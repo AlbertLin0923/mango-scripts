@@ -1,0 +1,22 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# @mango-scripts/react-scripts
+/packages/react-scripts/node_modules
+/packages/react-scripts/example/
+
+# @mango-scripts/i18n-scripts
+/packages/i18n-scripts/node_modules
+/packages/i18n-scripts/example/node_modules
+
+node_modules

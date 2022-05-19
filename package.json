@@ -1,0 +1,61 @@
+{
+  "name": "mango-scripts-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Some scripts",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts"
+  },
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts",
+  "keywords": [
+    "frontend",
+    "hmr",
+    "dev-server",
+    "build-tool",
+    "scripts"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "preinstall": "npx only-allow pnpm",
+    "build": "pnpm -r --filter=./packages/* run build",
+    "dev": "pnpm -r --parallel --filter=./packages/* run dev",
+    "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
+    "lint:eslint": "eslint ./ --fix",
+    "lint:prettier": "prettier -c ./ --write --end-of-line auto"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.0",
+    "@commitlint/config-conventional": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-define-config": "^1.4.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.6.2"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": "eslint --fix",
+    "**/*.{js,jsx,tsx,ts,less,scss,sass,css,md,json}": [
+      "prettier --write"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {}
+  }
+}

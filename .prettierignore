@@ -1,0 +1,50 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.local
+*.png
+*.toml
+
+package.json
+package-lock.json
+yarn.lock
+
+LICENSE
+
+.gitignore
+.prettierignore
+.eslintcache
+.eslintignore
+.editorconfig
+
+**/*.md
+**/*.svg
+
+pnpm-lock.yaml
+pnpm-workspace.yaml
