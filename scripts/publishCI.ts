@@ -8,7 +8,15 @@ async function main() {
     throw new Error('No tag specified')
   }
 
-  const [pkgName, version] = tag.split('@')
+  const versionSeg = tag.lastIndexOf('@')
+
+  if (versionSeg === -1) {
+    throw new Error('Tag format error')
+  }
+
+  const pkgName = tag.slice(0, versionSeg)
+
+  const version = tag.slice(versionSeg + 1)
 
   const rawPkgName = pkgName.split('/')[1]
 
