@@ -1,3 +1,5 @@
+### [1.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.4...@mango-scripts/react-scripts@1.0.5) (2022-05-20)
+
 ### [1.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.3...@mango-scripts/react-scripts@1.0.4) (2022-05-20)
 
 ### [1.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.2...@mango-scripts/react-scripts@1.0.3) (2022-05-20)
