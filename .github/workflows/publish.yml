@@ -8,8 +8,6 @@ on:
 
 jobs:
   publish:
-    # prevents this action from running on forks
-    if: github.repository == 'AlbertLin0923/mango-scripts'
     runs-on: ubuntu-latest
     environment: Release
     steps:
