@@ -111,17 +111,17 @@ async function bootstrap(): Promise<void> {
     return
   }
 
-  // step('\nPushing to GitHub...')
-  // await runIfNotDry('git', ['push', 'origin', `refs/tags/${tag}`])
-  // await runIfNotDry('git', ['push'])
+  step('\nPushing to GitHub...')
+  await runIfNotDry('git', ['push', 'origin', `refs/tags/${tag}`])
+  await runIfNotDry('git', ['push'])
 
-  // if (isDryRun) {
-  //   console.log(`\nDry run finished - run git diff to see package changes.`)
-  // } else {
-  //   console.log(
-  //     colors.green('\nPushed, publishing should starts shortly on CI.')
-  //   )
-  // }
+  if (isDryRun) {
+    console.log(`\nDry run finished - run git diff to see package changes.`)
+  } else {
+    console.log(
+      colors.green('\nPushed, publishing should starts shortly on CI.')
+    )
+  }
 
   console.log()
 }
