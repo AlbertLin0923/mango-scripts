@@ -22,7 +22,14 @@ module.exports = defineConfig({
     'no-process-exit': 'off',
     'node/no-unsupported-features/es-syntax': 'off',
     'node/no-missing-require': 'off',
-    'node/shebang': 'off'
+    'node/shebang': 'off',
+    'node/no-missing-import': [
+      'error',
+      {
+        allowModules: ['types', 'estree', 'less', 'sass', 'stylus'],
+        tryExtensions: ['.ts', '.js', '.jsx', '.tsx', '.d.ts']
+      }
+    ],
   },
   overrides: [
     {
