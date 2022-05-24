@@ -143,7 +143,7 @@ export async function updateVersion(
 ): Promise<void> {
   const pkg = await fs.readJSON(pkgPath)
   pkg.version = version
-  await fs.writeJson(pkgPath, pkg)
+  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n')
 }
 
 export async function publishPkg(pkdDir: string, tag?: string): Promise<void> {

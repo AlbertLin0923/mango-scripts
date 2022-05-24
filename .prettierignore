@@ -48,3 +48,5 @@ LICENSE
 
 pnpm-lock.yaml
 pnpm-workspace.yaml
+
+packages/*/CHANGELOG.md

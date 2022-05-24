@@ -1,7 +1,7 @@
 {
   "name": "@mango-scripts/i18n-scripts",
   "version": "1.0.0",
-  "description": "some scripts for i18n system",
+  "description": "Some scripts for i18n system",
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
@@ -9,6 +9,25 @@
   "bin": {
     "i18n-scripts": "./bin/i18n-scripts.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
+    "directory": "packages/i18n-scripts"
+  },
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
+  },
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-scripts",
+  "keywords": [
+    "frontend",
+    "scripts",
+    "i18n-scripts",
+    "internationalization-scripts"
+  ],
+  "files": [
+    "bin",
+    "src"
+  ],
   "dependencies": {
     "chalk": "4.1.2",
     "cli-table": "^0.3.11",

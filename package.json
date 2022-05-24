@@ -7,12 +7,12 @@
     "node": ">=14.0.0"
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/AlbertLin0923/mango-scripts"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AlbertLin0923/mango-scripts"
+  },
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts"
   },
   "homepage": "https://github.com/AlbertLin0923/mango-scripts",
   "keywords": [
