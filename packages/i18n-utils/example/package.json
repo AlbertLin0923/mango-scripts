@@ -1,0 +1,10 @@
+{
+  "name": "example",
+  "private": true,
+  "scripts": {
+    "i18n": "node index.js"
+  },
+  "dependencies": {
+    "fs-extra": "^10.1.0"
+  }
+}

@@ -23,19 +23,26 @@ module.exports = defineConfig({
     'node/no-unsupported-features/es-syntax': 'off',
     'node/no-missing-require': 'off',
     'node/shebang': 'off',
+    'no-useless-escape': 'off',
     'node/no-missing-import': [
       'error',
       {
         allowModules: ['types', 'estree', 'less', 'sass', 'stylus'],
         tryExtensions: ['.ts', '.js', '.jsx', '.tsx', '.d.ts']
       }
-    ],
+    ]
   },
   overrides: [
     {
       files: ['*.d.ts'],
       rules: {
         '@typescript-eslint/triple-slash-reference': 'off'
+      }
+    },
+    {
+      files: ['**/build.config.ts'],
+      rules: {
+        'node/no-missing-import': 'off'
       }
     }
   ]

@@ -1,3 +1,5 @@
+// Forked from https://github.com/vitejs/vite/
+
 import path from 'path'
 import prompts from 'prompts'
 import semver from 'semver'

@@ -1,0 +1,59 @@
+{
+  "name": "@mango-scripts/i18n-utils",
+  "version": "1.0.0",
+  "description": "i18n-system 工具库",
+  "license": "MIT",
+  "author": "AlbertLin0923",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "unbuild --stub",
+    "build": "unbuild",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=14.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
+    "directory": "packages/i18n-utils"
+  },
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
+  },
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-utils",
+  "keywords": [
+    "frontend",
+    "utils",
+    "i18n-utils",
+    "internationalization-utils"
+  ],
+  "dependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/parser": "^7.18.0",
+    "@babel/runtime": "^7.18.0",
+    "@types/fs-extra": "^9.0.13",
+    "@types/pug": "^2.0.6",
+    "fs-extra": "^10.1.0",
+    "glob": "^7.2.0",
+    "glob-promise": "^4.2.2",
+    "hyntax": "^1.1.9",
+    "pug": "^3.0.2",
+    "react": "^16.12.0 || ^17.0.0",
+    "svelte": "^3.48.0",
+    "vue": "2.6.14",
+    "vue-template-compiler": "^2.6.14"
+  }
+}

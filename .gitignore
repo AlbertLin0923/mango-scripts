@@ -15,8 +15,16 @@ yarn-error.log*
 /packages/react-scripts/node_modules
 /packages/react-scripts/example/
 
+
 # @mango-scripts/i18n-scripts
 /packages/i18n-scripts/node_modules
 /packages/i18n-scripts/example/node_modules
 
+
+# @mango-scripts/i18n-utils
+/packages/i18n-utils/node_modules
+/packages/i18n-utils/example/node_modules
+/packages/i18n-utils/example/contentHash/
+
 node_modules
+dist

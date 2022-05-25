@@ -1,3 +1,5 @@
+// Forked from https://github.com/vitejs/vite/
+
 import path from 'path'
 import { args, publishPkg, step } from './releaseUtils'
 

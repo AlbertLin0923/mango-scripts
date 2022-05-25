@@ -1,3 +1,5 @@
+// Forked from https://github.com/vitejs/vite/
+
 import fs from 'fs-extra'
 import path from 'path'
 import colors from 'picocolors'
