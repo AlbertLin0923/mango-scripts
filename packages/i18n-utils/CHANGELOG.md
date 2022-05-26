@@ -1,3 +1,9 @@
+## <small>1.0.2 (2022-05-26)</small>
+
+* fix: 修复i18n-utils路径问题 ([c31ab0f](https://github.com/AlbertLin0923/mango-scripts/commit/c31ab0f))
+
+
+
 ### 1.0.1 (2022-05-25)
 
 
