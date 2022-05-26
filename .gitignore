@@ -25,6 +25,8 @@ yarn-error.log*
 /packages/i18n-utils/node_modules
 /packages/i18n-utils/example/node_modules
 /packages/i18n-utils/example/contentHash/
+/packages/i18n-utils/es/
+/packages/i18n-utils/lib/
 
 node_modules
 dist

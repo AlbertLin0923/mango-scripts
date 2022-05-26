@@ -20,6 +20,7 @@
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild",
+    "build:father": "father-build",
     "prepublishOnly": "npm run build"
   },
   "engines": {
