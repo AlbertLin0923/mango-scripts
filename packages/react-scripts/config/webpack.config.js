@@ -42,6 +42,9 @@ const createEnvironmentHash = require('./webpack/persistentCache/createEnvironme
 // const WebpackBar = require('webpackbar')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const { mergeUserBabelConfig } = require('./userConfig/userBabelConfig')
+const {
+  mergeUserPreProcessorConfig
+} = require('./userConfig/userPreProcessorConfig')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const chalk = require('react-dev-utils/chalk')
 // andy end
@@ -92,6 +95,8 @@ const sassModuleRegex = /\.module\.(scss|sass)$/
 // andy
 const lessRegex = /\.less$/
 const lessModuleRegex = /\.module\.less$/
+const stylusRegex = /\.styl$/
+const stylusModuleRegex = /\.module\.styl$/
 // andy
 
 const hasJsxRuntime = (() => {
@@ -273,12 +278,12 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
         },
         {
           loader: require.resolve(preProcessor),
-          options: {
+          options: mergeUserPreProcessorConfig(preProcessor, {
             sourceMap: true,
             // andy start
             ...preProcessorOptions
             // andy end
-          }
+          })
         }
       )
     }
@@ -744,6 +749,40 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
                   modifyVars: {},
                   javascriptEnabled: true
                 }
+              )
+            },
+            {
+              test: stylusRegex,
+              exclude: stylusModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 5,
+                  sourceMap: isEnvProduction
+                    ? shouldUseSourceMap
+                    : isEnvDevelopment,
+                  modules: {
+                    mode: 'icss'
+                  }
+                },
+                'stylus-loader'
+              ),
+              sideEffects: true
+            },
+            {
+              test: stylusModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 5,
+                  sourceMap: isEnvProduction
+                    ? shouldUseSourceMap
+                    : isEnvDevelopment,
+                  modules: {
+                    mode: 'local',
+                    // localIdentName: '[local]_[hash:base64:10]',
+                    getLocalIdent: getCSSModuleLocalIdent
+                  }
+                },
+                'stylus-loader'
               )
             },
             {

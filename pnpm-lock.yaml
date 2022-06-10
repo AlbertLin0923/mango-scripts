@@ -189,6 +189,8 @@ importers:
       semver: ^7.3.5
       source-map-loader: ^3.0.0
       style-loader: ^3.3.1
+      stylus: ^0.58.1
+      stylus-loader: ^7.0.0
       svg-sprite-loader: ^6.0.11
       tailwindcss: ^3.0.2
       terser-webpack-plugin: ^5.2.5
@@ -248,6 +250,8 @@ importers:
       semver: 7.3.7
       source-map-loader: 3.0.1_webpack@5.73.0
       style-loader: 3.3.1_webpack@5.73.0
+      stylus: 0.58.1
+      stylus-loader: 7.0.0_stylus@0.58.1+webpack@5.73.0
       svg-sprite-loader: 6.0.11
       tailwindcss: 3.1.0_ts-node@10.8.1
       terser-webpack-plugin: 5.3.3_6fa2b210dcb84ea23408dfda1b6178ad
@@ -5569,6 +5573,14 @@ packages:
   /css-what/6.1.0:
     resolution: {integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==}
     engines: {node: '>= 6'}
+    dev: false
+
+  /css/3.0.0:
+    resolution: {integrity: sha512-DG9pFfwOrzc+hawpmqX/dHYHJG+Bsdb0klhyi1sDneOgGOXy9wQIC8hzyVp1e4NRYDBdxcylvywPkkXCHAzTyQ==}
+    dependencies:
+      inherits: 2.0.4
+      source-map: 0.6.1
+      source-map-resolve: 0.6.0
     dev: false
 
   /cssdb/6.6.3:
@@ -14013,6 +14025,14 @@ packages:
       urix: 0.1.0
     dev: false
 
+  /source-map-resolve/0.6.0:
+    resolution: {integrity: sha512-KXBr9d/fO/bWo97NXsPIAW1bFSBOuCnjbNTBMO7N59hsv5i9yzRDfcYwwt0l04+VqnKC+EwzvJZIP/qkuMgR/w==}
+    deprecated: See https://github.com/lydell/source-map-resolve#deprecated
+    dependencies:
+      atob: 2.1.2
+      decode-uri-component: 0.2.0
+    dev: false
+
   /source-map-support/0.5.21:
     resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
     dependencies:
@@ -14389,6 +14409,33 @@ packages:
       browserslist: 4.20.4
       postcss: 8.4.14
       postcss-selector-parser: 6.0.10
+    dev: false
+
+  /stylus-loader/7.0.0_stylus@0.58.1+webpack@5.73.0:
+    resolution: {integrity: sha512-WTbtLrNfOfLgzTaR9Lj/BPhQroKk/LC1hfTXSUbrxmxgfUo3Y3LpmKRVA2R1XbjvTAvOfaian9vOyfv1z99E+A==}
+    engines: {node: '>= 14.15.0'}
+    peerDependencies:
+      stylus: '>=0.52.4'
+      webpack: ^5.0.0
+    dependencies:
+      fast-glob: 3.2.11
+      klona: 2.0.5
+      normalize-path: 3.0.0
+      stylus: 0.58.1
+      webpack: 5.73.0_f7f61398fd25a5aa90c7320a1686ea94
+    dev: false
+
+  /stylus/0.58.1:
+    resolution: {integrity: sha512-AYiCHm5ogczdCPMfe9aeQa4NklB2gcf4D/IhzYPddJjTgPc+k4D/EVE0yfQbZD43MHP3lPy+8NZ9fcFxkrgs/w==}
+    hasBin: true
+    dependencies:
+      css: 3.0.0
+      debug: 4.3.4
+      glob: 7.2.3
+      sax: 1.2.4
+      source-map: 0.7.4
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /supports-color/2.0.0:
