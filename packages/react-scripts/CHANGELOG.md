@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.7...@mango-scripts/react-scripts@1.0.8) (2022-06-10)
+
+
+### Features
+
+* 增加预处理器配置支持 ([861620e](https://github.com/AlbertLin0923/mango-scripts/commit/861620e9f901f7fa707d29de4869f9d208b27db9))
+
 ### [1.0.7](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.6...@mango-scripts/react-scripts@1.0.7) (2022-05-24)
 
 ### [1.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.5...@mango-scripts/react-scripts@1.0.6) (2022-05-20)

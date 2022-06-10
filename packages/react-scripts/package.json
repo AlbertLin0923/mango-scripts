@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/react-scripts",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Custom Configuration and scripts for Create React App.",
   "engines": {
     "node": ">=14.0.0"
