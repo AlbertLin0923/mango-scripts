@@ -51,6 +51,7 @@
     "execa": "5.1.1",
     "father-build": "^1.22.2",
     "fs-extra": "^10.1.0",
+    "git-repo-info": "^2.1.1",
     "husky": "^8.0.1",
     "lint-staged": "^12.4.1",
     "minimist": "^1.2.6",

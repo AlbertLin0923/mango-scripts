@@ -4,6 +4,7 @@ import path from 'path'
 import prompts from 'prompts'
 import semver from 'semver'
 import colors from 'picocolors'
+import getGitRepoInfo from 'git-repo-info'
 
 import {
   IPkgInfo,
@@ -19,6 +20,10 @@ import {
 } from './releaseUtils'
 
 async function bootstrap(): Promise<void> {
+  const { branch } = getGitRepoInfo()
+
+  console.log(colors.cyan(`now in branch: ${branch}\n`))
+
   let targetVersion: string | undefined
 
   const pkgInfoList: IPkgInfo[] = await getPkgInfoList(
