@@ -22,9 +22,47 @@
 
 项目根目录下新增 `babel.config.js`, `.babelrc.js`, `.babelrc`配置文件,脚本会自动读取合并babel配置到babel-loader options
 
+babel.config.js
+
+```js
+module.exports = {
+  plugins: [
+    [
+      require.resolve('@babel/plugin-proposal-decorators'),
+      {
+        legacy: true,
+      },
+    ],
+    ['babel-plugin-import', { libraryName: 'antd-mobile', style: true }]
+  ],
+}
+
+```
+
 ## 预处理器配置支持
 
 项目根目录下新增 `preProcessor.config.js`, `.preProcessorrc.js`, `.preProcessorrc`配置文件,脚本会自动读取配置合并到预处理options
+
+preProcessor.config.js
+
+```js
+const path = require('path')
+
+module.exports = {
+  'less-loader': {
+    lessOptions: {
+      modifyVars: {
+        'brand-primary': '#975ec9',
+        'brand-primary-tap': '#7e3db7',
+        'switch-fill': '#975ec9',
+      },
+      javascriptEnabled: true,
+      paths: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src')],
+    },
+  },
+}
+
+```
 
 ## 开启 @umi/mfsu 支持
 

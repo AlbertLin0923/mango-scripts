@@ -724,8 +724,10 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
                 },
                 'less-loader',
                 {
-                  modifyVars: {},
-                  javascriptEnabled: true
+                  lessOptions: {
+                    modifyVars: {},
+                    javascriptEnabled: true
+                  }
                 }
               ),
               sideEffects: true
@@ -746,8 +748,10 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
                 },
                 'less-loader',
                 {
-                  modifyVars: {},
-                  javascriptEnabled: true
+                  lessOptions: {
+                    modifyVars: {},
+                    javascriptEnabled: true
+                  }
                 }
               )
             },
