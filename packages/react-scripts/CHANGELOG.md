@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.8...@mango-scripts/react-scripts@1.0.9) (2022-06-13)
+
+
+### Features
+
+* 升级less,less-loader版本 && 完善readme说明 ([512c58a](https://github.com/AlbertLin0923/mango-scripts/commit/512c58aecb0601eafbb4be826266780b49e41ed9))
+
 ## [1.0.8](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.7...@mango-scripts/react-scripts@1.0.8) (2022-06-10)
 
 
