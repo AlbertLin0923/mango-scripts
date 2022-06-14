@@ -58,9 +58,14 @@ const compareLocaleData = async (oldFilePath, newFilePath) => {
 
   try {
     oldString = await fs.readFile(oldFilePath, { encoding: 'utf-8' })
+  } catch (error) {
+    oldString = '{}'
+  }
+
+  try {
     newString = await fs.readFile(newFilePath, { encoding: 'utf-8' })
   } catch (error) {
-    throw new Error('文件比对-读取文件失败', error)
+    newString = '{}'
   }
 
   let oldObj = {}
@@ -73,7 +78,6 @@ const compareLocaleData = async (oldFilePath, newFilePath) => {
     oldArr = objToArr(oldObj)
     newArr = objToArr(newObj)
   } catch (error) {
-    console.log(error)
     throw new Error('文件比对-文件解析失败', error)
   }
 

@@ -3,7 +3,7 @@
   "private":true,
   "scripts": {
     "updateLocale-inquirer": "i18n-scripts updateLocale",
-    "updateLocale-inline-config": "i18n-scripts updateLocale -f http://192.168.1.146:3005/api/locale/get_locale_map -o ./src/locales/common/ -l zh-CN en-US id-ID vi-VN",
+    "updateLocale-inline-config": "i18n-scripts updateLocale -f http://192.168.1.146:5005/api/locale/get_locale_map -o ./src/updateLocale-example/common/ -l zh-CN en-US id-ID vi-VN",
     "insertI18n": "i18n-scripts insertI18n",
     "jsTojsx": "i18n-scripts jsTojsx",
     "help": "i18n-scripts --help",

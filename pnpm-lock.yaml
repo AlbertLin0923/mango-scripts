@@ -102,6 +102,9 @@ importers:
       umi-request: 1.4.0
       update-notifier: 5.1.0
 
+  packages/i18n-scripts/example:
+    specifiers: {}
+
   packages/i18n-utils:
     specifiers:
       '@babel/core': ^7.18.0

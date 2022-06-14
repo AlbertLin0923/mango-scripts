@@ -159,6 +159,8 @@ async function updateLocale(options) {
   })
 
   console.log(iTable.toString())
+
+  process.exit(0)
 }
 
 module.exports = (...args) => {
