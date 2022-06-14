@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/i18n-scripts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Some scripts for i18n system",
   "license": "MIT",
   "engines": {
