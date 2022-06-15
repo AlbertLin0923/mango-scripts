@@ -3,7 +3,7 @@
 import path from 'path'
 import prompts from 'prompts'
 import semver from 'semver'
-import colors from 'picocolors'
+import pico from 'picocolors'
 import getGitRepoInfo from 'git-repo-info'
 
 import {
@@ -22,7 +22,7 @@ import {
 async function bootstrap(): Promise<void> {
   const { branch } = getGitRepoInfo()
 
-  console.log(colors.cyan(`now in branch: ${branch}\n`))
+  console.log(pico.cyan(`now in branch: ${branch}\n`))
 
   let targetVersion: string | undefined
 
@@ -80,7 +80,7 @@ async function bootstrap(): Promise<void> {
   const { yes }: { yes: boolean } = await prompts({
     type: 'confirm',
     name: 'yes',
-    message: `Releasing ${colors.yellow(tag)} Confirm?`
+    message: `Releasing ${pico.yellow(tag)} Confirm?`
   })
 
   if (!yes) {
@@ -125,9 +125,7 @@ async function bootstrap(): Promise<void> {
   if (isDryRun) {
     console.log(`\nDry run finished - run git diff to see package changes.`)
   } else {
-    console.log(
-      colors.green('\nPushed, publishing should starts shortly on CI.')
-    )
+    console.log(pico.green('\nPushed, publishing should starts shortly on CI.'))
   }
 
   console.log()

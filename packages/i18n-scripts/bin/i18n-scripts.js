@@ -3,14 +3,14 @@
 // Check node version before requiring/doing anything else
 // The user may be on a very old node version
 const semver = require('semver')
-const colors = require('picocolors')
+const pico = require('picocolors')
 const requiredNodeVersion = require('../package.json').engines.node
 const cliName = require('../package.json').name
 
 function checkNodeVersion(wanted, id) {
   if (!semver.satisfies(process.version, wanted, { includePrerelease: true })) {
     console.log(
-      colors.red(
+      pico.red(
         `You are using Node ${process.version} , but this version of ${id} requires Node ${wanted}.
          Please upgrade your Node version.`
       )
@@ -35,11 +35,11 @@ const notifier = updater({
 notifier.notify({
   message:
     'Update available ' +
-    colors.dim('{currentVersion}') +
-    colors.reset(' → ') +
-    colors.green('{latestVersion}') +
+    pico.dim('{currentVersion}') +
+    pico.reset(' → ') +
+    pico.green('{latestVersion}') +
     ' \nRun ' +
-    colors.cyan(`pnpm update {packageName}@{latestVersion}`) +
+    pico.cyan(`pnpm update {packageName}@{latestVersion}`) +
     ' to update'
 })
 
@@ -87,7 +87,7 @@ program
   .command('info')
   .description('print debugging information about your environment')
   .action(() => {
-    console.log(colors.bold('\nEnvironment Info:'))
+    console.log(pico.bold('\nEnvironment Info:'))
     envinfo
       .run(
         {
@@ -108,7 +108,7 @@ program
 // output help information on unknown commands
 program.on('command:*', ([cmd]) => {
   program.outputHelp()
-  console.log(`  ` + colors.red(`Unknown command ${colors.yellow(cmd)}.`))
+  console.log(`  ` + pico.red(`Unknown command ${pico.yellow(cmd)}.`))
   console.log()
   suggestCommands(cmd)
   process.exitCode = 1
@@ -118,7 +118,7 @@ program.on('command:*', ([cmd]) => {
 program.on('--help', () => {
   console.log()
   console.log(
-    `  Run ${colors.cyan(
+    `  Run ${pico.cyan(
       `${cliName} <command> --help`
     )} for detailed usage of given command.`
   )
@@ -143,6 +143,6 @@ function suggestCommands(unknownCommand) {
   })
 
   if (suggestion) {
-    console.log(`  ` + colors.red(`Did you mean ${colors.yellow(suggestion)}?`))
+    console.log(`  ` + pico.red(`Did you mean ${pico.yellow(suggestion)}?`))
   }
 }

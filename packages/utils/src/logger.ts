@@ -1,14 +1,14 @@
-import colors from 'picocolors'
+import pico from 'picocolors'
 
 export const prefixes = {
-  wait: colors.cyan('wait') + '  -',
-  error: colors.red('error') + ' -',
-  fatal: colors.red('fatal') + ' -',
-  warn: colors.yellow('warn') + '  -',
-  ready: colors.green('ready') + ' -',
-  info: colors.cyan('info') + '  -',
-  event: colors.magenta('event') + ' -',
-  debug: colors.gray('debug') + ' -'
+  wait: pico.cyan('wait') + '  -',
+  error: pico.red('error') + ' -',
+  fatal: pico.red('fatal') + ' -',
+  warn: pico.yellow('warn') + '  -',
+  ready: pico.green('ready') + ' -',
+  info: pico.cyan('info') + '  -',
+  event: pico.magenta('event') + ' -',
+  debug: pico.gray('debug') + ' -'
 }
 
 class Logger {

@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const inquirer = require('inquirer')
 const request = require('umi-request')
-const colors = require('picocolors')
+const pico = require('picocolors')
 const consola = require('consola')
 const Table = require('cli-table')
 
@@ -140,21 +140,21 @@ async function updateLocale(options) {
 
   const iTable = new Table({
     head: [
-      colors.bold.cyan('locale'),
-      colors.bold.cyan('add'),
-      colors.bold.cyan('modify'),
-      colors.bold.cyan('delete'),
-      colors.bold.cyan('same')
+      pico.bold(pico.cyan('locale')),
+      pico.bold(pico.cyan('add')),
+      pico.bold(pico.cyan('modify')),
+      pico.bold(pico.cyan('delete')),
+      pico.bold(pico.cyan('same'))
     ]
   })
 
   Object.entries(stat).forEach(([key, value]) => {
     iTable.push([
-      colors.yellow(key),
-      colors.yellow(value.addNumber),
-      colors.yellow(value.modifyNumber),
-      colors.yellow(value.deleteNumber),
-      colors.yellow(value.sameNumber)
+      pico.yellow(key),
+      pico.yellow(value.addNumber),
+      pico.yellow(value.modifyNumber),
+      pico.yellow(value.deleteNumber),
+      pico.yellow(value.sameNumber)
     ])
   })
 

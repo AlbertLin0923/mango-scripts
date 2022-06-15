@@ -2,7 +2,7 @@
 
 import fs from 'fs-extra'
 import path from 'path'
-import colors from 'picocolors'
+import pico from 'picocolors'
 import type { Options as ExecaOptions } from 'execa'
 import execa from 'execa'
 import type { ReleaseType } from 'semver'
@@ -21,7 +21,7 @@ export const args = minimist(process.argv.slice(2))
 export const isDryRun = !!args.dry
 
 if (isDryRun) {
-  console.log(colors.inverse(colors.yellow(' DRY RUN ')))
+  console.log(pico.inverse(pico.yellow(' DRY RUN ')))
   console.log()
 }
 
@@ -63,16 +63,13 @@ export async function dryRun(
   args: string[],
   opts?: ExecaOptions<string>
 ) {
-  return console.log(
-    colors.blue(`[dryrun] ${bin} ${args.join(' ')}`),
-    opts || ''
-  )
+  return console.log(pico.blue(`[dryrun] ${bin} ${args.join(' ')}`), opts || '')
 }
 
 export const runIfNotDry = isDryRun ? dryRun : run
 
 export function step(msg: string) {
-  return console.log(colors.cyan(msg))
+  return console.log(pico.cyan(msg))
 }
 
 export function getVersionChoices(pkgCurrentVersion: string) {
@@ -175,10 +172,10 @@ export async function logRecentCommits(pkgName: string) {
     stdio: 'pipe'
   }).then((res) => res.stdout.trim())
   console.log(
-    colors.bold(
-      `\n${colors.blue(`i`)} Commits of ${colors.green(
-        pkgName
-      )} since ${colors.green(tag)} ${colors.gray(`(${sha.slice(0, 5)})`)}`
+    pico.bold(
+      `\n${pico.blue(`i`)} Commits of ${pico.green(pkgName)} since ${pico.green(
+        tag
+      )} ${pico.gray(`(${sha.slice(0, 5)})`)}`
     )
   )
   await run(
