@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const inquirer = require('inquirer')
 const request = require('umi-request')
-const chalk = require('chalk')
+const colors = require('picocolors')
 const consola = require('consola')
 const Table = require('cli-table')
 
@@ -140,21 +140,21 @@ async function updateLocale(options) {
 
   const iTable = new Table({
     head: [
-      chalk.bold.cyan('locale'),
-      chalk.bold.cyan('add'),
-      chalk.bold.cyan('modify'),
-      chalk.bold.cyan('delete'),
-      chalk.bold.cyan('same')
+      colors.bold.cyan('locale'),
+      colors.bold.cyan('add'),
+      colors.bold.cyan('modify'),
+      colors.bold.cyan('delete'),
+      colors.bold.cyan('same')
     ]
   })
 
   Object.entries(stat).forEach(([key, value]) => {
     iTable.push([
-      chalk.yellow(key),
-      chalk.yellow(value.addNumber),
-      chalk.yellow(value.modifyNumber),
-      chalk.yellow(value.deleteNumber),
-      chalk.yellow(value.sameNumber)
+      colors.yellow(key),
+      colors.yellow(value.addNumber),
+      colors.yellow(value.modifyNumber),
+      colors.yellow(value.deleteNumber),
+      colors.yellow(value.sameNumber)
     ])
   })
 

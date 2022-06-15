@@ -1,7 +1,7 @@
 const fs = require('fs-extra')
 const path = require('path')
 const inquirer = require('inquirer')
-const chalk = require('chalk')
+const colors = require('picocolors')
 const consola = require('consola')
 const gogocode = require('gogocode')
 const glob = require('glob-promise')
@@ -143,7 +143,7 @@ async function insertI18n(options) {
   const outputDirPath = path.resolve(cwd, output)
 
   console.log(
-    chalk.green(`
+    colors.green(`
   待转换文件的目录路径: ${inputDirPath}
   转换后生成文件存储的目录路径: ${outputDirPath}
   翻译模块字段: ${translateModulesStr}
