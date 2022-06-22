@@ -3,18 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "description": "Some scripts",
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts"
-  },
-  "bugs": {
-    "url": "https://github.com/AlbertLin0923/mango-scripts"
-  },
-  "homepage": "https://github.com/AlbertLin0923/mango-scripts",
   "keywords": [
     "frontend",
     "hmr",
@@ -22,14 +10,23 @@
     "build-tool",
     "scripts"
   ],
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts",
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts"
+  },
+  "license": "MIT",
   "scripts": {
-    "prepare": "husky install",
+    "ci-publish": "ts-node scripts/publishCI.ts",
     "preinstall": "npx only-allow pnpm",
     "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
     "lint:eslint": "eslint ./ --fix",
     "lint:prettier": "prettier -c ./ --write --end-of-line auto",
-    "release": "ts-node scripts/release.ts",
-    "ci-publish": "ts-node scripts/publishCI.ts"
+    "prepare": "husky install",
+    "release": "ts-node scripts/release.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
@@ -61,5 +58,8 @@
     "semver": "^7.3.7",
     "ts-node": "^10.7.0",
     "unbuild": "^0.7.4"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

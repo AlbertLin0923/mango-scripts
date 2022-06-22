@@ -2,28 +2,25 @@
   "name": "@mango-scripts/i18n-scripts",
   "version": "1.0.2",
   "description": "Some scripts for i18n system",
-  "license": "MIT",
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "bin": {
-    "i18n-scripts": "./bin/i18n-scripts.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
-    "directory": "packages/i18n-scripts"
-  },
-  "bugs": {
-    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
-  },
-  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-scripts",
   "keywords": [
     "frontend",
     "scripts",
     "i18n-scripts",
     "internationalization-scripts"
   ],
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-scripts",
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
+    "directory": "packages/i18n-scripts"
+  },
+  "license": "MIT",
+  "bin": {
+    "i18n-scripts": "./bin/i18n-scripts.js"
+  },
   "files": [
     "bin",
     "src"
@@ -46,5 +43,8 @@
     "semver": "^7.3.5",
     "umi-request": "^1.4.0",
     "update-notifier": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

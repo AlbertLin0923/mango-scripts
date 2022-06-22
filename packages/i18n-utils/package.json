@@ -2,14 +2,23 @@
   "name": "@mango-scripts/i18n-utils",
   "version": "1.0.2",
   "description": "i18n-system 工具库",
+  "keywords": [
+    "frontend",
+    "utils",
+    "i18n-utils",
+    "internationalization-utils"
+  ],
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-utils",
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
+    "directory": "packages/i18n-utils"
+  },
   "license": "MIT",
   "author": "AlbertLin0923",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.mjs",
-  "types": "./dist/esm/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/esm/index.d.ts",
@@ -17,30 +26,18 @@
       "require": "./dist/cjs/index.js"
     }
   },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/esm/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "unbuild --stub",
     "build": "unbuild",
     "build:father": "father-build",
+    "dev": "unbuild --stub",
     "prepublishOnly": "npm run build"
   },
-  "engines": {
-    "node": ">=14.6.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
-    "directory": "packages/i18n-utils"
-  },
-  "bugs": {
-    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
-  },
-  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-utils",
-  "keywords": [
-    "frontend",
-    "utils",
-    "i18n-utils",
-    "internationalization-utils"
-  ],
   "dependencies": {
     "@babel/core": "^7.18.0",
     "@babel/parser": "^7.18.0",
@@ -56,5 +53,8 @@
     "svelte": "^3.48.0",
     "vue": "2.6.14",
     "vue-template-compiler": "^2.6.14"
+  },
+  "engines": {
+    "node": ">=14.6.0"
   }
 }

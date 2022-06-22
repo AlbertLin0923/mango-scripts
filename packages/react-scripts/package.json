@@ -2,23 +2,6 @@
   "name": "@mango-scripts/react-scripts",
   "version": "1.0.9",
   "description": "Custom Configuration and scripts for Create React App.",
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "license": "MIT",
-  "bin": {
-    "react-scripts": "./bin/react-scripts.js"
-  },
-  "types": "./lib/react-app.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
-    "directory": "packages/react-scripts"
-  },
-  "bugs": {
-    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
-  },
-  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/react-scripts",
   "keywords": [
     "frontend",
     "hmr",
@@ -27,6 +10,20 @@
     "react-scripts",
     "custom-react-scripts"
   ],
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/react-scripts",
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
+    "directory": "packages/react-scripts"
+  },
+  "license": "MIT",
+  "types": "./lib/react-app.d.ts",
+  "bin": {
+    "react-scripts": "./bin/react-scripts.js"
+  },
   "files": [
     "bin",
     "config",
@@ -36,6 +33,18 @@
     "template-typescript",
     "utils"
   ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
@@ -102,9 +111,6 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
-  "optionalDependencies": {
-    "fsevents": "^2.3.2"
-  },
   "peerDependencies": {
     "eslint-config-react-app": "^7.0.0",
     "react": ">= 16",
@@ -115,16 +121,10 @@
       "optional": true
     }
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
