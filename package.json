@@ -24,7 +24,7 @@
     "preinstall": "npx only-allow pnpm",
     "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
     "lint:eslint": "eslint ./ --fix",
-    "lint:prettier": "prettier -c ./ --write --end-of-line auto",
+    "lint:prettier": "prettier -c ./ --write",
     "prepare": "husky install",
     "release": "ts-node scripts/release.ts"
   },

@@ -5,10 +5,7 @@ import * as pug from 'pug'
 import * as compilerSvelte from 'svelte/compiler'
 import * as hyntax from 'hyntax'
 
-import {
-  collectDisableRuleCommentlocation,
-  inDisableRuleCommentlocation
-} from '../utils/index'
+import { collectDisableRuleCommentlocation, inDisableRuleCommentlocation } from '../utils/index'
 
 // ------------------------vue-------------------------------
 const MATCH_I18N_FUNC_REGEX = /(?<=\$t\()([\w\W]*?)(?=\))/g
@@ -39,12 +36,9 @@ const extractInTemplateOfVue = (templateContent: string): Array<string> => {
   function collectChineseOfAttributes(ast: any) {
     ast?.content?.attributes?.length &&
       ast.content.attributes.forEach((item: any) => {
-        const i18nFuncmatcherList = item?.value?.content
-          ?.trim()
-          .match(MATCH_I18N_FUNC_REGEX)
+        const i18nFuncmatcherList = item?.value?.content?.trim().match(MATCH_I18N_FUNC_REGEX)
         if (i18nFuncmatcherList) {
-          const i18nStrmatcherList =
-            formatI18nFuncMatcherList(i18nFuncmatcherList)
+          const i18nStrmatcherList = formatI18nFuncMatcherList(i18nFuncmatcherList)
           arr.push(...i18nStrmatcherList)
         }
       })
@@ -54,13 +48,10 @@ const extractInTemplateOfVue = (templateContent: string): Array<string> => {
     if (!ast?.content?.children) {
       const textContent = ast.content?.value?.content
       if (textContent) {
-        const i18nFuncmatcherList = textContent
-          .trim()
-          .match(MATCH_I18N_FUNC_REGEX)
+        const i18nFuncmatcherList = textContent.trim().match(MATCH_I18N_FUNC_REGEX)
 
         if (i18nFuncmatcherList) {
-          const i18nStrmatcherList =
-            formatI18nFuncMatcherList(i18nFuncmatcherList)
+          const i18nStrmatcherList = formatI18nFuncMatcherList(i18nFuncmatcherList)
           arr.push(...i18nStrmatcherList)
         }
       }
@@ -81,7 +72,7 @@ const extractInTemplateOfVue = (templateContent: string): Array<string> => {
 const extractInVue = (code: string): Array<string> => {
   const sfc: compilerVue.SFCDescriptor = compilerVue.parseComponent(code)
 
-  const { template, script, styles } = sfc
+  const { template, script } = sfc
 
   let templateTextArr: Array<string> = []
   let scriptTextArr: Array<string> = []
@@ -146,7 +137,7 @@ const extractInSvelte = (code: string): Array<string> => {
     // options
   })
   const {
-    ast: { html: templateAst, css, instance: scriptAst }
+    ast: { html: templateAst }
   } = sfc
   const scriptContent = sfc.js
 
@@ -178,10 +169,7 @@ const extractInJsAndTs = (code: string): Array<string> => {
   const { partialCommentList, nextLineCommentList, thisLineCommentList } =
     collectDisableRuleCommentlocation(ast.comments)
 
-  const _inDisableRuleCommentlocation = (
-    startLine: number,
-    endLine: number
-  ) => {
+  const _inDisableRuleCommentlocation = (startLine: number, endLine: number) => {
     return inDisableRuleCommentlocation(
       partialCommentList,
       nextLineCommentList,

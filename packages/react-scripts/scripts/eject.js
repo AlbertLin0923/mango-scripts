@@ -40,13 +40,9 @@ function getGitStatus() {
 
 function tryGitAdd(appPath) {
   try {
-    spawnSync(
-      'git',
-      ['add', path.join(appPath, 'config'), path.join(appPath, 'scripts')],
-      {
-        stdio: 'inherit'
-      }
-    )
+    spawnSync('git', ['add', path.join(appPath, 'config'), path.join(appPath, 'scripts')], {
+      stdio: 'inherit'
+    })
 
     return true
   } catch (e) {
@@ -76,18 +72,14 @@ prompts({
   const gitStatus = getGitStatus()
   if (gitStatus) {
     console.error(
-      chalk.red(
-        'This git repository has untracked files or uncommitted changes:'
-      ) +
+      chalk.red('This git repository has untracked files or uncommitted changes:') +
         '\n\n' +
         gitStatus
           .split('\n')
           .map((line) => line.match(/ .*/g)[0].trim())
           .join('\n') +
         '\n\n' +
-        chalk.red(
-          'Remove untracked files, stash or commit any changes, and try again.'
-        )
+        chalk.red('Remove untracked files, stash or commit any changes, and try again.')
     )
     process.exit(1)
   }
@@ -109,12 +101,7 @@ prompts({
     }
   }
 
-  const folders = [
-    'config',
-    'config/jest',
-    'scripts',
-    'config/webpack/persistentCache'
-  ]
+  const folders = ['config', 'config/jest', 'scripts', 'config/webpack/persistentCache']
 
   // Make shallow array of files paths
   const files = folders.reduce((files, folder) => {
@@ -156,15 +143,9 @@ prompts({
     content =
       content
         // Remove dead code from .js files on eject
-        .replace(
-          /\/\/ @remove-on-eject-begin([\s\S]*?)\/\/ @remove-on-eject-end/gm,
-          ''
-        )
+        .replace(/\/\/ @remove-on-eject-begin([\s\S]*?)\/\/ @remove-on-eject-end/gm, '')
         // Remove dead code from .applescript files on eject
-        .replace(
-          /-- @remove-on-eject-begin([\s\S]*?)-- @remove-on-eject-end/gm,
-          ''
-        )
+        .replace(/-- @remove-on-eject-begin([\s\S]*?)-- @remove-on-eject-end/gm, '')
         .trim() + '\n'
     console.log(`  Adding ${cyan(file.replace(ownPath, ''))} to the project`)
     fs.writeFileSync(file.replace(ownPath, appPath), content)
@@ -190,10 +171,7 @@ prompts({
   }
   Object.keys(ownPackage.dependencies).forEach((key) => {
     // For some reason optionalDependencies end up in dependencies after install
-    if (
-      ownPackage.optionalDependencies &&
-      ownPackage.optionalDependencies[key]
-    ) {
+    if (ownPackage.optionalDependencies && ownPackage.optionalDependencies[key]) {
       return
     }
     console.log(`  Adding ${cyan(key)} to dependencies`)
@@ -217,14 +195,9 @@ prompts({
       if (!regex.test(appPackage.scripts[key])) {
         return
       }
-      appPackage.scripts[key] = appPackage.scripts[key].replace(
-        regex,
-        'node scripts/$1.js'
-      )
+      appPackage.scripts[key] = appPackage.scripts[key].replace(regex, 'node scripts/$1.js')
       console.log(
-        `  Replacing ${cyan(`"${binKey} ${key}"`)} with ${cyan(
-          `"node scripts/${key}.js"`
-        )}`
+        `  Replacing ${cyan(`"${binKey} ${key}"`)} with ${cyan(`"node scripts/${key}.js"`)}`
       )
     })
   })
@@ -249,33 +222,23 @@ prompts({
     }
   }
 
-  fs.writeFileSync(
-    path.join(appPath, 'package.json'),
-    JSON.stringify(appPackage, null, 2) + os.EOL
-  )
+  fs.writeFileSync(path.join(appPath, 'package.json'), JSON.stringify(appPackage, null, 2) + os.EOL)
   console.log()
 
   if (fs.existsSync(paths.appTypeDeclarations)) {
     try {
       // Read app declarations file
       let content = fs.readFileSync(paths.appTypeDeclarations, 'utf8')
-      const ownContent =
-        fs.readFileSync(paths.ownTypeDeclarations, 'utf8').trim() + os.EOL
+      const ownContent = fs.readFileSync(paths.ownTypeDeclarations, 'utf8').trim() + os.EOL
 
       // Remove react-scripts reference since they're getting a copy of the types in their project
       content =
         content
           // Remove react-scripts types
-          .replace(
-            /^\s*\/\/\/\s*<reference\s+types.+?"react-scripts".*\/>.*(?:\n|$)/gm,
-            ''
-          )
+          .replace(/^\s*\/\/\/\s*<reference\s+types.+?"react-scripts".*\/>.*(?:\n|$)/gm, '')
           .trim() + os.EOL
 
-      fs.writeFileSync(
-        paths.appTypeDeclarations,
-        (ownContent + os.EOL + content).trim() + os.EOL
-      )
+      fs.writeFileSync(paths.appTypeDeclarations, (ownContent + os.EOL + content).trim() + os.EOL)
     } catch (e) {
       // It's not essential that this succeeds, the TypeScript user should
       // be able to re-create these types with ease.
@@ -296,12 +259,7 @@ prompts({
   }
 
   if (fs.existsSync(paths.yarnLockFile)) {
-    const windowsCmdFilePath = path.join(
-      appPath,
-      'node_modules',
-      '.bin',
-      'react-scripts.cmd'
-    )
+    const windowsCmdFilePath = path.join(appPath, 'node_modules', '.bin', 'react-scripts.cmd')
     let windowsCmdFileContent
     if (process.platform === 'win32') {
       // https://github.com/facebook/create-react-app/pull/3806#issuecomment-357781035

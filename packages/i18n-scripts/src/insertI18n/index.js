@@ -24,11 +24,7 @@ const insertI18nForVueFile = (filePath) => {
       if (Array.isArray(node.attr('content.children'))) {
         node.attr('content.children').forEach((text) => {
           const re = text?.content?.value?.content?.trim()
-          if (
-            re &&
-            INCLUDE_CHINESE_CHAR.test(re) &&
-            !INCLUDE_VARIABLE_CHAR.test(re)
-          ) {
+          if (re && INCLUDE_CHINESE_CHAR.test(re) && !INCLUDE_VARIABLE_CHAR.test(re)) {
             text.content.value.content = `{{$t('${re}')}}`
           }
         })
@@ -36,8 +32,7 @@ const insertI18nForVueFile = (filePath) => {
 
       if (Array.isArray(node.attr('content.attributes'))) {
         node.attr('content.attributes').forEach((attr) => {
-          const keyIsDym =
-            attr?.key?.content && attr.key.content.startsWith(':')
+          const keyIsDym = attr?.key?.content && attr.key.content.startsWith(':')
           const re = attr?.value?.content
           if (!keyIsDym && INCLUDE_CHINESE_CHAR.test(re)) {
             attr.key.content = `:${attr.key.content}`

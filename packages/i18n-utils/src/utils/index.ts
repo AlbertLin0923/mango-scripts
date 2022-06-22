@@ -25,15 +25,12 @@ export const getFilePathList = (
     const isFile: boolean = fs.statSync(name).isFile()
 
     if (isDirectory) {
-      return fileList.concat(
-        getFilePathList(name, filterExtNameList, ignoreDirectory, ignoreFile)
-      )
+      return fileList.concat(getFilePathList(name, filterExtNameList, ignoreDirectory, ignoreFile))
     }
 
     const isIgnoreDirectoy: boolean =
       !ignoreDirectory ||
-      (!!ignoreDirectory &&
-        !path.dirname(name).split('/').includes(ignoreDirectory))
+      (!!ignoreDirectory && !path.dirname(name).split('/').includes(ignoreDirectory))
 
     const isIgnoreFile: boolean =
       !ignoreFile || (!!ignoreFile && path.basename(name) !== ignoreFile)
@@ -81,8 +78,7 @@ export const matchModuleMark = (code: string): string => {
   const MATCH_MODULE_MARK_A = /(?<=\/\/.*?translateModules:.*?\[)(.*?)(?=\])/g
   const MATCH_MODULE_MARK_B = /(?<=\<!--.*?translateModules:.*?\[)(.*?)(?=\])/g
   const MATCH_STRING_CONTENT = /(?<=['"`])(.*?)(?=['"`])/g
-  let result =
-    code.match(MATCH_MODULE_MARK_A) || code.match(MATCH_MODULE_MARK_B)
+  let result = code.match(MATCH_MODULE_MARK_A) || code.match(MATCH_MODULE_MARK_B)
 
   if (result) {
     result = result[0].split(',')
@@ -194,6 +190,7 @@ export const inDisableRuleCommentlocation = (
   nextLineCommentList: any,
   thisLineCommentList: any,
   startLine: number,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   endLine: number
 ) => {
   // 字符串在nextLineComment下一行，则忽略
@@ -235,7 +232,5 @@ export const formatLocaleKeyList = (localeList: LocaleItem[]) => {
 }
 
 export const deleteCodeComments = (code: string): string => {
-  return code
-    .replace(/(\/\/.*)|(\/\*[\s\S]*?\*\/)/g, '')
-    .replace(/<!--[\w\W\r\n]*?-->/gim, '')
+  return code.replace(/(\/\/.*)|(\/\*[\s\S]*?\*\/)/g, '').replace(/<!--[\w\W\r\n]*?-->/gim, '')
 }

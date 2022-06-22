@@ -12,12 +12,7 @@ const deepMergeWithArray = (object, sources) => {
 }
 
 const preProcessorExplorer = cosmiconfigSync('preProcessor', {
-  searchPlaces: [
-    'package.json',
-    `preProcessor.config.js`,
-    `.preProcessorrc.js`,
-    `.preProcessorrc`
-  ]
+  searchPlaces: ['package.json', `preProcessor.config.js`, `.preProcessorrc.js`, `.preProcessorrc`]
 })
 
 let userPreProcessorConfig = {}
@@ -30,9 +25,7 @@ if (configFilePath !== null) {
   userPreProcessorConfig = config.config
 
   if (!userPreProcessorConfig) {
-    throw new Error(
-      "preProcessor: Config function didn't return a config object."
-    )
+    throw new Error("preProcessor: Config function didn't return a config object.")
   }
 }
 

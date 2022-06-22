@@ -119,8 +119,7 @@ module.exports = {
 const ownPackageJson = require('../package.json')
 const reactScriptsPath = resolveApp(`node_modules/${ownPackageJson.name}`)
 const reactScriptsLinked =
-  fs.existsSync(reactScriptsPath) &&
-  fs.lstatSync(reactScriptsPath).isSymbolicLink()
+  fs.existsSync(reactScriptsPath) && fs.lstatSync(reactScriptsPath).isSymbolicLink()
 
 // config before publish: we're in ./packages/react-scripts/config/
 if (

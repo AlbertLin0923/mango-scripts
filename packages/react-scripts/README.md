@@ -1,10 +1,9 @@
-
 # @mango-scripts/react-scripts
 
 基于 [react-scripts@5.0.1](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts) 添加一些功能和优化
 
-- 开发环境下自动获取局域网IP，便于本地联调
-- eslint-config-react-app 改为 peerDependencies, 提升到项目顶级安装，方便使用pnpm时,无需扁平化处理依赖
+- 开发环境下自动获取局域网 IP，便于本地联调
+- eslint-config-react-app 改为 peerDependencies, 提升到项目顶级安装，方便使用 pnpm 时,无需扁平化处理依赖
 - 增加了 babel 配置支持
 - 增加了 @umi/mfsu 缓存支持
 - 增加了 antd 配置支持
@@ -20,7 +19,7 @@
 
 ## babel 配置
 
-项目根目录下新增 `babel.config.js`, `.babelrc.js`, `.babelrc`配置文件,脚本会自动读取合并babel配置到babel-loader options
+项目根目录下新增 `babel.config.js`, `.babelrc.js`, `.babelrc`配置文件,脚本会自动读取合并 babel 配置到 babel-loader options
 
 babel.config.js
 
@@ -30,18 +29,17 @@ module.exports = {
     [
       require.resolve('@babel/plugin-proposal-decorators'),
       {
-        legacy: true,
-      },
+        legacy: true
+      }
     ],
     ['babel-plugin-import', { libraryName: 'antd-mobile', style: true }]
-  ],
+  ]
 }
-
 ```
 
 ## 预处理器配置支持
 
-项目根目录下新增 `preProcessor.config.js`, `.preProcessorrc.js`, `.preProcessorrc`配置文件,脚本会自动读取配置合并到预处理options
+项目根目录下新增 `preProcessor.config.js`, `.preProcessorrc.js`, `.preProcessorrc`配置文件,脚本会自动读取配置合并到预处理 options
 
 preProcessor.config.js
 
@@ -54,14 +52,13 @@ module.exports = {
       modifyVars: {
         'brand-primary': '#975ec9',
         'brand-primary-tap': '#7e3db7',
-        'switch-fill': '#975ec9',
+        'switch-fill': '#975ec9'
       },
       javascriptEnabled: true,
-      paths: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src')],
-    },
-  },
+      paths: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src')]
+    }
+  }
 }
-
 ```
 
 ## 开启 @umi/mfsu 支持
@@ -70,17 +67,15 @@ module.exports = {
 
 ## 开启 qiankun 配置
 
-`cross-env USE_QIANKUN=true react-scripts start`
-`cross-env USE_QIANKUN=true react-scripts build`
+`cross-env USE_QIANKUN=true react-scripts start` `cross-env USE_QIANKUN=true react-scripts build`
 
 ## 开启 webpack-bundle-analyzer 显示
 
 `cross-env USE_ANALYZE=true react-scripts build`
 
-## 使用pnpm 情况下，偶尔会发生eslint错误，提示未找到配置options，这时候需要禁用 eslint plugin
+## 使用 pnpm 情况下，偶尔会发生 eslint 错误，提示未找到配置 options，这时候需要禁用 eslint plugin
 
-`cross-env DISABLE_ESLINT_PLUGIN=true react-scripts start`
-`cross-env DISABLE_ESLINT_PLUGIN=true react-scripts build`
+`cross-env DISABLE_ESLINT_PLUGIN=true react-scripts start` `cross-env DISABLE_ESLINT_PLUGIN=true react-scripts build`
 
 ## 开启 esbuild 打包压缩
 

@@ -81,13 +81,7 @@ function tryGitCommit(appPath) {
   }
 }
 
-module.exports = function (
-  appPath,
-  appName,
-  verbose,
-  originalDirectory,
-  templateName
-) {
+module.exports = function (appPath, appName, verbose, originalDirectory, templateName) {
   const appPackage = require(path.join(appPath, 'package.json'))
   const useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'))
 
@@ -106,9 +100,9 @@ module.exports = function (
     console.error(
       `You can fix this by running ${chalk.cyan(
         'npm uninstall -g create-react-app'
-      )} or ${chalk.cyan(
-        'yarn global remove create-react-app'
-      )} before using ${chalk.cyan('create-react-app')} again.`
+      )} or ${chalk.cyan('yarn global remove create-react-app')} before using ${chalk.cyan(
+        'create-react-app'
+      )} again.`
     )
     return
   }
@@ -170,14 +164,9 @@ module.exports = function (
 
   // Keys from templatePackage that will be added to appPackage,
   // replacing any existing entries.
-  const templatePackageToReplace = Object.keys(templatePackage).filter(
-    (key) => {
-      return (
-        !templatePackageBlacklist.includes(key) &&
-        !templatePackageToMerge.includes(key)
-      )
-    }
-  )
+  const templatePackageToReplace = Object.keys(templatePackage).filter((key) => {
+    return !templatePackageBlacklist.includes(key) && !templatePackageToMerge.includes(key)
+  })
 
   // Copy over some of the devDependencies
   appPackage.dependencies = appPackage.dependencies || {}
@@ -218,17 +207,11 @@ module.exports = function (
     appPackage[key] = templatePackage[key]
   })
 
-  fs.writeFileSync(
-    path.join(appPath, 'package.json'),
-    JSON.stringify(appPackage, null, 2) + os.EOL
-  )
+  fs.writeFileSync(path.join(appPath, 'package.json'), JSON.stringify(appPackage, null, 2) + os.EOL)
 
   const readmeExists = fs.existsSync(path.join(appPath, 'README.md'))
   if (readmeExists) {
-    fs.renameSync(
-      path.join(appPath, 'README.md'),
-      path.join(appPath, 'README.old.md')
-    )
+    fs.renameSync(path.join(appPath, 'README.md'), path.join(appPath, 'README.old.md'))
   }
 
   // Copy the files for the user
@@ -236,9 +219,7 @@ module.exports = function (
   if (fs.existsSync(templateDir)) {
     fs.copySync(templateDir, appPath)
   } else {
-    console.error(
-      `Could not locate supplied template: ${chalk.green(templateDir)}`
-    )
+    console.error(`Could not locate supplied template: ${chalk.green(templateDir)}`)
     return
   }
 
@@ -265,11 +246,7 @@ module.exports = function (
   } else {
     // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
     // See: https://github.com/npm/npm/issues/1862
-    fs.moveSync(
-      path.join(appPath, 'gitignore'),
-      path.join(appPath, '.gitignore'),
-      []
-    )
+    fs.moveSync(path.join(appPath, 'gitignore'), path.join(appPath, '.gitignore'), [])
   }
 
   // Initialize git repo
@@ -381,12 +358,8 @@ module.exports = function (
   console.log('    Starts the test runner.')
   console.log()
   console.log(chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}eject`))
-  console.log(
-    '    Removes this tool and copies build dependencies, configuration files'
-  )
-  console.log(
-    '    and scripts into the app directory. If you do this, you can’t go back!'
-  )
+  console.log('    Removes this tool and copies build dependencies, configuration files')
+  console.log('    and scripts into the app directory. If you do this, you can’t go back!')
   console.log()
   console.log('We suggest that you begin by typing:')
   console.log()
@@ -394,11 +367,7 @@ module.exports = function (
   console.log(`  ${chalk.cyan(`${displayedCommand} start`)}`)
   if (readmeExists) {
     console.log()
-    console.log(
-      chalk.yellow(
-        'You had a `README.md` file, we renamed it to `README.old.md`'
-      )
-    )
+    console.log(chalk.yellow('You had a `README.md` file, we renamed it to `README.old.md`'))
   }
   console.log()
   console.log('Happy hacking!')
@@ -408,7 +377,6 @@ function isReactInstalled(appPackage) {
   const dependencies = appPackage.dependencies || {}
 
   return (
-    typeof dependencies.react !== 'undefined' &&
-    typeof dependencies['react-dom'] !== 'undefined'
+    typeof dependencies.react !== 'undefined' && typeof dependencies['react-dom'] !== 'undefined'
   )
 }

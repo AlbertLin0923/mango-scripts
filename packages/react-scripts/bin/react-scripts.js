@@ -27,9 +27,7 @@ const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : []
 if (['build', 'eject', 'start', 'test', 'inspect'].includes(script)) {
   const result = spawn.sync(
     process.execPath,
-    nodeArgs
-      .concat(require.resolve('../scripts/' + script))
-      .concat(args.slice(scriptIndex + 1)),
+    nodeArgs.concat(require.resolve('../scripts/' + script)).concat(args.slice(scriptIndex + 1)),
     { stdio: 'inherit' }
   )
   if (result.signal) {
@@ -52,7 +50,5 @@ if (['build', 'eject', 'start', 'test', 'inspect'].includes(script)) {
 } else {
   console.log('Unknown script "' + script + '".')
   console.log('Perhaps you need to update react-scripts?')
-  console.log(
-    'See: https://facebook.github.io/create-react-app/docs/updating-to-new-releases'
-  )
+  console.log('See: https://facebook.github.io/create-react-app/docs/updating-to-new-releases')
 }

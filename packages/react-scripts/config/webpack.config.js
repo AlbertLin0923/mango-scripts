@@ -42,9 +42,7 @@ const createEnvironmentHash = require('./webpack/persistentCache/createEnvironme
 // const WebpackBar = require('webpackbar')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const { mergeUserBabelConfig } = require('./userConfig/userBabelConfig')
-const {
-  mergeUserPreProcessorConfig
-} = require('./userConfig/userPreProcessorConfig')
+const { mergeUserPreProcessorConfig } = require('./userConfig/userPreProcessorConfig')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const chalk = require('react-dev-utils/chalk')
 // andy end
@@ -72,17 +70,13 @@ const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false'
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true'
 const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true'
 
-const imageInlineSizeLimit = parseInt(
-  process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
-)
+const imageInlineSizeLimit = parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10000')
 
 // Check if TypeScript is setup
 const useTypeScript = fs.existsSync(paths.appTsConfig)
 
 // Check if Tailwind config exists
-const useTailwind = fs.existsSync(
-  path.join(paths.appPath, 'tailwind.config.js')
-)
+const useTailwind = fs.existsSync(path.join(paths.appPath, 'tailwind.config.js'))
 
 // Get the path to the uncompiled service worker (if it exists).
 const swSrc = paths.swSrc
@@ -193,8 +187,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
 
   // Variable used for enabling profiling in Production
   // passed into alias object. Uses a flag if passed into the build command
-  const isEnvProductionProfile =
-    isEnvProduction && process.argv.includes('--profile')
+  const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile')
 
   // We will provide `paths.publicUrlOrPath` to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -213,9 +206,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
         loader: MiniCssExtractPlugin.loader,
         // css is located in `static/css`, use '../../' to locate index.html folder
         // in production `paths.publicUrlOrPath` can be a relative path
-        options: paths.publicUrlOrPath.startsWith('.')
-          ? { publicPath: '../../' }
-          : {}
+        options: paths.publicUrlOrPath.startsWith('.') ? { publicPath: '../../' } : {}
       },
       {
         loader: require.resolve('css-loader'),
@@ -326,13 +317,9 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
       publicPath: paths.publicUrlOrPath,
       // Point sourcemap entries to original disk location (format as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction
-        ? (info) =>
-            path
-              .relative(paths.appSrc, info.absoluteResourcePath)
-              .replace(/\\/g, '/')
+        ? (info) => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
         : isEnvDevelopment &&
-          ((info) =>
-            path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
+          ((info) => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
       // andy start
       ...QIANKUN_config
       // andy end
@@ -345,9 +332,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
       buildDependencies: {
         defaultWebpack: ['webpack/lib/'],
         config: [__filename],
-        tsconfig: [paths.appTsConfig, paths.appJsConfig].filter((f) =>
-          fs.existsSync(f)
-        )
+        tsconfig: [paths.appTsConfig, paths.appJsConfig].filter((f) => fs.existsSync(f))
       }
     },
     infrastructureLogging: {
@@ -410,9 +395,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
       // We placed these paths second because we want `node_modules` to "win"
       // if there are any conflicts. This matches Node resolution mechanism.
       // https://github.com/facebook/create-react-app/issues/253
-      modules: ['node_modules', paths.appNodeModules].concat(
-        modules.additionalModulePaths || []
-      ),
+      modules: ['node_modules', paths.appNodeModules].concat(modules.additionalModulePaths || []),
       // These are the reasonable defaults supported by the Node ecosystem.
       // We also include JSX as a common component filename extension to support
       // some tools, although we do not recommend using it, see:
@@ -528,9 +511,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
               loader: require.resolve('babel-loader'),
               // andy start
               options: mergeUserBabelConfig({
-                customize: require.resolve(
-                  'babel-preset-react-app/webpack-overrides'
-                ),
+                customize: require.resolve('babel-preset-react-app/webpack-overrides'),
                 presets: [
                   [
                     require.resolve('babel-preset-react-app'),
@@ -548,9 +529,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
                 // is sane and uses Babel options. Instead of options, we use
                 // the react-scripts and babel-preset-react-app versions.
                 cacheIdentifier: getCacheIdentifier(
-                  isEnvProduction
-                    ? 'production'
-                    : isEnvDevelopment && 'development',
+                  isEnvProduction ? 'production' : isEnvDevelopment && 'development',
                   [
                     'babel-plugin-named-asset-import',
                     'babel-preset-react-app',
@@ -598,19 +577,14 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
                 configFile: false,
                 compact: false,
                 presets: [
-                  [
-                    require.resolve('babel-preset-react-app/dependencies'),
-                    { helpers: true }
-                  ]
+                  [require.resolve('babel-preset-react-app/dependencies'), { helpers: true }]
                 ],
                 cacheDirectory: true,
                 // See #6846 for context on why cacheCompression is disabled
                 cacheCompression: false,
                 // @remove-on-eject-begin
                 cacheIdentifier: getCacheIdentifier(
-                  isEnvProduction
-                    ? 'production'
-                    : isEnvDevelopment && 'development',
+                  isEnvProduction ? 'production' : isEnvDevelopment && 'development',
                   [
                     'babel-plugin-named-asset-import',
                     'babel-preset-react-app',
@@ -638,9 +612,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
               exclude: cssModuleRegex,
               use: getStyleLoaders({
                 importLoaders: 1,
-                sourceMap: isEnvProduction
-                  ? shouldUseSourceMap
-                  : isEnvDevelopment,
+                sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                 modules: {
                   mode: 'icss'
                 }
@@ -657,9 +629,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
               test: cssModuleRegex,
               use: getStyleLoaders({
                 importLoaders: 1,
-                sourceMap: isEnvProduction
-                  ? shouldUseSourceMap
-                  : isEnvDevelopment,
+                sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                 modules: {
                   mode: 'local',
                   getLocalIdent: getCSSModuleLocalIdent
@@ -675,9 +645,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
               use: getStyleLoaders(
                 {
                   importLoaders: 3,
-                  sourceMap: isEnvProduction
-                    ? shouldUseSourceMap
-                    : isEnvDevelopment,
+                  sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                   modules: {
                     mode: 'icss'
                   }
@@ -697,9 +665,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
               use: getStyleLoaders(
                 {
                   importLoaders: 3,
-                  sourceMap: isEnvProduction
-                    ? shouldUseSourceMap
-                    : isEnvDevelopment,
+                  sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                   modules: {
                     mode: 'local',
                     getLocalIdent: getCSSModuleLocalIdent
@@ -715,9 +681,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
               use: getStyleLoaders(
                 {
                   importLoaders: 4,
-                  sourceMap: isEnvProduction
-                    ? shouldUseSourceMap
-                    : isEnvDevelopment,
+                  sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                   modules: {
                     mode: 'icss'
                   }
@@ -737,9 +701,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
               use: getStyleLoaders(
                 {
                   importLoaders: 4,
-                  sourceMap: isEnvProduction
-                    ? shouldUseSourceMap
-                    : isEnvDevelopment,
+                  sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                   modules: {
                     mode: 'local',
                     // localIdentName: '[local]_[hash:base64:10]',
@@ -761,9 +723,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
               use: getStyleLoaders(
                 {
                   importLoaders: 5,
-                  sourceMap: isEnvProduction
-                    ? shouldUseSourceMap
-                    : isEnvDevelopment,
+                  sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                   modules: {
                     mode: 'icss'
                   }
@@ -777,9 +737,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
               use: getStyleLoaders(
                 {
                   importLoaders: 5,
-                  sourceMap: isEnvProduction
-                    ? shouldUseSourceMap
-                    : isEnvDevelopment,
+                  sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                   modules: {
                     mode: 'local',
                     // localIdentName: '[local]_[hash:base64:10]',
@@ -947,9 +905,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
             }),
             configOverwrite: {
               compilerOptions: {
-                sourceMap: isEnvProduction
-                  ? shouldUseSourceMap
-                  : isEnvDevelopment,
+                sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
                 skipLibCheck: true,
                 inlineSourceMap: false,
                 declarationMap: false,
@@ -970,10 +926,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
             // as micromatch doesn't match
             // '../cra-template-typescript/template/src/App.tsx'
             // otherwise.
-            include: [
-              { file: '../**/src/**/*.{ts,tsx}' },
-              { file: '**/src/**/*.{ts,tsx}' }
-            ],
+            include: [{ file: '../**/src/**/*.{ts,tsx}' }, { file: '**/src/**/*.{ts,tsx}' }],
             exclude: [
               { file: '**/src/**/__tests__/**' },
               { file: '**/src/**/?(*.){spec|test}.*' },
@@ -994,10 +947,7 @@ function getOriginWebpackConfig(webpackEnv, mfsu) {
           failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
           context: paths.appSrc,
           cache: true,
-          cacheLocation: path.resolve(
-            paths.appNodeModules,
-            '.cache/.eslintcache'
-          ),
+          cacheLocation: path.resolve(paths.appNodeModules, '.cache/.eslintcache'),
           // ESLint class options
           cwd: paths.appPath,
           resolvePluginsRelativeTo: __dirname,

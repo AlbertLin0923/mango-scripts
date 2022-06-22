@@ -28,9 +28,7 @@ if (isDryRun) {
 export async function getPkgInfoList(targetDir: string): Promise<IPkgInfo[]> {
   const pkgInfoList: IPkgInfo[] = []
 
-  const pkgDirList: string[] = fs
-    .readdirSync(targetDir)
-    .filter((filename) => filename[0] !== '.')
+  const pkgDirList: string[] = fs.readdirSync(targetDir).filter((filename) => filename[0] !== '.')
 
   await Promise.all(
     pkgDirList.map(async (pkgDir) => {
@@ -50,19 +48,11 @@ export async function getPkgInfoList(targetDir: string): Promise<IPkgInfo[]> {
   return pkgInfoList
 }
 
-export async function run(
-  bin: string,
-  args: string[],
-  opts: ExecaOptions<string> = {}
-) {
+export async function run(bin: string, args: string[], opts: ExecaOptions<string> = {}) {
   return execa(bin, args, { stdio: 'inherit', ...opts })
 }
 
-export async function dryRun(
-  bin: string,
-  args: string[],
-  opts?: ExecaOptions<string>
-) {
+export async function dryRun(bin: string, args: string[], opts?: ExecaOptions<string>) {
   return console.log(pico.blue(`[dryrun] ${bin} ${args.join(' ')}`), opts || '')
 }
 
@@ -78,7 +68,7 @@ export function getVersionChoices(pkgCurrentVersion: string) {
   const isStable = !currentBeta && !currentAlpha
 
   function inc(i: ReleaseType, tag = currentAlpha ? 'alpha' : 'beta') {
-    return semver.inc(pkgCurrentVersion, i, tag)!
+    return semver.inc(pkgCurrentVersion, i, tag) as string
   }
 
   let versionChoices = [
@@ -136,10 +126,7 @@ export function getVersionChoices(pkgCurrentVersion: string) {
   return versionChoices
 }
 
-export async function updateVersion(
-  pkgPath: string,
-  version: string
-): Promise<void> {
+export async function updateVersion(pkgPath: string, version: string): Promise<void> {
   const pkg = await fs.readJSON(pkgPath)
   pkg.version = version
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n')
@@ -156,9 +143,7 @@ export async function publishPkg(pkdDir: string, tag?: string): Promise<void> {
 }
 
 export async function getLatestTag(pkgName: string) {
-  const tags = (await run('git', ['tag'], { stdio: 'pipe' })).stdout
-    .split(/\n/)
-    .filter(Boolean)
+  const tags = (await run('git', ['tag'], { stdio: 'pipe' })).stdout.split(/\n/).filter(Boolean)
   return tags
     .filter((tag) => tag.startsWith(`${pkgName}@`))
     .sort()
@@ -173,21 +158,14 @@ export async function logRecentCommits(pkgName: string) {
   }).then((res) => res.stdout.trim())
   console.log(
     pico.bold(
-      `\n${pico.blue(`i`)} Commits of ${pico.green(pkgName)} since ${pico.green(
-        tag
-      )} ${pico.gray(`(${sha.slice(0, 5)})`)}`
+      `\n${pico.blue(`i`)} Commits of ${pico.green(pkgName)} since ${pico.green(tag)} ${pico.gray(
+        `(${sha.slice(0, 5)})`
+      )}`
     )
   )
   await run(
     'git',
-    [
-      '--no-pager',
-      'log',
-      `${sha}..HEAD`,
-      '--oneline',
-      '--',
-      `packages/${pkgName}`
-    ],
+    ['--no-pager', 'log', `${sha}..HEAD`, '--oneline', '--', `packages/${pkgName}`],
     { stdio: 'inherit' }
   )
   console.log()

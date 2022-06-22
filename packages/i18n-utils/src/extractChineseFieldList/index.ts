@@ -17,24 +17,14 @@ const bootstrap = async (
   sourceCodeContentHashMapPath: string,
   extractor: Extractor
 ): Promise<Array<LocaleItem>> => {
-  const filePathList = resolvePathList.reduce(
-    (previousValue: string[], currentValue: string) => {
-      return previousValue.concat(
-        getFilePathList(currentValue, filterExtNameList)
-      )
-    },
-    []
-  )
+  const filePathList = resolvePathList.reduce((previousValue: string[], currentValue: string) => {
+    return previousValue.concat(getFilePathList(currentValue, filterExtNameList))
+  }, [])
 
   // 不存在contentHash文件则创建它
-  const sourceCodeContentHashMapPathExist = await fs.pathExists(
-    sourceCodeContentHashMapPath
-  )
+  const sourceCodeContentHashMapPathExist = await fs.pathExists(sourceCodeContentHashMapPath)
   if (!sourceCodeContentHashMapPathExist) {
-    await fs.outputFile(
-      sourceCodeContentHashMapPath,
-      JSON.stringify({}, null, 2)
-    )
+    await fs.outputFile(sourceCodeContentHashMapPath, JSON.stringify({}, null, 2))
   }
   const contentHashMap = await fs.readJSON(sourceCodeContentHashMapPath)
 
@@ -48,9 +38,7 @@ const bootstrap = async (
     if (isContentModify) {
       const modules = matchModuleMark(resString)
       const chineseFieldList = (
-        extractor === 'regex'
-          ? regexExtractor(resString)
-          : astExtractor(resString, filePath)
+        extractor === 'regex' ? regexExtractor(resString) : astExtractor(resString, filePath)
       ).map((i) => {
         return {
           'zh-CN': i,
@@ -65,10 +53,7 @@ const bootstrap = async (
   }
 
   const formatLocaleList = uniArr(formatLocaleKeyList(localeList))
-  await fs.outputFile(
-    sourceCodeContentHashMapPath,
-    JSON.stringify(contentHashMap, null, 2)
-  )
+  await fs.outputFile(sourceCodeContentHashMapPath, JSON.stringify(contentHashMap, null, 2))
   return formatLocaleList
 }
 

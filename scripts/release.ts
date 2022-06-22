@@ -26,9 +26,7 @@ async function bootstrap(): Promise<void> {
 
   let targetVersion: string | undefined
 
-  const pkgInfoList: IPkgInfo[] = await getPkgInfoList(
-    path.resolve(process.cwd(), './packages')
-  )
+  const pkgInfoList: IPkgInfo[] = await getPkgInfoList(path.resolve(process.cwd(), './packages'))
 
   const { pkg }: { pkg: IPkgInfo } = await prompts({
     type: 'select',

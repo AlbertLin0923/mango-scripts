@@ -17,6 +17,7 @@ module.exports = defineConfig({
   },
   rules: {
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'node/no-unpublished-import': 'off',
     'node/no-unpublished-require': 'off',
     'no-process-exit': 'off',

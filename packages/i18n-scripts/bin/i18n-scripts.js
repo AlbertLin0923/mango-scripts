@@ -47,9 +47,7 @@ const leven = require('leven')
 const program = require('commander')
 const envinfo = require('envinfo')
 
-program
-  .version(`${cliName} ${require('../package').version}`)
-  .usage('<command> [options]')
+program.version(`${cliName} ${require('../package').version}`).usage('<command> [options]')
 
 program
   .command('updateLocale')
@@ -118,9 +116,7 @@ program.on('command:*', ([cmd]) => {
 program.on('--help', () => {
   console.log()
   console.log(
-    `  Run ${pico.cyan(
-      `${cliName} <command> --help`
-    )} for detailed usage of given command.`
+    `  Run ${pico.cyan(`${cliName} <command> --help`)} for detailed usage of given command.`
   )
   console.log()
 })
@@ -135,8 +131,7 @@ function suggestCommands(unknownCommand) {
   let suggestion
 
   availableCommands.forEach((cmd) => {
-    const isBestMatch =
-      leven(cmd, unknownCommand) < leven(suggestion || '', unknownCommand)
+    const isBestMatch = leven(cmd, unknownCommand) < leven(suggestion || '', unknownCommand)
     if (leven(cmd, unknownCommand) < 3 && isBestMatch) {
       suggestion = cmd
     }
