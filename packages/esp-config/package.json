@@ -1,0 +1,49 @@
+{
+  "name": "@mango-scripts/esp-config",
+  "version": "1.0.0",
+  "description": "A collection of configuration files containing eslint, stylelint, prettier",
+  "keywords": [
+    "eslint",
+    "stylelint",
+    "prettier",
+    "config"
+  ],
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/esp-config",
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
+    "directory": "packages/esp-config"
+  },
+  "license": "MIT",
+  "author": "AlbertLin0923",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/esm/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "stylelint-config-css-modules": "^4.1.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-config-standard-scss": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=14.6.0"
+  }
+}
