@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/esp-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A collection of configuration files containing eslint, stylelint, prettier",
   "keywords": [
     "eslint",

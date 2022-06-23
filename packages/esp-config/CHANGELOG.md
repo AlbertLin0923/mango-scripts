@@ -1,3 +1,9 @@
+## <small>1.0.1 (2022-06-23)</small>
+
+* feat: 完善@mango-scripts/esp-config,增加readme说明 ([c8061ac](https://github.com/AlbertLin0923/mango-scripts/commit/c8061ac))
+
+
+
 ## 1.0.0 (2022-06-23)
 
 
