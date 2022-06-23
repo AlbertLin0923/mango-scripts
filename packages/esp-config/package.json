@@ -38,10 +38,14 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "postcss-less": "^6.0.0",
+    "postcss-styl": "^0.11.1",
     "stylelint-config-css-modules": "^4.1.0",
     "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^26.0.0",
-    "stylelint-config-standard-scss": "^4.0.0"
+    "stylelint-config-standard-scss": "^4.0.0",
+    "stylelint-order": "^5.0.0"
   },
   "engines": {
     "node": ">=14.6.0"
