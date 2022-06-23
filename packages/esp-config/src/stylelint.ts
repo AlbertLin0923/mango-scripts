@@ -6,17 +6,15 @@ export default {
     'stylelint-config-rational-order',
     'stylelint-config-prettier'
   ],
-  plugins: [],
-  rules: {},
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
   overrides: [
     {
       files: ['**/*.less'],
-      customSyntax: 'postcss-less'
+      customSyntax: require('postcss-less')
     },
     {
       files: ['**/*.styl', '**/*.stylus'],
-      customSyntax: 'postcss-styl'
+      customSyntax: require('postcss-styl')
     }
   ]
 }
