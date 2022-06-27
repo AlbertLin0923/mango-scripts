@@ -12,7 +12,7 @@ async function bootstrap() {
   await fs.emptyDir(path.resolve(__dirname, './contentHash/'))
   const result = await extractChineseFieldList(
     [projectPath],
-    ['.vue'],
+    ['.jsx'],
     sourceCodeContentHashMapPath,
     'ast'
   )

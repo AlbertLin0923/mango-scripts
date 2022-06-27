@@ -1,6 +1,7 @@
 import * as compilerVue from 'vue-template-compiler'
 import * as babel from '@babel/core'
 import * as babelParser from '@babel/parser'
+import * as t from '@babel/types'
 import * as pug from 'pug'
 import * as compilerSvelte from 'svelte/compiler'
 import * as hyntax from 'hyntax'
@@ -166,11 +167,12 @@ const extractInJsAndTs = (code: string): Array<string> => {
 
   const arr: Array<string> = []
 
-  const { partialCommentList, nextLineCommentList, thisLineCommentList } =
+  const { entireFileDisabled, partialCommentList, nextLineCommentList, thisLineCommentList } =
     collectDisableRuleCommentlocation(ast.comments)
 
   const _inDisableRuleCommentlocation = (startLine: number, endLine: number) => {
     return inDisableRuleCommentlocation(
+      entireFileDisabled,
       partialCommentList,
       nextLineCommentList,
       thisLineCommentList,
@@ -183,10 +185,18 @@ const extractInJsAndTs = (code: string): Array<string> => {
     Program: {
       enter(path: any) {
         path.traverse({
-          'StringLiteral|TemplateLiteral'(path: any) {
+          'StringLiteral|TemplateLiteral|JSXText'(path: any) {
             const startLine = path.node.loc.start.line
             const endLine = path.node.loc.end.line
+
             if (_inDisableRuleCommentlocation(startLine, endLine)) {
+              path.node.skipTransform = true
+            }
+            if (
+              path.findParent((p: any) => {
+                return p.node.callee && t.isIdentifier(p.node.callee.object, { name: 'console' })
+              })
+            ) {
               path.node.skipTransform = true
             }
           }

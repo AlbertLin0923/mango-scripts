@@ -154,38 +154,44 @@ export const compareLocaleData = (oldFilePath: string, newFilePath: string) => {
 }
 
 export const collectDisableRuleCommentlocation = (comments: any) => {
+  let entireFileDisabled = false
   const partialCommentList: Array<any> = []
   const nextLineCommentList: Array<any> = []
   const thisLineCommentList: Array<any> = []
 
   const tmp_partialCommentList: Array<any> = []
 
-  comments.forEach((comment: any) => {
-    if (/translate-disable-next-line/.test(comment.value)) {
-      nextLineCommentList.push(comment.loc.end.line)
-    } else if (/translate-disable-line/.test(comment.value)) {
-      thisLineCommentList.push(comment.loc.start.line)
-    } else if (/translate-disable/.test(comment.value)) {
-      tmp_partialCommentList.push(comment.loc.end.line)
-    }
-  })
-
-  tmp_partialCommentList
-    .sort((a, b) => {
-      return a - b
-    })
-    .forEach((item, index) => {
-      if (index % 2) {
-        partialCommentList[partialCommentList.length - 1][1] = item
-      } else {
-        partialCommentList.push([item])
+  if (comments.some((comment: any) => /translate-disable-entire-file/.test(comment.value))) {
+    entireFileDisabled = true
+  } else {
+    comments.forEach((comment: any) => {
+      if (/translate-disable-next-line/.test(comment.value)) {
+        nextLineCommentList.push(comment.loc.end.line)
+      } else if (/translate-disable-line/.test(comment.value)) {
+        thisLineCommentList.push(comment.loc.start.line)
+      } else if (/translate-disable/.test(comment.value)) {
+        tmp_partialCommentList.push(comment.loc.end.line)
       }
     })
 
-  return { partialCommentList, nextLineCommentList, thisLineCommentList }
+    tmp_partialCommentList
+      .sort((a, b) => {
+        return a - b
+      })
+      .forEach((item, index) => {
+        if (index % 2) {
+          partialCommentList[partialCommentList.length - 1][1] = item
+        } else {
+          partialCommentList.push([item])
+        }
+      })
+  }
+
+  return { entireFileDisabled, partialCommentList, nextLineCommentList, thisLineCommentList }
 }
 
 export const inDisableRuleCommentlocation = (
+  entireFileDisabled: boolean,
   partialCommentList: any,
   nextLineCommentList: any,
   thisLineCommentList: any,
@@ -193,6 +199,10 @@ export const inDisableRuleCommentlocation = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   endLine: number
 ) => {
+  // 存在文件忽略标识，整个文件忽略
+  if (entireFileDisabled === true) {
+    return true
+  }
   // 字符串在nextLineComment下一行，则忽略
   if (nextLineCommentList.indexOf(startLine - 1) > -1) return true
 
