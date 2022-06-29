@@ -1,5 +1,4 @@
 import * as fs from 'fs-extra'
-import { LocaleItem, Extractor } from '../types/index'
 import regexExtractor from './regexExtractor'
 import astExtractor from './astExtractor'
 
@@ -10,6 +9,22 @@ import {
   getContentHash,
   formatLocaleKeyList
 } from '../utils/index'
+
+export type LocaleItem = {
+  'zh-CN': string
+  modules: string
+}
+
+export interface ExecResult {
+  success: boolean
+  message: Array<string>
+  readResult: Array<any>
+}
+
+export enum Extractor {
+  AST = 'ast',
+  REGEX = 'regex'
+}
 
 const bootstrap = async (
   resolvePathList: Array<string>,

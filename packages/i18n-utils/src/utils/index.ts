@@ -2,7 +2,10 @@ import * as path from 'path'
 import * as fs from 'fs-extra'
 import * as crypto from 'crypto'
 
-import { LocaleItem } from '../types/index'
+export type LocaleItem = {
+  'zh-CN': string
+  modules: string
+}
 
 /**
  * @description: 获取目标文件下符合条件的文件路径
@@ -222,23 +225,31 @@ export const getContentHash = (content: string): string => {
   return crypto.createHash('md5').update(content).digest('hex')
 }
 
-export const isLegalLocaleKey = (str: string): boolean => {
+export const isLegalLocaleStr = (str: string): boolean => {
   return str ? true : false
 }
 
-export const formatLocaleKeyStr = (str: string): string => {
+export const formatLocaleStr = (str: any): string => {
   return String(str)
     .replace(/[\n\r\t]/g, '')
     .trim()
 }
 
+export const formatLocaleObj = (localeObj: Record<string, any>) => {
+  const r: Record<string, any> = {}
+  Object.entries(localeObj).forEach(([key, value]) => {
+    r[formatLocaleStr(key)] = formatLocaleStr(value)
+  })
+  return r
+}
+
 export const formatLocaleKeyList = (localeList: LocaleItem[]) => {
   return localeList
     .map((i) => {
-      i['zh-CN'] = formatLocaleKeyStr(i['zh-CN'])
+      i['zh-CN'] = formatLocaleStr(i['zh-CN'])
       return i
     })
-    .filter((i) => isLegalLocaleKey(i['zh-CN']))
+    .filter((i) => isLegalLocaleStr(i['zh-CN']))
 }
 
 export const deleteCodeComments = (code: string): string => {

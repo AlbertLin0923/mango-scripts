@@ -31,7 +31,8 @@ module.exports = defineConfig({
         allowModules: ['types', 'estree', 'less', 'sass', 'stylus'],
         tryExtensions: ['.ts', '.js', '.jsx', '.tsx', '.d.ts']
       }
-    ]
+    ],
+    'node/no-extraneous-import': 'off'
   },
   overrides: [
     {
