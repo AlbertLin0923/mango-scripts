@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.3...@mango-scripts/i18n-utils@1.0.4) (2022-06-29)
+
+
+### Features
+
+* @mango-scripts/i18n-utils 导出处理locale方法 ([394cac1](https://github.com/AlbertLin0923/mango-scripts/commit/394cac13a15087bc12627646a5e0f2606dfa1ba5))
+
 ## [1.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.2...@mango-scripts/i18n-utils@1.0.3) (2022-06-27)
 
 
