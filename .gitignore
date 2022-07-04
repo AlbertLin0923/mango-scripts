@@ -11,6 +11,9 @@ node_modules
 # production
 dist
 
+# coverage
+coverage
+
 
 # @mango-scripts/react-scripts
 /packages/react-scripts/example/

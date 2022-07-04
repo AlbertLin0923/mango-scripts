@@ -52,7 +52,7 @@
     "fs-extra": "^10.1.0",
     "git-repo-info": "^2.1.1",
     "husky": "^8.0.1",
-    "jest": "^27.4.3",
+    "jest": "28.1.2",
     "lint-staged": "^12.4.1",
     "minimist": "^1.2.6",
     "picocolors": "^1.0.0",

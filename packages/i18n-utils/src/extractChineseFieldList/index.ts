@@ -27,30 +27,49 @@ export enum Extractor {
 }
 
 const bootstrap = async (
+  extractor: Extractor,
   resolvePathList: Array<string>,
   filterExtNameList: Array<string>,
-  sourceCodeContentHashMapPath: string,
-  extractor: Extractor
+  sourceCodeContentHashMapPath?: string
 ): Promise<Array<LocaleItem>> => {
   const filePathList = resolvePathList.reduce((previousValue: string[], currentValue: string) => {
     return previousValue.concat(getFilePathList(currentValue, filterExtNameList))
   }, [])
 
-  // 不存在contentHash文件则创建它
-  const sourceCodeContentHashMapPathExist = await fs.pathExists(sourceCodeContentHashMapPath)
-  if (!sourceCodeContentHashMapPathExist) {
-    await fs.outputFile(sourceCodeContentHashMapPath, JSON.stringify({}, null, 2))
+  let contentHashMap: Record<string, string> = {}
+
+  if (sourceCodeContentHashMapPath) {
+    // 不存在contentHash文件则创建它
+    const sourceCodeContentHashMapPathExist = await fs.pathExists(sourceCodeContentHashMapPath)
+    if (!sourceCodeContentHashMapPathExist) {
+      await fs.outputFile(sourceCodeContentHashMapPath, JSON.stringify({}, null, 2))
+    }
+    contentHashMap = await fs.readJSON(sourceCodeContentHashMapPath)
   }
-  const contentHashMap = await fs.readJSON(sourceCodeContentHashMapPath)
 
   const localeList: Array<LocaleItem> = []
 
   for (let index = 0; index < filePathList.length; index++) {
     const filePath = filePathList[index]
     const resString = await fs.readFile(filePath, { encoding: 'utf-8' })
-    const contentHash = getContentHash(resString)
-    const isContentModify = contentHashMap[filePath] !== contentHash
-    if (isContentModify) {
+    if (sourceCodeContentHashMapPath) {
+      const contentHash = getContentHash(resString)
+      const isContentModify = contentHashMap[filePath] !== contentHash
+      if (isContentModify) {
+        const modules = matchModuleMark(resString)
+        const chineseFieldList = (
+          extractor === 'regex' ? regexExtractor(resString) : astExtractor(resString, filePath)
+        ).map((i) => {
+          return {
+            'zh-CN': i,
+            modules
+          }
+        })
+        // 写入contentHash文件
+        contentHashMap[filePath] = contentHash
+        localeList.push(...chineseFieldList)
+      }
+    } else {
       const modules = matchModuleMark(resString)
       const chineseFieldList = (
         extractor === 'regex' ? regexExtractor(resString) : astExtractor(resString, filePath)
@@ -60,15 +79,15 @@ const bootstrap = async (
           modules
         }
       })
-
-      // 写入contentHash文件
-      contentHashMap[filePath] = contentHash
       localeList.push(...chineseFieldList)
     }
   }
 
   const formatLocaleList = uniArr(formatLocaleKeyList(localeList))
-  await fs.outputFile(sourceCodeContentHashMapPath, JSON.stringify(contentHashMap, null, 2))
+  if (sourceCodeContentHashMapPath) {
+    await fs.outputFile(sourceCodeContentHashMapPath, JSON.stringify(contentHashMap, null, 2))
+  }
+
   return formatLocaleList
 }
 
