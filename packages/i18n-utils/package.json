@@ -34,7 +34,6 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "build:father": "father-build",
     "dev": "unbuild --stub",
     "prepublishOnly": "npm run build"
   },
