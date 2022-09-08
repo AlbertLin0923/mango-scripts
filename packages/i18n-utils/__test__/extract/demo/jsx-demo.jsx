@@ -1,3 +1,4 @@
+/* eslint-disable node/no-missing-import */
 // translateModules:["DEMO模块"]
 import React, { useState } from 'react'
 

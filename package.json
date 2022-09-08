@@ -20,13 +20,13 @@
   },
   "license": "MIT",
   "scripts": {
-    "ci-publish": "ts-node scripts/publishCI.ts",
+    "ci-publish": "tsx scripts/publishCI.ts",
     "preinstall": "npx only-allow pnpm",
     "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
     "lint:eslint": "eslint ./ --fix",
     "lint:prettier": "prettier ./ --write --check",
     "prepare": "husky install",
-    "release": "ts-node scripts/release.ts",
+    "release": "tsx scripts/release.ts",
     "test": "jest --coverage --no-cache",
     "test:watch": "jest --coverage --watch"
   },
@@ -60,10 +60,12 @@
     "prompts": "^2.4.2",
     "semver": "^7.3.7",
     "ts-jest": "^28.0.5",
-    "ts-node": "^10.7.0",
     "unbuild": "^0.7.4"
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "tsx": "^3.9.0"
   }
 }

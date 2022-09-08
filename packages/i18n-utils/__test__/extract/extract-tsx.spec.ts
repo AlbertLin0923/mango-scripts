@@ -3,22 +3,25 @@ const projectPath = path.resolve(__dirname, './demo')
 
 import { extractChineseFieldList, Extractor } from '../../src/index'
 
-describe('extract jsx', () => {
-  test('should extract jsx i18n key', async () => {
-    const result = await extractChineseFieldList(Extractor.AST, [projectPath], ['.jsx'])
+describe('extract tsx', () => {
+  test('should extract tsx i18n key', async () => {
+    const result = await extractChineseFieldList(Extractor.AST, [projectPath], ['.tsx'])
 
     expect(result).toEqual(
       expect.arrayContaining([
-        { 'zh-CN': '早上好', modules: 'DEMO模块' },
-        { 'zh-CN': '设置次数', modules: 'DEMO模块' },
-        { 'zh-CN': '设置问候语', modules: 'DEMO模块' },
+        { 'zh-CN': '语言包', modules: 'DEMO模块' },
+        { 'zh-CN': '总数目', modules: 'DEMO模块' },
+        { 'zh-CN': '已翻译', modules: 'DEMO模块' },
+        { 'zh-CN': '未翻译', modules: 'DEMO模块' },
+        { 'zh-CN': '翻译进度', modules: 'DEMO模块' },
+        { 'zh-CN': '数据统计', modules: 'DEMO模块' },
         { 'zh-CN': '刘德华', modules: 'DEMO模块' }
       ])
     )
   })
 
   test('should ignore console message i18n key', async () => {
-    const result = await extractChineseFieldList(Extractor.AST, [projectPath], ['.jsx'])
+    const result = await extractChineseFieldList(Extractor.AST, [projectPath], ['.tsx'])
 
     expect(result).toEqual(
       expect.not.arrayContaining([
@@ -29,7 +32,7 @@ describe('extract jsx', () => {
   })
 
   test('should ignore i18n key of translate-disable line', async () => {
-    const result = await extractChineseFieldList(Extractor.AST, [projectPath], ['.jsx'])
+    const result = await extractChineseFieldList(Extractor.AST, [projectPath], ['.tsx'])
 
     expect(result).toEqual(
       expect.not.arrayContaining([
