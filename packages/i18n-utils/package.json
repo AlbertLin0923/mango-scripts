@@ -38,21 +38,20 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@babel/core": "^7.18.0",
-    "@babel/parser": "^7.18.0",
-    "@babel/runtime": "^7.18.0",
-    "@babel/types": "^7.18.4",
+    "@babel/core": "^7.19.1",
+    "@babel/parser": "^7.19.1",
+    "@babel/runtime": "^7.19.0",
+    "@babel/types": "^7.19.0",
     "@types/fs-extra": "^9.0.13",
     "@types/pug": "^2.0.6",
     "fs-extra": "^10.1.0",
-    "glob": "^7.2.0",
-    "glob-promise": "^4.2.2",
+    "glob": "^8.0.3",
+    "glob-promise": "^5.0.0",
     "hyntax": "^1.1.9",
     "pug": "^3.0.2",
-    "react": "^16.12.0 || ^17.0.0",
-    "svelte": "^3.48.0",
-    "vue": "2.6.14",
-    "vue-template-compiler": "^2.6.14"
+    "svelte": "^3.50.1",
+    "vue": "^2.7.10",
+    "vue-template-compiler": "^2.7.10"
   },
   "engines": {
     "node": ">=14.6.0"
