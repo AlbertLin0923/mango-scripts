@@ -1,3 +1,13 @@
+## [1.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.4...@mango-scripts/i18n-utils@1.0.5) (2022-12-28)
+
+
+### Features
+
+* 去掉father-build ([66edc9e](https://github.com/AlbertLin0923/mango-scripts/commit/66edc9e2f1680cab023d5d3f4c6ccf9b670f1ad8))
+* 增加i18n-utils测试用例 ([800bc7b](https://github.com/AlbertLin0923/mango-scripts/commit/800bc7b2aa3ba0405552de2830f1c738df757a95))
+* 增加i18n-utils测试用例 ([3ee0ba4](https://github.com/AlbertLin0923/mango-scripts/commit/3ee0ba4ffa4879abdc8f82e6ed60f8626f64e6b9))
+* ts-node替换为tsx ([6c0ccb3](https://github.com/AlbertLin0923/mango-scripts/commit/6c0ccb3929bc8d8dcc0ecca96c60e69faa3caf2d))
+
 ## [1.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.3...@mango-scripts/i18n-utils@1.0.4) (2022-06-29)
 
 
