@@ -48,7 +48,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "execa": "6.1.0",
+    "execa": "^6.1.0",
     "fs-extra": "^10.1.0",
     "git-repo-info": "^2.1.1",
     "husky": "^8.0.1",

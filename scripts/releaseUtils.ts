@@ -1,12 +1,12 @@
 // Forked from https://github.com/vitejs/vite/
 
-import fs from 'fs-extra'
-import path from 'path'
+import path from 'node:path'
 import pico from 'picocolors'
-import type { Options as ExecaOptions } from 'execa'
-import execa from 'execa'
+import type { Options as ExecaOptions, ExecaReturnValue } from 'execa'
+import { execa } from 'execa'
 import type { ReleaseType } from 'semver'
 import semver from 'semver'
+import fs from 'fs-extra'
 import minimist from 'minimist'
 
 export interface IPkgInfo {
@@ -48,7 +48,11 @@ export async function getPkgInfoList(targetDir: string): Promise<IPkgInfo[]> {
   return pkgInfoList
 }
 
-export async function run(bin: string, args: string[], opts: ExecaOptions<string> = {}) {
+export async function run(
+  bin: string,
+  args: string[],
+  opts: ExecaOptions<string> = {}
+): Promise<ExecaReturnValue<string>> {
   return execa(bin, args, { stdio: 'inherit', ...opts })
 }
 
