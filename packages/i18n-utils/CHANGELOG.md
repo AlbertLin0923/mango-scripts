@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.5...@mango-scripts/i18n-utils@1.0.6) (2022-12-28)
+
+
+### Features
+
+* release @mango-scripts/i18n-utils@1.0.5 ([4845a9c](https://github.com/AlbertLin0923/mango-scripts/commit/4845a9c51fa6bc74468b166b5237c79d355185c2))
+
 ## [1.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.5...@mango-scripts/i18n-utils@1.0.5) (2022-12-28)
 
 ## [1.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.4...@mango-scripts/i18n-utils@1.0.5) (2022-12-28)
