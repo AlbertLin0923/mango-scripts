@@ -1,3 +1,5 @@
+## [1.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.5...@mango-scripts/i18n-utils@1.0.5) (2022-12-28)
+
 ## [1.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.4...@mango-scripts/i18n-utils@1.0.5) (2022-12-28)
 
 
