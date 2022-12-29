@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/react-scripts",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Custom Configuration and scripts for Create React App.",
   "keywords": [
     "frontend",
