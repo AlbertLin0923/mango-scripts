@@ -1,3 +1,11 @@
+## [1.0.10](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.9...@mango-scripts/react-scripts@1.0.10) (2022-12-29)
+
+
+### Features
+
+* 使用sort-package-json插件对package.json文件进行格式化 ([d871bc3](https://github.com/AlbertLin0923/mango-scripts/commit/d871bc3f77eac29a7551f6ffcea2906989853378))
+* 修改react-scripts本地ip配置 ([6bcba5c](https://github.com/AlbertLin0923/mango-scripts/commit/6bcba5ce601e45489d9a518719446082edc70d16))
+
 ## [1.0.9](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.8...@mango-scripts/react-scripts@1.0.9) (2022-06-13)
 
 
