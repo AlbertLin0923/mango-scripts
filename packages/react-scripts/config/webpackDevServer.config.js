@@ -19,28 +19,30 @@ const getHttpsConfig = require('./getHttpsConfig')
 // andy start
 const interfaces = require('os').networkInterfaces()
 
-// 在开发环境中获取局域网中的本机iP地址
-const getLocalIPAddress = () => {
-  let IPAddress = ''
-  for (var devName in interfaces) {
-    var iface = interfaces[devName]
-    for (var i = 0; i < iface.length; i++) {
-      var alias = iface[i]
-      if (
-        alias.family === 'IPv4' &&
-        alias.address !== '127.0.0.1' &&
-        !alias.internal &&
-        alias.address.startsWith('10')
-      ) {
-        IPAddress = alias.address
-        // 找到符合的ip就跳出循环，规避vpn的虚拟ip
-        return IPAddress
+if (process.env.USE_LOCAL_HOST === 'true') {
+  // 在开发环境中获取局域网中的本机iP地址
+  const getLocalIPAddress = () => {
+    let IPAddress = ''
+    for (var devName in interfaces) {
+      var iface = interfaces[devName]
+      for (var i = 0; i < iface.length; i++) {
+        var alias = iface[i]
+        if (
+          alias.family === 'IPv4' &&
+          alias.address !== '127.0.0.1' &&
+          !alias.internal &&
+          alias.address.startsWith('10')
+        ) {
+          IPAddress = alias.address
+          // 找到符合的ip就跳出循环，规避vpn的虚拟ip
+          return IPAddress
+        }
       }
     }
   }
-}
 
-process.env.HOST = getLocalIPAddress()
+  process.env.HOST = getLocalIPAddress()
+}
 // andy end
 
 const host = process.env.HOST || '0.0.0.0'
