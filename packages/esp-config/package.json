@@ -49,15 +49,15 @@
   },
   "dependencies": {
     "postcss-less": "^6.0.0",
-    "postcss-styl": "^0.11.1",
+    "postcss-styl": "^0.12.2",
     "stylelint-config-css-modules": "^4.1.0",
-    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-prettier": "^9.0.4",
     "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-config-standard": "^28.0.0",
-    "stylelint-config-standard-scss": "^5.0.0",
-    "stylelint-order": "^5.0.0"
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-config-standard-scss": "^6.1.0",
+    "stylelint-order": "^6.0.1"
   },
   "engines": {
-    "node": ">=14.6.0"
+    "node": ">=14.0.0"
   }
 }
