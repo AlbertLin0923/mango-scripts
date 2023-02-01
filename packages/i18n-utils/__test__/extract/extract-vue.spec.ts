@@ -1,3 +1,4 @@
+import { describe, it, expect, test } from 'vitest'
 const path = require('path')
 const projectPath = path.resolve(__dirname, './demo')
 
