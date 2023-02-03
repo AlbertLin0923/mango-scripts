@@ -8,6 +8,7 @@
     "hmr",
     "dev-server",
     "build-tool",
+    "i18n",
     "scripts"
   ],
   "homepage": "https://github.com/AlbertLin0923/mango-scripts",
@@ -20,15 +21,15 @@
   },
   "license": "MIT",
   "scripts": {
-    "ci-publish": "tsx scripts/publishCI.ts",
+    "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
     "lint": "pnpm run lint:eslint && pnpm run lint:prettier",
     "lint:eslint": "eslint ./ --fix",
     "lint:prettier": "prettier ./ --write --check",
-    "prepare": "husky install",
-    "release": "tsx scripts/release.ts",
     "test-unit": "vitest run",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "release": "tsx scripts/release.ts",
+    "ci-publish": "tsx scripts/publishCI.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.1",
