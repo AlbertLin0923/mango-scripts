@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "postcss-less": "^6.0.0",
-    "postcss-styl": "^0.12.2",
+    "postcss-styl": "^0.12.3",
     "stylelint-config-css-modules": "^4.1.0",
     "stylelint-config-prettier": "^9.0.4",
     "stylelint-config-rational-order": "^0.1.2",
