@@ -1,3 +1,3 @@
 # @mango-scripts/utils
 
-工具集合
+mango-scripts 工具库

@@ -1,7 +1,7 @@
 {
   "name": "@mango-scripts/react-scripts",
   "version": "1.0.11",
-  "description": "Custom Configuration and scripts for Create React App.",
+  "description": "基于 react-scripts@5.0.1 添加一些功能和优化",
   "keywords": [
     "frontend",
     "hmr",
@@ -16,10 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
-    "directory": "packages/react-scripts"
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/react-scripts",
+    "branch": "master",
+    "directory": "packages/react-scripts",
+    "platform": "github"
   },
   "license": "MIT",
+  "author": "AlbertLin0923",
   "types": "./lib/react-app.d.ts",
   "bin": {
     "react-scripts": "./bin/react-scripts.js"

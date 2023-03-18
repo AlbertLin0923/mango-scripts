@@ -1,7 +1,7 @@
 {
   "name": "@mango-scripts/i18n-utils",
   "version": "1.0.6",
-  "description": "i18n-system 工具库",
+  "description": "mango-i18n-system 自动国际化文案配置系统的文案解析器，用于提取中文文案key",
   "keywords": [
     "frontend",
     "utils",
@@ -14,8 +14,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
-    "directory": "packages/i18n-utils"
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-utils",
+    "branch": "master",
+    "directory": "packages/i18n-utils",
+    "platform": "github"
   },
   "license": "MIT",
   "author": "AlbertLin0923",
@@ -30,11 +32,11 @@
   "module": "./dist/esm/index.mjs",
   "types": "./dist/esm/index.d.ts",
   "files": [
-    "dist"
+    "./dist"
   ],
   "scripts": {
-    "build": "unbuild",
     "dev": "unbuild --stub",
+    "build": "unbuild",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

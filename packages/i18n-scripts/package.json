@@ -1,23 +1,26 @@
 {
   "name": "@mango-scripts/i18n-scripts",
   "version": "1.0.2",
-  "description": "Some scripts for i18n system",
+  "description": "mango-i18n-system 自动国际化文案配置系统的辅助插件合集，用于下载语言包,转换vue文件，转换文件后缀等",
   "keywords": [
     "frontend",
     "scripts",
     "i18n-scripts",
     "internationalization-scripts"
   ],
-  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-scripts",
+  "homepage": "hhttps://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-scripts",
   "bugs": {
     "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
-    "directory": "packages/i18n-scripts"
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-scripts",
+    "branch": "master",
+    "directory": "packages/i18n-scripts",
+    "platform": "github"
   },
   "license": "MIT",
+  "author": "AlbertLin0923",
   "bin": {
     "i18n-scripts": "./bin/i18n-scripts.js"
   },

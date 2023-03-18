@@ -14,8 +14,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
-    "directory": "packages/esp-config"
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/esp-config",
+    "branch": "master",
+    "directory": "packages/esp-config",
+    "platform": "github"
   },
   "license": "MIT",
   "author": "AlbertLin0923",
@@ -43,8 +45,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
     "dev": "unbuild --stub",
+    "build": "unbuild",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

@@ -2,15 +2,7 @@
   "name": "mango-scripts-monorepo",
   "version": "0.0.1",
   "private": true,
-  "description": "Some scripts",
-  "keywords": [
-    "frontend",
-    "hmr",
-    "dev-server",
-    "build-tool",
-    "i18n",
-    "scripts"
-  ],
+  "description": "一些用于 mango-i18n-system 的工具包合集",
   "homepage": "https://github.com/AlbertLin0923/mango-scripts",
   "bugs": {
     "url": "https://github.com/AlbertLin0923/mango-scripts"
@@ -20,6 +12,7 @@
     "url": "git+https://github.com/AlbertLin0923/mango-scripts"
   },
   "license": "MIT",
+  "author": "AlbertLin0923",
   "scripts": {
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
@@ -30,6 +23,9 @@
     "coverage": "vitest run --coverage",
     "release": "tsx scripts/release.ts",
     "ci-publish": "tsx scripts/publishCI.ts"
+  },
+  "dependencies": {
+    "tsx": "^3.12.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
@@ -64,8 +60,5 @@
   },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "dependencies": {
-    "tsx": "^3.12.3"
   }
 }

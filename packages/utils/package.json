@@ -1,15 +1,24 @@
 {
   "name": "@mango-scripts/utils",
   "version": "1.0.0",
-  "description": "mango-scripts utils 工具库",
+  "description": "mango-scripts 工具库",
+  "keywords": [
+    "frontend",
+    "utils"
+  ],
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/utils",
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/utils",
+    "branch": "master",
+    "directory": "packages/utils",
+    "platform": "github"
+  },
   "license": "MIT",
   "author": "AlbertLin0923",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.mjs",
-  "types": "./dist/esm/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/esm/index.d.ts",
@@ -17,28 +26,21 @@
       "require": "./dist/cjs/index.js"
     }
   },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/esm/index.d.ts",
+  "files": [
+    "./dist"
+  ],
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild",
     "prepublishOnly": "npm run build"
   },
-  "engines": {
-    "node": ">=14.6.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts",
-    "directory": "packages/utils"
-  },
-  "bugs": {
-    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
-  },
-  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/utils",
-  "keywords": [
-    "frontend",
-    "utils"
-  ],
   "dependencies": {
     "picocolors": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

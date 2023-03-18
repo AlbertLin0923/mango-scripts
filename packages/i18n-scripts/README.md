@@ -1,6 +1,6 @@
 # @mango-scripts/i18n-scripts
 
-一些`国际化前端文案`相关的便捷脚本合集
+`mango-i18n-system` 自动国际化文案配置系统的`辅助插件合集`，用于下载语言包,转换 vue 文件，转换文件后缀等
 
 ## i18n-scripts updateLocale
 
