@@ -1,3 +1,5 @@
+## [1.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@1.0.2...@mango-scripts/esp-config@1.0.3) (2023-03-18)
+
 ## [1.0.2](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@1.0.1...@mango-scripts/esp-config@1.0.2) (2023-03-18)
 
 
