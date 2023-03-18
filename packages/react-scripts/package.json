@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/react-scripts",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "基于 react-scripts@5.0.1 添加一些功能和优化",
   "keywords": [
     "frontend",
