@@ -7,7 +7,7 @@
 - 增加了 babel 配置支持
 - 增加了 @umi/mfsu 缓存支持
 - 增加了 antd 配置支持
-- 内置 less,stylus ，无需再安装，支持 `sass/less/stylus` 预处理器配置支持
+- 内置 less、stylus，无需再安装，支持 `sass/less/stylus` 预处理器配置支持
 - 增加了 [qiankun](https://github.com/umijs/qiankun) 配置支持
 - 增加了 svg-sprite-loader 配置支持
 - 增加了 webpack-bundle-analyzer 配置支持
@@ -27,7 +27,7 @@
 
 ## 自定义 babel 配置支持
 
-项目根目录下新增 `babel.config.js`, `.babelrc.js`, `.babelrc`配置文件,脚本会自动读取合并 babel 配置到 babel-loader options
+项目根目录下新增 `babel.config.js`，`.babelrc.js`，`.babelrc`配置文件，脚本会自动读取合并 babel 配置到 babel-loader options
 
 babel.config.js
 
@@ -47,7 +47,7 @@ module.exports = {
 
 ## 自定义 css 预处理器配置支持
 
-项目根目录下新增 `preProcessor.config.js`, `.preProcessorrc.js`, `.preProcessorrc`配置文件,脚本会自动读取配置合并到预处理 options
+项目根目录下新增 `preProcessor.config.js`，`.preProcessorrc.js`，`.preProcessorrc`配置文件，脚本会自动读取配置合并到预处理 options
 
 preProcessor.config.js
 
