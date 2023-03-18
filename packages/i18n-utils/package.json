@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/i18n-utils",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "mango-i18n-system 自动国际化文案配置系统的文案解析器，用于提取中文文案key",
   "keywords": [
     "frontend",

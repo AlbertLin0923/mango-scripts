@@ -1,3 +1,14 @@
+## [1.0.7](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.6...@mango-scripts/i18n-utils@1.0.7) (2023-03-18)
+
+
+### Features
+
+* 迁移jest到vitest ([f87d400](https://github.com/AlbertLin0923/mango-scripts/commit/f87d40039f972736ca2e6fbc3889b41397c2586d))
+* 升级依赖包 ([fd28fd2](https://github.com/AlbertLin0923/mango-scripts/commit/fd28fd26d3715ab019869f0e552240c1d20bf2b8))
+* 完善readme说明 ([d5efbbc](https://github.com/AlbertLin0923/mango-scripts/commit/d5efbbc38cdb98427edd4a2323d79ac80ac0331a))
+* 完善readme说明 ([cdd5b7e](https://github.com/AlbertLin0923/mango-scripts/commit/cdd5b7ea2fa1adad5b1bd7ae240fa4f0a56835d7))
+* 依赖包更新 ([b204b11](https://github.com/AlbertLin0923/mango-scripts/commit/b204b11597b8d92e2388bf14d1785016c2b2d74b))
+
 ## [1.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.5...@mango-scripts/i18n-utils@1.0.6) (2022-12-28)
 
 
