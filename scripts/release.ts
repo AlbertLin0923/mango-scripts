@@ -1,4 +1,4 @@
-// Forked from https://github.com/vitejs/vite/
+// Forked from https://github.com/vitejs/vite/blob/main/scripts/release.ts
 
 import path from 'path'
 import prompts from 'prompts'

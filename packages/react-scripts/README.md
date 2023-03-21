@@ -1,5 +1,7 @@
 # @mango-scripts/react-scripts
 
+![npm (scoped)](https://img.shields.io/npm/v/@mango-scripts/react-scripts) ![node-current (scoped)](https://img.shields.io/node/v/@mango-scripts/react-scripts) ![GitHub](https://img.shields.io/github/license/Albertlin0923/mango-scripts) ![npm](https://img.shields.io/npm/dt/@mango-scripts/react-scripts)
+
 基于 [react-scripts@5.0.1](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts) 添加一些功能和优化
 
 - 可在开发环境下自动获取局域网 IP，便于本地联调
