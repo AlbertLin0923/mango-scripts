@@ -6,16 +6,14 @@
     "frontend",
     "utils"
   ],
-  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/utils",
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/utils#readme",
   "bugs": {
     "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/utils",
-    "branch": "master",
-    "directory": "packages/utils",
-    "platform": "github"
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts.git",
+    "directory": "packages/utils"
   },
   "license": "MIT",
   "author": "AlbertLin0923",
@@ -30,17 +28,25 @@
   "module": "./dist/esm/index.mjs",
   "types": "./dist/esm/index.d.ts",
   "files": [
-    "./dist"
+    "dist"
   ],
   "scripts": {
-    "dev": "unbuild --stub",
+    "dev": "unbuild",
     "build": "unbuild",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "picocolors": "^1.0.0"
+    "gradient-string": "^2.0.2",
+    "picocolors": "^1.0.0",
+    "semver": "^7.5.0",
+    "update-notifier": "5.1.0"
+  },
+  "devDependencies": {
+    "@types/gradient-string": "^1.1.2",
+    "@types/semver": "^7.3.13",
+    "@types/update-notifier": "5.1.0"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   }
 }

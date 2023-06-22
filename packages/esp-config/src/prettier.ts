@@ -1,8 +1,7 @@
-export default {
+const Config = {
   semi: false,
   singleQuote: true,
   trailingComma: 'none',
-  printWidth: 100,
   proseWrap: 'never',
   endOfLine: 'auto',
   overrides: [
@@ -14,3 +13,5 @@ export default {
     }
   ]
 }
+
+export default Config

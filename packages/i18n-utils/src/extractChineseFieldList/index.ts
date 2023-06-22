@@ -17,8 +17,8 @@ export type LocaleItem = {
 
 export interface ExecResult {
   success: boolean
-  message: Array<string>
-  readResult: Array<any>
+  message: string[]
+  readResult: any[]
 }
 
 export enum Extractor {
@@ -28,10 +28,10 @@ export enum Extractor {
 
 const bootstrap = async (
   extractor: Extractor,
-  resolvePathList: Array<string>,
-  filterExtNameList: Array<string>,
+  resolvePathList: string[],
+  filterExtNameList: string[],
   sourceCodeContentHashMapPath?: string
-): Promise<Array<LocaleItem>> => {
+): Promise<LocaleItem[]> => {
   const filePathList = resolvePathList.reduce((previousValue: string[], currentValue: string) => {
     return previousValue.concat(getFilePathList(currentValue, filterExtNameList))
   }, [])
@@ -47,7 +47,7 @@ const bootstrap = async (
     contentHashMap = await fs.readJSON(sourceCodeContentHashMapPath)
   }
 
-  const localeList: Array<LocaleItem> = []
+  const localeList: LocaleItem[] = []
 
   for (let index = 0; index < filePathList.length; index++) {
     const filePath = filePathList[index]

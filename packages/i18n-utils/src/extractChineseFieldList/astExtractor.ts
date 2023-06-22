@@ -17,14 +17,14 @@ const INCLUDE_CHINESE_CHAR = /.*[\u4e00-\u9fa5]+.*$/
 
 // -----------------------------vue start--------------------------------------
 
-const extractInTemplateOfVue = (templateContent: string): Array<string> => {
+const extractInTemplateOfVue = (templateContent: string): string[] => {
   const { tokens } = hyntax.tokenize(templateContent)
   const templateAst = hyntax.constructTree(tokens)?.ast
 
   const arr: any = []
 
-  function formatI18nFuncMatcherList(list: Array<string>): Array<string> {
-    const result: Array<string> = []
+  function formatI18nFuncMatcherList(list: string[]): string[] {
+    const result: string[] = []
     list.forEach((i) => {
       const r = i.match(MATCH_STRING_CONTENT)
       if (r) {
@@ -70,13 +70,13 @@ const extractInTemplateOfVue = (templateContent: string): Array<string> => {
   return arr
 }
 
-const extractInVue = (code: string): Array<string> => {
+const extractInVue = (code: string): string[] => {
   const sfc: compilerVue.SFCDescriptor = compilerVue.parseComponent(code)
 
   const { template, script } = sfc
 
-  let templateTextArr: Array<string> = []
-  let scriptTextArr: Array<string> = []
+  let templateTextArr: string[] = []
+  let scriptTextArr: string[] = []
 
   if (template) {
     const templateContent = (template.content ??= '')
@@ -101,8 +101,8 @@ const extractInVue = (code: string): Array<string> => {
 
 // -----------------------------svelte start------------------------------------
 
-const extractInHtmlOfSvelte = (templateAst: any): Array<string> => {
-  const arr: Array<string> = []
+const extractInHtmlOfSvelte = (templateAst: any): string[] => {
+  const arr: string[] = []
   function emun(ast: any) {
     if (!ast.children) {
       if (ast.data) {
@@ -133,7 +133,7 @@ const extractInHtmlOfSvelte = (templateAst: any): Array<string> => {
   return arr
 }
 
-const extractInSvelte = (code: string): Array<string> => {
+const extractInSvelte = (code: string): string[] => {
   const sfc = compilerSvelte.compile(code, {
     // options
   })
@@ -142,8 +142,8 @@ const extractInSvelte = (code: string): Array<string> => {
   } = sfc
   const scriptContent = sfc.js
 
-  let templateTextArr: Array<string> = []
-  let scriptTextArr: Array<string> = []
+  let templateTextArr: string[] = []
+  let scriptTextArr: string[] = []
 
   if (templateAst) {
     templateTextArr = extractInHtmlOfSvelte(templateAst)
@@ -159,13 +159,13 @@ const extractInSvelte = (code: string): Array<string> => {
 
 // ------------------------------- js & ts start------------------------------------
 
-const extractInJsAndTs = (code: string): Array<string> => {
+const extractInJsAndTs = (code: string): string[] => {
   const ast = babelParser.parse(code, {
     sourceType: 'unambiguous',
     plugins: ['jsx', 'typescript']
   })
 
-  const arr: Array<string> = []
+  const arr: string[] = []
 
   const { entireFileDisabled, partialCommentList, nextLineCommentList, thisLineCommentList } =
     collectDisableRuleCommentlocation(ast.comments)

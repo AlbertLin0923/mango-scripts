@@ -1,7 +1,9 @@
 import stylelint from './stylelint'
 import prettier from './prettier'
 
-export default {
+const config = {
   stylelint,
   prettier
 }
+
+export default config

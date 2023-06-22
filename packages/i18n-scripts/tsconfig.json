@@ -1,0 +1,15 @@
+{
+  "include": ["./src", "./types"],
+  "compilerOptions": {
+    "outDir": "dist/esm",
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "strict": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": false, // ESM doesn't yet support JSON modules.
+    "declarationDir": "dist/esm/types"
+  }
+}

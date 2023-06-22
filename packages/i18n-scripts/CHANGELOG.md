@@ -1,6 +1,5 @@
 ## [1.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-scripts@1.0.2...@mango-scripts/i18n-scripts@1.0.3) (2023-03-18)
 
-
 ### Features
 
 * 规范包引用名 ([1d59a7d](https://github.com/AlbertLin0923/mango-scripts/commit/1d59a7dc2155ae4e73238d51c8c9717c2f126cb4))
@@ -17,12 +16,8 @@
 * feat: i18n-scripts:找不到备份包的时候不报错 ([9211379](https://github.com/AlbertLin0923/mango-scripts/commit/9211379))
 * chore: 去掉子包里面的pnpm-lock.yaml ([363fad3](https://github.com/AlbertLin0923/mango-scripts/commit/363fad3))
 
-
-
 ### 1.0.1 (2022-05-24)
-
 
 ### Features
 
 * 增加react-scripts && i18n-scripts 两个脚本 ([8feedeb](https://github.com/AlbertLin0923/mango-scripts/commit/8feedeb342c27f08849e89425661727afef1e763))
-

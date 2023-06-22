@@ -1,53 +1,61 @@
 {
   "name": "@mango-scripts/i18n-scripts",
   "version": "1.0.3",
-  "description": "mango-i18n-system 自动国际化文案配置系统的辅助插件合集，用于下载语言包、转换vue文件、转换文件后缀等",
+  "description": "mango-i18n-system 自动国际化文案配置系统的辅助插件合集，用于下载语言包、转换vue文件等",
   "keywords": [
     "frontend",
     "scripts",
     "i18n-scripts",
     "internationalization-scripts"
   ],
-  "homepage": "hhttps://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-scripts",
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-scripts#readme",
   "bugs": {
     "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-scripts",
-    "branch": "master",
-    "directory": "packages/i18n-scripts",
-    "platform": "github"
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts.git",
+    "directory": "packages/i18n-scripts"
   },
   "license": "MIT",
   "author": "AlbertLin0923",
+  "type": "module",
+  "types": "./dist/esm/index.mts",
   "bin": {
-    "i18n-scripts": "./bin/i18n-scripts.js"
+    "i18n-scripts": "./dist/esm/index.mjs"
   },
   "files": [
-    "bin",
-    "src"
+    "dist"
   ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "pnpm run build"
+  },
   "dependencies": {
+    "@mango-scripts/utils": "workspace:*",
     "cli-table": "^0.3.11",
-    "commander": "^10.0.0",
-    "consola": "^2.15.3",
+    "commander": "^10.0.1",
+    "consola": "^3.1.0",
     "envinfo": "^7.8.1",
-    "fs-extra": "^11.1.0",
-    "glob": "^8.1.0",
-    "glob-promise": "^6.0.2",
+    "fs-extra": "^11.1.1",
+    "glob": "^10.2.2",
     "gogocode": "^1.0.55",
-    "inquirer": "^9.1.4",
+    "inquirer": "^9.2.0",
     "inquirer-fuzzy-path": "^2.3.0",
-    "leven": "4.0.0",
     "lodash": "^4.17.21",
-    "minimist": "^1.2.7",
     "picocolors": "^1.0.0",
-    "semver": "^7.3.8",
-    "umi-request": "^1.4.0",
-    "update-notifier": "^6.0.2"
+    "undici": "^5.22.0"
+  },
+  "devDependencies": {
+    "@types/cli-table": "^0.3.1",
+    "@types/envinfo": "^7.8.1",
+    "@types/fs-extra": "^11.0.1",
+    "@types/inquirer": "^9.0.3",
+    "@types/inquirer-fuzzy-path": "^2.3.6",
+    "@types/lodash": "^4.14.194"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   }
 }

@@ -2,7 +2,6 @@
 
 ## [1.0.2](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@1.0.1...@mango-scripts/esp-config@1.0.2) (2023-03-18)
 
-
 ### Features
 
 * 升级依赖包 ([fd28fd2](https://github.com/AlbertLin0923/mango-scripts/commit/fd28fd26d3715ab019869f0e552240c1d20bf2b8))
@@ -16,10 +15,7 @@
 
 * feat: 完善@mango-scripts/esp-config,增加readme说明 ([c8061ac](https://github.com/AlbertLin0923/mango-scripts/commit/c8061ac))
 
-
-
 ## 1.0.0 (2022-06-23)
-
 
 ### Features
 
@@ -29,9 +25,7 @@
 
 ## 1.0.0 (2022-06-23)
 
-
 ### Features
 
 * 完善@mango-scripts/esp-config ([7417b83](https://github.com/AlbertLin0923/mango-scripts/commit/7417b835f951d687e71d3d0454acae6a069f33df))
 * 新增@mango-scripts/esp-config配置包 ([dfb2c63](https://github.com/AlbertLin0923/mango-scripts/commit/dfb2c63ce69ef9ca3fa8b3eac49158223d047393))
-

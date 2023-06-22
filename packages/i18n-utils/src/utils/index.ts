@@ -20,7 +20,7 @@ export const getFilePathList = (
   filterExtNameList = [''],
   ignoreDirectory = '',
   ignoreFile = ''
-): Array<string> => {
+): string[] => {
   return fs.readdirSync(dir).reduce((fileList, file) => {
     const name: string = path.join(dir, file)
 
@@ -55,12 +55,12 @@ const combineModules = (module1: string, module2: string): string => {
   return Array.from(new Set([...a, ...b])).join(',')
 }
 
-export const uniArr = (objArr: Array<LocaleItem>) => {
+export const uniArr = (objArr: LocaleItem[]) => {
   if (objArr.length === 0) {
     return []
   }
   const hash: any = {}
-  return objArr.reduce((item: Array<LocaleItem>, next) => {
+  return objArr.reduce((item: LocaleItem[], next) => {
     hash[next['zh-CN']]
       ? (item = item.map((i) => {
           if (i['zh-CN'] === next['zh-CN']) {
@@ -74,7 +74,7 @@ export const uniArr = (objArr: Array<LocaleItem>) => {
         }))
       : (hash[next['zh-CN']] = true && item.push(next))
     return item
-  }, [] as Array<LocaleItem>)
+  }, [] as LocaleItem[])
 }
 
 export const matchModuleMark = (code: string): string => {
@@ -158,11 +158,11 @@ export const compareLocaleData = (oldFilePath: string, newFilePath: string) => {
 
 export const collectDisableRuleCommentlocation = (comments: any) => {
   let entireFileDisabled = false
-  const partialCommentList: Array<any> = []
-  const nextLineCommentList: Array<any> = []
-  const thisLineCommentList: Array<any> = []
+  const partialCommentList: any[] = []
+  const nextLineCommentList: any[] = []
+  const thisLineCommentList: any[] = []
 
-  const tmp_partialCommentList: Array<any> = []
+  const tmp_partialCommentList: any[] = []
 
   if (comments.some((comment: any) => /translate-disable-entire-file/.test(comment.value))) {
     entireFileDisabled = true
@@ -190,7 +190,12 @@ export const collectDisableRuleCommentlocation = (comments: any) => {
       })
   }
 
-  return { entireFileDisabled, partialCommentList, nextLineCommentList, thisLineCommentList }
+  return {
+    entireFileDisabled,
+    partialCommentList,
+    nextLineCommentList,
+    thisLineCommentList
+  }
 }
 
 export const inDisableRuleCommentlocation = (

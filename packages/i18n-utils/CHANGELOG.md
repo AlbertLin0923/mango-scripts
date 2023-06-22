@@ -1,6 +1,5 @@
 ## [1.0.7](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.6...@mango-scripts/i18n-utils@1.0.7) (2023-03-18)
 
-
 ### Features
 
 * 迁移jest到vitest ([f87d400](https://github.com/AlbertLin0923/mango-scripts/commit/f87d40039f972736ca2e6fbc3889b41397c2586d))
@@ -11,7 +10,6 @@
 
 ## [1.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.5...@mango-scripts/i18n-utils@1.0.6) (2022-12-28)
 
-
 ### Features
 
 * release @mango-scripts/i18n-utils@1.0.5 ([4845a9c](https://github.com/AlbertLin0923/mango-scripts/commit/4845a9c51fa6bc74468b166b5237c79d355185c2))
@@ -19,7 +17,6 @@
 ## [1.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.5...@mango-scripts/i18n-utils@1.0.5) (2022-12-28)
 
 ## [1.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.4...@mango-scripts/i18n-utils@1.0.5) (2022-12-28)
-
 
 ### Features
 
@@ -30,13 +27,11 @@
 
 ## [1.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.3...@mango-scripts/i18n-utils@1.0.4) (2022-06-29)
 
-
 ### Features
 
 * @mango-scripts/i18n-utils 导出处理locale方法 ([394cac1](https://github.com/AlbertLin0923/mango-scripts/commit/394cac13a15087bc12627646a5e0f2606dfa1ba5))
 
 ## [1.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.2...@mango-scripts/i18n-utils@1.0.3) (2022-06-27)
-
 
 ### Features
 
@@ -47,10 +42,7 @@
 
 * fix: 修复i18n-utils路径问题 ([c31ab0f](https://github.com/AlbertLin0923/mango-scripts/commit/c31ab0f))
 
-
-
 ### 1.0.1 (2022-05-25)
-
 
 ### Features
 
@@ -58,8 +50,6 @@
 
 ## 1.0.0 (2022-05-25)
 
-
 ### Features
 
 * 增加i18n-utils ([fb73d88](https://github.com/AlbertLin0923/mango-scripts/commit/fb73d88530a147b40e18ef1f1ce09beaf6f1ab9a))
-

@@ -1,8 +1,8 @@
 import { describe, it, expect, test } from 'vitest'
-const path = require('path')
-const projectPath = path.resolve(__dirname, './demo')
 
 import { extractChineseFieldList, Extractor } from '../../src/index'
+const path = require('path')
+const projectPath = path.resolve(__dirname, './demo')
 
 describe('extract jsx', () => {
   test('should extract jsx i18n key', async () => {

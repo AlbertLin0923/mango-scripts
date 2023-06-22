@@ -6,8 +6,8 @@ import { Modal, Table, Progress } from 'antd'
 import { useTranslation } from 'react-i18next'
 
 export type AnalysisModalProps = React.PropsWithChildren<{
-  localeDictWithLabel: Array<any>
-  filterTableData: Array<any>
+  localeDictWithLabel: any[]
+  filterTableData: any[]
   visible: boolean
   onClose: () => void
 }>
@@ -109,11 +109,11 @@ const AnalysisModal: React.FC<AnalysisModalProps> = (props) => {
 
   return (
     <Modal
-      width="50vw"
-      title={t('数据统计')}
-      visible={visible}
       footer={null}
       maskClosable={false}
+      title={t('数据统计')}
+      visible={visible}
+      width="50vw"
       onCancel={() => {
         onClose()
       }}
