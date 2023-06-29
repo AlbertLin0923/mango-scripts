@@ -1,15 +1,15 @@
 {
-  "include": ["./src", "./types"],
   "compilerOptions": {
-    "outDir": "dist/esm",
-    "target": "esnext",
+    "declaration": true,
+    "declarationDir": "dist/esm/types",
+    "esModuleInterop": true,
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "strict": true,
-    "declaration": true,
-    "esModuleInterop": true,
+    "outDir": "dist/esm",
+    "resolveJsonModule": false,
     "skipLibCheck": true,
-    "resolveJsonModule": false, // ESM doesn't yet support JSON modules.
-    "declarationDir": "dist/esm/types"
-  }
+    "strict": true,
+    "target": "esnext"
+  },
+  "include": ["./src", "./types"]
 }
