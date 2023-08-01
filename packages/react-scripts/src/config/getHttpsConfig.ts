@@ -2,6 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import crypto from 'crypto'
 import pico from 'picocolors'
+
 import getPaths from './getPaths'
 
 // Ensure the certificate and key provided are valid and if not

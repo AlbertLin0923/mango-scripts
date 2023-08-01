@@ -4,9 +4,9 @@ import dotenv from 'dotenv'
 import dotenvExpand from 'dotenv-expand'
 
 import getPaths from './getPaths'
-import { defaultMode } from './mode'
+import { defaultMode } from './getMode'
 
-import type { DefaultModeType } from './mode'
+import type { DefaultModeType } from './getMode'
 
 export const applyEnv = (mode: string) => {
   const paths = getPaths()
@@ -28,8 +28,6 @@ export const applyEnv = (mode: string) => {
       dotenvExpand.expand(dotenv.config({ path: dotenvFile, override: true }))
     }
   })
-
-  // console.log('process.env', process.env)
 
   const NODE_ENV = process.env.NODE_ENV
 

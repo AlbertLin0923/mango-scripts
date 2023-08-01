@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import pico from 'picocolors'
-import { Command } from 'commander'
 import envinfo from 'envinfo'
+import { Command } from 'commander'
 import { checkNodeVersion, checkUpdate } from '@mango-scripts/utils'
 import build from './scripts/build'
 import dev from './scripts/dev'
@@ -23,12 +23,8 @@ program
   .option('-m --mode <mode>', '指定环境模式 (默认值：dev)', 'dev')
   .allowUnknownOption()
   .action((options) => {
-    console.log('options', options)
     const { mode } = options
-
     dev(mode)
-
-    // require('../src/updateLocale/index')(options)
   })
 
 program
@@ -38,7 +34,6 @@ program
   .allowUnknownOption()
   .action((options) => {
     const { mode } = options
-
     build(mode)
   })
 
@@ -67,7 +62,7 @@ program
 // output help information on unknown commands
 program.on('command:*', ([cmd]) => {
   program.outputHelp()
-  console.log(`  ` + pico.red(`Unknown command ${pico.yellow(cmd)}.`))
+  console.log(pico.red(`Unknown command ${pico.yellow(cmd)}.`))
   console.log()
   process.exitCode = 1
 })

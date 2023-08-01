@@ -2,6 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import pico from 'picocolors'
 import resolve from 'resolve'
+
 import getPaths from './getPaths'
 
 /**

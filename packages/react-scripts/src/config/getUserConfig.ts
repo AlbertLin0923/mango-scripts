@@ -1,6 +1,6 @@
 import fs from 'fs-extra'
-import { cosmiconfigSync } from 'cosmiconfig'
 import _ from 'lodash'
+import { cosmiconfigSync } from 'cosmiconfig'
 
 const deepMergeWithArray = (object: any, sources: any) => {
   return _.mergeWith(object, sources, (objValue: any, srcValue: any) => {

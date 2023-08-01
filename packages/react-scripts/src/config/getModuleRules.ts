@@ -3,7 +3,7 @@ import getCacheIdentifier from 'react-dev-utils/getCacheIdentifier'
 import getCSSModuleLocalIdent from 'react-dev-utils/getCSSModuleLocalIdent'
 
 import getPaths from './getPaths'
-import { mergeUserBabelConfig, mergeUserPreProcessorConfig } from './mergeUserConfig'
+import { mergeUserBabelConfig, mergeUserPreProcessorConfig } from './getUserConfig'
 
 import type { RuleSetRule } from 'webpack'
 
@@ -138,6 +138,19 @@ export const getModuleRules = (mfsu?: any) => {
               maxSize: imageInlineSizeLimit
             }
           }
+        },
+        {
+          test: /\.svg$/,
+          include: [paths.svgSpritePath],
+          use: [
+            {
+              loader: require.resolve('svg-sprite-loader'),
+              options: {
+                symbolId: 'icon-[name]'
+              }
+            },
+            { loader: require.resolve('svgo-loader') }
+          ]
         },
         {
           test: /\.svg$/,
@@ -384,18 +397,6 @@ export const getModuleRules = (mfsu?: any) => {
             },
             'stylus-loader'
           )
-        },
-        {
-          test: /\.svg$/,
-          include: [paths.svgSpritePath],
-          use: [
-            {
-              loader: require.resolve('svg-sprite-loader'),
-              options: {
-                symbolId: 'icon-[name]'
-              }
-            }
-          ]
         },
         // "file" loader makes sure those assets get served by WebpackDevServer.
         // When you `import` an asset, you get its (virtual) filename.

@@ -2,25 +2,28 @@ import fs from 'fs-extra'
 import path from 'path'
 import webpack from 'webpack'
 import resolve from 'resolve'
+
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
-import InlineChunkHtmlPlugin from 'react-dev-utils/InlineChunkHtmlPlugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin'
-import InterpolateHtmlPlugin from 'react-dev-utils/InterpolateHtmlPlugin'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import WorkboxWebpackPlugin from 'workbox-webpack-plugin'
 import ESLintPlugin from 'eslint-webpack-plugin'
-import ModuleNotFoundPlugin from 'react-dev-utils/ModuleNotFoundPlugin'
-import ForkTsCheckerWebpackPlugin from 'react-dev-utils/ForkTsCheckerWebpackPlugin'
+import StylelintPlugin from 'stylelint-webpack-plugin'
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
+
+import InterpolateHtmlPlugin from 'react-dev-utils/InterpolateHtmlPlugin'
+import InlineChunkHtmlPlugin from 'react-dev-utils/InlineChunkHtmlPlugin'
+import ForkTsCheckerWebpackPlugin from 'react-dev-utils/ForkTsCheckerWebpackPlugin'
+import ModuleNotFoundPlugin from 'react-dev-utils/ModuleNotFoundPlugin'
 import ModuleScopePlugin from 'react-dev-utils/ModuleScopePlugin'
 
 import getPaths from './getPaths'
-import getModules from './modules'
-import { getClientEnvironment } from './env'
+import getModules from './getModules'
+import { getClientEnvironment } from './getEnv'
 import { getHash } from '../utils'
-import { getJsMini, getCssMini } from './getMinimizerConfig'
+import { getJsMinimizer, getCssMinimizer } from './getMinimizerConfig'
 import { getModuleRules } from './getModuleRules'
 
 import type { Configuration } from 'webpack'
@@ -33,12 +36,13 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
   // Source maps are resource heavy and can cause out of memory issue for large source files.
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
   const useESLintPlugin = process.env.USE_ESLINT_PLUGIN === 'true'
-  const emitEslintErrorsAsWarnings = process.env.EMIT_ESLINT_ERRORS_AS_WARNINGS === 'true'
-  const useAnalyze = process.env.USE_ANALYZE === 'true'
-  const useReactRefresh = process.env.USE_FAST_REFRESH === 'true'
+  const useStylelintPlugin = process.env.USE_STYLELINT_PLUGIN === 'true'
+  const useBundleAnalyzerPlugin = process.env.USE_ANALYZE === 'true'
+  const useReactRefreshPlugin = process.env.USE_FAST_REFRESH === 'true'
   // Variable used for enabling profiling in Production
   // passed into alias object. Uses a flag if passed into the build command
   const useProfile = process.env.USE_PROFILE === 'true'
+  const emitEslintErrorsAsWarnings = process.env.EMIT_ESLINT_ERRORS_AS_WARNINGS === 'true'
 
   const paths = getPaths()
   const modules = getModules()
@@ -166,10 +170,8 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
       },
       minimizer: [
         // This is only used in production mode
-        getJsMini(),
-
-        // This is only used in production mode
-        getCssMini()
+        getJsMinimizer(),
+        getCssMinimizer()
       ]
     },
     resolve: {
@@ -265,7 +267,7 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
       // Experimental hot reloading for React .
       // https://github.com/facebook/react/tree/main/packages/react-refresh
       isEnvDevelopment &&
-        useReactRefresh &&
+        useReactRefreshPlugin &&
         new ReactRefreshWebpackPlugin({
           overlay: false
         }),
@@ -362,25 +364,34 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
           infrastructure: 'silent'
         }
       }),
-      !useESLintPlugin &&
+      useESLintPlugin &&
         new ESLintPlugin({
-          // Plugin options
           extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
           formatter: require.resolve('react-dev-utils/eslintFormatter'),
           eslintPath: require.resolve('eslint'),
-          failOnError: isEnvProduction && !emitEslintErrorsAsWarnings,
+          failOnError: isEnvProduction,
           context: paths.appSrc,
           cache: true,
           cacheLocation: path.resolve(paths.appNodeModules, '.cache/.eslintcache'),
-          // ESLint class options
-          cwd: paths.appPath,
-          resolvePluginsRelativeTo: __dirname,
-          baseConfig: {
-            extends: [require.resolve('eslint-config-react-app/base')]
-          }
+          cwd: paths.appPath
         }),
-
-      useAnalyze && new BundleAnalyzerPlugin()
+      useStylelintPlugin &&
+        new StylelintPlugin({
+          extensions: ['less', 'scss', 'sass', 'stylus', 'styl', 'css'],
+          stylelintPath: require.resolve('stylelint'),
+          failOnError: isEnvProduction,
+          context: paths.appSrc,
+          cache: true,
+          cacheLocation: path.resolve(paths.appNodeModules, '.cache/.stylelintcache'),
+          cwd: paths.appPath
+        }),
+      useBundleAnalyzerPlugin && new BundleAnalyzerPlugin(),
+      new webpack.ProgressPlugin({
+        handler: (percentage, message, ...args) => {
+          // e.g. Output each progress message directly to the console:
+          console.info(percentage, message, ...args)
+        }
+      })
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter

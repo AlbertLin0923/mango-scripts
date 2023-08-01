@@ -1,5 +1,6 @@
 import fs from 'fs-extra'
 import path from 'path'
+
 import getPublicUrlOrPath from 'react-dev-utils/getPublicUrlOrPath'
 
 const getPaths = () => {
@@ -20,7 +21,7 @@ const getPaths = () => {
     process.env.PUBLIC_URL
   )
 
-  const distPath = process.env.DIST_PATH || 'dist'
+  const distPath = process.env.DIST_PATH as string
 
   const moduleFileExtensions = [
     'web.mjs',

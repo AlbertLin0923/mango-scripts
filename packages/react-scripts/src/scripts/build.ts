@@ -1,13 +1,14 @@
-import pico from 'picocolors'
 import fs from 'fs-extra'
+import pico from 'picocolors'
 import webpack from 'webpack'
+
 import checkRequiredFiles from 'react-dev-utils/checkRequiredFiles'
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages'
 import FileSizeReporter from 'react-dev-utils/FileSizeReporter'
 import printBuildError from 'react-dev-utils/printBuildError'
 import { checkBrowsers } from 'react-dev-utils/browsersHelper'
 
-import { applyEnv } from '../config/env'
+import { applyEnv } from '../config/getEnv'
 import getPaths from '../config/getPaths'
 import { getBuildConfig } from '../config/webpack.config'
 
@@ -143,16 +144,6 @@ const build = async (mode: string) => {
       )
 
       console.log()
-
-      console.log(
-        pico.green(
-          pico.bold(
-            'The build time: ' +
-              Math.floor((stats?.endTime - stats?.startTime) / 1000) +
-              ' second \n'
-          )
-        )
-      )
     } catch (err: any) {
       console.log(pico.red('Failed to compile.\n'))
       printBuildError(err)
