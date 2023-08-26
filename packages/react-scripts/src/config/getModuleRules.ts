@@ -3,7 +3,7 @@ import getCacheIdentifier from 'react-dev-utils/getCacheIdentifier'
 import getCSSModuleLocalIdent from 'react-dev-utils/getCSSModuleLocalIdent'
 
 import getPaths from './getPaths'
-import { mergeUserBabelConfig, mergeUserPreProcessorConfig } from './getUserConfig'
+import { mergeBabelConfig, mergePreProcessorConfig } from './getUserConfig'
 
 import type { RuleSetRule } from 'webpack'
 
@@ -91,7 +91,7 @@ const getStyleLoaders = (cssOptions: any, preProcessor?: any, preProcessorOption
     },
     preProcessor && {
       loader: require.resolve(preProcessor),
-      options: mergeUserPreProcessorConfig(preProcessor, {
+      options: mergePreProcessorConfig(preProcessor, {
         sourceMap: true,
         ...preProcessorOptions
       })
@@ -185,7 +185,7 @@ export const getModuleRules = (mfsu?: any) => {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
           include: paths.appSrc,
           loader: require.resolve('babel-loader'),
-          options: mergeUserBabelConfig({
+          options: mergeBabelConfig({
             customize: require.resolve('babel-preset-react-app/webpack-overrides'),
             presets: [
               [

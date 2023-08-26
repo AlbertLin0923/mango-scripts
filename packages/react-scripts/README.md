@@ -55,7 +55,7 @@ pnpm add @mango-scripts/react-scripts
 
 与`vue-cli`类似，`@mango-scripts/react-scripts` 支持`模式和环境变量`。
 
-默认情况下，一个项目有四个模式：
+默认情况下，一个项目有五个模式：
 
 - local 模式：用于`项目本地环境`
 - dev 模式：用于`项目开发环境`
@@ -122,6 +122,37 @@ module.exports = {
   },
   'sass-loader': {
     additionalData: `@import "src/styles/mixins.scss";`
+  }
+}
+```
+
+#### 扩展 terserOptions 配置
+
+项目根目录下新增 `terserOptions.config.js` / `.terserOptionsrc.js` / `.terserOptionsrc` 配置文件，脚本会自动读取配置合并到 terserOptions
+
+terserOptions.config.js
+
+```js
+module.exports = {
+  parse: {
+    ecma: 2020
+  },
+  compress: {
+    ecma: 5,
+    comparisons: false,
+    inline: 2,
+    drop_console: dropConsole,
+    drop_debugger: dropDebugger
+  },
+  mangle: {
+    safari10: true
+  },
+  keep_classnames: useProfile,
+  keep_fnames: useProfile,
+  output: {
+    ecma: 5,
+    comments: false,
+    ascii_only: true
   }
 }
 ```

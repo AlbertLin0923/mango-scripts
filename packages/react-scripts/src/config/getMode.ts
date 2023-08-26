@@ -33,7 +33,10 @@ const defaultProductionNodeEnvMode = {
   EMIT_ESLINT_ERRORS_AS_WARNINGS: 'false',
   DIST_PATH: 'dist',
 
-  USE_ANALYZE: 'false'
+  USE_ANALYZE: 'false',
+
+  DROP_CONSOLE: 'false',
+  DROP_DEBUGGER: 'false'
 }
 
 export type DefaultModeType = {

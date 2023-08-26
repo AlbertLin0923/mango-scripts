@@ -1,35 +1,39 @@
 import TerserPlugin from 'terser-webpack-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 
+import { mergeTerserOptionsConfig } from './getUserConfig'
+
 export const getJsMinimizer = () => {
   const useProfile = process.env.USE_PROFILE === 'true'
+  const dropConsole = process.env.DROP_CONSOLE === 'true'
+  const dropDebugger = process.env.DROP_DEBUGGER === 'true'
 
   switch (process.env.USE_JS_MINIMIZER) {
     case 'uglifyJsMinify':
       return new TerserPlugin({
         minify: TerserPlugin.uglifyJsMinify,
-        terserOptions: {
+        terserOptions: mergeTerserOptionsConfig({
           // `uglif-js` options
-        }
+        })
       })
     case 'esbuildMinify':
       return new TerserPlugin({
         minify: TerserPlugin.esbuildMinify,
-        terserOptions: {
+        terserOptions: mergeTerserOptionsConfig({
           // `esbuild` options
-        }
+        })
       })
     case 'swcMinify':
       return new TerserPlugin({
         minify: TerserPlugin.swcMinify,
-        terserOptions: {
+        terserOptions: mergeTerserOptionsConfig({
           // `swc` options
-        }
+        })
       })
     default:
       return new TerserPlugin({
         minify: TerserPlugin.terserMinify,
-        terserOptions: {
+        terserOptions: mergeTerserOptionsConfig({
           parse: {
             // We want terser to parse ecma 8 code. However, we don't want it
             // to apply any minification steps that turns valid ecma 5 code
@@ -49,7 +53,9 @@ export const getJsMinimizer = () => {
             // https://github.com/facebook/create-react-app/issues/5250
             // Pending further investigation:
             // https://github.com/terser-js/terser/issues/120
-            inline: 2
+            inline: 2,
+            drop_console: dropConsole,
+            drop_debugger: dropDebugger
           },
           mangle: {
             safari10: true
@@ -64,7 +70,7 @@ export const getJsMinimizer = () => {
             // https://github.com/facebook/create-react-app/issues/2488
             ascii_only: true
           }
-        }
+        })
       })
   }
 }

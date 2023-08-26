@@ -10,34 +10,34 @@ const deepMergeWithArray = (object: any, sources: any) => {
   })
 }
 
-export const mergeUserBabelConfig = (options: any) => {
+export const mergeBabelConfig = (options: any) => {
   const projectRoot = fs.realpathSync(process.cwd())
 
-  const babelrcExplorer = cosmiconfigSync('babel', {
+  const babelConfigExplorer = cosmiconfigSync('babel', {
     searchPlaces: ['package.json', `babel.config.js`, `.babelrc.js`, `.babelrc`]
   })
 
-  let userBabelConfig: any = {}
+  let babelConfig: any = {}
 
-  const configFilePath = babelrcExplorer.search(projectRoot)
+  const configFilePath = babelConfigExplorer.search(projectRoot)
 
   if (configFilePath !== null) {
-    const config = babelrcExplorer.load(configFilePath.filepath)
+    const config = babelConfigExplorer.load(configFilePath.filepath)
 
-    userBabelConfig = config?.config
+    babelConfig = config?.config
 
-    if (!userBabelConfig) {
+    if (!babelConfig) {
       throw new Error("babel: Config function didn't return a config object.")
     }
   }
 
-  return deepMergeWithArray(userBabelConfig, options)
+  return deepMergeWithArray(babelConfig, options)
 }
 
-export const mergeUserPreProcessorConfig = (preProcessorName: string, options: any) => {
+export const mergePreProcessorConfig = (preProcessorName: string, options: any) => {
   const projectRoot = fs.realpathSync(process.cwd())
 
-  const preProcessorExplorer = cosmiconfigSync('preProcessor', {
+  const preProcessorConfigExplorer = cosmiconfigSync('preProcessor', {
     searchPlaces: [
       'package.json',
       `preProcessor.config.js`,
@@ -46,20 +46,49 @@ export const mergeUserPreProcessorConfig = (preProcessorName: string, options: a
     ]
   })
 
-  let userPreProcessorConfig: any = {}
+  let preProcessorConfig: any = {}
 
-  const configFilePath = preProcessorExplorer.search(projectRoot)
+  const configFilePath = preProcessorConfigExplorer.search(projectRoot)
 
   if (configFilePath !== null) {
-    const config = preProcessorExplorer.load(configFilePath.filepath)
+    const config = preProcessorConfigExplorer.load(configFilePath.filepath)
 
-    userPreProcessorConfig = config?.config
+    preProcessorConfig = config?.config
 
-    if (!userPreProcessorConfig) {
+    if (!preProcessorConfig) {
       throw new Error("preProcessor: Config function didn't return a config object.")
     }
   }
 
-  const userConfig = userPreProcessorConfig[preProcessorName] || {}
-  return deepMergeWithArray(userConfig, options)
+  const config = preProcessorConfig[preProcessorName] || {}
+  return deepMergeWithArray(config, options)
+}
+
+export const mergeTerserOptionsConfig = (options: any) => {
+  const projectRoot = fs.realpathSync(process.cwd())
+
+  const terserOptionsConfigExplorer = cosmiconfigSync('terserOptions', {
+    searchPlaces: [
+      'package.json',
+      `terserOptions.config.js`,
+      `.terserOptionsrc.js`,
+      `.terserOptionsrc`
+    ]
+  })
+
+  let terserOptionsConfig: any = {}
+
+  const configFilePath = terserOptionsConfigExplorer.search(projectRoot)
+
+  if (configFilePath !== null) {
+    const config = terserOptionsConfigExplorer.load(configFilePath.filepath)
+
+    terserOptionsConfig = config?.config
+
+    if (!terserOptionsConfig) {
+      throw new Error("terserOptions: Config function didn't return a config object.")
+    }
+  }
+
+  return deepMergeWithArray(terserOptionsConfig, options)
 }
