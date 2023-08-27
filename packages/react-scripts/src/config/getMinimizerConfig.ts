@@ -1,39 +1,33 @@
 import TerserPlugin from 'terser-webpack-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 
-import { mergeTerserOptionsConfig } from './getUserConfig'
+import { getUserConfig, deepMergeWithArray } from './getUserConfig'
 
 export const getJsMinimizer = () => {
   const useProfile = process.env.USE_PROFILE === 'true'
-  const dropConsole = process.env.DROP_CONSOLE === 'true'
-  const dropDebugger = process.env.DROP_DEBUGGER === 'true'
 
-  switch (process.env.USE_JS_MINIMIZER) {
+  const { minify, terserOptions } = getUserConfig('optimization.minimizer.jsMinimizer')
+
+  switch (minify) {
     case 'uglifyJsMinify':
       return new TerserPlugin({
         minify: TerserPlugin.uglifyJsMinify,
-        terserOptions: mergeTerserOptionsConfig({
-          // `uglif-js` options
-        })
+        terserOptions
       })
     case 'esbuildMinify':
       return new TerserPlugin({
         minify: TerserPlugin.esbuildMinify,
-        terserOptions: mergeTerserOptionsConfig({
-          // `esbuild` options
-        })
+        terserOptions
       })
     case 'swcMinify':
       return new TerserPlugin({
         minify: TerserPlugin.swcMinify,
-        terserOptions: mergeTerserOptionsConfig({
-          // `swc` options
-        })
+        terserOptions
       })
     default:
       return new TerserPlugin({
         minify: TerserPlugin.terserMinify,
-        terserOptions: mergeTerserOptionsConfig({
+        terserOptions: deepMergeWithArray(terserOptions, {
           parse: {
             // We want terser to parse ecma 8 code. However, we don't want it
             // to apply any minification steps that turns valid ecma 5 code
@@ -53,9 +47,7 @@ export const getJsMinimizer = () => {
             // https://github.com/facebook/create-react-app/issues/5250
             // Pending further investigation:
             // https://github.com/terser-js/terser/issues/120
-            inline: 2,
-            drop_console: dropConsole,
-            drop_debugger: dropDebugger
+            inline: 2
           },
           mangle: {
             safari10: true
@@ -76,20 +68,38 @@ export const getJsMinimizer = () => {
 }
 
 export const getCssMinimizer = () => {
-  switch (process.env.USE_CSS_MINIMIZER) {
+  const { minify, minimizerOptions } = getUserConfig('optimization.minimizer.cssMinimizer')
+
+  switch (minify) {
+    case 'cssoMinify':
+      return new CssMinimizerPlugin({
+        minify: CssMinimizerPlugin.cssoMinify,
+        minimizerOptions
+      })
+    case 'cleanCssMinify':
+      return new CssMinimizerPlugin({
+        minify: CssMinimizerPlugin.cleanCssMinify,
+        minimizerOptions
+      })
     case 'esbuildMinify':
       return new CssMinimizerPlugin({
-        minify: CssMinimizerPlugin.esbuildMinify
-      })
-    case 'swcMinify':
-      return new CssMinimizerPlugin({
-        minify: CssMinimizerPlugin.swcMinify
+        minify: CssMinimizerPlugin.esbuildMinify,
+        minimizerOptions
       })
     case 'lightningCssMinify':
       return new CssMinimizerPlugin({
-        minify: CssMinimizerPlugin.lightningCssMinify
+        minify: CssMinimizerPlugin.lightningCssMinify,
+        minimizerOptions
+      })
+    case 'swcMinify':
+      return new CssMinimizerPlugin({
+        minify: CssMinimizerPlugin.swcMinify,
+        minimizerOptions
       })
     default:
-      return new CssMinimizerPlugin()
+      return new CssMinimizerPlugin({
+        minify: CssMinimizerPlugin.cssnanoMinify,
+        minimizerOptions: deepMergeWithArray(minimizerOptions, { preset: 'default' })
+      })
   }
 }

@@ -3,7 +3,7 @@ import getCacheIdentifier from 'react-dev-utils/getCacheIdentifier'
 import getCSSModuleLocalIdent from 'react-dev-utils/getCSSModuleLocalIdent'
 
 import getPaths from './getPaths'
-import { mergeBabelConfig, mergePreProcessorConfig } from './getUserConfig'
+import { getUserConfig, deepMergeWithArray } from './getUserConfig'
 
 import type { RuleSetRule } from 'webpack'
 
@@ -22,6 +22,14 @@ const getStyleLoaders = (cssOptions: any, preProcessor?: any, preProcessorOption
   const isEnvProduction = process.env.NODE_ENV === 'production'
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
   const useTailwind = process.env.USE_TAILWIND === 'true'
+
+  const { less, sass, stylus, postcss } = getUserConfig('loader')
+
+  const preProcessorLoaderMap: any = {
+    'less-loader': less,
+    'sass-loader': sass,
+    'stylus-loader': stylus
+  }
 
   const paths = getPaths()
 
@@ -42,7 +50,7 @@ const getStyleLoaders = (cssOptions: any, preProcessor?: any, preProcessorOption
       // Adds vendor prefixing based on your specified browser support in
       // package.json
       loader: require.resolve('postcss-loader'),
-      options: {
+      options: deepMergeWithArray(postcss['options'], {
         postcssOptions: {
           // Necessary for external CSS imports to work
           // https://github.com/facebook/create-react-app/issues/2677
@@ -80,7 +88,7 @@ const getStyleLoaders = (cssOptions: any, preProcessor?: any, preProcessorOption
               ]
         },
         sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment
-      }
+      })
     },
     preProcessor && {
       loader: require.resolve('resolve-url-loader'),
@@ -91,7 +99,7 @@ const getStyleLoaders = (cssOptions: any, preProcessor?: any, preProcessorOption
     },
     preProcessor && {
       loader: require.resolve(preProcessor),
-      options: mergePreProcessorConfig(preProcessor, {
+      options: deepMergeWithArray(preProcessorLoaderMap[preProcessor]['options'], {
         sourceMap: true,
         ...preProcessorOptions
       })
@@ -103,9 +111,8 @@ export const getModuleRules = (mfsu?: any) => {
   const isEnvDevelopment = process.env.NODE_ENV === 'development'
   const isEnvProduction = process.env.NODE_ENV === 'production'
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
-  const useReactRefresh = process.env.USE_FAST_REFRESH === 'true'
 
-  const imageInlineSizeLimit = parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT as string)
+  const { babel } = getUserConfig('loader')
 
   const paths = getPaths()
 
@@ -123,7 +130,7 @@ export const getModuleRules = (mfsu?: any) => {
           mimetype: 'image/avif',
           parser: {
             dataUrlCondition: {
-              maxSize: imageInlineSizeLimit
+              maxSize: 10000
             }
           }
         },
@@ -135,7 +142,7 @@ export const getModuleRules = (mfsu?: any) => {
           type: 'asset',
           parser: {
             dataUrlCondition: {
-              maxSize: imageInlineSizeLimit
+              maxSize: 10000
             }
           }
         },
@@ -185,7 +192,7 @@ export const getModuleRules = (mfsu?: any) => {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
           include: paths.appSrc,
           loader: require.resolve('babel-loader'),
-          options: mergeBabelConfig({
+          options: deepMergeWithArray(babel['options'], {
             customize: require.resolve('babel-preset-react-app/webpack-overrides'),
             presets: [
               [
@@ -211,7 +218,7 @@ export const getModuleRules = (mfsu?: any) => {
             ]),
             // @remove-on-eject-end
             plugins: [
-              isEnvDevelopment && useReactRefresh && require.resolve('react-refresh/babel'),
+              isEnvDevelopment && require.resolve('react-refresh/babel'),
               require.resolve('babel-plugin-jsx-css-modules'),
               // [mfsu] 3. add mfsu babel plugins
               ...(mfsu ? mfsu.getBabelPlugins() : [])

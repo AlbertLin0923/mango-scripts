@@ -4,15 +4,29 @@ import dotenv from 'dotenv'
 import dotenvExpand from 'dotenv-expand'
 
 import getPaths from './getPaths'
-import { defaultMode } from './getMode'
-
-import type { DefaultModeType } from './getMode'
+import { defaultModeConfig, recommendProductionModeConfig } from './getMode'
+import type { DefaultModeConfigType, RecommendProductionModeConfigType } from './getMode'
 
 export const applyEnv = (mode: string) => {
+  const NODE_ENV = process.env.NODE_ENV
   const paths = getPaths()
 
-  if (defaultMode[mode as keyof DefaultModeType]) {
-    Object.entries(defaultMode[mode as keyof DefaultModeType]).forEach(([key, value]) => {
+  const defaultMode = defaultModeConfig[NODE_ENV as keyof DefaultModeConfigType]
+
+  if (!defaultMode) {
+    throw new Error(
+      pico.red('The NODE_ENV environment variable should be development or production')
+    )
+  } else {
+    Object.entries(defaultMode).forEach(([key, value]) => {
+      process.env[key] = value
+    })
+  }
+
+  if (NODE_ENV === 'production') {
+    Object.entries(
+      recommendProductionModeConfig[mode as keyof RecommendProductionModeConfigType]
+    ).forEach(([key, value]) => {
       process.env[key] = value
     })
   }
@@ -28,14 +42,6 @@ export const applyEnv = (mode: string) => {
       dotenvExpand.expand(dotenv.config({ path: dotenvFile, override: true }))
     }
   })
-
-  const NODE_ENV = process.env.NODE_ENV
-
-  if (!NODE_ENV) {
-    throw new Error(
-      pico.red('The NODE_ENV environment variable is required but was not specified.')
-    )
-  }
 }
 
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be

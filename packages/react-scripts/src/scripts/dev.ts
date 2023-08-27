@@ -3,7 +3,7 @@ import pico from 'picocolors'
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 
-// import clearConsole from 'react-dev-utils/clearConsole';
+import clearConsole from 'react-dev-utils/clearConsole'
 import checkRequiredFiles from 'react-dev-utils/checkRequiredFiles'
 import {
   choosePort,
@@ -22,6 +22,7 @@ import getPaths from '../config/getPaths'
 import { getDevConfig } from '../config/webpack.config'
 import { applyEnv } from '../config/getEnv'
 import { getLocalHost } from '../utils'
+import { getUserConfig } from '../config/getUserConfig'
 // import { MFSU } from '@umijs/mfsu'
 
 import getHttpsConfig from '../config/getHttpsConfig'
@@ -37,6 +38,8 @@ const dev = async (mode: string) => {
 
     const paths = getPaths()
 
+    const useMFSU = getUserConfig('mfsu')
+
     const isInteractive = process.stdout.isTTY
 
     // Warn and crash if required files are missing
@@ -45,7 +48,6 @@ const dev = async (mode: string) => {
     }
 
     const useLocalHost = process.env.USE_LOCAL_HOST === 'true'
-    const useMFSU = process.env.USE_MFSU === 'true'
     const useHttps = process.env.USE_HTTPS === 'true'
 
     const defaultPort = Number(process.env.PORT || '3000')
@@ -235,7 +237,7 @@ const dev = async (mode: string) => {
     devServer.startCallback(() => {
       if (isInteractive) {
         // Prevent clear mfsu print log
-        // clearConsole();
+        clearConsole()
       }
 
       console.log(pico.cyan('Starting the development server...\n'))

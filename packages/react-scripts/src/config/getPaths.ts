@@ -2,6 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 
 import getPublicUrlOrPath from 'react-dev-utils/getPublicUrlOrPath'
+import { getUserConfig } from './getUserConfig'
 
 const getPaths = () => {
   // Make sure any symlinks in the project folder are resolved:
@@ -21,7 +22,7 @@ const getPaths = () => {
     process.env.PUBLIC_URL
   )
 
-  const distPath = process.env.DIST_PATH as string
+  const distDir = getUserConfig('distDir')
 
   const moduleFileExtensions = [
     'web.mjs',
@@ -53,7 +54,7 @@ const getPaths = () => {
   const paths = {
     dotenv: resolveApp('.env'),
     appPath: resolveApp('.'),
-    appDist: resolveApp(distPath),
+    appDist: resolveApp(distDir),
     appPublic: resolveApp('public'),
     appHtml: resolveApp('public/index.html'),
     appIndexJs: resolveModule(resolveApp, 'src/index'),

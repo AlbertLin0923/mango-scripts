@@ -25,7 +25,7 @@ import { getClientEnvironment } from './getEnv'
 import { getHash } from '../utils'
 import { getJsMinimizer, getCssMinimizer } from './getMinimizerConfig'
 import { getModuleRules } from './getModuleRules'
-
+import { getUserConfig, deepMergeWithArray } from './getUserConfig'
 import type { Configuration } from 'webpack'
 
 // This is the production and development configuration.
@@ -35,17 +35,17 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
   const isEnvProduction = process.env.NODE_ENV === 'production'
   // Source maps are resource heavy and can cause out of memory issue for large source files.
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
-  const useESLintPlugin = process.env.USE_ESLINT_PLUGIN === 'true'
-  const useStylelintPlugin = process.env.USE_STYLELINT_PLUGIN === 'true'
   const useBundleAnalyzerPlugin = process.env.USE_ANALYZE === 'true'
-  const useReactRefreshPlugin = process.env.USE_FAST_REFRESH === 'true'
   // Variable used for enabling profiling in Production
   // passed into alias object. Uses a flag if passed into the build command
   const useProfile = process.env.USE_PROFILE === 'true'
-  const emitEslintErrorsAsWarnings = process.env.EMIT_ESLINT_ERRORS_AS_WARNINGS === 'true'
 
   const paths = getPaths()
   const modules = getModules()
+  const { splitChunks } = getUserConfig('optimization.splitChunks')
+  const {
+    plugins: { eslint, stylelint, typescript }
+  } = getUserConfig('plugins')
 
   // We will provide `paths.publicUrlOrPath` to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -127,47 +127,49 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
     },
     optimization: {
       minimize: isEnvProduction,
-      splitChunks: isEnvProduction && {
-        chunks: 'all',
-        cacheGroups: {
-          libs: {
-            name: 'chunk-libs',
-            test: /[\\/]node_modules[\\/]/,
-            priority: 10,
-            chunks: 'initial' // only package third parties that are initially dependent
-          },
-          antd: {
-            name: 'chunk-antd', // split elementUI into a single package
-            priority: 19, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-            test: /[\\/]node_modules[\\/]_?antd(.*)/ // in order to adapt to cnpm
-          },
-          elementUI: {
-            name: 'chunk-elementUI', // split elementUI into a single package
-            priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-            test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
-          },
-          d3: {
-            name: 'chunk-d3', // split d3 into a single package
-            priority: 21, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-            test: /[\\/]node_modules[\\/]d3/ // in order to adapt to cnpm
-          },
-          echarts: {
-            name: 'chunk-echarts', // split echarts into a single package
-            priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-            test: /[\\/]node_modules[\\/]echarts/ // in order to adapt to cnpm
-          },
-          exceljs: {
-            name: 'chunk-exceljs', // split exceljs into a single package
-            priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-            test: /[\\/]node_modules[\\/]exceljs/ // in order to adapt to cnpm
-          },
-          xlsx: {
-            name: 'chunk-xlsx', // split xlsx into a single package
-            priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-            test: /[\\/]node_modules[\\/]xlsx/ // in order to adapt to cnpm
+      splitChunks:
+        isEnvProduction &&
+        deepMergeWithArray(splitChunks, {
+          chunks: 'all',
+          cacheGroups: {
+            libs: {
+              name: 'chunk-libs',
+              test: /[\\/]node_modules[\\/]/,
+              priority: 10,
+              chunks: 'initial' // only package third parties that are initially dependent
+            },
+            antd: {
+              name: 'chunk-antd', // split elementUI into a single package
+              priority: 19, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+              test: /[\\/]node_modules[\\/]_?antd(.*)/ // in order to adapt to cnpm
+            },
+            elementUI: {
+              name: 'chunk-elementUI', // split elementUI into a single package
+              priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+              test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
+            },
+            d3: {
+              name: 'chunk-d3', // split d3 into a single package
+              priority: 21, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+              test: /[\\/]node_modules[\\/]d3/ // in order to adapt to cnpm
+            },
+            echarts: {
+              name: 'chunk-echarts', // split echarts into a single package
+              priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+              test: /[\\/]node_modules[\\/]echarts/ // in order to adapt to cnpm
+            },
+            exceljs: {
+              name: 'chunk-exceljs', // split exceljs into a single package
+              priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+              test: /[\\/]node_modules[\\/]exceljs/ // in order to adapt to cnpm
+            },
+            xlsx: {
+              name: 'chunk-xlsx', // split xlsx into a single package
+              priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+              test: /[\\/]node_modules[\\/]xlsx/ // in order to adapt to cnpm
+            }
           }
-        }
-      },
+        }),
       minimizer: [
         // This is only used in production mode
         getJsMinimizer(),
@@ -267,7 +269,6 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
       // Experimental hot reloading for React .
       // https://github.com/facebook/react/tree/main/packages/react-refresh
       isEnvDevelopment &&
-        useReactRefreshPlugin &&
         new ReactRefreshWebpackPlugin({
           overlay: false
         }),
@@ -323,68 +324,75 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
           maximumFileSizeToCacheInBytes: 5 * 1024 * 1024
         }),
       // TypeScript type checking
-      new ForkTsCheckerWebpackPlugin({
-        async: isEnvDevelopment,
-        typescript: {
-          typescriptPath: resolve.sync('typescript', {
-            basedir: paths.appNodeModules
-          }),
-          configOverwrite: {
-            compilerOptions: {
-              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
-              skipLibCheck: true,
-              inlineSourceMap: false,
-              declarationMap: false,
-              noEmit: true,
-              incremental: true,
-              tsBuildInfoFile: paths.appTsBuildInfoFile
+      typescript?.enable &&
+        new ForkTsCheckerWebpackPlugin(
+          deepMergeWithArray(typescript?.options, {
+            async: isEnvDevelopment,
+            typescript: {
+              typescriptPath: resolve.sync('typescript', {
+                basedir: paths.appNodeModules
+              }),
+              configOverwrite: {
+                compilerOptions: {
+                  sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
+                  skipLibCheck: true,
+                  inlineSourceMap: false,
+                  declarationMap: false,
+                  noEmit: true,
+                  incremental: true,
+                  tsBuildInfoFile: paths.appTsBuildInfoFile
+                }
+              },
+              context: paths.appPath,
+              diagnosticOptions: {
+                syntactic: true
+              },
+              mode: 'write-references'
+              // profile: true,
+            },
+            issue: {
+              // This one is specifically to match during CI tests,
+              // as micromatch doesn't match
+              // '../cra-template-typescript/template/src/App.tsx'
+              // otherwise.
+              include: [{ file: '../**/src/**/*.{ts,tsx}' }, { file: '**/src/**/*.{ts,tsx}' }],
+              exclude: [
+                { file: '**/src/**/__tests__/**' },
+                { file: '**/src/**/?(*.){spec|test}.*' },
+                { file: '**/src/setupProxy.*' },
+                { file: '**/src/setupTests.*' }
+              ]
+            },
+            logger: {
+              infrastructure: 'silent'
             }
-          },
-          context: paths.appPath,
-          diagnosticOptions: {
-            syntactic: true
-          },
-          mode: 'write-references'
-          // profile: true,
-        },
-        issue: {
-          // This one is specifically to match during CI tests,
-          // as micromatch doesn't match
-          // '../cra-template-typescript/template/src/App.tsx'
-          // otherwise.
-          include: [{ file: '../**/src/**/*.{ts,tsx}' }, { file: '**/src/**/*.{ts,tsx}' }],
-          exclude: [
-            { file: '**/src/**/__tests__/**' },
-            { file: '**/src/**/?(*.){spec|test}.*' },
-            { file: '**/src/setupProxy.*' },
-            { file: '**/src/setupTests.*' }
-          ]
-        },
-        logger: {
-          infrastructure: 'silent'
-        }
-      }),
-      useESLintPlugin &&
-        new ESLintPlugin({
-          extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-          formatter: require.resolve('react-dev-utils/eslintFormatter'),
-          eslintPath: require.resolve('eslint'),
-          failOnError: isEnvProduction,
-          context: paths.appSrc,
-          cache: true,
-          cacheLocation: path.resolve(paths.appNodeModules, '.cache/.eslintcache'),
-          cwd: paths.appPath
-        }),
-      useStylelintPlugin &&
-        new StylelintPlugin({
-          extensions: ['less', 'scss', 'sass', 'stylus', 'styl', 'css'],
-          stylelintPath: require.resolve('stylelint'),
-          failOnError: isEnvProduction,
-          context: paths.appSrc,
-          cache: true,
-          cacheLocation: path.resolve(paths.appNodeModules, '.cache/.stylelintcache'),
-          cwd: paths.appPath
-        }),
+          })
+        ),
+      eslint?.enable &&
+        new ESLintPlugin(
+          deepMergeWithArray(eslint?.options, {
+            extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+            formatter: require.resolve('react-dev-utils/eslintFormatter'),
+            eslintPath: require.resolve('eslint'),
+            failOnError: isEnvProduction,
+            context: paths.appSrc,
+            cache: true,
+            cacheLocation: path.resolve(paths.appNodeModules, '.cache/.eslintcache'),
+            cwd: paths.appPath
+          })
+        ),
+      stylelint?.enable &&
+        new StylelintPlugin(
+          deepMergeWithArray(stylelint?.options, {
+            extensions: ['less', 'scss', 'sass', 'stylus', 'styl', 'css'],
+            stylelintPath: require.resolve('stylelint'),
+            failOnError: isEnvProduction,
+            context: paths.appSrc,
+            cache: true,
+            cacheLocation: path.resolve(paths.appNodeModules, '.cache/.stylelintcache'),
+            cwd: paths.appPath
+          })
+        ),
       useBundleAnalyzerPlugin && new BundleAnalyzerPlugin(),
       new webpack.ProgressPlugin({
         handler: (percentage, message, ...args) => {
@@ -399,10 +407,6 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
   }
 }
 
-export const getBuildConfig = () => {
-  return getOriginWebpackConfig()
-}
-
 export const getDevConfig = async (mfsu?: any) => {
   if (mfsu) {
     const config = getOriginWebpackConfig(mfsu)
@@ -413,4 +417,8 @@ export const getDevConfig = async (mfsu?: any) => {
   } else {
     return getOriginWebpackConfig(mfsu)
   }
+}
+
+export const getBuildConfig = () => {
+  return getOriginWebpackConfig()
 }
