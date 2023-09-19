@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "mango-scripts 工具库",
   "keywords": [
-    "frontend",
+    "mango-scripts",
     "utils"
   ],
   "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/utils#readme",
@@ -38,12 +38,12 @@
   "dependencies": {
     "gradient-string": "^2.0.2",
     "picocolors": "^1.0.0",
-    "semver": "^7.5.0",
+    "semver": "^7.5.4",
     "update-notifier": "5.1.0"
   },
   "devDependencies": {
     "@types/gradient-string": "^1.1.2",
-    "@types/semver": "^7.3.13",
+    "@types/semver": "^7.5.2",
     "@types/update-notifier": "5.1.0"
   },
   "engines": {

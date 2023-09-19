@@ -3,10 +3,9 @@
   "version": "1.0.3",
   "description": "mango-i18n-system 自动国际化文案配置系统的辅助插件合集，用于下载语言包、转换vue文件等",
   "keywords": [
-    "frontend",
-    "scripts",
+    "mango-scripts",
     "i18n-scripts",
-    "internationalization-scripts"
+    "chineseKeys"
   ],
   "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-scripts#readme",
   "bugs": {
@@ -28,32 +27,32 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
     "dev": "tsc --watch",
+    "build": "tsc",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "@mango-scripts/utils": "workspace:*",
     "cli-table": "^0.3.11",
-    "commander": "^10.0.1",
-    "consola": "^3.1.0",
-    "envinfo": "^7.8.1",
+    "commander": "^11.0.0",
+    "consola": "^3.2.3",
+    "envinfo": "^7.10.0",
     "fs-extra": "^11.1.1",
-    "glob": "^10.2.2",
+    "glob": "^10.3.4",
     "gogocode": "^1.0.55",
-    "inquirer": "^9.2.0",
+    "inquirer": "^9.2.11",
     "inquirer-fuzzy-path": "^2.3.0",
     "lodash": "^4.17.21",
     "picocolors": "^1.0.0",
-    "undici": "^5.22.0"
+    "undici": "^5.24.0"
   },
   "devDependencies": {
-    "@types/cli-table": "^0.3.1",
+    "@types/cli-table": "^0.3.2",
     "@types/envinfo": "^7.8.1",
-    "@types/fs-extra": "^11.0.1",
+    "@types/fs-extra": "^11.0.2",
     "@types/inquirer": "^9.0.3",
     "@types/inquirer-fuzzy-path": "^2.3.6",
-    "@types/lodash": "^4.14.194"
+    "@types/lodash": "^4.14.198"
   },
   "engines": {
     "node": ">=16.0.0"

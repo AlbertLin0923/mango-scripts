@@ -3,10 +3,9 @@
   "version": "1.0.7",
   "description": "mango-i18n-system 自动国际化文案配置系统的文案解析器，用于提取 中文文案key",
   "keywords": [
-    "frontend",
-    "utils",
+    "mango-scripts",
     "i18n-utils",
-    "internationalization-utils"
+    "chineseKeys"
   ],
   "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/i18n-utils#readme",
   "bugs": {
@@ -38,12 +37,12 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@babel/core": "^7.21.8",
-    "@babel/parser": "^7.21.8",
-    "@babel/runtime": "^7.21.5",
-    "@babel/types": "^7.21.5",
+    "@babel/core": "^7.22.20",
+    "@babel/parser": "^7.22.16",
+    "@babel/runtime": "^7.22.15",
+    "@babel/types": "^7.22.19",
     "fs-extra": "^11.1.1",
-    "glob": "^10.2.2",
+    "glob": "^10.3.4",
     "hyntax": "^1.1.9",
     "pug": "^3.0.2",
     "svelte": "^3.59.0",
@@ -51,7 +50,7 @@
     "vue-template-compiler": "^2.7.14"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.1",
+    "@types/fs-extra": "^11.0.2",
     "@types/pug": "^2.0.6"
   },
   "engines": {

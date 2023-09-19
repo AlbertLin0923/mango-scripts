@@ -14,16 +14,13 @@ const restrictedGlobals = require('confusing-browser-globals')
 
 const config = {
   root: true,
-
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended'
   ],
-
   parser: require.resolve('@babel/eslint-parser'),
-
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -35,15 +32,12 @@ const config = {
     },
     requireConfigFile: false
   },
-
   plugins: ['react', 'import', 'jsx-a11y', 'react-hooks'],
-
   settings: {
     react: {
       version: 'detect'
     }
   },
-
   env: {
     browser: true,
     node: true,

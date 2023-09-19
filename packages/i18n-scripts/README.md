@@ -39,4 +39,4 @@ i18n-scripts insertI18n
 
 ## License
 
-[MIT](./LICENSE) License © 2022-Present [AlbertLin](https://github.com/AlbertLin0923)
+[MIT](./LICENSE)

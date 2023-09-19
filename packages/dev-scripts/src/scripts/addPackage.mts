@@ -40,7 +40,7 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
           return []
         }
         const response = await npmKeyword(input.trim())
-        return response.map((i:any) => ({ value: i.name, name: i.name }))
+        return response.map((i: any) => ({ value: i.name, name: i.name }))
       },
       suggestOnly: true,
       searchText: '正在从npm上查找该包...',
@@ -49,9 +49,7 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
     {
       type: 'list',
       name: 'type',
-      message: `依赖包安装到哪里？ ${pico.red(
-        '[注意: typescript类型包请安装到devDependencies]'
-      )}`,
+      message: `依赖包安装到哪里？ ${pico.red('[注意: typescript类型包请安装到devDependencies]')}`,
       choices: typeMap.map((i) => ({ name: i.name, value: i.name }))
     }
   ])
@@ -82,27 +80,17 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
     {
       type: 'confirm',
       name: 'yes',
-      message: `确定安装 ${pico.yellow(installPkgName)} 到 ${pico.magenta(
-        appName
-      )} ${pico.cyan(type)}?`
+      message: `确定安装 ${pico.yellow(installPkgName)} 到 ${pico.magenta(appName)} ${pico.cyan(
+        type
+      )}?`
     }
   ])
 
   const typeValue = typeMap.find((i) => i.name === type)?.value
 
   if (yes) {
-    console.log(
-      `执行 ${pico.cyan(
-        `pnpm add ${installPkgName} ${typeValue} --filter ${appName}`
-      )}`
-    )
-    await run('pnpm', [
-      'add',
-      `${installPkgName}`,
-      `${typeValue}`,
-      '--filter',
-      `${appName}`
-    ])
+    console.log(`执行 ${pico.cyan(`pnpm add ${installPkgName} ${typeValue} --filter ${appName}`)}`)
+    await run('pnpm', ['add', `${installPkgName}`, `${typeValue}`, '--filter', `${appName}`])
   } else {
     console.log(pico.red('取消安装'))
   }

@@ -54,4 +54,4 @@ module.exports = {
 
 ## License
 
-[MIT](./LICENSE) License © 2022-Present [AlbertLin](https://github.com/AlbertLin0923)
+[MIT](./LICENSE)

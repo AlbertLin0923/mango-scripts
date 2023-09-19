@@ -1,9 +1,9 @@
 import fs from 'fs-extra'
-import _ from 'lodash'
+import { mergeWith, get } from 'lodash'
 import { cosmiconfigSync } from 'cosmiconfig'
 
 export const deepMergeWithArray = (object: any, sources: any) => {
-  return _.mergeWith(object, sources, (objValue: any, srcValue: any) => {
+  return mergeWith(object, sources, (objValue: any, srcValue: any) => {
     if (Array.isArray(objValue)) {
       return objValue.concat(srcValue)
     }
@@ -73,8 +73,8 @@ export const getUserConfig = (targetConfigObjPath: string) => {
       throw new Error("mango: Config function didn't return a config object.")
     }
 
-    return _.get(deepMergeWithArray(userConfig?.config, defaultUserConfig), targetConfigObjPath)
+    return get(deepMergeWithArray(userConfig?.config, defaultUserConfig), targetConfigObjPath)
   }
 
-  return _.get(defaultUserConfig, targetConfigObjPath)
+  return get(defaultUserConfig, targetConfigObjPath)
 }

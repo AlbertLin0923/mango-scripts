@@ -23,7 +23,6 @@ const gitGkd = async (options: GitGkdOptionsType): Promise<void> => {
   for (let i = 0; i < targetBranch.length; i++) {
     const it = targetBranch[i]
 
-
     consola.start(pico.cyan(`git checkout ${it}`))
     await run('git', ['checkout', `${it}`])
 
@@ -37,10 +36,9 @@ const gitGkd = async (options: GitGkdOptionsType): Promise<void> => {
     await run('git', ['push', 'origin', `${it}`])
   }
 
-
   consola.start(pico.cyan(`git checkout ${branch}`))
   await run('git', ['checkout', `${branch}`])
-  
+
   consola.success(`${pico.green('done!')}`)
 }
 

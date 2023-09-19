@@ -50,8 +50,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
         !output && {
           type: 'fuzzypath',
           name: 'output',
-          excludePath: (nodePath: string) =>
-            nodePath.startsWith('node_modules'),
+          excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
           message: '请选择语言包的存放目录路径',

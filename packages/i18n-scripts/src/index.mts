@@ -12,9 +12,7 @@ import updateLocale from './scripts/updateLocale.mjs'
 import insertI18n from './scripts/insertI18n.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const packageJson = fs.readJSONSync(
-  path.resolve(__dirname, '../../package.json')
-)
+const packageJson = fs.readJSONSync(path.resolve(__dirname, '../../package.json'))
 const { engines, name, version } = packageJson
 
 checkNodeVersion(engines.node, name)
@@ -78,11 +76,7 @@ program.on('command:*', ([cmd]) => {
 // add some useful info on help
 program.on('--help', () => {
   console.log()
-  console.log(
-    `  Run ${pico.cyan(
-      `${name} <command> --help`
-    )} for detailed usage of given command.`
-  )
+  console.log(`  Run ${pico.cyan(`${name} <command> --help`)} for detailed usage of given command.`)
   console.log()
 })
 

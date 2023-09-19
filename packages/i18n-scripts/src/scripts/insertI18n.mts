@@ -25,11 +25,7 @@ const insertI18nForVueFile = (filePath: string) => {
       if (Array.isArray(node.attr('content.children'))) {
         ;(node.attr('content.children') as []).forEach((text: any) => {
           const re = text?.content?.value?.content?.trim()
-          if (
-            re &&
-            INCLUDE_CHINESE_CHAR.test(re) &&
-            !INCLUDE_VARIABLE_CHAR.test(re)
-          ) {
+          if (re && INCLUDE_CHINESE_CHAR.test(re) && !INCLUDE_VARIABLE_CHAR.test(re)) {
             text.content.value.content = `{{$t('${re}')}}`
           }
         })
@@ -37,8 +33,7 @@ const insertI18nForVueFile = (filePath: string) => {
 
       if (Array.isArray(node.attr('content.attributes'))) {
         ;(node.attr('content.attributes') as []).forEach((attr: any) => {
-          const keyIsDym =
-            attr?.key?.content && attr.key.content.startsWith(':')
+          const keyIsDym = attr?.key?.content && attr.key.content.startsWith(':')
           const re = attr?.value?.content
           if (!keyIsDym && INCLUDE_CHINESE_CHAR.test(re)) {
             attr.key.content = `:${attr.key.content}`
@@ -75,8 +70,7 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
         !input && {
           type: 'fuzzypath',
           name: 'input',
-          excludePath: (nodePath: string) =>
-            nodePath.startsWith('node_modules'),
+          excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
           message: '请选择待转换文件的目录路径',
@@ -86,8 +80,7 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
         !output && {
           type: 'fuzzypath',
           name: 'output',
-          excludePath: (nodePath: string) =>
-            nodePath.startsWith('node_modules'),
+          excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
           message: '请选择转换后生成文件的存储目录路径',

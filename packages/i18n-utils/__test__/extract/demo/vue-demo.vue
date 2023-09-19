@@ -1,4 +1,3 @@
-
 <!-- translateModules:["DEMO模块"] -->
 <template>
   <div class="app-container">

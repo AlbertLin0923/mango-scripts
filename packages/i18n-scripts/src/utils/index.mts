@@ -14,10 +14,7 @@ export const objToArr = (obj: Record<string, any>) => {
   })
 }
 
-export const compareLocaleData = async (
-  oldFilePath: string,
-  newFilePath: string
-) => {
+export const compareLocaleData = async (oldFilePath: string, newFilePath: string) => {
   let oldString = '{}'
   let newString = '{}'
 

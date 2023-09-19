@@ -15,9 +15,7 @@ type ChangeExtnameOptionsType = {
   targetExt: string
 }
 
-const changeExtname = async (
-  options: ChangeExtnameOptionsType
-): Promise<void> => {
+const changeExtname = async (options: ChangeExtnameOptionsType): Promise<void> => {
   let { input, output, originExt, targetExt } = options
 
   if (!input || !output || !originExt || !targetExt) {
@@ -26,8 +24,7 @@ const changeExtname = async (
         !input && {
           type: 'fuzzypath',
           name: 'input',
-          excludePath: (nodePath: string) =>
-            nodePath.startsWith('node_modules'),
+          excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
           message: '请选择待转换文件的目录路径',
@@ -37,8 +34,7 @@ const changeExtname = async (
         !output && {
           type: 'fuzzypath',
           name: 'output',
-          excludePath: (nodePath: string) =>
-            nodePath.startsWith('node_modules'),
+          excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
           message: '请选择转换后生成文件的存储目录路径',

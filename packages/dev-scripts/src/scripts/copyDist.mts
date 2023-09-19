@@ -27,9 +27,7 @@ const copyDist = async (options: CopyDistOptionsType): Promise<void> => {
 
     const distPath = path.resolve(process.cwd(), it.pkgDirPath, './dist')
 
-    consola.start(
-      `copy ${pico.green(distPath)} to  ${pico.magenta('root dist dir')} ...`
-    )
+    consola.start(`copy ${pico.green(distPath)} to  ${pico.magenta('root dist dir')} ...`)
 
     await fs.copy(distPath, path.resolve(rootDistPath, `./${it.pkgDir}`))
   }

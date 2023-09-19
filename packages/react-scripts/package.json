@@ -3,11 +3,11 @@
   "version": "1.0.15",
   "description": "基于 react-scripts@5.0.1 添加一些功能和优化",
   "keywords": [
-    "frontend",
+    "mango-scripts",
+    "react-scripts",
     "hmr",
     "dev-server",
     "build-tool",
-    "react-scripts",
     "custom-react-scripts"
   ],
   "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/react-scripts#readme",
