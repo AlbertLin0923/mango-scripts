@@ -107,7 +107,7 @@ const getStyleLoaders = (cssOptions: any, preProcessor?: any, preProcessorOption
   ].filter(Boolean)
 }
 
-export const getModuleRules = (mfsu?: any) => {
+export const getModuleRules = () => {
   const isEnvDevelopment = process.env.NODE_ENV === 'development'
   const isEnvProduction = process.env.NODE_ENV === 'production'
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
@@ -219,9 +219,7 @@ export const getModuleRules = (mfsu?: any) => {
             // @remove-on-eject-end
             plugins: [
               isEnvDevelopment && require.resolve('react-refresh/babel'),
-              require.resolve('babel-plugin-jsx-css-modules'),
-              // [mfsu] 3. add mfsu babel plugins
-              ...(mfsu ? mfsu.getBabelPlugins() : [])
+              require.resolve('babel-plugin-jsx-css-modules')
             ].filter(Boolean),
             // This is a feature of `babel-loader` for webpack (not Babel itself).
             // It enables caching results in ./node_modules/.cache/babel-loader/

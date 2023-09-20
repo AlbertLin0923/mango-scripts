@@ -20,7 +20,6 @@
 - 内置 `babel-plugin-jsx-css-modules` 插件，就像写普通 `css` 样式一样写 `css module` 模块化代码
 - 内置 `webpack-bundle-analyzer` 打包分析插件
 - 内置 [svg-sprite-loader](https://juejin.cn/post/6844903517564436493) svg 精灵图优化 loader
-- 增加 [@umi/mfsu](https://umijs.org/blog/mfsu-faster-than-vite) 支持
 - 增加 [qiankun](https://github.com/umijs/qiankun) 配置支持
 - 增加 `eslint-webpack-plugin` 和 `stylelint-webpack-plugin`，修改其配置默认为读取业务项目目录的配置
 - 可在开发环境下自动获取局域网 IP 并映射到地址栏，便于本地联调
@@ -155,8 +154,7 @@ module.exports = {
         minimizerOptions: {}
       }
     }
-  },
-  mfsu: false
+  }
 }
 ```
 

@@ -4,8 +4,9 @@ import pico from 'picocolors'
 import envinfo from 'envinfo'
 import { Command } from 'commander'
 import { checkNodeVersion, checkUpdate } from '@mango-scripts/utils'
-import build from './scripts/build'
 import dev from './scripts/dev'
+import build from './scripts/build'
+import inspect from './scripts/inspect'
 
 const packageJson = require('../../package.json')
 
@@ -20,7 +21,7 @@ program.version(`${name} ${version}`).usage('<command> [options]')
 program
   .command('dev')
   .description('启动开发服务器')
-  .option('-m --mode <mode>', '指定环境模式 (默认值：dev)', 'dev')
+  .option('-m --mode <mode>', '指定环境模式 (默认值：development)', '默认值：development')
   .allowUnknownOption()
   .action((options) => {
     const { mode } = options
@@ -30,11 +31,21 @@ program
 program
   .command('build')
   .description('构建打包应用')
-  .option('-m --mode <mode>', '指定环境模式 (默认值：prod)', 'prod')
+  .option('-m --mode <mode>', '指定环境模式 (默认值：production)', 'production')
   .allowUnknownOption()
   .action((options) => {
     const { mode } = options
     build(mode)
+  })
+
+program
+  .command('inspect')
+  .description('打印 webpack 配置')
+  .option('-m --mode <mode>', '指定环境模式 (默认值：production)', 'production')
+  .allowUnknownOption()
+  .action((options) => {
+    const { mode } = options
+    inspect(mode)
   })
 
 program

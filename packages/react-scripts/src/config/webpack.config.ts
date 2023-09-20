@@ -30,7 +30,7 @@ import type { Configuration } from 'webpack'
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
-const getOriginWebpackConfig = (mfsu?: any): Configuration => {
+export const getWebpackConfig = (): Configuration => {
   const isEnvDevelopment = process.env.NODE_ENV === 'development'
   const isEnvProduction = process.env.NODE_ENV === 'production'
   // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -140,17 +140,17 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
             },
             antd: {
               name: 'chunk-antd', // split elementUI into a single package
-              priority: 19, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+              priority: 12, // the weight needs to be larger than libs and app or it will be packaged into libs or app
               test: /[\\/]node_modules[\\/]_?antd(.*)/ // in order to adapt to cnpm
             },
             elementUI: {
               name: 'chunk-elementUI', // split elementUI into a single package
-              priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+              priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
               test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
             },
             d3: {
               name: 'chunk-d3', // split d3 into a single package
-              priority: 21, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+              priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
               test: /[\\/]node_modules[\\/]d3/ // in order to adapt to cnpm
             },
             echarts: {
@@ -289,9 +289,7 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
       //   `index.html`
       // - "entrypoints" key: Array of files which are included in `index.html`,
       //   can be used to reconstruct the HTML if necessary
-
-      // Note: Not use `MFSU` with `WebpackManifestPlugin` in dev scene
-      (!mfsu || isEnvProduction) &&
+      isEnvProduction &&
         new WebpackManifestPlugin({
           fileName: 'asset-manifest.json',
           publicPath: paths.publicUrlOrPath,
@@ -405,20 +403,4 @@ const getOriginWebpackConfig = (mfsu?: any): Configuration => {
     // our own hints via the FileSizeReporter
     performance: false
   }
-}
-
-export const getDevConfig = async (mfsu?: any) => {
-  if (mfsu) {
-    const config = getOriginWebpackConfig(mfsu)
-    await mfsu.setWebpackConfig({
-      config
-    })
-    return config
-  } else {
-    return getOriginWebpackConfig(mfsu)
-  }
-}
-
-export const getBuildConfig = () => {
-  return getOriginWebpackConfig()
 }

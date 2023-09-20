@@ -60,8 +60,7 @@ export const getUserConfig = (targetConfigObjPath: string) => {
           minimizerOptions: {}
         }
       }
-    },
-    mfsu: false
+    }
   }
 
   const userConfigFilePath = userConfigExplorer.search(projectRoot)

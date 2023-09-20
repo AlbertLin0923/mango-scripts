@@ -10,7 +10,7 @@ import { checkBrowsers } from 'react-dev-utils/browsersHelper'
 
 import { applyEnv } from '../config/getEnv'
 import getPaths from '../config/getPaths'
-import { getBuildConfig } from '../config/webpack.config'
+import { getWebpackConfig } from '../config/webpack.config'
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
@@ -117,7 +117,7 @@ const build = async (mode: string) => {
     await copyPublicFolder()
 
     try {
-      const { stats, warnings } = await webpackBuild(getBuildConfig())
+      const { stats, warnings } = await webpackBuild(getWebpackConfig())
 
       if (warnings.length) {
         console.log(pico.yellow('Compiled with warnings.\n'))

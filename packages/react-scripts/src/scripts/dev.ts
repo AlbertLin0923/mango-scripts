@@ -19,11 +19,9 @@ import ignoredFiles from 'react-dev-utils/ignoredFiles'
 import redirectServedPath from 'react-dev-utils/redirectServedPathMiddleware'
 
 import getPaths from '../config/getPaths'
-import { getDevConfig } from '../config/webpack.config'
+import { getWebpackConfig } from '../config/webpack.config'
 import { applyEnv } from '../config/getEnv'
 import { getLocalHost } from '../utils'
-import { getUserConfig } from '../config/getUserConfig'
-// import { MFSU } from '@umijs/mfsu'
 
 import getHttpsConfig from '../config/getHttpsConfig'
 
@@ -37,8 +35,6 @@ const dev = async (mode: string) => {
     applyEnv(mode)
 
     const paths = getPaths()
-
-    const useMFSU = getUserConfig('mfsu')
 
     const isInteractive = process.stdout.isTTY
 
@@ -69,10 +65,6 @@ const dev = async (mode: string) => {
       console.log()
     }
 
-    // TODO
-    // [mfsu] 1. init instance
-    const mfsu: any = useMFSU ? null : null
-
     // We require that you explicitly set browsers and do not fall back to
     // browserslist defaults.
 
@@ -88,7 +80,7 @@ const dev = async (mode: string) => {
       return
     }
 
-    const config = useMFSU ? await getDevConfig(mfsu) : await getDevConfig()
+    const config = await getWebpackConfig()
     const protocol = useHttps ? 'https' : 'http'
     const appName = require(paths.appPackageJson).name
     const urls = prepareUrls(protocol, host, port, paths.publicUrlOrPath.slice(0, -1))
@@ -202,13 +194,6 @@ const dev = async (mode: string) => {
           throw new Error('webpack-dev-server is not defined')
         }
 
-        // [mfsu] 2. add mfsu middleware
-        if (mfsu) {
-          for (const middleware of mfsu.getMiddlewares()) {
-            devServer.app.use(middleware)
-          }
-        }
-
         // Keep `evalSourceMapMiddleware`
         // middlewares before `redirectServedPath` otherwise will not have any effect
         // This lets us fetch source contents from webpack for the error overlay
@@ -236,7 +221,6 @@ const dev = async (mode: string) => {
     // Launch WebpackDevServer.
     devServer.startCallback(() => {
       if (isInteractive) {
-        // Prevent clear mfsu print log
         clearConsole()
       }
 
