@@ -32,7 +32,7 @@ const copyPublicFolder = async () => {
   const paths = getPaths()
   await fs.copy(paths.appPublic, paths.appDist, {
     dereference: true,
-    filter: (file) => file !== paths.appHtml
+    filter: (file) => file !== paths.appHtml,
   })
 }
 
@@ -55,16 +55,17 @@ const webpackBuild = async (config: webpack.Configuration) => {
         // Add additional information for postcss errors
         if (Object.prototype.hasOwnProperty.call(err, 'postcssNode')) {
           errMessage +=
-            '\nCompileError: Begins at CSS selector ' + (err as any)['postcssNode'].selector
+            '\nCompileError: Begins at CSS selector ' +
+            (err as any)['postcssNode'].selector
         }
 
         messages = formatWebpackMessages({
           errors: [errMessage],
-          warnings: []
+          warnings: [],
         } as any)
       } else {
         messages = formatWebpackMessages(
-          stats?.toJson({ all: false, warnings: true, errors: true }) as any
+          stats?.toJson({ all: false, warnings: true, errors: true }) as any,
         )
       }
 
@@ -79,7 +80,7 @@ const webpackBuild = async (config: webpack.Configuration) => {
 
       const resolveArgs = {
         stats,
-        warnings: messages.warnings
+        warnings: messages.warnings,
       }
 
       return resolve(resolveArgs)
@@ -90,7 +91,7 @@ const webpackBuild = async (config: webpack.Configuration) => {
 const build = async (mode: string) => {
   try {
     // apply env
-    applyEnv(mode)
+    applyEnv(mode, 'production')
 
     const isInteractive = process.stdout.isTTY
 
@@ -107,7 +108,8 @@ const build = async (mode: string) => {
 
     // First, read the current file sizes in build directory.
     // This lets us display how much they changed later.
-    const previousFileSizes = await FileSizeReporter.measureFileSizesBeforeBuild(paths.appDist)
+    const previousFileSizes =
+      await FileSizeReporter.measureFileSizesBeforeBuild(paths.appDist)
 
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
@@ -125,10 +127,12 @@ const build = async (mode: string) => {
         console.log(
           '\nSearch for the ' +
             pico.underline(pico.yellow('keywords')) +
-            ' to learn more about each warning.'
+            ' to learn more about each warning.',
         )
         console.log(
-          'To ignore, add ' + pico.cyan('// eslint-disable-next-line') + ' to the line before.\n'
+          'To ignore, add ' +
+            pico.cyan('// eslint-disable-next-line') +
+            ' to the line before.\n',
         )
       } else {
         console.log(pico.green('Compiled successfully.\n'))
@@ -140,7 +144,7 @@ const build = async (mode: string) => {
         previousFileSizes,
         paths.appDist,
         WARN_AFTER_BUNDLE_GZIP_SIZE,
-        WARN_AFTER_CHUNK_GZIP_SIZE
+        WARN_AFTER_CHUNK_GZIP_SIZE,
       )
 
       console.log()

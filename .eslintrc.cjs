@@ -7,13 +7,13 @@ module.exports = defineConfig({
     'eslint:recommended',
     'plugin:node/recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
   plugins: ['import'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 2021
+    ecmaVersion: 2021,
   },
   rules: {
     '@typescript-eslint/no-var-requires': 'off',
@@ -25,27 +25,15 @@ module.exports = defineConfig({
     'node/no-missing-require': 'off',
     'node/shebang': 'off',
     'no-useless-escape': 'off',
-    'node/no-missing-import': [
-      'error',
-      {
-        allowModules: ['types', 'estree', 'less', 'sass', 'stylus'],
-        tryExtensions: ['.ts', '.js', '.jsx', '.tsx', '.d.ts']
-      }
-    ],
-    'node/no-extraneous-import': 'off'
+    'node/no-missing-import': 'off',
+    'node/no-extraneous-import': 'off',
   },
   overrides: [
     {
       files: ['*.d.ts'],
       rules: {
-        '@typescript-eslint/triple-slash-reference': 'off'
-      }
+        '@typescript-eslint/triple-slash-reference': 'off',
+      },
     },
-    {
-      files: ['**/build.config.ts'],
-      rules: {
-        'node/no-missing-import': 'off'
-      }
-    }
-  ]
+  ],
 })

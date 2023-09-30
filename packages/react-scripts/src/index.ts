@@ -3,7 +3,8 @@
 import pico from 'picocolors'
 import envinfo from 'envinfo'
 import { Command } from 'commander'
-import { checkNodeVersion, checkUpdate } from '@mango-scripts/utils'
+import { checkNodeVersion, checkUpdate, gs } from '@mango-scripts/utils'
+
 import dev from './scripts/dev'
 import build from './scripts/build'
 import inspect from './scripts/inspect'
@@ -15,13 +16,19 @@ const { engines, name, version } = packageJson
 checkNodeVersion(engines.node, name)
 checkUpdate(packageJson)
 
+console.log(gs('@mango-scripts/react-scripts'))
+
 const program = new Command()
 program.version(`${name} ${version}`).usage('<command> [options]')
 
 program
   .command('dev')
   .description('启动开发服务器')
-  .option('-m --mode <mode>', '指定环境模式 (默认值：development)', '默认值：development')
+  .option(
+    '-m --mode <mode>',
+    '指定环境模式 (默认值：development)',
+    'development',
+  )
   .allowUnknownOption()
   .action((options) => {
     const { mode } = options
@@ -59,13 +66,13 @@ program
           System: ['OS', 'CPU', 'Memory', 'Shell'],
           Binaries: ['Node', 'Yarn', 'npm'],
           Browsers: ['Chrome', 'Edge', 'Firefox', 'Safari'],
-          npmPackages: '/**/{typescript,*react*}'
+          npmPackages: '/**/{typescript,*react*}',
         },
         {
           showNotFound: true,
           duplicates: true,
-          fullTree: true
-        }
+          fullTree: true,
+        },
       )
       .then(console.log)
   })
@@ -81,7 +88,11 @@ program.on('command:*', ([cmd]) => {
 // add some useful info on help
 program.on('--help', () => {
   console.log()
-  console.log(`  Run ${pico.cyan(`${name} <command> --help`)} for detailed usage of given command.`)
+  console.log(
+    `  Run ${pico.cyan(
+      `${name} <command> --help`,
+    )} for detailed usage of given command.`,
+  )
   console.log()
 })
 

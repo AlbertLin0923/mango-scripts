@@ -30,8 +30,8 @@
   ],
   "types": "./types/react-app.d.ts",
   "scripts": {
-    "dev": "unbuild",
-    "build": "unbuild",
+    "dev": "tsup --watch",
+    "build": "tsup",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
@@ -107,7 +107,6 @@
     "@types/envinfo": "^7.8.1",
     "@types/lodash": "^4.14.192",
     "@types/react": "^18.2.13",
-    "@types/react-dev-utils": "^9.0.11",
     "@types/react-dom": "^18.2.6",
     "@types/resolve": "^1.20.2",
     "@types/uglify-js": "^3.17.1",

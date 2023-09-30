@@ -1,16 +1,16 @@
-export type DefaultModeConfigType = {
+export type CliEnvType = {
   development: Record<string, string>
   production: Record<string, string>
 }
 
-export type RecommendProductionModeConfigType = {
+export type RecommendProductionEnvType = {
   dev: Record<string, string>
   test: Record<string, string>
   stage: Record<string, string>
   prod: Record<string, string>
 }
 
-export const defaultModeConfig: DefaultModeConfigType = {
+export const cliEnv: CliEnvType = {
   development: {
     NODE_ENV: 'development',
     BABEL_ENV: 'development',
@@ -24,7 +24,9 @@ export const defaultModeConfig: DefaultModeConfigType = {
     PORT: '',
     WDS_SOCKET_HOST: '',
     WDS_SOCKET_PATH: '',
-    WDS_SOCKET_PORT: ''
+    WDS_SOCKET_PORT: '',
+
+    USE_LOCAL_HOST: 'false',
   },
   production: {
     NODE_ENV: 'production',
@@ -34,29 +36,33 @@ export const defaultModeConfig: DefaultModeConfigType = {
 
     USE_PROFILE: 'false',
 
-    USE_ANALYZE: 'false'
-  }
+    USE_ANALYZE: 'false',
+  },
 }
 
-export const recommendProductionModeConfig: RecommendProductionModeConfigType = {
+export const recommendProductionEnv: RecommendProductionEnvType = {
   dev: {
+    ...cliEnv['production'],
     REACT_APP_ENV: 'dev',
-    USE_SOURCEMAP: 'true'
+    USE_SOURCEMAP: 'true',
   },
   test: {
+    ...cliEnv['production'],
     REACT_APP_ENV: 'test',
-    USE_SOURCEMAP: 'true'
+    USE_SOURCEMAP: 'true',
   },
   stage: {
+    ...cliEnv['production'],
     REACT_APP_ENV: 'stage',
     USE_SOURCEMAP: 'false',
     DROP_CONSOLE: 'true',
-    DROP_DEBUGGER: 'true'
+    DROP_DEBUGGER: 'true',
   },
   prod: {
+    ...cliEnv['production'],
     REACT_APP_ENV: 'prod',
     USE_SOURCEMAP: 'false',
     DROP_CONSOLE: 'true',
-    DROP_DEBUGGER: 'true'
-  }
+    DROP_DEBUGGER: 'true',
+  },
 }

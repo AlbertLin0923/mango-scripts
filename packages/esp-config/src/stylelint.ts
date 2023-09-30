@@ -6,19 +6,19 @@ const config = {
     'stylelint-config-standard-vue',
     'stylelint-config-css-modules',
     'stylelint-config-rational-order',
-    'stylelint-prettier/recommended'
+    'stylelint-prettier/recommended',
   ],
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
   overrides: [
     {
       files: ['*.less', '**/*.less'],
-      customSyntax: require('postcss-less')
+      customSyntax: 'postcss-less',
     },
     {
       files: ['*.styl', '**/*.styl', '*.stylus', '**/*.stylus'],
-      customSyntax: require('postcss-styl')
-    }
-  ]
+      customSyntax: 'postcss-styl',
+    },
+  ],
 }
 
 export default config

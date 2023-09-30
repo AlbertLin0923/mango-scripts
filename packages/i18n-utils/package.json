@@ -32,8 +32,8 @@
     "./dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild",
+    "dev": "tsup --watch",
+    "build": "tsup",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {

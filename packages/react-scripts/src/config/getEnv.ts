@@ -1,40 +1,33 @@
 import fs from 'fs-extra'
-import pico from 'picocolors'
 import dotenv from 'dotenv'
 import dotenvExpand from 'dotenv-expand'
 
 import getPaths from './getPaths'
-import { defaultModeConfig, recommendProductionModeConfig } from './getMode'
-import type { DefaultModeConfigType, RecommendProductionModeConfigType } from './getMode'
+import { cliEnv, recommendProductionEnv } from './getMode'
 
-export const applyEnv = (mode: string) => {
-  const NODE_ENV = process.env.NODE_ENV
+export const applyEnv = (
+  mode: string,
+  cliMode: 'development' | 'production',
+) => {
   const paths = getPaths()
 
-  const defaultMode = defaultModeConfig[NODE_ENV as keyof DefaultModeConfigType]
+  Object.entries(cliEnv[cliMode]).forEach(([key, value]) => {
+    process.env[key] = value
+  })
 
-  if (!defaultMode) {
-    throw new Error(
-      pico.red('The NODE_ENV environment variable should be development or production')
-    )
-  } else {
-    Object.entries(defaultMode).forEach(([key, value]) => {
+  const matchEnv =
+    recommendProductionEnv[mode as keyof typeof recommendProductionEnv]
+
+  matchEnv &&
+    Object.entries(matchEnv).forEach(([key, value]) => {
       process.env[key] = value
     })
-  }
-
-  if (NODE_ENV === 'production') {
-    Object.entries(
-      recommendProductionModeConfig[mode as keyof RecommendProductionModeConfigType]
-    ).forEach(([key, value]) => {
-      process.env[key] = value
-    })
-  }
 
   const dotenvFiles = [
     `${paths.dotenv}`,
+    `${paths.dotenv}.${cliMode}`,
     `${paths.dotenv}.${mode}`,
-    `${paths.dotenv}.${mode}.local`
+    `${paths.dotenv}.${mode}.local`,
   ]
 
   dotenvFiles.forEach((dotenvFile) => {
@@ -73,8 +66,8 @@ export const getClientEnvironment = (publicUrl: string) => {
         // and `sockPort` options in webpack-dev-server.
         WDS_SOCKET_HOST: process.env.WDS_SOCKET_HOST,
         WDS_SOCKET_PATH: process.env.WDS_SOCKET_PATH,
-        WDS_SOCKET_PORT: process.env.WDS_SOCKET_PORT
-      }
+        WDS_SOCKET_PORT: process.env.WDS_SOCKET_PORT,
+      },
     )
 
   // Stringify all values so we can feed into webpack DefinePlugin
@@ -82,7 +75,7 @@ export const getClientEnvironment = (publicUrl: string) => {
     'process.env': Object.keys(raw).reduce<Record<string, any>>((env, key) => {
       env[key] = JSON.stringify(raw[key])
       return env
-    }, {})
+    }, {}),
   }
 
   return { raw, stringified }

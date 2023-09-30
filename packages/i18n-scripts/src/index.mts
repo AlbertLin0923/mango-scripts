@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 import fs from 'fs-extra'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import pico from 'picocolors'
 import { Command } from 'commander'
 import envinfo from 'envinfo'
-import { checkNodeVersion, checkUpdate } from '@mango-scripts/utils'
+import { checkNodeVersion, checkUpdate, gs } from '@mango-scripts/utils'
 
 import updateLocale from './scripts/updateLocale.mjs'
 import insertI18n from './scripts/insertI18n.mjs'
@@ -17,6 +17,8 @@ const { engines, name, version } = packageJson
 
 checkNodeVersion(engines.node, name)
 checkUpdate(packageJson)
+
+console.log(gs('@mango-scripts/i18n-scripts'))
 
 const program = new Command()
 program.version(`${name} ${version}`).usage('<command> [options]')
@@ -34,9 +36,9 @@ program
 
 program
   .command('insertI18n')
-  .description('对 vue 文件添加国际化 i18n 标识')
-  .option('-i, --input <dirPath>', '待转换文件的目录路径')
-  .option('-o, --output <dirPath>', '转换后生成文件的存储目录路径')
+  .description('给 vue 文件添加国际化 i18n 标识')
+  .option('-i, --input <dirPath>', '输入目录路径')
+  .option('-o, --output <dirPath>', '输出目录路径')
   .option('-t, --localeModulesStr <string>', '国际化文案模块字段')
   .allowUnknownOption()
   .action((options) => {
@@ -53,8 +55,7 @@ program
         {
           System: ['OS', 'CPU', 'Memory', 'Shell'],
           Binaries: ['Node', 'Yarn', 'npm'],
-          Browsers: ['Chrome', 'Edge', 'Firefox', 'Safari'],
-          npmPackages: '/**/{typescript,*react*}'
+          Browsers: ['Chrome', 'Edge', 'Firefox', 'Safari']
         },
         {
           showNotFound: true,

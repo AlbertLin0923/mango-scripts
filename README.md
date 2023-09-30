@@ -2,7 +2,7 @@
 mango-scripts
 </h1>
 <p align="center">
-一些便捷的前端开发工具包
+一些便捷的前端开发 Node.js 工具包
 <p>
 
 | 包 | 说明 |

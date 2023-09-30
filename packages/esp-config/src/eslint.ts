@@ -18,35 +18,32 @@ const config = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
   parser: require.resolve('@babel/eslint-parser'),
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     babelOptions: {
-      presets: [require.resolve('babel-preset-react-app/prod')]
+      presets: [require.resolve('babel-preset-react-app/prod')],
     },
-    requireConfigFile: false
+    requireConfigFile: false,
   },
   plugins: ['react', 'import', 'jsx-a11y', 'react-hooks'],
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: 'detect',
+    },
   },
   env: {
     browser: true,
     node: true,
     commonjs: true,
-    es2022: true
+    es2022: true,
   },
-
-  // NOTE: When adding rules here, you need to make sure they are compatible with
-  // `typescript-eslint`, as some rules such as `no-array-constructor` aren't compatible.
   rules: {
     'react/jsx-uses-vars': 'warn',
     'react/jsx-uses-react': 'warn',
@@ -89,10 +86,10 @@ const config = {
           ['&', '|', '^', '~', '<<', '>>', '>>>'],
           ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
           ['&&', '||'],
-          ['in', 'instanceof']
+          ['in', 'instanceof'],
         ],
-        allowSamePrecedence: false
-      }
+        allowSamePrecedence: false,
+      },
     ],
     'no-multi-str': 'warn',
     'no-global-assign': 'warn',
@@ -124,24 +121,24 @@ const config = {
       {
         allowShortCircuit: true,
         allowTernary: true,
-        allowTaggedTemplates: true
-      }
+        allowTaggedTemplates: true,
+      },
     ],
     'no-unused-labels': 'warn',
     'no-unused-vars': [
       'warn',
       {
         args: 'none',
-        ignoreRestSiblings: true
-      }
+        ignoreRestSiblings: true,
+      },
     ],
     'no-use-before-define': [
       'warn',
       {
         functions: false,
         classes: false,
-        variables: false
-      }
+        variables: false,
+      },
     ],
     'no-useless-computed-key': 'warn',
     'no-useless-concat': 'warn',
@@ -152,8 +149,8 @@ const config = {
       {
         ignoreDestructuring: false,
         ignoreImport: false,
-        ignoreExport: false
-      }
+        ignoreExport: false,
+      },
     ],
     'no-with': 'warn',
     'no-whitespace-before-property': 'warn',
@@ -170,14 +167,14 @@ const config = {
         object: 'require',
         property: 'ensure',
         message:
-          'Please use import() instead. More info: https://facebook.github.io/create-react-app/docs/code-splitting'
+          'Please use import() instead. More info: https://facebook.github.io/create-react-app/docs/code-splitting',
       },
       {
         object: 'System',
         property: 'import',
         message:
-          'Please use import() instead. More info: https://facebook.github.io/create-react-app/docs/code-splitting'
-      }
+          'Please use import() instead. More info: https://facebook.github.io/create-react-app/docs/code-splitting',
+      },
     ],
     'getter-return': 'warn',
 
@@ -197,8 +194,8 @@ const config = {
       'warn',
       {
         allowAllCaps: true,
-        ignore: []
-      }
+        ignore: [],
+      },
     ],
     'react/no-danger-with-children': 'warn',
     // Disabled because of undesirable warnings
@@ -217,8 +214,8 @@ const config = {
     'jsx-a11y/anchor-is-valid': [
       'warn',
       {
-        aspects: ['noHref', 'invalidHref']
-      }
+        aspects: ['noHref', 'invalidHref'],
+      },
     ],
     'jsx-a11y/aria-activedescendant-has-tabindex': 'warn',
     'jsx-a11y/aria-props': 'warn',
@@ -257,29 +254,28 @@ const config = {
         shorthandFirst: false,
         shorthandLast: true,
         ignoreCase: true,
-        noSortAlphabetically: false
-      }
-    ]
+        noSortAlphabetically: false,
+      },
+    ],
   },
-
   overrides: [
     {
       files: ['**/*.{ts,tsx,mts}'],
       extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:prettier/recommended'
+        'plugin:prettier/recommended',
       ],
       parser: require.resolve('@typescript-eslint/parser'),
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
         ecmaFeatures: {
-          jsx: true
+          jsx: true,
         },
 
         // typescript-eslint specific options
-        warnOnUnsupportedTypeScriptVersion: true
+        warnOnUnsupportedTypeScriptVersion: true,
       },
       plugins: ['@typescript-eslint'],
       // If adding a typescript-eslint version of an existing ESLint rule,
@@ -305,8 +301,8 @@ const config = {
             functions: false,
             classes: false,
             variables: false,
-            typedefs: false
-          }
+            typedefs: false,
+          },
         ],
         'no-unused-expressions': 'off',
         '@typescript-eslint/no-unused-expressions': [
@@ -314,16 +310,16 @@ const config = {
           {
             allowShortCircuit: true,
             allowTernary: true,
-            allowTaggedTemplates: true
-          }
+            allowTaggedTemplates: true,
+          },
         ],
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': [
           'warn',
           {
             args: 'none',
-            ignoreRestSiblings: true
-          }
+            ignoreRestSiblings: true,
+          },
         ],
         'no-useless-constructor': 'off',
         '@typescript-eslint/no-useless-constructor': 'warn',
@@ -352,8 +348,7 @@ const config = {
         '@typescript-eslint/no-misused-promises': 'off',
         '@typescript-eslint/no-namespace': 'warn',
         '@typescript-eslint/no-non-null-assertion': 'off',
-        '@typescript-eslint/no-parameter-properties': 'error',
-        '@typescript-eslint/no-shadow': 'error',
+        '@typescript-eslint/no-shadow': 'warn',
         '@typescript-eslint/no-unnecessary-type-assertion': 'off',
         '@typescript-eslint/no-unnecessary-type-constraint': 'off',
         '@typescript-eslint/no-unsafe-assignment': 'off',
@@ -369,10 +364,10 @@ const config = {
         '@typescript-eslint/type-annotation-spacing': 'error',
         '@typescript-eslint/typedef': 'error',
         '@typescript-eslint/unbound-method': 'off',
-        '@typescript-eslint/unified-signatures': 'error'
-      }
-    }
-  ]
+        '@typescript-eslint/unified-signatures': 'error',
+      },
+    },
+  ],
 }
 
 export default config

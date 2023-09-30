@@ -28,7 +28,9 @@ if (isDryRun) {
 export async function getPkgInfoList(targetDir: string): Promise<IPkgInfo[]> {
   const pkgInfoList: IPkgInfo[] = []
 
-  const pkgDirList: string[] = fs.readdirSync(targetDir).filter((filename) => filename[0] !== '.')
+  const pkgDirList: string[] = fs
+    .readdirSync(targetDir)
+    .filter((filename) => filename[0] !== '.')
 
   await Promise.all(
     pkgDirList.map(async (pkgDir) => {
@@ -41,9 +43,9 @@ export async function getPkgInfoList(targetDir: string): Promise<IPkgInfo[]> {
         pkgName: pkgInfo.name,
         pkgPath,
         pkgDirPath,
-        pkgCurrentVersion: pkgInfo.version
+        pkgCurrentVersion: pkgInfo.version,
       })
-    })
+    }),
   )
   return pkgInfoList
 }
@@ -51,12 +53,16 @@ export async function getPkgInfoList(targetDir: string): Promise<IPkgInfo[]> {
 export async function run(
   bin: string,
   args: string[],
-  opts: ExecaOptions<string> = {}
+  opts: ExecaOptions<'utf8'> = {},
 ): Promise<ExecaReturnValue<string>> {
   return execa(bin, args, { stdio: 'inherit', ...opts })
 }
 
-export async function dryRun(bin: string, args: string[], opts?: ExecaOptions<string>) {
+export async function dryRun(
+  bin: string,
+  args: string[],
+  opts?: ExecaOptions<'utf8'>,
+) {
   return console.log(pico.blue(`[dryrun] ${bin} ${args.join(' ')}`), opts || '')
 }
 
@@ -78,46 +84,46 @@ export function getVersionChoices(pkgCurrentVersion: string) {
   let versionChoices = [
     {
       title: 'next',
-      value: inc(isStable ? 'patch' : 'prerelease')
-    }
+      value: inc(isStable ? 'patch' : 'prerelease'),
+    },
   ]
 
   if (isStable) {
     versionChoices.push(
       {
         title: 'beta-minor',
-        value: inc('preminor')
+        value: inc('preminor'),
       },
       {
         title: 'beta-major',
-        value: inc('premajor')
+        value: inc('premajor'),
       },
       {
         title: 'alpha-minor',
-        value: inc('preminor', 'alpha')
+        value: inc('preminor', 'alpha'),
       },
       {
         title: 'alpha-major',
-        value: inc('premajor', 'alpha')
+        value: inc('premajor', 'alpha'),
       },
       {
         title: 'minor',
-        value: inc('minor')
+        value: inc('minor'),
       },
       {
         title: 'major',
-        value: inc('major')
-      }
+        value: inc('major'),
+      },
     )
   } else if (currentAlpha) {
     versionChoices.push({
       title: 'beta',
-      value: inc('patch') + '-beta.0'
+      value: inc('patch') + '-beta.0',
     })
   } else {
     versionChoices.push({
       title: 'stable',
-      value: inc('patch')
+      value: inc('patch'),
     })
   }
   versionChoices.push({ value: 'custom', title: 'custom' })
@@ -130,7 +136,10 @@ export function getVersionChoices(pkgCurrentVersion: string) {
   return versionChoices
 }
 
-export async function updateVersion(pkgPath: string, version: string): Promise<void> {
+export async function updateVersion(
+  pkgPath: string,
+  version: string,
+): Promise<void> {
   const pkg = await fs.readJSON(pkgPath)
   pkg.version = version
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n')
@@ -142,12 +151,14 @@ export async function publishPkg(pkdDir: string, tag?: string): Promise<void> {
     publicArgs.push(`--tag`, tag)
   }
   await runIfNotDry('npm', publicArgs, {
-    cwd: pkdDir
+    cwd: pkdDir,
   })
 }
 
 export async function getLatestTag(pkgName: string) {
-  const tags = (await run('git', ['tag'], { stdio: 'pipe' })).stdout.split(/\n/).filter(Boolean)
+  const tags = (await run('git', ['tag'], { stdio: 'pipe' })).stdout
+    .split(/\n/)
+    .filter(Boolean)
   return tags
     .filter((tag) => tag.startsWith(`${pkgName}@`))
     .sort()
@@ -158,19 +169,26 @@ export async function logRecentCommits(pkgName: string) {
   const tag = await getLatestTag(pkgName)
   if (!tag) return
   const sha = await run('git', ['rev-list', '-n', '1', tag], {
-    stdio: 'pipe'
+    stdio: 'pipe',
   }).then((res) => res.stdout.trim())
   console.log(
     pico.bold(
-      `\n${pico.blue(`i`)} Commits of ${pico.green(pkgName)} since ${pico.green(tag)} ${pico.gray(
-        `(${sha.slice(0, 5)})`
-      )}`
-    )
+      `\n${pico.blue(`i`)} Commits of ${pico.green(pkgName)} since ${pico.green(
+        tag,
+      )} ${pico.gray(`(${sha.slice(0, 5)})`)}`,
+    ),
   )
   await run(
     'git',
-    ['--no-pager', 'log', `${sha}..HEAD`, '--oneline', '--', `packages/${pkgName}`],
-    { stdio: 'inherit' }
+    [
+      '--no-pager',
+      'log',
+      `${sha}..HEAD`,
+      '--oneline',
+      '--',
+      `packages/${pkgName}`,
+    ],
+    { stdio: 'inherit' },
   )
   console.log()
 }

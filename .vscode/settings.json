@@ -77,7 +77,10 @@
     "typescriptreact",
     "html",
     "vue",
-    "markdown"
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml"
   ],
   "eslint.probe": [
     "javascript",
@@ -86,7 +89,10 @@
     "typescriptreact",
     "html",
     "vue",
-    "markdown"
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml"
   ],
   "eslint.workingDirectories": [
     {

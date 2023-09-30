@@ -11,7 +11,7 @@ process.on('unhandledRejection', (err) => {
 const inspect = async (mode: string) => {
   try {
     // apply env
-    applyEnv(mode)
+    applyEnv(mode, 'production')
 
     const config = getWebpackConfig()
 

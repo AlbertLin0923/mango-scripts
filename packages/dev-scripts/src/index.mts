@@ -20,9 +20,7 @@ const { engines, name, version } = packageJson
 checkNodeVersion(engines.node, name)
 checkUpdate(packageJson)
 
-console.log()
-console.log(gs('dev-script'))
-console.log()
+console.log(gs('@mango-scripts/dev-scripts'))
 
 const program = new Command()
 program.version(`${name} ${version}`).usage('<command> [options]')
@@ -30,10 +28,10 @@ program.version(`${name} ${version}`).usage('<command> [options]')
 program
   .command('changeExtname')
   .description('转换文件后缀名')
-  .option('-i, --input <dirPath>', '待转换文件的目录路径')
-  .option('-o, --output <dirPath>', '转换后生成文件的存储目录路径')
-  .option('-r, --originExt <string>', '待转换文件的后缀名')
-  .option('-t, --targetExt <string>', '转换后生成文件的后缀名')
+  .option('-i, --input <dirPath>', '输入目录路径')
+  .option('-o, --output <dirPath>', '输出目录路径')
+  .option('-r, --originExt <string>', '原始后缀名')
+  .option('-t, --targetExt <string>', '目标后缀名')
   .allowUnknownOption()
   .action((options) => {
     changeExtname(options)
@@ -79,8 +77,7 @@ program
         {
           System: ['OS', 'CPU', 'Memory', 'Shell'],
           Binaries: ['Node', 'Yarn', 'npm'],
-          Browsers: ['Chrome', 'Edge', 'Firefox', 'Safari'],
-          npmPackages: '/**/{typescript,*react*}'
+          Browsers: ['Chrome', 'Edge', 'Firefox', 'Safari']
         },
         {
           showNotFound: true,

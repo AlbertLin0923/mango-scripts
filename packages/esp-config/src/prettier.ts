@@ -1,17 +1,16 @@
-const Config = {
+/** @type {import("prettier").Config} */
+const config = {
   semi: false,
   singleQuote: true,
-  trailingComma: 'none',
   proseWrap: 'never',
   endOfLine: 'auto',
   overrides: [
     {
       files: '.prettierrc',
       options: {
-        parser: 'json'
-      }
-    }
-  ]
+        parser: 'json',
+      },
+    },
+  ],
 }
-
-export default Config
+export default config

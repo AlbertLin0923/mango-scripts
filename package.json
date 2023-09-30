@@ -2,7 +2,7 @@
   "name": "mango-scripts-monorepo",
   "version": "0.0.1",
   "private": true,
-  "description": "一些用于web前端开发的工具包合集",
+  "description": "一些便捷的前端开发 Node.js 工具包",
   "homepage": "https://github.com/AlbertLin0923/mango-scripts",
   "bugs": {
     "url": "https://github.com/AlbertLin0923/mango-scripts"
@@ -29,9 +29,6 @@
     "release": "tsx scripts/release.ts",
     "test-unit": "vitest run"
   },
-  "dependencies": {
-    "tsx": "^3.12.7"
-  },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
@@ -51,6 +48,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.0.0",
     "execa": "^8.0.1",
+    "father": "^4.3.5",
     "fs-extra": "^11.1.1",
     "git-repo-info": "^2.1.1",
     "husky": "^8.0.3",
@@ -61,6 +59,8 @@
     "prompts": "^2.4.2",
     "semver": "^7.5.4",
     "stylelint": "^15.10.3",
+    "tsup": "^7.2.0",
+    "tsx": "^3.12.7",
     "typescript": "^5.2.2",
     "unbuild": "^2.0.0",
     "vitest": "^0.34.4"

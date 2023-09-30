@@ -1,5 +1,5 @@
-import path from 'node:path'
 import fs from 'fs-extra'
+import path from 'node:path'
 import pico from 'picocolors'
 import consola from 'consola'
 import Table from 'cli-table'
@@ -83,12 +83,12 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
 
   const newLocaleDirPath = path.resolve(process.cwd(), output)
 
-  consola.info(
-    pico.green(`
-  国际化文案配置系统接口地址: ${fromAddress}
-  语言包的存放目录路径: ${newLocaleDirPath}
-  需要下载的语言包列表: ${localeList.join(' ')}
-  `)
+  console.log(
+    `
+国际化文案配置系统接口地址: ${pico.green(fromAddress)}
+语言包的存放目录路径: ${pico.green(newLocaleDirPath)}
+需要下载的语言包列表: ${pico.green(localeList.join(' '))}
+  `
   )
 
   const oldlocaleBackupDirPath = path.resolve(
@@ -97,7 +97,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
     'this-is-old-locale-backup-folder'
   )
 
-  consola.start(pico.yellow('开始请求国际化文案配置系统数据...'))
+  consola.start('开始请求系统数据...')
 
   const newlocaleArr: { key: string; value: Record<string, any> }[] = []
 
@@ -108,7 +108,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
   const {
     success,
     data: { map }
-  }: { success: boolean; data: { map: FromAddressMapType } } = await body.json()
+  }: { success: boolean; data: { map: FromAddressMapType } } = (await body.json()) as any
 
   if (success && map) {
     Object.entries(map).forEach(([key, value]) => {
@@ -117,20 +117,26 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
       }
     })
   } else {
-    throw new Error('请求国际化文案配置系统数据失败,请重试或联系管理员')
+    throw new Error('请求系统数据失败,请重试或联系管理员')
   }
 
-  consola.start('数据请求成功,开始备份旧语言包文件...')
+  consola.success('数据请求成功！')
+
+  consola.start('开始备份旧语言包文件...')
 
   await fs.emptyDir(oldlocaleBackupDirPath)
 
   await fs.copy(newLocaleDirPath, oldlocaleBackupDirPath)
 
-  consola.start('备份旧语言包文件成功，开始清空语言包目录...')
+  consola.success('备份旧语言包文件成功！')
+
+  consola.start('开始清空语言包目录...')
 
   await fs.emptyDir(newLocaleDirPath)
 
-  consola.start('清空语言包目录成功,写入新的语言包文件...')
+  consola.success('清空语言包目录成功！')
+
+  consola.start('写入新的语言包文件...')
 
   const stat: StatType = {}
 
@@ -147,7 +153,9 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
     )
   }
 
-  consola.start('写入新的语言包文件成功,开始删除备份目录...')
+  consola.success('写入新的语言包文件成功！')
+
+  consola.start('开始删除备份目录...')
 
   await fs.remove(oldlocaleBackupDirPath)
 

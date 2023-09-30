@@ -1,15 +1,14 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "declarationDir": "dist/esm/types",
+    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "outDir": "dist/esm",
+    "noEmit": true,
     "resolveJsonModule": false,
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext"
   },
-  "include": ["./src", "./types"]
+  "include": ["./src"]
 }

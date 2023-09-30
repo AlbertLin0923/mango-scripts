@@ -54,27 +54,23 @@ pnpm add @mango-scripts/react-scripts
 
 一般来说，一个项目有两个主要模式：
 
-- development 模式：用于`项目本地开发环境`
-- production 模式：用于`项目线上环境`
+- development 模式：用于`本地开发环境`
+- production 模式：用于`线上环境`
 
-日常实际项目开发中，对于`线上环境`，往往需要区分`开发 / 测试 / 预发布 / 正式环境`，可通过不同环境变量进行区分。默认模式如下：
+日常实际项目开发中，对于`线上环境`，往往需要区分`开发 / 测试 / 预发布 / 正式`，可通过不同模式进行区分。默认线上环境模式如下：
 
-- dev 模式：用于`项目线上开发环境`
-- test 模式：用于`项目线上测试环境`
-- stage 模式：用于`项目线上预发布环境`
-- prod 模式：用于`项目线上正式环境`
+- dev 模式：用于`线上开发环境`
+- test 模式：用于`线上测试环境`
+- stage 模式：用于`线上预发布环境`
+- prod 模式：用于`线上正式环境`
 
 通过传递 --mode 模式选项，你可以加载对应的环境变量文件
 
 例如：
 
-1. 当运行 `react-scripts dev` 命令时，将依次读取项目根目录下的 `env.development`、 `env.development.local` 的配置信息，后者同个变量会覆盖前者，并加载到项目中
+1. 当运行 `react-scripts dev` 命令时，将依次读取并加载项目根目录下 `.env`、`.env.development`、 `.env.development.local` 的环境变量信息，后者同名变量会覆盖前者；
 
-2. 当运行 `react-scripts build --mode stage` 命令时，将依次读取项目根目录下的 `env.production`、 `env.stage`、`env.stage.local` 的配置信息，后者同个变量会覆盖前者，并加载到项目中
-
-### 启用功能
-
-在上一步配置了`mode`模式后，你可通过配置`环境变量`的方式启用`@mango-scripts/react-scripts`的特性
+2. 当运行 `react-scripts build --mode stage` 命令时，将依次读取并加载项目根目录下 `.env`、`.env.production`、 `.env.stage`、`.env.stage.local` 的环境变量信息，后者同名变量会覆盖前者
 
 ### 扩展配置
 
@@ -92,11 +88,11 @@ module.exports = {
           [
             require.resolve('@babel/plugin-proposal-decorators'),
             {
-              legacy: true
-            }
-          ]
-        ]
-      }
+              legacy: true,
+            },
+          ],
+        ],
+      },
     },
     less: {
       options: {
@@ -104,38 +100,41 @@ module.exports = {
           modifyVars: {
             'brand-primary': '#975ec9',
             'brand-primary-tap': '#7e3db7',
-            'switch-fill': '#975ec9'
+            'switch-fill': '#975ec9',
           },
           javascriptEnabled: true,
-          paths: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'src')]
-        }
-      }
+          paths: [
+            path.resolve(__dirname, 'node_modules'),
+            path.resolve(__dirname, 'src'),
+          ],
+        },
+      },
     },
     sass: {
       options: {
-        additionalData: `@import "src/styles/mixins.scss";`
-      }
+        additionalData: `@import "src/styles/mixins.scss";`,
+      },
     },
     stylus: {
-      options: {}
+      options: {},
     },
     postcss: {
-      options: {}
-    }
+      options: {},
+    },
   },
   plugin: {
     eslint: {
       enable: true,
-      options: {}
+      options: {},
     },
     stylelint: {
       enable: true,
-      options: {}
+      options: {},
     },
     typescript: {
       enable: true,
-      options: {}
-    }
+      options: {},
+    },
   },
   optimization: {
     splitChunks: {},
@@ -145,16 +144,16 @@ module.exports = {
         terserOptions: {
           compress: {
             drop_console: true,
-            drop_debugger: true
-          }
-        }
+            drop_debugger: true,
+          },
+        },
       },
       cssMinimizer: {
         minify: 'cssnanoMinify', // cssnanoMinify | cssoMinify | cleanCssMinify | esbuildMinify  | lightningCssMinify | swcMinify
-        minimizerOptions: {}
-      }
-    }
-  }
+        minimizerOptions: {},
+      },
+    },
+  },
 }
 ```
 

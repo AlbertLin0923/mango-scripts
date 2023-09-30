@@ -1,3 +1,8 @@
+pnpm-lock.yaml
+pnpm-workspace.yaml
+packages/*/CHANGELOG.md
+
+
 # 以下同.gitignore
 # dependencies
 node_modules
@@ -36,3 +41,4 @@ yarn-error.log*
 #turborepo
 .turbo
 # 以上同.gitignore
+

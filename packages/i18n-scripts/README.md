@@ -17,6 +17,8 @@
 pnpm add @mango-scripts/i18n-scripts -D
 ```
 
+> 注意：这是一个 [纯ESM包](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c#pure-esm-package)
+
 ## 使用
 
 在项目 `package.json` 的 `scripts` 增加脚本命令
@@ -31,7 +33,7 @@ i18n-scripts updateLocale
 
 ### insertI18n
 
-对 `vue` 文件添加 `$t('xxx')` 国际化 i18n 标识
+给 `vue` 文件添加 `$t('xxx')` 国际化 i18n 标识
 
 ```bash
 i18n-scripts insertI18n

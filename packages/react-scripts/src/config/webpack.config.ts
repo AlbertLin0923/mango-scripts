@@ -42,10 +42,10 @@ export const getWebpackConfig = (): Configuration => {
 
   const paths = getPaths()
   const modules = getModules()
-  const { splitChunks } = getUserConfig('optimization.splitChunks')
-  const {
-    plugins: { eslint, stylelint, typescript }
-  } = getUserConfig('plugins')
+
+  const splitChunks = getUserConfig('optimization.splitChunks')
+
+  const { eslint, stylelint, typescript } = getUserConfig('plugin')
 
   // We will provide `paths.publicUrlOrPath` to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -55,22 +55,29 @@ export const getWebpackConfig = (): Configuration => {
 
   const reactRefreshRuntimeEntry = require.resolve('react-refresh/runtime')
   const reactRefreshWebpackPluginRuntimeEntry = require.resolve(
-    '@pmmmwh/react-refresh-webpack-plugin'
+    '@pmmmwh/react-refresh-webpack-plugin',
   )
   const babelRuntimeEntry = require.resolve('babel-preset-react-app')
   const babelRuntimeEntryHelpers = require.resolve(
     '@babel/runtime/helpers/esm/assertThisInitialized',
-    { paths: [babelRuntimeEntry] }
+    { paths: [babelRuntimeEntry] },
   )
-  const babelRuntimeRegenerator = require.resolve('@babel/runtime/regenerator', {
-    paths: [babelRuntimeEntry]
-  })
+  const babelRuntimeRegenerator = require.resolve(
+    '@babel/runtime/regenerator',
+    {
+      paths: [babelRuntimeEntry],
+    },
+  )
 
   return {
     target: ['browserslist'],
     // Webpack noise constrained to errors and warnings
     stats: 'errors-warnings',
-    mode: isEnvProduction ? 'production' : isEnvDevelopment ? 'development' : undefined,
+    mode: isEnvProduction
+      ? 'production'
+      : isEnvDevelopment
+      ? 'development'
+      : undefined,
     // Stop compilation early in production
     bail: isEnvProduction,
     devtool: isEnvProduction
@@ -106,10 +113,14 @@ export const getWebpackConfig = (): Configuration => {
       publicPath: paths.publicUrlOrPath,
       // Point sourcemap entries to original disk location (format as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction
-        ? (info: any) => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
+        ? (info: any) =>
+            path
+              .relative(paths.appSrc, info.absoluteResourcePath)
+              .replace(/\\/g, '/')
         : isEnvDevelopment
-        ? (info: any) => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
-        : undefined
+        ? (info: any) =>
+            path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
+        : undefined,
     },
     cache: {
       type: 'filesystem',
@@ -119,11 +130,13 @@ export const getWebpackConfig = (): Configuration => {
       buildDependencies: {
         defaultWebpack: ['webpack/lib/'],
         config: [__filename],
-        tsconfig: [paths.appTsConfig, paths.appJsConfig].filter((f) => fs.existsSync(f))
-      }
+        tsconfig: [paths.appTsConfig, paths.appJsConfig].filter((f) =>
+          fs.existsSync(f),
+        ),
+      },
     },
     infrastructureLogging: {
-      level: 'none'
+      level: 'none',
     },
     optimization: {
       minimize: isEnvProduction,
@@ -136,52 +149,54 @@ export const getWebpackConfig = (): Configuration => {
               name: 'chunk-libs',
               test: /[\\/]node_modules[\\/]/,
               priority: 10,
-              chunks: 'initial' // only package third parties that are initially dependent
+              chunks: 'initial', // only package third parties that are initially dependent
             },
             antd: {
               name: 'chunk-antd', // split elementUI into a single package
               priority: 12, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-              test: /[\\/]node_modules[\\/]_?antd(.*)/ // in order to adapt to cnpm
+              test: /[\\/]node_modules[\\/]_?antd(.*)/, // in order to adapt to cnpm
             },
             elementUI: {
               name: 'chunk-elementUI', // split elementUI into a single package
               priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-              test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
+              test: /[\\/]node_modules[\\/]_?element-ui(.*)/, // in order to adapt to cnpm
             },
             d3: {
               name: 'chunk-d3', // split d3 into a single package
               priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-              test: /[\\/]node_modules[\\/]d3/ // in order to adapt to cnpm
+              test: /[\\/]node_modules[\\/]d3/, // in order to adapt to cnpm
             },
             echarts: {
               name: 'chunk-echarts', // split echarts into a single package
               priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-              test: /[\\/]node_modules[\\/]echarts/ // in order to adapt to cnpm
+              test: /[\\/]node_modules[\\/]echarts/, // in order to adapt to cnpm
             },
             exceljs: {
               name: 'chunk-exceljs', // split exceljs into a single package
               priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-              test: /[\\/]node_modules[\\/]exceljs/ // in order to adapt to cnpm
+              test: /[\\/]node_modules[\\/]exceljs/, // in order to adapt to cnpm
             },
             xlsx: {
               name: 'chunk-xlsx', // split xlsx into a single package
               priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-              test: /[\\/]node_modules[\\/]xlsx/ // in order to adapt to cnpm
-            }
-          }
+              test: /[\\/]node_modules[\\/]xlsx/, // in order to adapt to cnpm
+            },
+          },
         }),
       minimizer: [
         // This is only used in production mode
         getJsMinimizer(),
-        getCssMinimizer()
-      ]
+        getCssMinimizer(),
+      ],
     },
     resolve: {
       // This allows you to set a fallback for where webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
       // if there are any conflicts. This matches Node resolution mechanism.
       // https://github.com/facebook/create-react-app/issues/253
-      modules: ['node_modules', paths.appNodeModules].concat(modules.additionalModulePaths || []),
+      modules: ['node_modules', paths.appNodeModules].concat(
+        modules.additionalModulePaths || [],
+      ),
       // These are the reasonable defaults supported by the Node ecosystem.
       // We also include JSX as a common component filename extension to support
       // some tools, although we do not recommend using it, see:
@@ -195,10 +210,10 @@ export const getWebpackConfig = (): Configuration => {
         ...(isEnvProduction && useProfile
           ? {
               'react-dom$': 'react-dom/profiling',
-              'scheduler/tracing': 'scheduler/tracing-profiling'
+              'scheduler/tracing': 'scheduler/tracing-profiling',
             }
           : {}),
-        ...modules.webpackAliases
+        ...modules.webpackAliases,
       },
       plugins: [
         // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -212,13 +227,13 @@ export const getWebpackConfig = (): Configuration => {
           reactRefreshWebpackPluginRuntimeEntry,
           babelRuntimeEntry,
           babelRuntimeEntryHelpers,
-          babelRuntimeRegenerator
-        ]) as any
-      ]
+          babelRuntimeRegenerator,
+        ]) as any,
+      ],
     },
     module: {
       parser: { javascript: { strictExportPresence: true } },
-      rules: getModuleRules()
+      rules: getModuleRules(),
     },
     plugins: [
       // Generates an `index.html` file with the <script> injected.
@@ -227,7 +242,7 @@ export const getWebpackConfig = (): Configuration => {
           {},
           {
             inject: true,
-            template: paths.appHtml
+            template: paths.appHtml,
           },
           isEnvProduction
             ? {
@@ -241,16 +256,19 @@ export const getWebpackConfig = (): Configuration => {
                   keepClosingSlash: true,
                   minifyJS: true,
                   minifyCSS: true,
-                  minifyURLs: true
-                }
+                  minifyURLs: true,
+                },
               }
-            : undefined
-        )
+            : undefined,
+        ),
       ),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       // https://github.com/facebook/create-react-app/issues/5358
-      isEnvProduction && new InlineChunkHtmlPlugin(HtmlWebpackPlugin as any, [/runtime-.+[.]js/]),
+      isEnvProduction &&
+        new InlineChunkHtmlPlugin(HtmlWebpackPlugin as any, [
+          /runtime-.+[.]js/,
+        ]),
       // Makes some environment variables available in index.html.
       // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
       // <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
@@ -270,7 +288,7 @@ export const getWebpackConfig = (): Configuration => {
       // https://github.com/facebook/react/tree/main/packages/react-refresh
       isEnvDevelopment &&
         new ReactRefreshWebpackPlugin({
-          overlay: false
+          overlay: false,
         }),
       // Watcher doesn't work well if you mistype casing in a path so we use
       // a plugin that prints an error when you attempt to do this.
@@ -281,7 +299,7 @@ export const getWebpackConfig = (): Configuration => {
           // Options similar to the same options in webpackOptions.output
           // both options are optional
           filename: 'static/css/[name].[contenthash:12].css',
-          chunkFilename: 'static/css/[name].[contenthash:12].chunk.css'
+          chunkFilename: 'static/css/[name].[contenthash:12].chunk.css',
         }),
       // Generate an asset manifest file with the following content:
       // - "files" key: Mapping of all asset filenames to their corresponding
@@ -299,14 +317,14 @@ export const getWebpackConfig = (): Configuration => {
               return manifest
             }, seed)
             const entrypointFiles = entrypoints.main.filter(
-              (fileName) => !fileName.endsWith('.map')
+              (fileName) => !fileName.endsWith('.map'),
             )
 
             return {
               files: manifestFiles,
-              entrypoints: entrypointFiles
+              entrypoints: entrypointFiles,
             }
-          }
+          },
         }),
       // Generate a service worker script that will precache, and keep up to date,
       // the HTML & assets that are part of the webpack build.
@@ -319,7 +337,7 @@ export const getWebpackConfig = (): Configuration => {
           // Bump up the default maximum size (2mb) that's precached,
           // to make lazy-loading failure scenarios less likely.
           // See https://github.com/cra-template/pwa/issues/13#issuecomment-722667270
-          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024
+          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         }),
       // TypeScript type checking
       typescript?.enable &&
@@ -328,7 +346,7 @@ export const getWebpackConfig = (): Configuration => {
             async: isEnvDevelopment,
             typescript: {
               typescriptPath: resolve.sync('typescript', {
-                basedir: paths.appNodeModules
+                basedir: paths.appNodeModules,
               }),
               configOverwrite: {
                 compilerOptions: {
@@ -338,14 +356,14 @@ export const getWebpackConfig = (): Configuration => {
                   declarationMap: false,
                   noEmit: true,
                   incremental: true,
-                  tsBuildInfoFile: paths.appTsBuildInfoFile
-                }
+                  tsBuildInfoFile: paths.appTsBuildInfoFile,
+                },
               },
               context: paths.appPath,
               diagnosticOptions: {
-                syntactic: true
+                syntactic: true,
               },
-              mode: 'write-references'
+              mode: 'write-references',
               // profile: true,
             },
             issue: {
@@ -353,18 +371,21 @@ export const getWebpackConfig = (): Configuration => {
               // as micromatch doesn't match
               // '../cra-template-typescript/template/src/App.tsx'
               // otherwise.
-              include: [{ file: '../**/src/**/*.{ts,tsx}' }, { file: '**/src/**/*.{ts,tsx}' }],
+              include: [
+                { file: '../**/src/**/*.{ts,tsx}' },
+                { file: '**/src/**/*.{ts,tsx}' },
+              ],
               exclude: [
                 { file: '**/src/**/__tests__/**' },
                 { file: '**/src/**/?(*.){spec|test}.*' },
                 { file: '**/src/setupProxy.*' },
-                { file: '**/src/setupTests.*' }
-              ]
+                { file: '**/src/setupTests.*' },
+              ],
             },
             logger: {
-              infrastructure: 'silent'
-            }
-          })
+              infrastructure: 'silent',
+            },
+          }),
         ),
       eslint?.enable &&
         new ESLintPlugin(
@@ -375,9 +396,12 @@ export const getWebpackConfig = (): Configuration => {
             failOnError: isEnvProduction,
             context: paths.appSrc,
             cache: true,
-            cacheLocation: path.resolve(paths.appNodeModules, '.cache/.eslintcache'),
-            cwd: paths.appPath
-          })
+            cacheLocation: path.resolve(
+              paths.appNodeModules,
+              '.cache/.eslintcache',
+            ),
+            cwd: paths.appPath,
+          }),
         ),
       stylelint?.enable &&
         new StylelintPlugin(
@@ -387,20 +411,23 @@ export const getWebpackConfig = (): Configuration => {
             failOnError: isEnvProduction,
             context: paths.appSrc,
             cache: true,
-            cacheLocation: path.resolve(paths.appNodeModules, '.cache/.stylelintcache'),
-            cwd: paths.appPath
-          })
+            cacheLocation: path.resolve(
+              paths.appNodeModules,
+              '.cache/.stylelintcache',
+            ),
+            cwd: paths.appPath,
+          }),
         ),
       useBundleAnalyzerPlugin && new BundleAnalyzerPlugin(),
       new webpack.ProgressPlugin({
         handler: (percentage, message, ...args) => {
           // e.g. Output each progress message directly to the console:
           console.info(percentage, message, ...args)
-        }
-      })
+        },
+      }),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
-    performance: false
+    performance: false,
   }
 }

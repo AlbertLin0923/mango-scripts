@@ -19,7 +19,6 @@
   "license": "MIT",
   "author": "AlbertLin0923",
   "type": "module",
-  "types": "./dist/esm/index.mts",
   "bin": {
     "i18n-scripts": "./dist/esm/index.mjs"
   },
@@ -27,8 +26,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc",
+    "dev": "tsup --watch",
+    "build": "tsup",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {

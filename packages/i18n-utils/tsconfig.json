@@ -1,14 +1,14 @@
 {
-  "include": ["src"],
   "compilerOptions": {
-    "outDir": "dist",
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "declaration": true,
-    "sourceMap": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
-  }
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "esnext",
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": ["./src"]
 }

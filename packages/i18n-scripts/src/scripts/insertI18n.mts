@@ -73,7 +73,7 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
           excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
-          message: '请选择待转换文件的目录路径',
+          message: '请选择输入目录路径',
           suggestOnly: false,
           depthLimit: undefined
         },
@@ -83,7 +83,7 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
           excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
-          message: '请选择转换后生成文件的存储目录路径',
+          message: '请选择输出目录路径',
           suggestOnly: false,
           depthLimit: undefined
         },
@@ -108,12 +108,12 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
   const inputDirPath = path.resolve(process.cwd(), input)
   const outputDirPath = path.resolve(process.cwd(), output)
 
-  consola.info(
-    pico.green(`
-  待转换文件的目录路径: ${inputDirPath}
-  转换后生成文件的存储目录路径: ${outputDirPath}
-  国际化文案模块字段: ${localeModulesStr}
-  `)
+  console.log(
+    `
+输入目录路径: ${pico.green(inputDirPath)}
+输出目录路径: ${pico.green(outputDirPath)}
+国际化文案模块字段: ${pico.green(localeModulesStr)}
+  `
   )
 
   const filePathList = await glob(`${inputDirPath}/**/*`, { nodir: true })
@@ -131,8 +131,8 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
   })
 
   consola.success(
-    pico.yellow(
-      `读取到 ${originFilePathList.length} 个目标文件，${otherFilePathList.length} 个其他类型文件`
+    pico.cyan(
+      `读取到 ${originFilePathList.length} 个文件待转换； ${originFilePathList.length} 个其他类型文件无需转换`
     )
   )
 
