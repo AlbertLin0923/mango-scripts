@@ -15,7 +15,12 @@
         tooltip-effect="light"
         class="fix-el-table-style"
       >
-        <el-table-column :label="$t('序号')" type="index" align="center" width="180" />
+        <el-table-column
+          :label="$t('序号')"
+          type="index"
+          align="center"
+          width="180"
+        />
       </el-table>
     </div>
   </div>
@@ -27,7 +32,7 @@ export default {
   data() {
     return {
       caseStatusDictMap,
-      pageFrom: '列表页'
+      pageFrom: '列表页',
     }
   },
   watch: {},
@@ -73,10 +78,10 @@ export default {
     change() {
       const data = {
         page: '详情页',
-        system: '排查系统'
+        system: '排查系统',
       }
       this.info = data
-    }
-  }
+    },
+  },
 }
 </script>

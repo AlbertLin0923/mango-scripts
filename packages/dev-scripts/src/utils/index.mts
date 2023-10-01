@@ -12,7 +12,9 @@ export interface IPkgInfo {
   pkgCurrentVersion: string
 }
 
-export async function getPkgInfoList(targetDirList: string[]): Promise<IPkgInfo[]> {
+export async function getPkgInfoList(
+  targetDirList: string[],
+): Promise<IPkgInfo[]> {
   const pkgInfoList: IPkgInfo[] = []
   for (let i = 0; i < targetDirList.length; i++) {
     const targetDir = targetDirList[i]
@@ -32,7 +34,7 @@ export async function getPkgInfoList(targetDirList: string[]): Promise<IPkgInfo[
           pkgDirPath,
           pkgJsonFilePath,
           pkgName: packageJson?.name,
-          pkgCurrentVersion: packageJson?.version
+          pkgCurrentVersion: packageJson?.version,
         })
       }
     }
@@ -44,7 +46,7 @@ export async function getPkgInfoList(targetDirList: string[]): Promise<IPkgInfo[
 export async function run(
   bin: string,
   args: string[],
-  opts: ExecaOptions<'utf8'> = {}
+  opts: ExecaOptions<'utf8'> = {},
 ): Promise<ExecaReturnValue<string>> {
   return execa(bin, args, { stdio: 'inherit', ...opts })
 }

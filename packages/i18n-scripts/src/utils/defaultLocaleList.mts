@@ -8,113 +8,113 @@ const defaultLocaleList: DefaultLocaleListType = [
   {
     fileName: 'zh-CN',
     cnName: '简体中文',
-    name: '简体中文'
+    name: '简体中文',
   },
   {
     fileName: 'en-US',
     cnName: '英语',
-    name: 'English'
+    name: 'English',
   },
   {
     fileName: 'id-ID',
     cnName: '印度尼西亚语',
-    name: 'Bahasa Indonesia'
+    name: 'Bahasa Indonesia',
   },
   {
     fileName: 'vi-VN',
     cnName: '越南语',
-    name: 'Tiếng Việt'
+    name: 'Tiếng Việt',
   },
   {
     fileName: 'ms-MY',
     cnName: '马来语',
-    name: 'بهاس ملايو‎'
+    name: 'بهاس ملايو‎',
   },
   {
     fileName: 'es-ES',
     cnName: '西班牙语',
-    name: 'Español'
+    name: 'Español',
   },
   {
     fileName: 'fr-FR',
     cnName: '法语-法国',
-    name: 'Français'
+    name: 'Français',
   },
   {
     fileName: 'fr-BE',
     cnName: '法语-比利时',
-    name: 'Français'
+    name: 'Français',
   },
   {
     fileName: 'it-IT',
     cnName: '意大利语',
-    name: 'Italiano'
+    name: 'Italiano',
   },
   {
     fileName: 'pl-PL',
     cnName: '波兰语',
-    name: 'Polski'
+    name: 'Polski',
   },
   {
     fileName: 'de-DE',
     cnName: '德语',
-    name: 'Deutsch'
+    name: 'Deutsch',
   },
   {
     fileName: 'da-DK',
     cnName: '丹麦语',
-    name: 'Dansk'
+    name: 'Dansk',
   },
   {
     fileName: 'nl-NL',
     cnName: '荷兰语',
-    name: 'Vlaams'
+    name: 'Vlaams',
   },
   {
     fileName: 'fi-FI',
     cnName: '芬兰语',
-    name: 'Suomi'
+    name: 'Suomi',
   },
   {
     fileName: 'el-GR',
     cnName: '希腊语',
-    name: 'Ελληνικά'
+    name: 'Ελληνικά',
   },
   {
     fileName: 'hu-HU',
     cnName: '匈牙利语',
-    name: 'Magyar'
+    name: 'Magyar',
   },
   {
     fileName: 'is-IS',
     cnName: '冰岛语',
-    name: 'Íslenska'
+    name: 'Íslenska',
   },
   {
     fileName: 'ja-JP',
     cnName: '日语',
-    name: '日本語'
+    name: '日本語',
   },
   {
     fileName: 'ko-KR',
     cnName: '韩语',
-    name: '한국어'
+    name: '한국어',
   },
   {
     fileName: 'pt-PT',
     cnName: '葡萄牙语',
-    name: 'Português'
+    name: 'Português',
   },
   {
     fileName: 'sv-SE',
     cnName: '瑞典语',
-    name: 'Svenska'
+    name: 'Svenska',
   },
   {
     fileName: 'th-TH',
     cnName: '泰语',
-    name: 'ไทย'
-  }
+    name: 'ไทย',
+  },
 ]
 
 export default defaultLocaleList

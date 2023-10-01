@@ -11,7 +11,7 @@ const validateKeyAndCerts = ({
   cert,
   key,
   crtFilePath,
-  keyFilePath
+  keyFilePath,
 }: {
   cert: crypto.RsaPublicKey | crypto.RsaPrivateKey | crypto.KeyLike
   key: crypto.RsaPrivateKey | crypto.KeyLike
@@ -23,14 +23,22 @@ const validateKeyAndCerts = ({
     // publicEncrypt will throw an error with an invalid cert
     encrypted = crypto.publicEncrypt(cert, Buffer.from('test'))
   } catch (err: any) {
-    throw new Error(`The certificate "${pico.yellow(crtFilePath)}" is invalid.\n${err.message}`)
+    throw new Error(
+      `The certificate "${pico.yellow(crtFilePath)}" is invalid.\n${
+        err.message
+      }`,
+    )
   }
 
   try {
     // privateDecrypt will throw an error with an invalid key
     crypto.privateDecrypt(key, encrypted)
   } catch (err: any) {
-    throw new Error(`The certificate key "${pico.yellow(keyFilePath)}" is invalid.\n${err.message}`)
+    throw new Error(
+      `The certificate key "${pico.yellow(keyFilePath)}" is invalid.\n${
+        err.message
+      }`,
+    )
   }
 }
 
@@ -38,9 +46,9 @@ const validateKeyAndCerts = ({
 function readEnvFile(file: string, type: string): Buffer {
   if (!fs.existsSync(file)) {
     throw new Error(
-      `You specified ${pico.cyan(type)} in your env, but the file "${pico.yellow(
-        file
-      )}" can't be found.`
+      `You specified ${pico.cyan(
+        type,
+      )} in your env, but the file "${pico.yellow(file)}" can't be found.`,
     )
   }
   return fs.readFileSync(file)
@@ -59,7 +67,7 @@ function getHttpsConfig(): boolean | { cert: Buffer; key: Buffer } {
     const keyFilePath = path.resolve(paths.appPath, SSL_KEY_FILE_PATH)
     const config = {
       cert: readEnvFile(crtFilePath, 'SSL_CRT_FILE_PATH'),
-      key: readEnvFile(keyFilePath, 'SSL_KEY_FILE_PATH')
+      key: readEnvFile(keyFilePath, 'SSL_KEY_FILE_PATH'),
     }
 
     validateKeyAndCerts({ ...config, crtFilePath, keyFilePath })

@@ -19,7 +19,7 @@ export const getFilePathList = (
   dir: string,
   filterExtNameList = [''],
   ignoreDirectory = '',
-  ignoreFile = ''
+  ignoreFile = '',
 ): string[] => {
   return fs.readdirSync(dir).reduce((fileList, file) => {
     const name: string = path.join(dir, file)
@@ -28,12 +28,15 @@ export const getFilePathList = (
     const isFile: boolean = fs.statSync(name).isFile()
 
     if (isDirectory) {
-      return fileList.concat(getFilePathList(name, filterExtNameList, ignoreDirectory, ignoreFile))
+      return fileList.concat(
+        getFilePathList(name, filterExtNameList, ignoreDirectory, ignoreFile),
+      )
     }
 
     const isIgnoreDirectoy: boolean =
       !ignoreDirectory ||
-      (!!ignoreDirectory && !path.dirname(name).split('/').includes(ignoreDirectory))
+      (!!ignoreDirectory &&
+        !path.dirname(name).split('/').includes(ignoreDirectory))
 
     const isIgnoreFile: boolean =
       !ignoreFile || (!!ignoreFile && path.basename(name) !== ignoreFile)
@@ -66,7 +69,7 @@ export const uniArr = (objArr: LocaleItem[]) => {
           if (i['zh-CN'] === next['zh-CN']) {
             return (i = {
               'zh-CN': i['zh-CN'],
-              modules: combineModules(i['modules'], next['modules'])
+              modules: combineModules(i['modules'], next['modules']),
             })
           } else {
             return i
@@ -81,11 +84,12 @@ export const matchModuleMark = (code: string): string => {
   const MATCH_MODULE_MARK_A = /(?<=\/\/.*?translateModules:.*?\[)(.*?)(?=\])/g
   const MATCH_MODULE_MARK_B = /(?<=\<!--.*?translateModules:.*?\[)(.*?)(?=\])/g
   const MATCH_STRING_CONTENT = /(?<=['"`])(.*?)(?=['"`])/g
-  let result = code.match(MATCH_MODULE_MARK_A) || code.match(MATCH_MODULE_MARK_B)
+  const result =
+    code.match(MATCH_MODULE_MARK_A) || code.match(MATCH_MODULE_MARK_B)
 
   if (result) {
-    result = result[0].split(',')
-    return result
+    return result?.[0]
+      .split(',')
       .map((i) => {
         const m = i.match(MATCH_STRING_CONTENT)
         if (m) {
@@ -152,7 +156,7 @@ export const compareLocaleData = (oldFilePath: string, newFilePath: string) => {
     addNumber,
     deleteNumber,
     addItemArr,
-    deleteItemArr
+    deleteItemArr,
   }
 }
 
@@ -164,7 +168,11 @@ export const collectDisableRuleCommentlocation = (comments: any) => {
 
   const tmp_partialCommentList: any[] = []
 
-  if (comments.some((comment: any) => /translate-disable-entire-file/.test(comment.value))) {
+  if (
+    comments.some((comment: any) =>
+      /translate-disable-entire-file/.test(comment.value),
+    )
+  ) {
     entireFileDisabled = true
   } else {
     comments.forEach((comment: any) => {
@@ -194,7 +202,7 @@ export const collectDisableRuleCommentlocation = (comments: any) => {
     entireFileDisabled,
     partialCommentList,
     nextLineCommentList,
-    thisLineCommentList
+    thisLineCommentList,
   }
 }
 
@@ -205,7 +213,7 @@ export const inDisableRuleCommentlocation = (
   thisLineCommentList: any,
   startLine: number,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  endLine: number
+  endLine: number,
 ) => {
   // 存在文件忽略标识，整个文件忽略
   if (entireFileDisabled === true) {
@@ -258,5 +266,7 @@ export const formatLocaleKeyList = (localeList: LocaleItem[]) => {
 }
 
 export const deleteCodeComments = (code: string): string => {
-  return code.replace(/(\/\/.*)|(\/\*[\s\S]*?\*\/)/g, '').replace(/<!--[\w\W\r\n]*?-->/gim, '')
+  return code
+    .replace(/(\/\/.*)|(\/\*[\s\S]*?\*\/)/g, '')
+    .replace(/<!--[\w\W\r\n]*?-->/gim, '')
 }

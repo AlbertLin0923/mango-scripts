@@ -26,7 +26,7 @@ module.exports = {
   extends: [require.resolve('@mango-scripts/esp-config/eslint')],
   rules: {
     // your rules
-  }
+  },
 }
 ```
 
@@ -37,7 +37,7 @@ module.exports = {
   extends: [require.resolve('@mango-scripts/esp-config/stylelint')],
   rules: {
     // your rules
-  }
+  },
 }
 ```
 
@@ -47,7 +47,7 @@ module.exports = {
 const prettier = require('@mango-scripts/esp-config/prettier')
 
 module.exports = {
-  ...prettier
+  ...prettier,
   // your rules
 }
 ```

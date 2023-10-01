@@ -37,11 +37,6 @@ const getStyleLoaders = (
 
   const paths = getPaths()
 
-  console.log(
-    "preProcessorLoaderMap[preProcessor]['options']",
-    preProcessorLoaderMap?.[preProcessor]?.['options'],
-  )
-
   return [
     isEnvDevelopment && require.resolve('style-loader'),
     isEnvProduction && {

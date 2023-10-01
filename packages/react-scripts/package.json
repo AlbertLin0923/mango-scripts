@@ -100,6 +100,7 @@
     "webpack-bundle-analyzer": "^4.8.0",
     "webpack-dev-server": "^4.13.3",
     "webpack-manifest-plugin": "^5.0.0",
+    "webpackbar": "^5.0.2",
     "workbox-webpack-plugin": "^6.5.4"
   },
   "devDependencies": {

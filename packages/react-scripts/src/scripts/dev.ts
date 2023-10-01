@@ -52,20 +52,6 @@ const dev = async (mode: string) => {
     const sockPath = process.env.WDS_SOCKET_PATH || undefined
     const sockPort = process.env.WDS_SOCKET_PORT || undefined
 
-    if (host) {
-      console.log(
-        pico.cyan(
-          `Attempting to bind to HOST environment variable: ${pico.yellow(
-            pico.bold(host),
-          )}`,
-        ),
-      )
-      console.log(
-        `If this was unintentional, check that you haven't mistakenly set it in your shell.`,
-      )
-      console.log()
-    }
-
     // We require that you explicitly set browsers and do not fall back to
     // browserslist defaults.
 

@@ -8,7 +8,8 @@ const getPaths = () => {
   // Make sure any symlinks in the project folder are resolved:
   // https://github.com/facebook/create-react-app/issues/637
   const appDirectory = fs.realpathSync(process.cwd())
-  const resolveApp = (relativePath: string) => path.resolve(appDirectory, relativePath)
+  const resolveApp = (relativePath: string) =>
+    path.resolve(appDirectory, relativePath)
 
   // We use `PUBLIC_URL` environment variable or "homepage" field to infer
   // "public path" at which the app is served.
@@ -19,7 +20,7 @@ const getPaths = () => {
   const publicUrlOrPath = getPublicUrlOrPath(
     process.env.NODE_ENV === 'development',
     require(resolveApp('package.json')).homepage,
-    process.env.PUBLIC_URL
+    process.env.PUBLIC_URL,
   )
 
   const distDir = getUserConfig('distDir')
@@ -35,13 +36,13 @@ const getPaths = () => {
     'tsx',
     'json',
     'web.jsx',
-    'jsx'
+    'jsx',
   ]
 
   // Resolve file paths in the same order as webpack
   const resolveModule = (resolveFn: typeof path.resolve, filePath: string) => {
     const extension = moduleFileExtensions.find((extension) =>
-      fs.existsSync(resolveFn(`${filePath}.${extension}`))
+      fs.existsSync(resolveFn(`${filePath}.${extension}`)),
     )
 
     if (extension) {
@@ -69,7 +70,7 @@ const getPaths = () => {
     swSrc: resolveModule(resolveApp, 'src/service-worker'),
     publicUrlOrPath,
     svgSpritePath: resolveApp('src/icons/svg'),
-    moduleFileExtensions
+    moduleFileExtensions,
   }
 
   return paths

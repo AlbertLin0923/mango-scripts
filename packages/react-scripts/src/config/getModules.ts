@@ -45,9 +45,9 @@ const getAdditionalModulePaths = (options: any = {}) => {
     pico.red(
       pico.bold(
         "Your project's `baseUrl` can only be set to `src` or `node_modules`." +
-          ' Create React App does not support other values at this time.'
-      )
-    )
+          ' Create React App does not support other values at this time.',
+      ),
+    ),
   )
 }
 
@@ -56,7 +56,9 @@ const getAdditionalModulePaths = (options: any = {}) => {
  *
  * @param {*} options
  */
-const getWebpackAliases = (options: any = {}): { src: string } | Record<string, never> => {
+const getWebpackAliases = (
+  options: any = {},
+): { src: string } | Record<string, never> => {
   const paths = getPaths()
   const baseUrl = options.baseUrl
 
@@ -68,7 +70,7 @@ const getWebpackAliases = (options: any = {}): { src: string } | Record<string, 
 
   if (path.relative(paths.appPath, baseUrlResolved) === '') {
     return {
-      src: paths.appSrc
+      src: paths.appSrc,
     }
   } else {
     return {}
@@ -83,7 +85,7 @@ const getModules = () => {
 
   if (hasTsConfig && hasJsConfig) {
     throw new Error(
-      'You have both a tsconfig.json and a jsconfig.json. If you are using TypeScript please remove your jsconfig.json file.'
+      'You have both a tsconfig.json and a jsconfig.json. If you are using TypeScript please remove your jsconfig.json file.',
     )
   }
 
@@ -95,8 +97,8 @@ const getModules = () => {
   if (hasTsConfig) {
     const ts = require(
       resolve.sync('typescript', {
-        basedir: paths.appNodeModules
-      })
+        basedir: paths.appNodeModules,
+      }),
     )
     config = ts.readConfigFile(paths.appTsConfig, ts.sys.readFile).config
     // Otherwise we'll check if there is jsconfig.json
@@ -113,7 +115,7 @@ const getModules = () => {
   return {
     additionalModulePaths: additionalModulePaths,
     webpackAliases: getWebpackAliases(options),
-    hasTsConfig
+    hasTsConfig,
   }
 }
 

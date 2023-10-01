@@ -15,8 +15,18 @@
         tooltip-effect="light"
         class="fix-el-table-style"
       >
-        <el-table-column :label="$t('序号')" type="index" align="center" width="180" />
-        <el-table-column :label="$t('变更时间')" prop="last_update_time" align="center" width="240">
+        <el-table-column
+          :label="$t('序号')"
+          type="index"
+          align="center"
+          width="180"
+        />
+        <el-table-column
+          :label="$t('变更时间')"
+          prop="last_update_time"
+          align="center"
+          width="240"
+        >
           <template slot-scope="scope">
             {{ scope.row.last_update_time | formatDate }}
           </template>
@@ -35,12 +45,22 @@
           align="center"
           width="250"
         />
-        <el-table-column :label="$t('案件状态')" prop="status" align="center" width="200">
+        <el-table-column
+          :label="$t('案件状态')"
+          prop="status"
+          align="center"
+          width="200"
+        >
           <template slot-scope="scope">
             {{ $t(caseStatusDictMap.get(scope.row.status)) }}
           </template>
         </el-table-column>
-        <el-table-column :label="$t('操作')" align="center" fixed="right" min-width="140">
+        <el-table-column
+          :label="$t('操作')"
+          align="center"
+          fixed="right"
+          min-width="140"
+        >
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="linkDetail(scope.row)">
               {{ $t('查看') }}
@@ -77,15 +97,15 @@ export default {
       caseStatusDictMap,
       pageFrom: '',
       searchOptions: {
-        order_no: this.orderNo
+        order_no: this.orderNo,
       },
       tablePagination: {
         pages: 1,
-        pagesize: 5
+        pagesize: 5,
       },
       tableData: [],
       tableLoading: false,
-      tableDataLen: 0
+      tableDataLen: 0,
     }
   },
   watch: {},
@@ -103,7 +123,7 @@ export default {
     sizeChange(pagesize) {
       this.tablePagination = {
         pages: 1,
-        pagesize
+        pagesize,
       }
       this.getHistoryList()
     },
@@ -111,7 +131,9 @@ export default {
       this.tableLoading = true
       const params = { ...this.searchOptions, ...this.tablePagination }
       const formData = new FormData()
-      Object.entries(params).forEach(([key, value]) => formData.append(key, value))
+      Object.entries(params).forEach(([key, value]) =>
+        formData.append(key, value),
+      )
       const { success, errMsg, data, ...rest } = await Api.api_history(formData)
       this.tableLoading = false
       if ([true, 'true'].includes(success)) {
@@ -130,11 +152,11 @@ export default {
         query: {
           order_no,
           order_id,
-          pageFrom: this.pageFrom
-        }
+          pageFrom: this.pageFrom,
+        },
       })
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="less" scoped>

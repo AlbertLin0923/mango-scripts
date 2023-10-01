@@ -10,7 +10,7 @@ inquirer.registerPrompt('autocomplete', inquirerPrompt)
 
 const typeMap = [
   { name: 'dependencies', value: '--save-prod' },
-  { name: 'devDependencies', value: '--save-dev' }
+  { name: 'devDependencies', value: '--save-dev' },
 ]
 
 type AddPackageOptionsType = {
@@ -26,7 +26,7 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
       type: 'list',
       name: 'appName',
       message: '哪个项目需要安装依赖包？',
-      choices: appList.map((i) => ({ value: i.pkgName, name: i.pkgName }))
+      choices: appList.map((i) => ({ value: i.pkgName, name: i.pkgName })),
     },
     {
       type: 'autocomplete',
@@ -34,7 +34,7 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
       message: '输入需要安装的依赖包名称',
       source: async (
         answersSoFar: any,
-        input: string
+        input: string,
       ): Promise<{ value: string; name: string }[]> => {
         if (!input || !input.trim()) {
           return []
@@ -44,14 +44,16 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
       },
       suggestOnly: true,
       searchText: '正在从npm上查找该包...',
-      emptyText: '暂无数据'
+      emptyText: '暂无数据',
     },
     {
       type: 'list',
       name: 'type',
-      message: `依赖包安装到哪里？ ${pico.red('[注意: typescript类型包请安装到devDependencies]')}`,
-      choices: typeMap.map((i) => ({ name: i.name, value: i.name }))
-    }
+      message: `依赖包安装到哪里？ ${pico.red(
+        '[注意: typescript类型包请安装到devDependencies]',
+      )}`,
+      choices: typeMap.map((i) => ({ name: i.name, value: i.name })),
+    },
   ])
 
   const pkgJson = await packageJson(installPkgName, { fullMetadata: true })
@@ -62,9 +64,9 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
     consola.start(
       pico.yellow(
         `当前下载的包 ${pico.cyan(
-          installPkgName
-        )} 没有内置TypeScript类型文件，正在搜寻类型定义文件 ${`@types/${installPkgName.trim()}`}`
-      )
+          installPkgName,
+        )} 没有内置TypeScript类型文件，正在搜寻类型定义文件 ${`@types/${installPkgName.trim()}`}`,
+      ),
     )
   }
 
@@ -80,17 +82,27 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
     {
       type: 'confirm',
       name: 'yes',
-      message: `确定安装 ${pico.yellow(installPkgName)} 到 ${pico.magenta(appName)} ${pico.cyan(
-        type
-      )}?`
-    }
+      message: `确定安装 ${pico.yellow(installPkgName)} 到 ${pico.magenta(
+        appName,
+      )} ${pico.cyan(type)}?`,
+    },
   ])
 
   const typeValue = typeMap.find((i) => i.name === type)?.value
 
   if (yes) {
-    console.log(`执行 ${pico.cyan(`pnpm add ${installPkgName} ${typeValue} --filter ${appName}`)}`)
-    await run('pnpm', ['add', `${installPkgName}`, `${typeValue}`, '--filter', `${appName}`])
+    console.log(
+      `执行 ${pico.cyan(
+        `pnpm add ${installPkgName} ${typeValue} --filter ${appName}`,
+      )}`,
+    )
+    await run('pnpm', [
+      'add',
+      `${installPkgName}`,
+      `${typeValue}`,
+      '--filter',
+      `${appName}`,
+    ])
   } else {
     console.log(pico.red('取消安装'))
   }

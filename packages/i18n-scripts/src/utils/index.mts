@@ -9,12 +9,15 @@ export const objToArr = (obj: Record<string, any>) => {
   return Object.entries(obj).map(([key, value]) => {
     return {
       key,
-      value
+      value,
     }
   })
 }
 
-export const compareLocaleData = async (oldFilePath: string, newFilePath: string) => {
+export const compareLocaleData = async (
+  oldFilePath: string,
+  newFilePath: string,
+) => {
   let oldString = '{}'
   let newString = '{}'
 
@@ -78,7 +81,7 @@ export const compareLocaleData = async (oldFilePath: string, newFilePath: string
     sameNumber,
     addNumber,
     modifyNumber,
-    deleteNumber
+    deleteNumber,
   }
 }
 

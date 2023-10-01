@@ -12,6 +12,8 @@ import { applyEnv } from '../config/getEnv'
 import getPaths from '../config/getPaths'
 import { getWebpackConfig } from '../config/webpack.config'
 
+import type { Configuration } from 'webpack'
+
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
@@ -37,8 +39,8 @@ const copyPublicFolder = async () => {
 }
 
 // Create the production build and print the deployment instructions.
-const webpackBuild = async (config: webpack.Configuration) => {
-  console.log(pico.cyan('Creating an optimized production build...'))
+const webpackBuild = async (config: Configuration) => {
+  console.log(pico.cyan('\nCreating an optimized production build...'))
 
   const compiler = webpack(config)
 

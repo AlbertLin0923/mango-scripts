@@ -6,23 +6,25 @@ import { getUserConfig, deepMergeWithArray } from './getUserConfig'
 export const getJsMinimizer = () => {
   const useProfile = process.env.USE_PROFILE === 'true'
 
-  const { minify, terserOptions } = getUserConfig('optimization.minimizer.jsMinimizer')
+  const { minify, terserOptions } = getUserConfig(
+    'optimization.minimizer.jsMinimizer',
+  )
 
   switch (minify) {
     case 'uglifyJsMinify':
       return new TerserPlugin({
         minify: TerserPlugin.uglifyJsMinify,
-        terserOptions
+        terserOptions,
       })
     case 'esbuildMinify':
       return new TerserPlugin({
         minify: TerserPlugin.esbuildMinify,
-        terserOptions
+        terserOptions,
       })
     case 'swcMinify':
       return new TerserPlugin({
         minify: TerserPlugin.swcMinify,
-        terserOptions
+        terserOptions,
       })
     default:
       return new TerserPlugin({
@@ -34,7 +36,7 @@ export const getJsMinimizer = () => {
             // into invalid ecma 5 code. This is why the 'compress' and 'output'
             // sections only apply transformations that are ecma 5 safe
             // https://github.com/facebook/create-react-app/pull/4234
-            ecma: 2020
+            ecma: 2020,
           },
           compress: {
             ecma: 5,
@@ -47,10 +49,10 @@ export const getJsMinimizer = () => {
             // https://github.com/facebook/create-react-app/issues/5250
             // Pending further investigation:
             // https://github.com/terser-js/terser/issues/120
-            inline: 2
+            inline: 2,
           },
           mangle: {
-            safari10: true
+            safari10: true,
           },
           // Added for profiling in devtools
           keep_classnames: useProfile,
@@ -60,46 +62,50 @@ export const getJsMinimizer = () => {
             comments: false,
             // Turned on because emoji and regex is not minified properly using default
             // https://github.com/facebook/create-react-app/issues/2488
-            ascii_only: true
-          }
-        })
+            ascii_only: true,
+          },
+        }),
       })
   }
 }
 
 export const getCssMinimizer = () => {
-  const { minify, minimizerOptions } = getUserConfig('optimization.minimizer.cssMinimizer')
+  const { minify, minimizerOptions } = getUserConfig(
+    'optimization.minimizer.cssMinimizer',
+  )
 
   switch (minify) {
     case 'cssoMinify':
       return new CssMinimizerPlugin({
         minify: CssMinimizerPlugin.cssoMinify,
-        minimizerOptions
+        minimizerOptions,
       })
     case 'cleanCssMinify':
       return new CssMinimizerPlugin({
         minify: CssMinimizerPlugin.cleanCssMinify,
-        minimizerOptions
+        minimizerOptions,
       })
     case 'esbuildMinify':
       return new CssMinimizerPlugin({
         minify: CssMinimizerPlugin.esbuildMinify,
-        minimizerOptions
+        minimizerOptions,
       })
     case 'lightningCssMinify':
       return new CssMinimizerPlugin({
         minify: CssMinimizerPlugin.lightningCssMinify,
-        minimizerOptions
+        minimizerOptions,
       })
     case 'swcMinify':
       return new CssMinimizerPlugin({
         minify: CssMinimizerPlugin.swcMinify,
-        minimizerOptions
+        minimizerOptions,
       })
     default:
       return new CssMinimizerPlugin({
         minify: CssMinimizerPlugin.cssnanoMinify,
-        minimizerOptions: deepMergeWithArray(minimizerOptions, { preset: 'default' })
+        minimizerOptions: deepMergeWithArray(minimizerOptions, {
+          preset: 'default',
+        }),
       })
   }
 }

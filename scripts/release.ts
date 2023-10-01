@@ -16,7 +16,7 @@ import {
   runIfNotDry,
   isDryRun,
   step,
-  updateVersion
+  updateVersion,
 } from './releaseUtils'
 
 async function bootstrap(): Promise<void> {
@@ -26,13 +26,15 @@ async function bootstrap(): Promise<void> {
 
   let targetVersion: string | undefined
 
-  const pkgInfoList: IPkgInfo[] = await getPkgInfoList(path.resolve(process.cwd(), './packages'))
+  const pkgInfoList: IPkgInfo[] = await getPkgInfoList(
+    path.resolve(process.cwd(), './packages'),
+  )
 
   const { pkg }: { pkg: IPkgInfo } = await prompts({
     type: 'select',
     name: 'pkg',
     message: 'Select package',
-    choices: pkgInfoList.map((i) => ({ value: i, title: i.pkgName }))
+    choices: pkgInfoList.map((i) => ({ value: i, title: i.pkgName })),
   })
 
   if (!pkg) return
@@ -46,7 +48,7 @@ async function bootstrap(): Promise<void> {
       type: 'select',
       name: 'release',
       message: 'Select release type',
-      choices: getVersionChoices(pkgCurrentVersion)
+      choices: getVersionChoices(pkgCurrentVersion),
     })
 
     if (release === 'custom') {
@@ -54,7 +56,7 @@ async function bootstrap(): Promise<void> {
         type: 'text',
         name: 'version',
         message: 'Input custom version',
-        initial: pkgCurrentVersion
+        initial: pkgCurrentVersion,
       })
       targetVersion = res.version
     } else {
@@ -78,7 +80,7 @@ async function bootstrap(): Promise<void> {
   const { yes }: { yes: boolean } = await prompts({
     type: 'confirm',
     name: 'yes',
-    message: `Releasing ${pico.yellow(tag)} Confirm?`
+    message: `Releasing ${pico.yellow(tag)} Confirm?`,
   })
 
   if (!yes) {
@@ -99,7 +101,7 @@ async function bootstrap(): Promise<void> {
     'CHANGELOG.md',
     '-s',
     '--commit-path',
-    '.'
+    '.',
   ]
   changelogArgs.push('--lerna-package', pkgName)
 

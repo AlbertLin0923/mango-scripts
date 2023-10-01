@@ -14,7 +14,9 @@ import copyDist from './scripts/copyDist.mjs'
 import gitGkd from './scripts/gitGkd.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const packageJson = fs.readJSONSync(path.resolve(__dirname, '../../package.json'))
+const packageJson = fs.readJSONSync(
+  path.resolve(__dirname, '../../package.json'),
+)
 const { engines, name, version } = packageJson
 
 checkNodeVersion(engines.node, name)
@@ -40,10 +42,11 @@ program
 program
   .command('addPackage')
   .description('快捷添加多包仓库的子目录依赖包')
-  .option('-t, --targetDirList [targetDirList...]', '需要添加依赖包的子目录列表', [
-    './apps',
-    './packages'
-  ])
+  .option(
+    '-t, --targetDirList [targetDirList...]',
+    '需要添加依赖包的子目录列表',
+    ['./apps', './packages'],
+  )
   .allowUnknownOption()
   .action((options) => {
     addPackage(options)
@@ -52,7 +55,11 @@ program
 program
   .command('copyDist')
   .description('复制多包仓库的打包dist产物到根目录')
-  .option('-t, --targetDirList [targetDirList...]', '需要复制dist产物的子目录列表', ['./apps'])
+  .option(
+    '-t, --targetDirList [targetDirList...]',
+    '需要复制dist产物的子目录列表',
+    ['./apps'],
+  )
   .allowUnknownOption()
   .action((options) => {
     copyDist(options)
@@ -61,7 +68,11 @@ program
 program
   .command('gitGkd')
   .description('一键切换、合并、推送目标分支')
-  .option('-t, --targetBranch [targetBranch...]', '切换、合并、推送的目标分支', ['dev', 'test'])
+  .option(
+    '-t, --targetBranch [targetBranch...]',
+    '切换、合并、推送的目标分支',
+    ['dev', 'test'],
+  )
   .allowUnknownOption()
   .action((options) => {
     gitGkd(options)
@@ -77,13 +88,13 @@ program
         {
           System: ['OS', 'CPU', 'Memory', 'Shell'],
           Binaries: ['Node', 'Yarn', 'npm'],
-          Browsers: ['Chrome', 'Edge', 'Firefox', 'Safari']
+          Browsers: ['Chrome', 'Edge', 'Firefox', 'Safari'],
         },
         {
           showNotFound: true,
           duplicates: true,
-          fullTree: true
-        }
+          fullTree: true,
+        },
       )
       .then(console.log)
   })
@@ -99,7 +110,11 @@ program.on('command:*', ([cmd]) => {
 // add some useful info on help
 program.on('--help', () => {
   console.log()
-  console.log(`  Run ${pico.cyan(`${name} <command> --help`)} for detailed usage of given command.`)
+  console.log(
+    `  Run ${pico.cyan(
+      `${name} <command> --help`,
+    )} for detailed usage of given command.`,
+  )
   console.log()
 })
 

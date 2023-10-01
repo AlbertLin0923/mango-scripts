@@ -15,7 +15,9 @@ type ChangeExtnameOptionsType = {
   targetExt: string
 }
 
-const changeExtname = async (options: ChangeExtnameOptionsType): Promise<void> => {
+const changeExtname = async (
+  options: ChangeExtnameOptionsType,
+): Promise<void> => {
   let { input, output, originExt, targetExt } = options
 
   if (!input || !output || !originExt || !targetExt) {
@@ -24,22 +26,24 @@ const changeExtname = async (options: ChangeExtnameOptionsType): Promise<void> =
         !input && {
           type: 'fuzzypath',
           name: 'input',
-          excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
+          excludePath: (nodePath: string) =>
+            nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
           message: '请选择输入目录路径',
           suggestOnly: false,
-          depthLimit: undefined
+          depthLimit: undefined,
         },
         !output && {
           type: 'fuzzypath',
           name: 'output',
-          excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
+          excludePath: (nodePath: string) =>
+            nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
           message: '请选择输出目录路径',
           suggestOnly: false,
-          depthLimit: undefined
+          depthLimit: undefined,
         },
         !originExt && {
           type: 'input',
@@ -50,7 +54,7 @@ const changeExtname = async (options: ChangeExtnameOptionsType): Promise<void> =
               return '后缀名不能为空!'
             }
             return true
-          }
+          },
         },
         !targetExt && {
           type: 'input',
@@ -61,9 +65,9 @@ const changeExtname = async (options: ChangeExtnameOptionsType): Promise<void> =
               return '后缀名不能为空!'
             }
             return true
-          }
-        }
-      ].filter(Boolean)
+          },
+        },
+      ].filter(Boolean),
     )
     input = answer.input
     output = answer.output
@@ -80,7 +84,7 @@ const changeExtname = async (options: ChangeExtnameOptionsType): Promise<void> =
 输出目录路径: ${pico.green(outputDirPath)}
 原始后缀名: ${pico.green(originExt)}
 目标后缀名: ${pico.green(targetExt)}
-  `
+  `,
   )
 
   consola.start('开始读取文件...')
@@ -101,8 +105,8 @@ const changeExtname = async (options: ChangeExtnameOptionsType): Promise<void> =
 
   consola.success(
     pico.cyan(
-      `读取到 ${originFilePathList.length} 个文件待转换； ${originFilePathList.length} 个其他类型文件无需转换`
-    )
+      `读取到 ${originFilePathList.length} 个文件待转换； ${originFilePathList.length} 个其他类型文件无需转换`,
+    ),
   )
 
   consola.start('开始转换文件...')
@@ -112,7 +116,7 @@ const changeExtname = async (options: ChangeExtnameOptionsType): Promise<void> =
         .replace(inputDirPath, outputDirPath)
         .replace(originExt, targetExt)
       return fs.copy(_filePath, newFilePath)
-    })
+    }),
   )
 
   consola.success(pico.cyan(`转换完成！`))
@@ -122,7 +126,7 @@ const changeExtname = async (options: ChangeExtnameOptionsType): Promise<void> =
     otherFilePathList.map((_filePath: string) => {
       const newFilePath = _filePath.replace(inputDirPath, outputDirPath)
       return fs.copy(_filePath, newFilePath)
-    })
+    }),
   )
 
   consola.success(pico.cyan(`复制完成！`))

@@ -50,6 +50,7 @@
     "vue-template-compiler": "^2.7.14"
   },
   "devDependencies": {
+    "@types/babel__core": "^7.20.2",
     "@types/fs-extra": "^11.0.2",
     "@types/pug": "^2.0.6"
   },

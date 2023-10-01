@@ -107,9 +107,3 @@ declare module 'react-dev-utils/printBuildError'
 declare module 'react-dev-utils/getPublicUrlOrPath'
 declare module 'react-dev-utils/getCacheIdentifier'
 declare module 'react-dev-utils/getCSSModuleLocalIdent'
-
-// declare module 'react-dev-utils/ModuleNotFoundPlugin'
-
-// declare module 'react-dev-utils/ForkTsCheckerWebpackPlugin'
-
-// declare module 'react-dev-utils/WebpackDevServerUtils'

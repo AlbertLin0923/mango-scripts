@@ -16,27 +16,29 @@ export const cliEnv: CliEnvType = {
     BABEL_ENV: 'development',
 
     USE_TAILWIND: 'false',
-
     USE_HTTPS: 'false',
     SSL_CRT_FILE_PATH: '',
     SSL_KEY_FILE_PATH: '',
-
     PORT: '',
     WDS_SOCKET_HOST: '',
     WDS_SOCKET_PATH: '',
     WDS_SOCKET_PORT: '',
-
     USE_LOCAL_HOST: 'false',
+
+    REACT_APP_ENV: 'development',
   },
   production: {
     NODE_ENV: 'production',
     BABEL_ENV: 'production',
 
     USE_TAILWIND: 'false',
-
     USE_PROFILE: 'false',
-
     USE_ANALYZE: 'false',
+    USE_SOURCEMAP: 'false',
+    DROP_CONSOLE: 'false',
+    DROP_DEBUGGER: 'false',
+
+    REACT_APP_ENV: 'production',
   },
 }
 

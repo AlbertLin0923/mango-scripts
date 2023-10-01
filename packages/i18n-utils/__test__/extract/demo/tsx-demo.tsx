@@ -36,7 +36,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = (props) => {
       all,
       finished,
       unfinished,
-      finishedPercent
+      finishedPercent,
     }
   })
 
@@ -44,22 +44,22 @@ const AnalysisModal: React.FC<AnalysisModalProps> = (props) => {
     {
       title: '语言包',
       dataIndex: 'locale',
-      key: 'locale'
+      key: 'locale',
     },
     {
       title: '总数目',
       dataIndex: 'all',
-      key: 'all'
+      key: 'all',
     },
     {
       title: '已翻译',
       dataIndex: 'finished',
-      key: 'finished'
+      key: 'finished',
     },
     {
       title: '未翻译',
       dataIndex: 'unfinished',
-      key: 'unfinished'
+      key: 'unfinished',
     },
     {
       title: '翻译进度',
@@ -67,8 +67,8 @@ const AnalysisModal: React.FC<AnalysisModalProps> = (props) => {
       key: 'finishedPercent',
       render: (text: number) => {
         return <Progress percent={text} />
-      }
-    }
+      },
+    },
   ]
 
   console.log('执行管理员设置')

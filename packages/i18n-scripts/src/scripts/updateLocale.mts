@@ -45,17 +45,18 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
               return '国际化文案配置系统接口地址不能为空!'
             }
             return true
-          }
+          },
         },
         !output && {
           type: 'fuzzypath',
           name: 'output',
-          excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
+          excludePath: (nodePath: string) =>
+            nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
           message: '请选择语言包的存放目录路径',
           suggestOnly: false,
-          depthLimit: undefined
+          depthLimit: undefined,
         },
         !localeList && {
           type: 'checkbox',
@@ -63,7 +64,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
           name: 'localeList',
           choices: defaultLocaleList.map((i) => {
             return {
-              name: i.fileName
+              name: i.fileName,
             }
           }),
           validate(v: string[]) {
@@ -71,9 +72,9 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
               return '至少选择一个语言包列表'
             }
             return true
-          }
-        }
-      ].filter(Boolean)
+          },
+        },
+      ].filter(Boolean),
     )
 
     fromAddress = answer.fromAddress
@@ -88,13 +89,13 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
 国际化文案配置系统接口地址: ${pico.green(fromAddress)}
 语言包的存放目录路径: ${pico.green(newLocaleDirPath)}
 需要下载的语言包列表: ${pico.green(localeList.join(' '))}
-  `
+  `,
   )
 
   const oldlocaleBackupDirPath = path.resolve(
     newLocaleDirPath,
     '../',
-    'this-is-old-locale-backup-folder'
+    'this-is-old-locale-backup-folder',
   )
 
   consola.start('开始请求系统数据...')
@@ -102,13 +103,14 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
   const newlocaleArr: { key: string; value: Record<string, any> }[] = []
 
   const { body } = await request(fromAddress, {
-    method: 'GET'
+    method: 'GET',
   })
 
   const {
     success,
-    data: { map }
-  }: { success: boolean; data: { map: FromAddressMapType } } = (await body.json()) as any
+    data: { map },
+  }: { success: boolean; data: { map: FromAddressMapType } } =
+    (await body.json()) as any
 
   if (success && map) {
     Object.entries(map).forEach(([key, value]) => {
@@ -144,12 +146,12 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
     const element = newlocaleArr[index]
     await fs.writeFile(
       path.join(newLocaleDirPath, element.key + '.json'),
-      cusJsonStringify(element.value)
+      cusJsonStringify(element.value),
     )
 
     stat[element.key] = await compareLocaleData(
       path.join(oldlocaleBackupDirPath, element.key + '.json'),
-      path.join(newLocaleDirPath, element.key + '.json')
+      path.join(newLocaleDirPath, element.key + '.json'),
     )
   }
 
@@ -167,8 +169,8 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
       pico.bold(pico.cyan('add')),
       pico.bold(pico.cyan('modify')),
       pico.bold(pico.cyan('delete')),
-      pico.bold(pico.cyan('same'))
-    ]
+      pico.bold(pico.cyan('same')),
+    ],
   })
 
   Object.entries(stat).forEach(([key, value]) => {
@@ -177,7 +179,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
       pico.yellow(value.addNumber),
       pico.yellow(value.modifyNumber),
       pico.yellow(value.deleteNumber),
-      pico.yellow(value.sameNumber)
+      pico.yellow(value.sameNumber),
     ])
   })
 

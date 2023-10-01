@@ -5,10 +5,9 @@ import dotenvExpand from 'dotenv-expand'
 import getPaths from './getPaths'
 import { cliEnv, recommendProductionEnv } from './getMode'
 
-export const applyEnv = (
-  mode: string,
-  cliMode: 'development' | 'production',
-) => {
+import type { CliEnvType } from './getMode'
+
+export const applyEnv = (mode: string, cliMode: keyof CliEnvType) => {
   const paths = getPaths()
 
   Object.entries(cliEnv[cliMode]).forEach(([key, value]) => {
@@ -51,9 +50,6 @@ export const getClientEnvironment = (publicUrl: string) => {
         return env
       },
       {
-        // Useful for determining whether we’re running in production mode.
-        // Most importantly, it switches React into the correct mode.
-        NODE_ENV: process.env.NODE_ENV || 'development',
         // Useful for resolving the correct path to static assets in `public`.
         // For example, <img src={process.env.PUBLIC_URL + '/img/logo.png'} />.
         // This should only be used as an escape hatch. Normally you would put

@@ -16,8 +16,8 @@ const insertI18nForVueFile = (filePath: string) => {
   return gogocode
     .loadFile(filePath, {
       parseOptions: {
-        language: 'vue'
-      }
+        language: 'vue',
+      },
     })
     .find('<template></template>')
     .find(['<$_$></$_$>', '<$_$ />'])
@@ -25,7 +25,11 @@ const insertI18nForVueFile = (filePath: string) => {
       if (Array.isArray(node.attr('content.children'))) {
         ;(node.attr('content.children') as []).forEach((text: any) => {
           const re = text?.content?.value?.content?.trim()
-          if (re && INCLUDE_CHINESE_CHAR.test(re) && !INCLUDE_VARIABLE_CHAR.test(re)) {
+          if (
+            re &&
+            INCLUDE_CHINESE_CHAR.test(re) &&
+            !INCLUDE_VARIABLE_CHAR.test(re)
+          ) {
             text.content.value.content = `{{$t('${re}')}}`
           }
         })
@@ -33,7 +37,8 @@ const insertI18nForVueFile = (filePath: string) => {
 
       if (Array.isArray(node.attr('content.attributes'))) {
         ;(node.attr('content.attributes') as []).forEach((attr: any) => {
-          const keyIsDym = attr?.key?.content && attr.key.content.startsWith(':')
+          const keyIsDym =
+            attr?.key?.content && attr.key.content.startsWith(':')
           const re = attr?.value?.content
           if (!keyIsDym && INCLUDE_CHINESE_CHAR.test(re)) {
             attr.key.content = `:${attr.key.content}`
@@ -70,22 +75,24 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
         !input && {
           type: 'fuzzypath',
           name: 'input',
-          excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
+          excludePath: (nodePath: string) =>
+            nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
           message: '请选择输入目录路径',
           suggestOnly: false,
-          depthLimit: undefined
+          depthLimit: undefined,
         },
         !output && {
           type: 'fuzzypath',
           name: 'output',
-          excludePath: (nodePath: string) => nodePath.startsWith('node_modules'),
+          excludePath: (nodePath: string) =>
+            nodePath.startsWith('node_modules'),
           itemType: 'directory',
           rootPath: './',
           message: '请选择输出目录路径',
           suggestOnly: false,
-          depthLimit: undefined
+          depthLimit: undefined,
         },
         !localeModulesStr && {
           type: 'input',
@@ -96,9 +103,9 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
               return '国际化文案模块字段不能为空!'
             }
             return true
-          }
-        }
-      ].filter(Boolean)
+          },
+        },
+      ].filter(Boolean),
     )
     input = answer.input
     output = answer.output
@@ -113,7 +120,7 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
 输入目录路径: ${pico.green(inputDirPath)}
 输出目录路径: ${pico.green(outputDirPath)}
 国际化文案模块字段: ${pico.green(localeModulesStr)}
-  `
+  `,
   )
 
   const filePathList = await glob(`${inputDirPath}/**/*`, { nodir: true })
@@ -132,15 +139,15 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
 
   consola.success(
     pico.cyan(
-      `读取到 ${originFilePathList.length} 个文件待转换； ${originFilePathList.length} 个其他类型文件无需转换`
-    )
+      `读取到 ${originFilePathList.length} 个文件待转换； ${originFilePathList.length} 个其他类型文件无需转换`,
+    ),
   )
 
   const { yes } = await inquirer.prompt({
     type: 'confirm',
     name: 'yes',
     message: '确定开始转换文件吗？',
-    default: true
+    default: true,
   })
 
   if (!yes) {
@@ -153,7 +160,7 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
       const newFilePath = _filePath.replace(inputDirPath, outputDirPath)
       const newCode = insertI18nForVueFile(_filePath)
       return fs.outputFile(newFilePath, localeModulesStr + newCode)
-    })
+    }),
   )
 
   consola.success(`转换完成！`)
@@ -163,7 +170,7 @@ const insertI18n = async (options: InsertI18nOptionsType): Promise<void> => {
     otherFilePathList.map((_filePath: string) => {
       const newFilePath = _filePath.replace(inputDirPath, outputDirPath)
       return fs.copy(_filePath, newFilePath)
-    })
+    }),
   )
 
   consola.success(`复制完成！`)

@@ -1,10 +1,10 @@
 import fs from 'fs-extra'
-import { mergeWith, get } from 'lodash'
+import { mergeWith, get, isArray } from 'lodash'
 import { cosmiconfigSync } from 'cosmiconfig'
 
 export const deepMergeWithArray = (object: any, sources: any) => {
-  return mergeWith(object, sources, (objValue: any, srcValue: any) => {
-    if (Array.isArray(objValue)) {
+  return mergeWith(object, sources, (objValue, srcValue) => {
+    if (isArray(objValue)) {
       return objValue.concat(srcValue)
     }
   })
@@ -19,48 +19,48 @@ export const getUserConfig = (targetConfigObjPath: string) => {
     distDir: 'dist',
     loader: {
       babel: {
-        options: {}
+        options: {},
       },
       less: {
-        options: {}
+        options: {},
       },
       sass: {
-        options: {}
+        options: {},
       },
       stylus: {
-        options: {}
+        options: {},
       },
       postcss: {
-        options: {}
-      }
+        options: {},
+      },
     },
     plugin: {
       eslint: {
         enable: true,
-        options: {}
+        options: {},
       },
       stylelint: {
         enable: true,
-        options: {}
+        options: {},
       },
       typescript: {
         enable: true,
-        options: {}
-      }
+        options: {},
+      },
     },
     optimization: {
       splitChunks: {},
       minimizer: {
         jsMinimizer: {
           minify: 'terserMinify', // terserMinify | uglifyJsMinify | esbuildMinify | swcMinify
-          terserOptions: {}
+          terserOptions: {},
         },
         cssMinimizer: {
           minify: 'cssnanoMinify', // cssnanoMinify | cssoMinify | cleanCssMinify | esbuildMinify  | lightningCssMinify | swcMinify
-          minimizerOptions: {}
-        }
-      }
-    }
+          minimizerOptions: {},
+        },
+      },
+    },
   }
 
   const userConfigFilePath = userConfigExplorer.search(projectRoot)
@@ -72,7 +72,10 @@ export const getUserConfig = (targetConfigObjPath: string) => {
       throw new Error("mango: Config function didn't return a config object.")
     }
 
-    return get(deepMergeWithArray(userConfig?.config, defaultUserConfig), targetConfigObjPath)
+    return get(
+      deepMergeWithArray(defaultUserConfig, userConfig?.config),
+      targetConfigObjPath,
+    )
   }
 
   return get(defaultUserConfig, targetConfigObjPath)

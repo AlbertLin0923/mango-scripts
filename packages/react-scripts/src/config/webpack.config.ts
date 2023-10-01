@@ -12,6 +12,7 @@ import ESLintPlugin from 'eslint-webpack-plugin'
 import StylelintPlugin from 'stylelint-webpack-plugin'
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
+import WebpackBar from 'webpackbar'
 
 import InterpolateHtmlPlugin from 'react-dev-utils/InterpolateHtmlPlugin'
 import InlineChunkHtmlPlugin from 'react-dev-utils/InlineChunkHtmlPlugin'
@@ -26,6 +27,7 @@ import { getHash } from '../utils'
 import { getJsMinimizer, getCssMinimizer } from './getMinimizerConfig'
 import { getModuleRules } from './getModuleRules'
 import { getUserConfig, deepMergeWithArray } from './getUserConfig'
+
 import type { Configuration } from 'webpack'
 
 // This is the production and development configuration.
@@ -419,12 +421,7 @@ export const getWebpackConfig = (): Configuration => {
           }),
         ),
       useBundleAnalyzerPlugin && new BundleAnalyzerPlugin(),
-      new webpack.ProgressPlugin({
-        handler: (percentage, message, ...args) => {
-          // e.g. Output each progress message directly to the console:
-          console.info(percentage, message, ...args)
-        },
-      }),
+      new WebpackBar(),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter

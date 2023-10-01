@@ -6,7 +6,10 @@ import * as pug from 'pug'
 import * as compilerSvelte from 'svelte/compiler'
 import * as hyntax from 'hyntax'
 
-import { collectDisableRuleCommentlocation, inDisableRuleCommentlocation } from '../utils/index'
+import {
+  collectDisableRuleCommentlocation,
+  inDisableRuleCommentlocation,
+} from '../utils/index'
 
 // ------------------------vue-------------------------------
 const MATCH_I18N_FUNC_REGEX = /(?<=\$t\()([\w\W]*?)(?=\))/g
@@ -37,9 +40,12 @@ const extractInTemplateOfVue = (templateContent: string): string[] => {
   function collectChineseOfAttributes(ast: any) {
     ast?.content?.attributes?.length &&
       ast.content.attributes.forEach((item: any) => {
-        const i18nFuncmatcherList = item?.value?.content?.trim().match(MATCH_I18N_FUNC_REGEX)
+        const i18nFuncmatcherList = item?.value?.content
+          ?.trim()
+          .match(MATCH_I18N_FUNC_REGEX)
         if (i18nFuncmatcherList) {
-          const i18nStrmatcherList = formatI18nFuncMatcherList(i18nFuncmatcherList)
+          const i18nStrmatcherList =
+            formatI18nFuncMatcherList(i18nFuncmatcherList)
           arr.push(...i18nStrmatcherList)
         }
       })
@@ -49,10 +55,13 @@ const extractInTemplateOfVue = (templateContent: string): string[] => {
     if (!ast?.content?.children) {
       const textContent = ast.content?.value?.content
       if (textContent) {
-        const i18nFuncmatcherList = textContent.trim().match(MATCH_I18N_FUNC_REGEX)
+        const i18nFuncmatcherList = textContent
+          .trim()
+          .match(MATCH_I18N_FUNC_REGEX)
 
         if (i18nFuncmatcherList) {
-          const i18nStrmatcherList = formatI18nFuncMatcherList(i18nFuncmatcherList)
+          const i18nStrmatcherList =
+            formatI18nFuncMatcherList(i18nFuncmatcherList)
           arr.push(...i18nStrmatcherList)
         }
       }
@@ -83,7 +92,7 @@ const extractInVue = (code: string): string[] => {
     const formatTemplateContent =
       template.lang && template.lang === 'pug'
         ? pug.compile(templateContent, {
-            doctype: 'html'
+            doctype: 'html',
           })()
         : templateContent
     templateTextArr = extractInTemplateOfVue(formatTemplateContent)
@@ -138,7 +147,7 @@ const extractInSvelte = (code: string): string[] => {
     // options
   })
   const {
-    ast: { html: templateAst }
+    ast: { html: templateAst },
   } = sfc
   const scriptContent = sfc.js
 
@@ -162,22 +171,29 @@ const extractInSvelte = (code: string): string[] => {
 const extractInJsAndTs = (code: string): string[] => {
   const ast = babelParser.parse(code, {
     sourceType: 'unambiguous',
-    plugins: ['jsx', 'typescript']
+    plugins: ['jsx', 'typescript'],
   })
 
   const arr: string[] = []
 
-  const { entireFileDisabled, partialCommentList, nextLineCommentList, thisLineCommentList } =
-    collectDisableRuleCommentlocation(ast.comments)
+  const {
+    entireFileDisabled,
+    partialCommentList,
+    nextLineCommentList,
+    thisLineCommentList,
+  } = collectDisableRuleCommentlocation(ast.comments)
 
-  const _inDisableRuleCommentlocation = (startLine: number, endLine: number) => {
+  const _inDisableRuleCommentlocation = (
+    startLine: number,
+    endLine: number,
+  ) => {
     return inDisableRuleCommentlocation(
       entireFileDisabled,
       partialCommentList,
       nextLineCommentList,
       thisLineCommentList,
       startLine,
-      endLine
+      endLine,
     )
   }
 
@@ -194,14 +210,17 @@ const extractInJsAndTs = (code: string): string[] => {
             }
             if (
               path.findParent((p: any) => {
-                return p.node.callee && t.isIdentifier(p.node.callee.object, { name: 'console' })
+                return (
+                  p.node.callee &&
+                  t.isIdentifier(p.node.callee.object, { name: 'console' })
+                )
               })
             ) {
               path.node.skipTransform = true
             }
-          }
+          },
         })
-      }
+      },
     },
     StringLiteral(path: any) {
       if (path.node.skipTransform) {
@@ -232,14 +251,14 @@ const extractInJsAndTs = (code: string): string[] => {
       if (INCLUDE_CHINESE_CHAR.test(value)) {
         arr.push(value)
       }
-    }
+    },
   }
 
   const i18nPlugin = { visitor }
 
   babel.transformFromAstSync(ast, code, {
     presets: null,
-    plugins: [[i18nPlugin]]
+    plugins: [[i18nPlugin]],
   })
 
   return arr
