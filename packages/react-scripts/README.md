@@ -16,18 +16,18 @@
 - 基于 [react-scripts@5.0.1](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts)，用 TypeScript 改写
 - 类似 [craco](https://github.com/dilanx/craco)，可通过配置文件对该构建工具进行扩展配置
 - webpack 以及周边 loader、plugin 等相关依赖包保持及时的更新
-- 内置 `less`、`scss`、`sass`、`stylus` css 预处理器
-- 内置 `babel-plugin-jsx-css-modules` 插件，就像写普通 `css` 样式一样写 `css module` 模块化代码
+- 内置 `less`、`scss`、`sass`、`stylus` CSS 预处理器
+- 内置 [babel-plugin-jsx-css-modules](https://github.com/CJY0208/babel-plugin-jsx-css-modules) 插件，就像写普通 `css` 样式一样写 `css module` 模块化代码
 - 内置 `webpack-bundle-analyzer` 打包分析插件
-- 内置 [svg-sprite-loader](https://juejin.cn/post/6844903517564436493) svg 精灵图优化 loader
+- 内置 [svg-sprite-loader](https://github.com/JetBrains/svg-sprite-loader) svg 精灵图优化 loader
 - 增加 [qiankun](https://github.com/umijs/qiankun) 配置支持
-- 增加 `eslint-webpack-plugin` 和 `stylelint-webpack-plugin`，修改其配置默认为读取业务项目目录的配置
+- 增加 `eslint-webpack-plugin` 和 `stylelint-webpack-plugin`，默认读取业务项目目录的配置
 - 可在开发环境下自动获取局域网 IP 并映射到地址栏，便于本地联调
 
 ## 安装
 
 ```bash
-pnpm add @mango-scripts/react-scripts
+pnpm add @mango-scripts/react-scripts -D
 ```
 
 ## 使用
@@ -102,11 +102,6 @@ module.exports = {
             'brand-primary-tap': '#7e3db7',
             'switch-fill': '#975ec9',
           },
-          javascriptEnabled: true,
-          paths: [
-            path.resolve(__dirname, 'node_modules'),
-            path.resolve(__dirname, 'src'),
-          ],
         },
       },
     },
