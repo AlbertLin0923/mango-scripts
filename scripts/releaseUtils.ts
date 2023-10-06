@@ -150,7 +150,7 @@ export async function publishPkg(pkdDir: string, tag?: string): Promise<void> {
   if (tag) {
     publicArgs.push(`--tag`, tag)
   }
-  await runIfNotDry('npm', publicArgs, {
+  await runIfNotDry('pnpm', publicArgs, {
     cwd: pkdDir,
   })
 }
