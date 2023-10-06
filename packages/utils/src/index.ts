@@ -19,7 +19,6 @@ export const checkUpdate = (pkg: any) => {
   updateNotifier({
     pkg,
     shouldNotifyInNpmScript: true,
-    updateCheckInterval: 0,
   }).notify({
     message:
       'Update available ' +

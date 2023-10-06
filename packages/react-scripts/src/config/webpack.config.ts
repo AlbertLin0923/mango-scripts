@@ -98,13 +98,13 @@ export const getWebpackConfig = (): Configuration => {
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
       filename: isEnvProduction
-        ? 'static/js/[name].[contenthash:12].js'
+        ? 'static/js/[name].[contenthash:16].js'
         : isEnvDevelopment
         ? 'static/js/bundle.js'
         : undefined,
       // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
-        ? 'static/js/[name].[contenthash:12].chunk.js'
+        ? 'static/js/[name].[contenthash:16].chunk.js'
         : isEnvDevelopment
         ? 'static/js/[name].chunk.js'
         : undefined,
@@ -300,8 +300,8 @@ export const getWebpackConfig = (): Configuration => {
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
           // both options are optional
-          filename: 'static/css/[name].[contenthash:12].css',
-          chunkFilename: 'static/css/[name].[contenthash:12].chunk.css',
+          filename: 'static/css/[name].[contenthash:16].css',
+          chunkFilename: 'static/css/[name].[contenthash:16].chunk.css',
         }),
       // Generate an asset manifest file with the following content:
       // - "files" key: Mapping of all asset filenames to their corresponding
@@ -395,7 +395,7 @@ export const getWebpackConfig = (): Configuration => {
             extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
             formatter: require.resolve('react-dev-utils/eslintFormatter'),
             eslintPath: require.resolve('eslint'),
-            failOnError: isEnvProduction,
+            failOnError: true,
             context: paths.appSrc,
             cache: true,
             cacheLocation: path.resolve(

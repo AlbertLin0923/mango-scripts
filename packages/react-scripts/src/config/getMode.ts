@@ -32,8 +32,8 @@ export const cliEnv: CliEnvType = {
     BABEL_ENV: 'production',
 
     USE_TAILWIND: 'false',
-    USE_PROFILE: 'false',
     USE_ANALYZE: 'false',
+    USE_PROFILE: 'false',
     USE_SOURCEMAP: 'false',
     DROP_CONSOLE: 'false',
     DROP_DEBUGGER: 'false',

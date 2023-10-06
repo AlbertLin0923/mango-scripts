@@ -14,7 +14,7 @@
 ## 安装
 
 ```bash
-pnpm add @mango-scripts/esp-config
+pnpm add @mango-scripts/esp-config -D
 ```
 
 ## 使用
