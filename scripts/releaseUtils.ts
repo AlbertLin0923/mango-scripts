@@ -150,6 +150,7 @@ export async function publishPkg(pkdDir: string, tag?: string): Promise<void> {
   if (tag) {
     publicArgs.push(`--tag`, tag)
   }
+  publicArgs.push(`--no-git-checks`)
   await runIfNotDry('pnpm', publicArgs, {
     cwd: pkdDir,
   })
