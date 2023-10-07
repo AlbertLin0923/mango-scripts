@@ -1,6 +1,6 @@
 // Forked from https://github.com/vitejs/vite/blob/main/scripts/release.ts
 
-import path from 'path'
+import path from 'node:path'
 import prompts from 'prompts'
 import semver from 'semver'
 import pico from 'picocolors'
@@ -125,7 +125,16 @@ async function bootstrap(): Promise<void> {
   if (isDryRun) {
     console.log(`\nDry run finished - run git diff to see package changes.`)
   } else {
-    console.log(pico.green('\nPushed, publishing should starts shortly on CI.'))
+    console.log(
+      pico.green(
+        `
+Pushed, publishing should starts shortly on CI.
+
+You can view this page for detail:
+https://github.com/AlbertLin0923/mango-scripts/actions
+`,
+      ),
+    )
   }
 
   console.log()

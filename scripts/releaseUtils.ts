@@ -2,12 +2,13 @@
 
 import path from 'node:path'
 import pico from 'picocolors'
-import type { Options as ExecaOptions, ExecaReturnValue } from 'execa'
-import { execa } from 'execa'
-import type { ReleaseType } from 'semver'
 import semver from 'semver'
 import fs from 'fs-extra'
 import minimist from 'minimist'
+import { execa } from 'execa'
+
+import type { ReleaseType } from 'semver'
+import type { Options as ExecaOptions, ExecaReturnValue } from 'execa'
 
 export interface IPkgInfo {
   pkgName: string

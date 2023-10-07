@@ -1,6 +1,6 @@
 // Forked from https://github.com/vitejs/vite/blob/main/scripts/publishCI.ts
 
-import path from 'path'
+import path from 'node:path'
 import { args, publishPkg, step } from './releaseUtils'
 
 async function main() {
@@ -25,11 +25,13 @@ async function main() {
   const pkgDir = path.join(__dirname, `../packages/${rawPkgName}`)
 
   step('Publishing package...')
+
   const releaseTag = version.includes('beta')
     ? 'beta'
     : version.includes('alpha')
     ? 'alpha'
     : undefined
+
   await publishPkg(pkgDir, releaseTag)
 }
 
