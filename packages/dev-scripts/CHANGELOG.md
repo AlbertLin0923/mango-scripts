@@ -1,3 +1,5 @@
+## [2.0.0](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.0...@mango-scripts/dev-scripts@2.0.0) (2023-10-07)
+
 ## 2.0.0 (2023-10-07)
 
 
