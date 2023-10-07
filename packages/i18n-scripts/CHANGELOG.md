@@ -1,3 +1,20 @@
+## [2.0.0](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-scripts@1.0.3...@mango-scripts/i18n-scripts@2.0.0) (2023-10-07)
+
+
+### Features
+
+* 格式化代码&&细节优化 ([41bb0ed](https://github.com/AlbertLin0923/mango-scripts/commit/41bb0ede7c15b029cd7cfd508f0c191505a02920))
+* 升级依赖&&修改说明内容相关 ([fbd70d4](https://github.com/AlbertLin0923/mango-scripts/commit/fbd70d44c00e1670131d83bd4d72e779a9f5a81f))
+* 升级react-scripts&&新增dev-scripts等 ([549b687](https://github.com/AlbertLin0923/mango-scripts/commit/549b687cff4c02bc808b4928a382c395c2767e01))
+* 完善readme说明 ([c2a75de](https://github.com/AlbertLin0923/mango-scripts/commit/c2a75dec532a8e95024bca4af0f1f844ba6b81f8))
+* 优化打包配置等 ([da3a849](https://github.com/AlbertLin0923/mango-scripts/commit/da3a84947ff00d22729e22e6bfe6da8f9a122eb7))
+
+
+### Bug Fixes
+
+* 发布脚本错误问题 ([ae37b16](https://github.com/AlbertLin0923/mango-scripts/commit/ae37b161bb7fdea5fdf4e99e336074ff4f40e155))
+* 发布命令pnpm publish存在问题，暂时手工替代 ([f6a9172](https://github.com/AlbertLin0923/mango-scripts/commit/f6a9172a7e8818323e0bcdb84118ffe29c239139))
+
 ## [1.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-scripts@1.0.2...@mango-scripts/i18n-scripts@1.0.3) (2023-03-18)
 
 ### Features
