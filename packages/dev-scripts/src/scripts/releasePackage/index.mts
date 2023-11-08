@@ -16,9 +16,9 @@ import {
   step,
   updateVersion,
   publishPkg,
-} from './utils.mts'
+} from './utils.mjs'
 
-import type { IPkgInfo } from './utils.mts'
+import type { IPkgInfo } from './utils.mjs'
 
 export const boot = async (): Promise<void> => {
   const { branch } = getGitRepoInfo()
