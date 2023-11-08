@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.0...@mango-scripts/esp-config@2.0.1) (2023-11-08)
+
+
+### Features
+
+* 升级依赖包&&新增脚本 ([f3a00a3](https://github.com/AlbertLin0923/mango-scripts/commit/f3a00a3504b36d95aff0efeabbecad4c08e778c5))
+
 ## [2.0.0](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@1.0.3...@mango-scripts/esp-config@2.0.0) (2023-10-07)
 
 

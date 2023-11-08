@@ -15,7 +15,6 @@
   "author": "AlbertLin0923",
   "scripts": {
     "build": "pnpm -r --filter './packages/**' run build",
-    "ci-publish": "tsx scripts/publishCI.ts",
     "coverage": "vitest run --coverage",
     "cz": "git add . && git cz",
     "dev": "pnpm -r --filter './packages/**' run dev",
@@ -26,14 +25,14 @@
     "lint:prettier": "prettier ./ --write --check",
     "lint:stylelint": "stylelint \"**/*.{less,scss,sass,stylus,styl,css}\" --fix",
     "prepare": "husky install",
-    "release": "tsx scripts/release.ts",
+    "release": "dev-scripts releasePackage",
     "test-unit": "vitest run"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
     "@mango-scripts/esp-config": "^2.0.0",
-    "@mango-scripts/dev-scripts": "^2.0.3",
+    "@mango-scripts/dev-scripts": "^2.0.5",
     "@types/fs-extra": "^11.0.3",
     "@types/minimist": "^1.2.4",
     "@types/node": "^18.15.5",

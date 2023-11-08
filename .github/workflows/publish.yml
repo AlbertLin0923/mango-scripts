@@ -29,6 +29,6 @@ jobs:
         run: pnpm install
 
       - name: Publish package
-        run: pnpm run ci-publish ${{ github.ref_name }}
+        run: pnpm run release --tag ${{ github.ref_name }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

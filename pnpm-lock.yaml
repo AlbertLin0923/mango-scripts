@@ -6,7 +6,7 @@ importers:
     specifiers:
       '@commitlint/cli': ^18.2.0
       '@commitlint/config-conventional': ^18.1.0
-      '@mango-scripts/dev-scripts': ^2.0.3
+      '@mango-scripts/dev-scripts': ^2.0.5
       '@mango-scripts/esp-config': ^2.0.0
       '@types/fs-extra': ^11.0.3
       '@types/minimist': ^1.2.4
@@ -35,7 +35,7 @@ importers:
     devDependencies:
       '@commitlint/cli': 18.2.0_typescript@5.2.2
       '@commitlint/config-conventional': 18.1.0
-      '@mango-scripts/dev-scripts': 2.0.3
+      '@mango-scripts/dev-scripts': 2.0.5
       '@mango-scripts/esp-config': 2.0.0_hylujpixtsfmb27j3wn3k2bena
       '@types/fs-extra': 11.0.4
       '@types/minimist': 1.2.5
@@ -3276,8 +3276,8 @@ packages:
       dayjs: 1.11.10
     dev: false
 
-  /@mango-scripts/dev-scripts/2.0.3:
-    resolution: {integrity: sha512-08LCQEHzlOa8JLtkjViI1Lej5djREaLhoiUo/kllKypCVT5Nl7dB6E8vI78NqxN0hMerRg8zI0pL+t+7e6ykXQ==}
+  /@mango-scripts/dev-scripts/2.0.5:
+    resolution: {integrity: sha512-yNYdKzaVTqHY0d+LqzYXnhzxggPNQbNHhHVwoEr30YbikWg6m7AzDuz0FwwwhHGGZSlbXwlmSY3FlTSpH4FTxQ==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     dependencies:
