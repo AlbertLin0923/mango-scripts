@@ -7,7 +7,8 @@
     "dev-scripts",
     "changeExtname",
     "addPackage",
-    "copyDist"
+    "copyDist",
+    "releasePackage"
   ],
   "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/dev-scripts#readme",
   "bugs": {
@@ -35,30 +36,36 @@
   "dependencies": {
     "@mango-scripts/utils": "^2.0.0",
     "cli-table": "^0.3.11",
-    "commander": "^11.0.0",
+    "commander": "^11.1.0",
     "consola": "^3.2.3",
-    "envinfo": "^7.10.0",
+    "envinfo": "^7.11.0",
     "execa": "^8.0.1",
     "fs-extra": "^11.1.1",
     "git-repo-info": "^2.1.1",
-    "glob": "^10.3.4",
+    "glob": "^10.3.10",
     "inquirer": "^9.2.11",
-    "inquirer-autocomplete-prompt": "^3.0.0",
+    "inquirer-autocomplete-prompt": "^3.0.1",
     "inquirer-fuzzy-path": "^2.3.0",
     "lodash": "^4.17.21",
     "npm-keyword": "^7.0.0",
     "package-json": "^8.1.1",
     "picocolors": "^1.0.0",
-    "undici": "^5.24.0"
+    "undici": "^5.27.0",
+    "prompts": "^2.4.2",
+    "semver": "^7.5.4",
+    "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "@types/cli-table": "^0.3.2",
-    "@types/envinfo": "^7.8.1",
-    "@types/fs-extra": "^11.0.2",
-    "@types/inquirer": "^9.0.3",
-    "@types/inquirer-autocomplete-prompt": "^3.0.0",
-    "@types/inquirer-fuzzy-path": "^2.3.6",
-    "@types/lodash": "^4.14.198"
+    "@types/cli-table": "^0.3.3",
+    "@types/envinfo": "^7.8.2",
+    "@types/fs-extra": "^11.0.3",
+    "@types/inquirer": "^9.0.6",
+    "@types/inquirer-autocomplete-prompt": "^3.0.2",
+    "@types/inquirer-fuzzy-path": "^2.3.8",
+    "@types/lodash": "^4.14.200",
+    "@types/prompts": "^2.4.7",
+    "@types/semver": "^7.5.4",
+    "@types/minimist": "^1.2.4"
   },
   "engines": {
     "node": ">=16.0.0"

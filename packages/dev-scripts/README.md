@@ -52,7 +52,7 @@ dev-scripts copyDist --targetDirList [targetDirList...]
 一键切换、合并、推送目标分支
 
 ```bash
-dev-scripts gitGkd --targetDirList [targetDirList...]
+dev-scripts gitGkd --targetBranch [targetBranch...]
 ```
 
 ## License

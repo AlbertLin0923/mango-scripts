@@ -37,12 +37,12 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@babel/core": "^7.22.20",
-    "@babel/parser": "^7.22.16",
-    "@babel/runtime": "^7.22.15",
-    "@babel/types": "^7.22.19",
+    "@babel/core": "^7.23.2",
+    "@babel/parser": "^7.23.0",
+    "@babel/runtime": "^7.23.2",
+    "@babel/types": "^7.23.0",
     "fs-extra": "^11.1.1",
-    "glob": "^10.3.4",
+    "glob": "^10.3.10",
     "hyntax": "^1.1.9",
     "pug": "^3.0.2",
     "svelte": "^3.59.0",
@@ -50,9 +50,9 @@
     "vue-template-compiler": "^2.7.14"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.20.2",
-    "@types/fs-extra": "^11.0.2",
-    "@types/pug": "^2.0.6"
+    "@types/babel__core": "^7.20.3",
+    "@types/fs-extra": "^11.0.3",
+    "@types/pug": "^2.0.8"
   },
   "engines": {
     "node": ">=16.0.0"

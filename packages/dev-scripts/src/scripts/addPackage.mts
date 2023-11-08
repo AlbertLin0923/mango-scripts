@@ -2,9 +2,10 @@ import pico from 'picocolors'
 import consola from 'consola'
 import npmKeyword from 'npm-keyword'
 import packageJson from 'package-json'
-import { run, getPkgInfoList } from '../utils/index.mjs'
 import inquirer from 'inquirer'
 import inquirerPrompt from 'inquirer-autocomplete-prompt'
+
+import { run, getPkgInfoList } from '../utils/index.mjs'
 
 inquirer.registerPrompt('autocomplete', inquirerPrompt)
 

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-import fs from 'fs-extra'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+
+import fs from 'fs-extra'
 import pico from 'picocolors'
 import { Command } from 'commander'
 import envinfo from 'envinfo'
@@ -12,6 +13,7 @@ import changeExtname from './scripts/changeExtname.mjs'
 import addPackage from './scripts/addPackage.mjs'
 import copyDist from './scripts/copyDist.mjs'
 import gitGkd from './scripts/gitGkd.mjs'
+import releasePackage from './scripts/releasePackage/index.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const packageJson = fs.readJSONSync(
@@ -76,6 +78,14 @@ program
   .allowUnknownOption()
   .action((options) => {
     gitGkd(options)
+  })
+
+program
+  .command('releasePackage')
+  .description('发布Monorepo模式下的npm包')
+  .allowUnknownOption()
+  .action(() => {
+    releasePackage()
   })
 
 program

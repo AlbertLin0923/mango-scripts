@@ -246,7 +246,6 @@ const config = {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/self-closing-comp': 'warn',
-
     'react/jsx-sort-props': [
       'warn',
       {
@@ -255,6 +254,25 @@ const config = {
         shorthandLast: true,
         ignoreCase: true,
         noSortAlphabetically: false,
+      },
+    ],
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'unknown',
+          'sibling',
+          'parent',
+          'index',
+          'object',
+          'type',
+        ],
+        pathGroups: [],
+        'newlines-between': 'always',
+        warnOnUnassignedImports: true,
       },
     ],
   },
@@ -273,7 +291,6 @@ const config = {
         ecmaFeatures: {
           jsx: true,
         },
-
         // typescript-eslint specific options
         warnOnUnsupportedTypeScriptVersion: true,
       },

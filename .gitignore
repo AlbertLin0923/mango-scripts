@@ -4,8 +4,6 @@
 # @mango-scripts/i18n-utils
 /packages/i18n-utils/example/contentHash/
 
-
-
 # 以下同.gitignore
 # dependencies
 node_modules
