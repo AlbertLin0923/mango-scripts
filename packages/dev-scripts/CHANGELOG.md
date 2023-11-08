@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.3...@mango-scripts/dev-scripts@2.0.4) (2023-11-08)
+
+
+### Bug Fixes
+
+* 修复dev-scripts脚本问题 ([a1ee038](https://github.com/AlbertLin0923/mango-scripts/commit/a1ee038b4fe440802c06bcd9ab6d109826dd36cc))
+
 ## [2.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.2...@mango-scripts/dev-scripts@2.0.3) (2023-11-08)
 
 
