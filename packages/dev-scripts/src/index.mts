@@ -13,7 +13,7 @@ import changeExtname from './scripts/changeExtname.mjs'
 import addPackage from './scripts/addPackage.mjs'
 import copyDist from './scripts/copyDist.mjs'
 import gitGkd from './scripts/gitGkd.mjs'
-import releasePackage from './scripts/releasePackage/index.mjs'
+import releasePackage from './scripts/releasePackage.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const packageJson = fs.readJSONSync(
@@ -25,6 +25,7 @@ checkNodeVersion(engines.node, name)
 checkUpdate(packageJson)
 
 console.log(gs('@mango-scripts/dev-scripts'))
+console.log()
 
 const program = new Command()
 program.version(`${name} ${version}`).usage('<command> [options]')

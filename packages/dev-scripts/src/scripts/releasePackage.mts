@@ -16,9 +16,9 @@ import {
   step,
   updateVersion,
   publishPkg,
-} from './utils.mjs'
+} from '../utils/index.mjs'
 
-import type { IPkgInfo } from './utils.mjs'
+import type { IPkgInfo } from '../utils/index.mjs'
 
 export const boot = async (): Promise<void> => {
   const { branch } = getGitRepoInfo()
@@ -26,22 +26,20 @@ export const boot = async (): Promise<void> => {
 
   let targetVersion: string | undefined
 
-  const pkgInfoList: IPkgInfo[] = await getPkgInfoList(
-    path.resolve(process.cwd(), './packages'),
-  )
+  const pkgList = await getPkgInfoList(['./packages'])
 
   const { pkg }: { pkg: IPkgInfo } = await prompts({
     type: 'select',
     name: 'pkg',
     message: 'Select package',
-    choices: pkgInfoList.map((i) => ({ value: i, title: i.pkgName })),
+    choices: pkgList.map((i) => ({ value: i, title: i.pkgName })),
   })
 
   if (!pkg) return
 
-  await logRecentCommits(pkg.pkgName)
+  const { pkgName, pkgJsonFilePath, pkgDirPath, pkgCurrentVersion } = pkg
 
-  const { pkgName, pkgPath, pkgDirPath, pkgCurrentVersion } = pkg
+  await logRecentCommits(pkgName)
 
   if (!targetVersion) {
     const { releaseType }: { releaseType: string } = await prompts({
@@ -82,7 +80,7 @@ export const boot = async (): Promise<void> => {
 
   step('\nUpdating package version...')
 
-  await updateVersion(pkgPath, targetVersion)
+  await updateVersion(pkgJsonFilePath, targetVersion)
 
   step('\nGenerating changelog...')
 
@@ -157,7 +155,7 @@ export const publishCI = async (tag: string) => {
 
 const releasePackage = async () => {
   const processArgs = minimist(process.argv.slice(2))
-  const tag = processArgs._[0]
+  const { tag } = processArgs
   if (tag) {
     publishCI(tag)
   } else {
