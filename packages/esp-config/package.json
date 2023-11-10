@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/esp-config",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "一个包含 eslint，stylelint，prettier 的配置文件合集",
   "keywords": [
     "mango-scripts",
