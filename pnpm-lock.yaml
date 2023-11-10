@@ -7,7 +7,7 @@ importers:
       '@commitlint/cli': ^18.2.0
       '@commitlint/config-conventional': ^18.1.0
       '@mango-scripts/dev-scripts': ^2.0.5
-      '@mango-scripts/esp-config': 2.0.0
+      '@mango-scripts/esp-config': ^2.0.3
       '@types/node': ^18.15.5
       '@vitest/coverage-v8': ^0.34.6
       conventional-changelog-cli: ^4.1.0
@@ -24,7 +24,7 @@ importers:
       '@commitlint/cli': 18.2.0_typescript@5.2.2
       '@commitlint/config-conventional': 18.1.0
       '@mango-scripts/dev-scripts': 2.0.5
-      '@mango-scripts/esp-config': 2.0.0_hylujpixtsfmb27j3wn3k2bena
+      '@mango-scripts/esp-config': 2.0.3_hylujpixtsfmb27j3wn3k2bena
       '@types/node': 18.18.9
       '@vitest/coverage-v8': 0.34.6_vitest@0.34.6
       conventional-changelog-cli: 4.1.0
@@ -3274,8 +3274,8 @@ packages:
       undici: 5.27.2
     dev: true
 
-  /@mango-scripts/esp-config/2.0.0_hylujpixtsfmb27j3wn3k2bena:
-    resolution: {integrity: sha512-Y5w6/U4iygPbkW8+s9YvQFsYVBJ2IO4pKdifYvB5qwe2Bua3VuIjZq4lfWRSwcfNXCY4DRZhkzkxL2rL655z1Q==}
+  /@mango-scripts/esp-config/2.0.3_hylujpixtsfmb27j3wn3k2bena:
+    resolution: {integrity: sha512-DmSAu56XK2XSnk/6Ne1qpdF3uOdcWTG4hvWY+BwHw1BwkyfH1Otkk0PE5S5s9R9hlX+uPX8z9fj7mWWDvoAxgg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       eslint: '>= 8.50.0'
