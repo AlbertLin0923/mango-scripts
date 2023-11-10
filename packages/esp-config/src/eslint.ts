@@ -2,16 +2,6 @@
 // Inspired by https://github.com/facebook/create-react-app/tree/main/packages/eslint-config-react-app
 // Inspired by https://github.com/umijs/umi/blob/master/packages/lint/src/config/eslint/legacy.ts
 
-// Fix eslint shareable config (https://github.com/eslint/eslint/issues/3458)
-require('@rushstack/eslint-patch/modern-module-resolution')
-
-// The ESLint browser environment defines all browser globals as valid,
-// even though most people don't know some of them exist (e.g. `name` or `status`).
-// This is dangerous as it hides accidentally undefined variables.
-// We blacklist the globals that we deem potentially confusing.
-// To use them, explicitly reference them, e.g. `window.name` or `window.status`.
-const restrictedGlobals = require('confusing-browser-globals')
-
 const config = {
   root: true,
   extends: [
@@ -114,7 +104,6 @@ const config = {
     'no-this-before-super': 'warn',
     'no-throw-literal': 'warn',
     'no-undef': 'error',
-    'no-restricted-globals': ['error'].concat(restrictedGlobals),
     'no-unreachable': 'warn',
     'no-unused-expressions': [
       'error',
@@ -256,25 +245,25 @@ const config = {
         noSortAlphabetically: false,
       },
     ],
-    // 'import/order': [
-    //   'error',
-    //   {
-    //     groups: [
-    //       'builtin',
-    //       'external',
-    //       'internal',
-    //       'unknown',
-    //       'sibling',
-    //       'parent',
-    //       'index',
-    //       'object',
-    //       'type',
-    //     ],
-    //     pathGroups: [],
-    //     'newlines-between': 'always',
-    //     warnOnUnassignedImports: true,
-    //   },
-    // ],
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'unknown',
+          'sibling',
+          'parent',
+          'index',
+          'object',
+          'type',
+        ],
+        pathGroups: [],
+        'newlines-between': 'always',
+        warnOnUnassignedImports: true,
+      },
+    ],
   },
   overrides: [
     {

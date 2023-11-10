@@ -6,10 +6,11 @@ export default defineConfig([
     entry: ['src'],
     outDir: 'dist/cjs',
     bundle: false,
-    splitting: false,
+    splitting: true,
     clean: true,
     dts: true,
     shims: true,
+    cjsInterop: true,
     outExtension() {
       return {
         js: `.cjs`,
