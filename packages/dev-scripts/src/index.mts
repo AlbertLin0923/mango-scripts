@@ -32,7 +32,7 @@ program.version(`${name} ${version}`).usage('<command> [options]')
 
 program
   .command('changeExtname')
-  .description('转换文件后缀名')
+  .description('批量转换文件后缀名')
   .option('-i, --input <dirPath>', '输入目录路径')
   .option('-o, --output <dirPath>', '输出目录路径')
   .option('-r, --originExt <string>', '原始后缀名')
@@ -44,7 +44,7 @@ program
 
 program
   .command('addPackage')
-  .description('快捷添加多包仓库的子目录依赖包')
+  .description('在Monorepo仓库模式下，快捷添加子目录依赖包')
   .option(
     '-t, --targetDirList [targetDirList...]',
     '需要添加依赖包的子目录列表',
@@ -53,6 +53,14 @@ program
   .allowUnknownOption()
   .action((options) => {
     addPackage(options)
+  })
+
+program
+  .command('releasePackage')
+  .description('在Monorepo仓库模式下，发布npm包')
+  .allowUnknownOption()
+  .action(() => {
+    releasePackage()
   })
 
 program
@@ -79,14 +87,6 @@ program
   .allowUnknownOption()
   .action((options) => {
     gitGkd(options)
-  })
-
-program
-  .command('releasePackage')
-  .description('发布Monorepo模式下的npm包')
-  .allowUnknownOption()
-  .action(() => {
-    releasePackage()
   })
 
 program

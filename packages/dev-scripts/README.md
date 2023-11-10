@@ -2,7 +2,7 @@
 @mango-scripts/dev-scripts
 </h1>
 <p align="center">
-一些便捷的前端开发脚本
+一些便捷的前端开发 Node.js 脚本
 <p>
 <p align="center">
 <a href="https://www.npmjs.com/package/@mango-scripts/dev-scripts" target="__blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/@mango-scripts/dev-scripts?label=" alt="NPM version"></a>
@@ -25,7 +25,7 @@ pnpm add @mango-scripts/dev-scripts -D
 
 ### changeExtname
 
-转换文件后缀名
+批量转换文件后缀名
 
 ```bash
 dev-scripts changeExtname --input <dirPath> --output <dirPath> --originExt <string> --targetExt <string>
@@ -33,10 +33,18 @@ dev-scripts changeExtname --input <dirPath> --output <dirPath> --originExt <stri
 
 ### addPackage
 
-快捷添加多包仓库的子目录依赖包
+在Monorepo仓库模式下，快捷添加子目录依赖包
 
 ```bash
 dev-scripts addPackage --targetDirList [targetDirList...]
+```
+
+### releasePackage
+
+在Monorepo仓库模式下，发布npm包
+
+```bash
+dev-scripts releasePackage
 ```
 
 ### copyDist

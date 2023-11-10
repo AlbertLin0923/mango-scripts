@@ -1,7 +1,7 @@
 {
   "name": "@mango-scripts/dev-scripts",
   "version": "2.0.5",
-  "description": "一些便捷的前端开发脚本",
+  "description": "一些便捷的前端开发 Node.js 脚本",
   "keywords": [
     "mango-scripts",
     "dev-scripts",
@@ -47,13 +47,13 @@
     "inquirer-autocomplete-prompt": "^3.0.1",
     "inquirer-fuzzy-path": "^2.3.0",
     "lodash": "^4.17.21",
+    "minimist": "^1.2.8",
     "npm-keyword": "^7.0.0",
     "package-json": "^8.1.1",
     "picocolors": "^1.0.0",
-    "undici": "^5.27.0",
     "prompts": "^2.4.2",
     "semver": "^7.5.4",
-    "minimist": "^1.2.8"
+    "undici": "^5.27.0"
   },
   "devDependencies": {
     "@types/cli-table": "^0.3.3",
@@ -63,9 +63,9 @@
     "@types/inquirer-autocomplete-prompt": "^3.0.2",
     "@types/inquirer-fuzzy-path": "^2.3.8",
     "@types/lodash": "^4.14.200",
+    "@types/minimist": "^1.2.4",
     "@types/prompts": "^2.4.7",
-    "@types/semver": "^7.5.4",
-    "@types/minimist": "^1.2.4"
+    "@types/semver": "^7.5.4"
   },
   "engines": {
     "node": ">=16.0.0"

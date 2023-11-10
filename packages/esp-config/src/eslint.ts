@@ -256,25 +256,25 @@ const config = {
         noSortAlphabetically: false,
       },
     ],
-    'import/order': [
-      'error',
-      {
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'unknown',
-          'sibling',
-          'parent',
-          'index',
-          'object',
-          'type',
-        ],
-        pathGroups: [],
-        'newlines-between': 'always',
-        warnOnUnassignedImports: true,
-      },
-    ],
+    // 'import/order': [
+    //   'error',
+    //   {
+    //     groups: [
+    //       'builtin',
+    //       'external',
+    //       'internal',
+    //       'unknown',
+    //       'sibling',
+    //       'parent',
+    //       'index',
+    //       'object',
+    //       'type',
+    //     ],
+    //     pathGroups: [],
+    //     'newlines-between': 'always',
+    //     warnOnUnassignedImports: true,
+    //   },
+    // ],
   },
   overrides: [
     {
