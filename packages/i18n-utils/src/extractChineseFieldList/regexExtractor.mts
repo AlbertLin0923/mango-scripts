@@ -1,6 +1,6 @@
-import { deleteCodeComments } from '../utils/index'
+import { deleteCodeComments } from '../utils/index.mjs'
 
-const regexExtractor = (code: string): string[] => {
+export const regexExtractor = (code: string): string[] => {
   const regex =
     /[`"'][\u4e00-\u9fa5]([\u4e00-\u9fa5,.!?，。！？;:；：、~/（）\-——(){}<>\d\w\s])*[\u4e00-\u9fa5,.!?，。！？;:；：、~/（）\-——(){}<>\d\w][`"']/gm
 
@@ -18,5 +18,3 @@ const regexExtractor = (code: string): string[] => {
   }
   return resultList
 }
-
-export default regexExtractor

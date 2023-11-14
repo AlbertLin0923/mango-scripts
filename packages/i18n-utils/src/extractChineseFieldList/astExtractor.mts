@@ -9,7 +9,7 @@ import * as hyntax from 'hyntax'
 import {
   collectDisableRuleCommentlocation,
   inDisableRuleCommentlocation,
-} from '../utils/index'
+} from '../utils/index.mts'
 
 // ------------------------vue-------------------------------
 const MATCH_I18N_FUNC_REGEX = /(?<=\$t\()([\w\W]*?)(?=\))/g
@@ -266,7 +266,7 @@ const extractInJsAndTs = (code: string): string[] => {
 
 // ------------------------------- js & ts end------------------------------------
 
-const astExtractor = (code: string, filePath: string) => {
+export const astExtractor = (code: string, filePath: string) => {
   if (filePath.endsWith('.vue')) {
     return extractInVue(code)
   } else if (filePath.endsWith('.svelte')) {
@@ -282,5 +282,3 @@ const astExtractor = (code: string, filePath: string) => {
     return []
   }
 }
-
-export default astExtractor

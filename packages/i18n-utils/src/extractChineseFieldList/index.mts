@@ -1,6 +1,7 @@
 import * as fs from 'fs-extra'
-import regexExtractor from './regexExtractor'
-import astExtractor from './astExtractor'
+
+import { regexExtractor } from './regexExtractor.mjs'
+import { astExtractor } from './astExtractor.mjs'
 
 import {
   uniArr,
@@ -8,7 +9,7 @@ import {
   matchModuleMark,
   getContentHash,
   formatLocaleKeyList,
-} from '../utils/index'
+} from '../utils/index.mjs'
 
 export type LocaleItem = {
   'zh-CN': string
@@ -23,7 +24,7 @@ export interface ExecResult {
 
 export type Extractor = 'ast' | 'regex'
 
-const bootstrap = async (
+export const extractChineseFieldList = async (
   extractor: Extractor,
   resolvePathList: string[],
   filterExtNameList: string[],
@@ -104,5 +105,3 @@ const bootstrap = async (
 
   return formatLocaleList
 }
-
-export default bootstrap

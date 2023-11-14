@@ -1,6 +1,7 @@
 import * as path from 'path'
-import * as fs from 'fs-extra'
 import * as crypto from 'crypto'
+
+import * as fs from 'fs-extra'
 
 export type LocaleItem = {
   'zh-CN': string
