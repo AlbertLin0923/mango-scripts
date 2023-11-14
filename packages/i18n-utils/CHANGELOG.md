@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@2.0.0...@mango-scripts/i18n-utils@2.0.1) (2023-11-14)
+
+
+### Features
+
+* 改i18n-utils为纯ESM包 ([64b2324](https://github.com/AlbertLin0923/mango-scripts/commit/64b2324e07fa0cdee7f2079b8fed01c168cf7894))
+* 升级依赖包&&新增脚本 ([f3a00a3](https://github.com/AlbertLin0923/mango-scripts/commit/f3a00a3504b36d95aff0efeabbecad4c08e778c5))
+
 ## [2.0.0](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@1.0.7...@mango-scripts/i18n-utils@2.0.0) (2023-10-07)
 
 
