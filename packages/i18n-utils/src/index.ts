@@ -1,2 +1,2 @@
-export { extractChineseFieldList } from './extractChineseFieldList/index.mts'
-export { formatLocaleStr, formatLocaleObj } from './utils/index.ts'
+export { extractChineseFieldList } from './extractChineseFieldList'
+export { formatLocaleStr, formatLocaleObj } from './utils'

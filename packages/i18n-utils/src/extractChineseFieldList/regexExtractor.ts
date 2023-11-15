@@ -1,4 +1,4 @@
-import { deleteCodeComments } from '../utils/index.ts'
+import { deleteCodeComments } from '../utils'
 
 export const regexExtractor = (code: string): string[] => {
   const regex =
