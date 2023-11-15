@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@2.0.5...@mango-scripts/i18n-utils@2.0.6) (2023-11-15)
+
+
+### Features
+
+* 改i18n-utils支持cjs和esm ([8d04844](https://github.com/AlbertLin0923/mango-scripts/commit/8d0484470c2a157bcdbef4db4370d51a37cf8277))
+
 ## [2.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@2.0.4...@mango-scripts/i18n-utils@2.0.5) (2023-11-15)
 
 
