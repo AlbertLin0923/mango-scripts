@@ -10,11 +10,6 @@ export default defineConfig([
     clean: true,
     dts: true,
     shims: true,
-    outExtension() {
-      return {
-        js: `.cjs`,
-      }
-    },
   },
   {
     format: 'esm',
@@ -25,10 +20,5 @@ export default defineConfig([
     clean: true,
     dts: true,
     shims: true,
-    outExtension() {
-      return {
-        js: `.mjs`,
-      }
-    },
   },
 ])

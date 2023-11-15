@@ -1,5 +1,6 @@
 const path = require('path')
-const { extractChineseFieldList } = require('../dist/cjs/index')
+
+const { extractChineseFieldList } = require('../dist/cjs')
 const projectPath = path.resolve(__dirname, './sourceCode/')
 
 async function bootstrap() {
