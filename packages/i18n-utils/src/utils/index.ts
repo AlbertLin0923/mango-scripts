@@ -83,6 +83,7 @@ export const uniArr = (objArr: LocaleItem[]) => {
 
 export const matchModuleMark = (code: string): string => {
   const MATCH_MODULE_MARK_A = /(?<=\/\/.*?translateModules:.*?\[)(.*?)(?=\])/g
+  // eslint-disable-next-line no-useless-escape
   const MATCH_MODULE_MARK_B = /(?<=\<!--.*?translateModules:.*?\[)(.*?)(?=\])/g
   const MATCH_STRING_CONTENT = /(?<=['"`])(.*?)(?=['"`])/g
   const result =

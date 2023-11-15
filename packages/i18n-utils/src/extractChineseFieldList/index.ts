@@ -9,7 +9,7 @@ import {
   matchModuleMark,
   getContentHash,
   formatLocaleKeyList,
-} from '../utils/index.mts'
+} from '../utils/index.ts'
 
 export type LocaleItem = {
   'zh-CN': string

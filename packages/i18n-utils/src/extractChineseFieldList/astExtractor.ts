@@ -9,7 +9,7 @@ import * as hyntax from 'hyntax'
 import {
   collectDisableRuleCommentlocation,
   inDisableRuleCommentlocation,
-} from '../utils/index.mts'
+} from '../utils/index.ts'
 
 // ------------------------vue-------------------------------
 const MATCH_I18N_FUNC_REGEX = /(?<=\$t\()([\w\W]*?)(?=\))/g
@@ -116,7 +116,7 @@ const extractInHtmlOfSvelte = (templateAst: any): string[] => {
     if (!ast.children) {
       if (ast.data) {
         const t = ast.data.match(INCLUDE_CHINESE_CHAR)
-        t ? arr.push(...t) : ''
+        t && arr.push(...t)
       }
     } else {
       ast.attributes &&
