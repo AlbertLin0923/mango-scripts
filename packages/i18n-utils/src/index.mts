@@ -1,2 +1,2 @@
-export { extractChineseFieldList } from './extractChineseFieldList/index.mjs'
-export { formatLocaleStr, formatLocaleObj } from './utils/index.mjs'
+export { extractChineseFieldList } from './extractChineseFieldList/index.mts'
+export { formatLocaleStr, formatLocaleObj } from './utils/index.mts'
