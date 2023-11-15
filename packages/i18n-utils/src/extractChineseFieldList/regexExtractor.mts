@@ -1,4 +1,4 @@
-import { deleteCodeComments } from '../utils'
+import { deleteCodeComments } from '../utils/index.mjs'
 
 export const regexExtractor = (code: string): string[] => {
   const regex =

@@ -17,6 +17,8 @@
 pnpm add @mango-scripts/i18n-utils
 ```
 
+> 注意：这是一个 [纯ESM包](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c#pure-esm-package)
+
 ## License
 
 [MIT](./LICENSE)

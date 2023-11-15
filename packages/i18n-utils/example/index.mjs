@@ -1,12 +1,11 @@
-const path = require('path')
+import path from 'node:path'
 
-const { extractChineseFieldList } = require('../dist/cjs')
-const projectPath = path.resolve(__dirname, './sourceCode/')
+import { extractChineseFieldList } from '../dist/esm/index.mjs'
 
 async function bootstrap() {
   const result = await extractChineseFieldList(
     'ast',
-    [projectPath],
+    [path.resolve(process.cwd(), './sourceCode/')],
     ['.jsx', '.vue'],
   )
   console.log('result', result)

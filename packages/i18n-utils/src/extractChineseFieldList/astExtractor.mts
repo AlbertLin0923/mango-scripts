@@ -9,7 +9,7 @@ import * as hyntax from 'hyntax'
 import {
   collectDisableRuleCommentlocation,
   inDisableRuleCommentlocation,
-} from '../utils'
+} from '../utils/index.mjs'
 
 // ------------------------vue-------------------------------
 const MATCH_I18N_FUNC_REGEX = /(?<=\$t\()([\w\W]*?)(?=\))/g

@@ -1,7 +1,7 @@
-import * as fs from 'fs-extra'
+import fs from 'fs-extra'
 
-import { regexExtractor } from './regexExtractor'
-import { astExtractor } from './astExtractor'
+import { regexExtractor } from './regexExtractor.mjs'
+import { astExtractor } from './astExtractor.mjs'
 
 import {
   uniArr,
@@ -9,7 +9,7 @@ import {
   matchModuleMark,
   getContentHash,
   formatLocaleKeyList,
-} from '../utils'
+} from '../utils/index.mjs'
 
 export type LocaleItem = {
   'zh-CN': string

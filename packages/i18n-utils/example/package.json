@@ -2,7 +2,7 @@
   "name": "example",
   "private": true,
   "scripts": {
-    "i18n": "node index.js"
+    "dev": "node index.mjs"
   },
   "dependencies": {
     "fs-extra": "^10.1.0"
