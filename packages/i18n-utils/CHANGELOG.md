@@ -1,3 +1,10 @@
+## [2.0.10](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@2.0.9...@mango-scripts/i18n-utils@2.0.10) (2023-11-21)
+
+
+### Bug Fixes
+
+* 修复i18n-utils独立使用，会读取业务项目babel配置的问题 ([4860622](https://github.com/AlbertLin0923/mango-scripts/commit/4860622569883ea25212b38c9123790c2b493917))
+
 ## [2.0.9](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@2.0.8...@mango-scripts/i18n-utils@2.0.9) (2023-11-15)
 
 
