@@ -259,6 +259,8 @@ const extractInJsAndTs = (code: string): string[] => {
   babel.transformFromAstSync(ast, code, {
     presets: null,
     plugins: [[i18nPlugin]],
+    babelrc: false,
+    configFile: false,
   })
 
   return arr

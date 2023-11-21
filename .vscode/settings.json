@@ -78,8 +78,6 @@
     "html",
     "vue",
     "markdown",
-    "json",
-    "jsonc",
     "yaml"
   ],
   "eslint.probe": [
@@ -90,8 +88,6 @@
     "html",
     "vue",
     "markdown",
-    "json",
-    "jsonc",
     "yaml"
   ],
   "eslint.workingDirectories": [

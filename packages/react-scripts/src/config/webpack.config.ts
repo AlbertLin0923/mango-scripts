@@ -1,8 +1,8 @@
-import fs from 'fs-extra'
 import path from 'path'
+
+import fs from 'fs-extra'
 import webpack from 'webpack'
 import resolve from 'resolve'
-
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin'
@@ -13,7 +13,6 @@ import StylelintPlugin from 'stylelint-webpack-plugin'
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import WebpackBar from 'webpackbar'
-
 import InterpolateHtmlPlugin from 'react-dev-utils/InterpolateHtmlPlugin'
 import InlineChunkHtmlPlugin from 'react-dev-utils/InlineChunkHtmlPlugin'
 import ForkTsCheckerWebpackPlugin from 'react-dev-utils/ForkTsCheckerWebpackPlugin'
@@ -23,10 +22,11 @@ import ModuleScopePlugin from 'react-dev-utils/ModuleScopePlugin'
 import getPaths from './getPaths'
 import getModules from './getModules'
 import { getClientEnvironment } from './getEnv'
-import { getHash } from '../utils'
 import { getJsMinimizer, getCssMinimizer } from './getMinimizerConfig'
 import { getModuleRules } from './getModuleRules'
 import { getUserConfig, deepMergeWithArray } from './getUserConfig'
+
+import { getHash } from '../utils'
 
 import type { Configuration } from 'webpack'
 
