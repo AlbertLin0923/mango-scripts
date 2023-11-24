@@ -29,8 +29,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsup --watch",
     "build": "tsup",
+    "dev": "tsup --watch",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
@@ -38,6 +38,7 @@
     "cli-table": "^0.3.11",
     "commander": "^11.1.0",
     "consola": "^3.2.3",
+    "conventional-changelog-cli": "^4.1.0",
     "envinfo": "^7.11.0",
     "execa": "^8.0.1",
     "fs-extra": "^11.1.1",

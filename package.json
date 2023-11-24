@@ -29,13 +29,14 @@
     "cz": "git add . && git cz"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.2.0",
-    "@commitlint/config-conventional": "^18.1.0",
-    "@mango-scripts/esp-config": "^2.0.3",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "@mango-scripts/dev-scripts": "^2.0.5",
+    "@mango-scripts/esp-config": "^2.0.3",
     "@types/node": "^18.15.5",
     "@vitest/coverage-v8": "^0.34.6",
-    "conventional-changelog-cli": "^4.1.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.52.0",
     "husky": "^8.0.3",
     "lint-staged": "^15.0.2",

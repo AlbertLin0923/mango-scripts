@@ -141,7 +141,7 @@ export const publishCI = async (tag: string) => {
 
   const rawPkgName = pkgName.split('/')[1]
 
-  step(`Publishing ${rawPkgName} package...`)
+  step(`Publishing ${pkgName} package...`)
 
   await publishPkg(
     path.join(process.cwd(), `./packages/${rawPkgName}`),
