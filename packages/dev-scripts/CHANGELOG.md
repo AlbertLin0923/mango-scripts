@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.5...@mango-scripts/dev-scripts@2.0.6) (2023-11-24)
+
+
+### Features
+
+* 增加commitizen ([4e9c07a](https://github.com/AlbertLin0923/mango-scripts/commit/4e9c07ab65859ce0de6528d96364678e6bc5d61e))
+
 ## [2.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.4...@mango-scripts/dev-scripts@2.0.5) (2023-11-08)
 
 ## [2.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.3...@mango-scripts/dev-scripts@2.0.4) (2023-11-08)
