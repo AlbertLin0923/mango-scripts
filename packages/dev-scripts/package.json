@@ -23,7 +23,7 @@
   "author": "AlbertLin0923",
   "type": "module",
   "bin": {
-    "dev-scripts": "./dist/esm/index.mjs"
+    "dev-scripts": "./dist/esm/cli.mjs"
   },
   "files": [
     "dist"

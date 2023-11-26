@@ -2,7 +2,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import getCacheIdentifier from 'react-dev-utils/getCacheIdentifier'
 import getCSSModuleLocalIdent from 'react-dev-utils/getCSSModuleLocalIdent'
 
-import getPaths from './getPaths'
+import { getPaths } from './getPaths'
 import { getUserConfig, deepMergeWithArray } from './getUserConfig'
 
 import type { RuleSetRule } from 'webpack'
@@ -213,7 +213,6 @@ export const getModuleRules = () => {
                 },
               ],
             ],
-            // @remove-on-eject-begin
             babelrc: false,
             configFile: false,
             // Make sure we have a unique cache identifier, erring on the
@@ -230,7 +229,6 @@ export const getModuleRules = () => {
                 'react-scripts',
               ],
             ),
-            // @remove-on-eject-end
             plugins: [
               isEnvDevelopment && require.resolve('react-refresh/babel'),
               require.resolve('babel-plugin-jsx-css-modules'),

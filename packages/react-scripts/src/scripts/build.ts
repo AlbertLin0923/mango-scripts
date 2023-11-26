@@ -1,7 +1,6 @@
 import fs from 'fs-extra'
 import pico from 'picocolors'
 import webpack from 'webpack'
-
 import checkRequiredFiles from 'react-dev-utils/checkRequiredFiles'
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages'
 import FileSizeReporter from 'react-dev-utils/FileSizeReporter'
@@ -9,7 +8,7 @@ import printBuildError from 'react-dev-utils/printBuildError'
 import { checkBrowsers } from 'react-dev-utils/browsersHelper'
 
 import { applyEnv } from '../config/getEnv'
-import getPaths from '../config/getPaths'
+import { getPaths } from '../config/getPaths'
 import { getWebpackConfig } from '../config/webpack.config'
 
 import type { Configuration } from 'webpack'

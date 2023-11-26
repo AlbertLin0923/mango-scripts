@@ -2,7 +2,6 @@ import fs from 'fs-extra'
 import pico from 'picocolors'
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
-
 import clearConsole from 'react-dev-utils/clearConsole'
 import checkRequiredFiles from 'react-dev-utils/checkRequiredFiles'
 import {
@@ -18,12 +17,11 @@ import noopServiceWorkerMiddleware from 'react-dev-utils/noopServiceWorkerMiddle
 import ignoredFiles from 'react-dev-utils/ignoredFiles'
 import redirectServedPath from 'react-dev-utils/redirectServedPathMiddleware'
 
-import getPaths from '../config/getPaths'
+import { getPaths } from '../config/getPaths'
 import { getWebpackConfig } from '../config/webpack.config'
 import { applyEnv } from '../config/getEnv'
 import { getLocalHost } from '../utils'
-
-import getHttpsConfig from '../config/getHttpsConfig'
+import { getHttpsConfig } from '../config/getHttpsConfig'
 
 process.on('unhandledRejection', (err) => {
   throw err

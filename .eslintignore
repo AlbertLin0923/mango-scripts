@@ -2,6 +2,8 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 packages/*/CHANGELOG.md
 
+packages/i18n-utils/example/sourceCode
+
 
 # 以下同.gitignore
 # dependencies

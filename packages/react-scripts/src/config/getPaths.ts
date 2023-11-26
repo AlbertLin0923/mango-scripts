@@ -1,10 +1,11 @@
-import fs from 'fs-extra'
 import path from 'path'
 
+import fs from 'fs-extra'
 import getPublicUrlOrPath from 'react-dev-utils/getPublicUrlOrPath'
+
 import { getUserConfig } from './getUserConfig'
 
-const getPaths = () => {
+export const getPaths = () => {
   // Make sure any symlinks in the project folder are resolved:
   // https://github.com/facebook/create-react-app/issues/637
   const appDirectory = fs.realpathSync(process.cwd())
@@ -75,5 +76,3 @@ const getPaths = () => {
 
   return paths
 }
-
-export default getPaths

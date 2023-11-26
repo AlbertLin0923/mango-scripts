@@ -1,9 +1,9 @@
 import TerserPlugin from 'terser-webpack-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 
-import type { MinifyOptions } from 'terser'
-
 import { getUserConfig, deepMergeWithArray } from './getUserConfig'
+
+import type { MinifyOptions } from 'terser'
 
 export const getJsMinimizer = (): TerserPlugin<MinifyOptions> => {
   const useProfile = process.env.USE_PROFILE === 'true'

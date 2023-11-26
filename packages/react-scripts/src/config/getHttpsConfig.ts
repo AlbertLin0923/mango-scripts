@@ -1,9 +1,10 @@
-import fs from 'fs-extra'
 import path from 'path'
 import crypto from 'crypto'
+
+import fs from 'fs-extra'
 import pico from 'picocolors'
 
-import getPaths from './getPaths'
+import { getPaths } from './getPaths'
 
 // Ensure the certificate and key provided are valid and if not
 // throw an easy to debug error
@@ -43,7 +44,7 @@ const validateKeyAndCerts = ({
 }
 
 // Read file and throw an error if it doesn't exist
-function readEnvFile(file: string, type: string): Buffer {
+const readEnvFile = (file: string, type: string): Buffer => {
   if (!fs.existsSync(file)) {
     throw new Error(
       `You specified ${pico.cyan(
@@ -56,7 +57,7 @@ function readEnvFile(file: string, type: string): Buffer {
 
 // Get the https config
 // Return cert files if provided in env, otherwise just true or false
-function getHttpsConfig(): boolean | { cert: Buffer; key: Buffer } {
+export const getHttpsConfig = (): boolean | { cert: Buffer; key: Buffer } => {
   const paths = getPaths()
 
   const { SSL_CRT_FILE_PATH, SSL_KEY_FILE_PATH, USE_HTTPS } = process.env
@@ -75,5 +76,3 @@ function getHttpsConfig(): boolean | { cert: Buffer; key: Buffer } {
   }
   return useHttps
 }
-
-export default getHttpsConfig

@@ -1,5 +1,3 @@
-/* eslint-disable node/no-extraneous-import */
-
 // translate-disable-entire-file
 import React, { useState } from 'react'
 

@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import dotenv from 'dotenv'
 import dotenvExpand from 'dotenv-expand'
 
-import getPaths from './getPaths'
+import { getPaths } from './getPaths'
 import { cliEnv, recommendProductionEnv } from './getMode'
 
 import type { CliEnvType } from './getMode'

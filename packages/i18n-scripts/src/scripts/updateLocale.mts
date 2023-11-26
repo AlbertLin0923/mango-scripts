@@ -1,5 +1,6 @@
-import fs from 'fs-extra'
 import path from 'node:path'
+
+import fs from 'fs-extra'
 import pico from 'picocolors'
 import consola from 'consola'
 import Table from 'cli-table'

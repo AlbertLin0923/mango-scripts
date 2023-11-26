@@ -1,9 +1,10 @@
-import fs from 'fs-extra'
 import path from 'path'
+
+import fs from 'fs-extra'
 import pico from 'picocolors'
 import resolve from 'resolve'
 
-import getPaths from './getPaths'
+import { getPaths } from './getPaths'
 
 /**
  * Get additional module paths based on the baseUrl of a compilerOptions object.
@@ -77,7 +78,7 @@ const getWebpackAliases = (
   }
 }
 
-const getModules = () => {
+export const getModules = () => {
   const paths = getPaths()
   // Check if TypeScript is setup
   const hasTsConfig = fs.existsSync(paths.appTsConfig)
@@ -118,5 +119,3 @@ const getModules = () => {
     hasTsConfig,
   }
 }
-
-export default getModules

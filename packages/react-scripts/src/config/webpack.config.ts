@@ -19,8 +19,8 @@ import ForkTsCheckerWebpackPlugin from 'react-dev-utils/ForkTsCheckerWebpackPlug
 import ModuleNotFoundPlugin from 'react-dev-utils/ModuleNotFoundPlugin'
 import ModuleScopePlugin from 'react-dev-utils/ModuleScopePlugin'
 
-import getPaths from './getPaths'
-import getModules from './getModules'
+import { getPaths } from './getPaths'
+import { getModules } from './getModules'
 import { getClientEnvironment } from './getEnv'
 import { getJsMinimizer, getCssMinimizer } from './getMinimizerConfig'
 import { getModuleRules } from './getModuleRules'
@@ -78,8 +78,8 @@ export const getWebpackConfig = (): Configuration => {
     mode: isEnvProduction
       ? 'production'
       : isEnvDevelopment
-      ? 'development'
-      : undefined,
+        ? 'development'
+        : undefined,
     // Stop compilation early in production
     bail: isEnvProduction,
     devtool: isEnvProduction
@@ -100,14 +100,14 @@ export const getWebpackConfig = (): Configuration => {
       filename: isEnvProduction
         ? 'static/js/[name].[contenthash:16].js'
         : isEnvDevelopment
-        ? 'static/js/bundle.js'
-        : undefined,
+          ? 'static/js/bundle.js'
+          : undefined,
       // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
         ? 'static/js/[name].[contenthash:16].chunk.js'
         : isEnvDevelopment
-        ? 'static/js/[name].chunk.js'
-        : undefined,
+          ? 'static/js/[name].chunk.js'
+          : undefined,
       assetModuleFilename: 'static/media/[name].[hash][ext]',
       // webpack uses `publicPath` to determine where the app is being served from.
       // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -120,9 +120,9 @@ export const getWebpackConfig = (): Configuration => {
               .relative(paths.appSrc, info.absoluteResourcePath)
               .replace(/\\/g, '/')
         : isEnvDevelopment
-        ? (info: any) =>
-            path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
-        : undefined,
+          ? (info: any) =>
+              path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
+          : undefined,
     },
     cache: {
       type: 'filesystem',
