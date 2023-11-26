@@ -1,3 +1,16 @@
+## [2.0.1](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.0...@mango-scripts/react-scripts@2.0.1) (2023-11-26)
+
+
+### Features
+
+* 升级依赖包&&新增脚本 ([f3a00a3](https://github.com/AlbertLin0923/mango-scripts/commit/f3a00a3504b36d95aff0efeabbecad4c08e778c5))
+* 修改@mango-scripts/react-scripts一些模块导入方式 ([0fb7002](https://github.com/AlbertLin0923/mango-scripts/commit/0fb7002f5afb291016bf4463c9a35b90414d85cb))
+
+
+### Bug Fixes
+
+* 修复i18n-utils独立使用，会读取业务项目babel配置的问题 ([4860622](https://github.com/AlbertLin0923/mango-scripts/commit/4860622569883ea25212b38c9123790c2b493917))
+
 ## [2.0.0](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@1.0.15...@mango-scripts/react-scripts@2.0.0) (2023-10-07)
 
 

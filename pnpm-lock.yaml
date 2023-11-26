@@ -11,6 +11,7 @@ importers:
       '@types/node': ^18.15.5
       '@vitest/coverage-v8': ^0.34.6
       commitizen: ^4.3.0
+      conventional-changelog-cli: ^4.1.0
       cz-conventional-changelog: ^3.3.0
       eslint: ^8.54.0
       husky: ^8.0.3
@@ -29,6 +30,7 @@ importers:
       '@types/node': 18.18.9
       '@vitest/coverage-v8': 0.34.6_vitest@0.34.6
       commitizen: 4.3.0_typescript@5.3.2
+      conventional-changelog-cli: 4.1.0
       cz-conventional-changelog: 3.3.0_typescript@5.3.2
       eslint: 8.54.0
       husky: 8.0.3
