@@ -55,22 +55,6 @@ export const getWebpackConfig = (): Configuration => {
   // Get environment variables to inject into our app.
   const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1))
 
-  const reactRefreshRuntimeEntry = require.resolve('react-refresh/runtime')
-  const reactRefreshWebpackPluginRuntimeEntry = require.resolve(
-    '@pmmmwh/react-refresh-webpack-plugin',
-  )
-  const babelRuntimeEntry = require.resolve('babel-preset-react-app')
-  const babelRuntimeEntryHelpers = require.resolve(
-    '@babel/runtime/helpers/esm/assertThisInitialized',
-    { paths: [babelRuntimeEntry] },
-  )
-  const babelRuntimeRegenerator = require.resolve(
-    '@babel/runtime/regenerator',
-    {
-      paths: [babelRuntimeEntry],
-    },
-  )
-
   return {
     target: ['browserslist'],
     // Webpack noise constrained to errors and warnings
@@ -225,11 +209,19 @@ export const getWebpackConfig = (): Configuration => {
         // Make sure your source files are compiled, as they will not be processed in any way.
         new ModuleScopePlugin(paths.appSrc, [
           paths.appPackageJson,
-          reactRefreshRuntimeEntry,
-          reactRefreshWebpackPluginRuntimeEntry,
-          babelRuntimeEntry,
-          babelRuntimeEntryHelpers,
-          babelRuntimeRegenerator,
+          require.resolve('react-refresh/runtime'),
+          require.resolve('@pmmmwh/react-refresh-webpack-plugin'),
+          require.resolve('@mango-scripts/babel-preset-mango/source'),
+          require.resolve('@babel/runtime/helpers/esm/assertThisInitialized', {
+            paths: [
+              require.resolve('@mango-scripts/babel-preset-mango/source'),
+            ],
+          }),
+          require.resolve('@babel/runtime/regenerator', {
+            paths: [
+              require.resolve('@mango-scripts/babel-preset-mango/source'),
+            ],
+          }),
         ]) as any,
       ],
     },

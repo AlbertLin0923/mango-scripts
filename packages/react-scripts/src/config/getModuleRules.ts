@@ -1,6 +1,7 @@
+import path from 'path'
+
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import getCacheIdentifier from 'react-dev-utils/getCacheIdentifier'
-import getCSSModuleLocalIdent from 'react-dev-utils/getCSSModuleLocalIdent'
+import loaderUtils from 'loader-utils'
 
 import { getPaths } from './getPaths'
 import { getUserConfig, deepMergeWithArray } from './getUserConfig'
@@ -15,6 +16,36 @@ const lessRegex = /\.less$/
 const lessModuleRegex = /\.module\.less$/
 const stylusRegex = /\.(styl|stylus)$/
 const stylusModuleRegex = /\.module\.(styl|stylus)$/
+
+const getLocalIdent = (
+  context: any,
+  localIdentName: string,
+  localName: string,
+  options: any,
+) => {
+  // Use the filename or folder name, based on some uses the index.js / index.module.(css|scss|sass) project style
+  const fileNameOrFolder = context.resourcePath.match(
+    /index\.module\.(css|scss|sass)$/,
+  )
+    ? '[folder]'
+    : '[name]'
+  // Create a hash based on a the file location and class name. Will be unique across a project, and close to globally unique.
+  const hash = loaderUtils.getHashDigest(
+    (path.posix.relative(context.rootContext, context.resourcePath) +
+      localName) as any,
+    'md5',
+    'base64',
+    5,
+  )
+  // Use loaderUtils to find the file or folder name
+  const className = loaderUtils.interpolateName(
+    context,
+    fileNameOrFolder + '_' + localName + '__' + hash,
+    options,
+  )
+  // Remove the .module that appears in every classname when based on the file and replace all "." with "_".
+  return className.replace('.module_', '_').replace(/\./g, '_')
+}
 
 // common function to get style loaders
 const getStyleLoaders = (
@@ -203,11 +234,11 @@ export const getModuleRules = () => {
           loader: require.resolve('babel-loader'),
           options: deepMergeWithArray(babel['options'], {
             customize: require.resolve(
-              'babel-preset-react-app/webpack-overrides',
+              '@mango-scripts/babel-preset-mango/customize',
             ),
             presets: [
               [
-                require.resolve('babel-preset-react-app'),
+                require.resolve('@mango-scripts/babel-preset-mango/source'),
                 {
                   runtime: 'automatic',
                 },
@@ -215,23 +246,8 @@ export const getModuleRules = () => {
             ],
             babelrc: false,
             configFile: false,
-            // Make sure we have a unique cache identifier, erring on the
-            // side of caution.
-            // We remove this when the user ejects because the default
-            // is sane and uses Babel options. Instead of options, we use
-            // the react-scripts and babel-preset-react-app versions.
-            cacheIdentifier: getCacheIdentifier(
-              isEnvProduction ? 'production' : 'development',
-              [
-                'babel-plugin-named-asset-import',
-                'babel-preset-react-app',
-                'react-dev-utils',
-                'react-scripts',
-              ],
-            ),
             plugins: [
               isEnvDevelopment && require.resolve('react-refresh/babel'),
-              require.resolve('babel-plugin-jsx-css-modules'),
             ].filter(Boolean),
             // This is a feature of `babel-loader` for webpack (not Babel itself).
             // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -254,24 +270,15 @@ export const getModuleRules = () => {
             compact: false,
             presets: [
               [
-                require.resolve('babel-preset-react-app/dependencies'),
+                require.resolve(
+                  '@mango-scripts/babel-preset-mango/dependencies',
+                ),
                 { helpers: true },
               ],
             ],
             cacheDirectory: true,
             // See #6846 for context on why cacheCompression is disabled
             cacheCompression: false,
-            // @remove-on-eject-begin
-            cacheIdentifier: getCacheIdentifier(
-              isEnvProduction ? 'production' : 'development',
-              [
-                'babel-plugin-named-asset-import',
-                'babel-preset-react-app',
-                'react-dev-utils',
-                'react-scripts',
-              ],
-            ),
-            // @remove-on-eject-end
             // Babel sourcemaps are needed for debugging into node_modules
             // code.  Without the options below, debuggers like VSCode
             // show incorrect code and set breakpoints on the wrong lines.
@@ -311,7 +318,7 @@ export const getModuleRules = () => {
             sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
             modules: {
               mode: 'local',
-              getLocalIdent: getCSSModuleLocalIdent,
+              getLocalIdent: getLocalIdent,
             },
           }),
         },
@@ -347,7 +354,7 @@ export const getModuleRules = () => {
               sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
               modules: {
                 mode: 'local',
-                getLocalIdent: getCSSModuleLocalIdent,
+                getLocalIdent: getLocalIdent,
               },
             },
             'sass-loader',
@@ -382,7 +389,7 @@ export const getModuleRules = () => {
               sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
               modules: {
                 mode: 'local',
-                getLocalIdent: getCSSModuleLocalIdent,
+                getLocalIdent: getLocalIdent,
               },
             },
             'less-loader',
@@ -417,7 +424,7 @@ export const getModuleRules = () => {
               sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
               modules: {
                 mode: 'local',
-                getLocalIdent: getCSSModuleLocalIdent,
+                getLocalIdent: getLocalIdent,
               },
             },
             'stylus-loader',

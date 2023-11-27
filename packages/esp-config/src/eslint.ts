@@ -18,7 +18,13 @@ const config = {
       jsx: true,
     },
     babelOptions: {
-      presets: [require.resolve('babel-preset-react-app/prod')],
+      presets: [
+        require.resolve('@mango-scripts/babel-preset-mango/source'),
+        {
+          helpers: false,
+          forceEnv: 'production',
+        },
+      ],
     },
     requireConfigFile: false,
   },

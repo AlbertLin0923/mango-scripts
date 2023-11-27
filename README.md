@@ -12,6 +12,7 @@ mango-scripts
 | [@mango-scripts/dev-scripts](packages/dev-scripts) | 一些便捷的前端开发脚本 |
 | [@mango-scripts/react-scripts](packages/react-scripts) | 基于  [react-scripts@5.0.1](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts)  添加一些功能和优化 |
 | [@mango-scripts/esp-config](packages/esp-config) | 一个包含 `eslint`，`stylelint`，`prettier`  的配置文件合集 |
+| [@mango-scripts/babel-preset-mango](packages/babel-preset-mango) | 通用 React App Babel 配置 |
 | [@mango-scripts/utils](packages/utils) | mango-scripts 内部工具库 |
 
 ## License

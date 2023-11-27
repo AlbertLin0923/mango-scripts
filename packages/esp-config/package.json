@@ -23,15 +23,15 @@
   "exports": {
     "./eslint": {
       "types": "./dist/cjs/eslint.d.ts",
-      "require": "./dist/cjs/eslint.cjs"
+      "require": "./dist/cjs/eslint.js"
     },
     "./stylelint": {
       "types": "./dist/cjs/stylelint.d.ts",
-      "require": "./dist/cjs/stylelint.cjs"
+      "require": "./dist/cjs/stylelint.js"
     },
     "./prettier": {
       "types": "./dist/cjs/prettier.d.ts",
-      "require": "./dist/cjs/prettier.cjs"
+      "require": "./dist/cjs/prettier.js"
     }
   },
   "main": "./dist/cjs/index.js",
@@ -47,10 +47,10 @@
   "dependencies": {
     "@babel/core": "^7.22.20",
     "@babel/eslint-parser": "^7.22.15",
+    "@mango-scripts/babel-preset-mango": "workspace:*",
     "@rushstack/eslint-patch": "^1.4.0",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
-    "babel-preset-react-app": "^10.0.1",
     "confusing-browser-globals": "^1.0.11",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-jsx-a11y": "^6.7.1",
