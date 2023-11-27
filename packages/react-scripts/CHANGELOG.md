@@ -1,3 +1,13 @@
+## [2.0.2](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.1...@mango-scripts/react-scripts@2.0.2) (2023-11-27)
+
+
+### Features
+
+* 手动更新依赖 ([271371c](https://github.com/AlbertLin0923/mango-scripts/commit/271371ca3ade25ac0e2ec6242727b6c65291735e))
+* 增加@mango-scripts/babel-preset-mango包 ([94ec001](https://github.com/AlbertLin0923/mango-scripts/commit/94ec0018cdc5a634682b5281bedf998a3da6ecf4))
+* release @mango-scripts/react-scripts@2.0.2 ([9efbd8e](https://github.com/AlbertLin0923/mango-scripts/commit/9efbd8e6760c1515d5377cbbd04b4e656e884636))
+* release @mango-scripts/react-scripts@2.0.2 ([b7857aa](https://github.com/AlbertLin0923/mango-scripts/commit/b7857aa821eca686771c5a426cb7fdaa229d1fd4))
+
 ## [2.0.2](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.2...@mango-scripts/react-scripts@2.0.2) (2023-11-27)
 
 ## [2.0.2](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.1...@mango-scripts/react-scripts@2.0.2) (2023-11-27)
