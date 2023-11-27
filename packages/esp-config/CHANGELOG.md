@@ -1,3 +1,11 @@
+## [2.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.3...@mango-scripts/esp-config@2.0.4) (2023-11-27)
+
+
+### Features
+
+* 手动更新依赖 ([271371c](https://github.com/AlbertLin0923/mango-scripts/commit/271371ca3ade25ac0e2ec6242727b6c65291735e))
+* 增加@mango-scripts/babel-preset-mango包 ([94ec001](https://github.com/AlbertLin0923/mango-scripts/commit/94ec0018cdc5a634682b5281bedf998a3da6ecf4))
+
 ## [2.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.2...@mango-scripts/esp-config@2.0.3) (2023-11-10)
 
 ## [2.0.2](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.1...@mango-scripts/esp-config@2.0.2) (2023-11-10)
