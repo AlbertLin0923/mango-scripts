@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/babel-preset-mango",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "通用 React App Babel 配置",
   "keywords": [
     "mango-scripts",
