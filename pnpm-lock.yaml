@@ -7,7 +7,7 @@ importers:
       '@commitlint/cli': ^18.4.3
       '@commitlint/config-conventional': ^18.4.3
       '@mango-scripts/dev-scripts': ^2.0.6
-      '@mango-scripts/esp-config': ^2.0.3
+      '@mango-scripts/esp-config': ^2.0.4
       '@types/node': ^18.15.5
       '@vitest/coverage-v8': ^0.34.6
       commitizen: ^4.3.0
@@ -26,7 +26,7 @@ importers:
       '@commitlint/cli': 18.4.3_typescript@5.3.2
       '@commitlint/config-conventional': 18.4.3
       '@mango-scripts/dev-scripts': 2.0.6
-      '@mango-scripts/esp-config': 2.0.3_b7f76eo2ffficipafubkkxlsae
+      '@mango-scripts/esp-config': 2.0.4_b7f76eo2ffficipafubkkxlsae
       '@types/node': 18.18.9
       '@vitest/coverage-v8': 0.34.6_vitest@0.34.6
       commitizen: 4.3.0_typescript@5.3.2
@@ -1206,16 +1206,6 @@ packages:
       '@babel/core': 7.23.3
       '@babel/helper-plugin-utils': 7.22.5
 
-  /@babel/plugin-syntax-flow/7.22.5_@babel+core@7.23.3:
-    resolution: {integrity: sha512-9RdCl0i+q0QExayk2nOS7853w08yLucnnPML6EN9S8fgMPVtdLDCdx/cOQ/i44Lb9UeQX9A35yaqBBOMMZxPxQ==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.23.3
-      '@babel/helper-plugin-utils': 7.22.5
-    dev: true
-
   /@babel/plugin-syntax-import-assertions/7.23.3_@babel+core@7.23.3:
     resolution: {integrity: sha512-lPgDSU+SJLK3xmFDTV2ZRQAiM7UuUjGidwBywFavObCiZc1BeAAcMtHJKUya92hPHO+at63JJPLygilZard8jw==}
     engines: {node: '>=6.9.0'}
@@ -1499,17 +1489,6 @@ packages:
       '@babel/core': 7.23.3
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-export-namespace-from': 7.8.3_@babel+core@7.23.3
-
-  /@babel/plugin-transform-flow-strip-types/7.22.5_@babel+core@7.23.3:
-    resolution: {integrity: sha512-tujNbZdxdG0/54g/oua8ISToaXTFBf8EnSb5PgQSciIXWOWKX3S4+JR7ZE9ol8FZwf9kxitzkGQ+QWeov/mCiA==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.23.3
-      '@babel/helper-plugin-utils': 7.22.5
-      '@babel/plugin-syntax-flow': 7.22.5_@babel+core@7.23.3
-    dev: true
 
   /@babel/plugin-transform-for-of/7.23.3_@babel+core@7.23.3:
     resolution: {integrity: sha512-X8jSm8X1CMwxmK878qsUGJRmbysKNbdpTv/O1/v0LuY/ZkZrng5WYiekYSdg9m09OTmDDUWeEDsTE+17WYbAZw==}
@@ -3502,7 +3481,6 @@ packages:
       fs-extra: 11.1.1
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@mango-scripts/dev-scripts/2.0.6:
     resolution: {integrity: sha512-Od09r+M1gp6H9yqLeAMVC9LQyeyD/0f9rgy2J7F2KLA2oUOqh1zfUo2M5PXpvV4I6tNtVVFWvK/7+YRvNUJpcg==}
@@ -3532,8 +3510,8 @@ packages:
       undici: 5.27.2
     dev: true
 
-  /@mango-scripts/esp-config/2.0.3_b7f76eo2ffficipafubkkxlsae:
-    resolution: {integrity: sha512-DmSAu56XK2XSnk/6Ne1qpdF3uOdcWTG4hvWY+BwHw1BwkyfH1Otkk0PE5S5s9R9hlX+uPX8z9fj7mWWDvoAxgg==}
+  /@mango-scripts/esp-config/2.0.4_b7f76eo2ffficipafubkkxlsae:
+    resolution: {integrity: sha512-4kOZDXs/ldwkH/zvtW0sR0wA/cL5H7BcNJchuLsn0PIleBqvKYiA2cRIVR3m9bhW6M85BHawXhbnttqxSlj/1w==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       eslint: '>= 8.50.0'
@@ -3542,10 +3520,10 @@ packages:
     dependencies:
       '@babel/core': 7.23.3
       '@babel/eslint-parser': 7.22.15_xig2xi565kmngvyk3tjcu3rayi
+      '@mango-scripts/babel-preset-mango': 0.0.1
       '@rushstack/eslint-patch': 1.5.1
       '@typescript-eslint/eslint-plugin': 6.10.0_22bpg26eh4mckz44pcqzyewy2a
       '@typescript-eslint/parser': 6.10.0_t4y562kuozn2x6kqiutrjmhi5a
-      babel-preset-react-app: 10.0.1
       confusing-browser-globals: 1.0.11
       eslint: 8.54.0
       eslint-config-prettier: 9.0.0_eslint@8.54.0
@@ -5897,30 +5875,6 @@ packages:
 
   /babel-plugin-transform-react-remove-prop-types/0.4.24:
     resolution: {integrity: sha512-eqj0hVcJUR57/Ug2zE1Yswsw4LhuqqHhD+8v120T1cl3kjg76QwtyBrdIk4WVwK+lAhBJVYCd/v+4nc4y+8JsA==}
-
-  /babel-preset-react-app/10.0.1:
-    resolution: {integrity: sha512-b0D9IZ1WhhCWkrTXyFuIIgqGzSkRIH5D5AmB0bXbzYAB1OBAwHcUeyWW2LorutLWF5btNo/N7r/cIdmvvKJlYg==}
-    dependencies:
-      '@babel/core': 7.23.3
-      '@babel/plugin-proposal-class-properties': 7.18.6_@babel+core@7.23.3
-      '@babel/plugin-proposal-decorators': 7.23.3_@babel+core@7.23.3
-      '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6_@babel+core@7.23.3
-      '@babel/plugin-proposal-numeric-separator': 7.18.6_@babel+core@7.23.3
-      '@babel/plugin-proposal-optional-chaining': 7.21.0_@babel+core@7.23.3
-      '@babel/plugin-proposal-private-methods': 7.18.6_@babel+core@7.23.3
-      '@babel/plugin-proposal-private-property-in-object': 7.21.11_@babel+core@7.23.3
-      '@babel/plugin-transform-flow-strip-types': 7.22.5_@babel+core@7.23.3
-      '@babel/plugin-transform-react-display-name': 7.23.3_@babel+core@7.23.3
-      '@babel/plugin-transform-runtime': 7.23.4_@babel+core@7.23.3
-      '@babel/preset-env': 7.23.3_@babel+core@7.23.3
-      '@babel/preset-react': 7.23.3_@babel+core@7.23.3
-      '@babel/preset-typescript': 7.23.3_@babel+core@7.23.3
-      '@babel/runtime': 7.23.4
-      babel-plugin-macros: 3.1.0
-      babel-plugin-transform-react-remove-prop-types: 0.4.24
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
 
   /babel-walk/3.0.0-canary-5:
     resolution: {integrity: sha512-GAwkz0AihzY5bkwIY5QDR+LvsRQgB/B+1foMPvi0FZPMl5fjD7ICiznUiBdLYMH1QYe6vqu4gWYytZOccLouFw==}
