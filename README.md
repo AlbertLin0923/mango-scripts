@@ -5,7 +5,7 @@ mango-scripts
 一些便捷的前端开发 Node.js 工具包
 <p>
 
-| 包 | 说明 |
+| <div style="width:300px">包</div> | 说明 |
 | --- | --- |
 | [@mango-scripts/i18n-utils](packages/i18n-utils) | [mango-i18n-system](https://github.com/AlbertLin0923/mango-i18n-system)  自动国际化文案配置系统的`文案解析器`，用于提取`中文文案key` |
 | [@mango-scripts/i18n-scripts](packages/i18n-scripts) | [mango-i18n-system](https://github.com/AlbertLin0923/mango-i18n-system)  自动国际化文案配置系统的`辅助插件合集`，用于下载语言包、转换 vue 文件等 |
