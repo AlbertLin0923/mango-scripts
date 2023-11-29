@@ -39,7 +39,7 @@ export const applyEnv = (mode: string, cliMode: keyof CliEnvType) => {
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in webpack configuration.
 
-export const getClientEnvironment = (publicUrl: string) => {
+export const getEnv = (publicUrl: string) => {
   const REACT_APP = /^REACT_APP_/i
 
   const raw = Object.keys(process.env)
