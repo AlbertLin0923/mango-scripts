@@ -1,3 +1,11 @@
+## [2.0.11](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@2.0.10...@mango-scripts/i18n-utils@2.0.11) (2023-12-02)
+
+
+### Features
+
+* 修改@mango-scripts/react-scripts一些模块导入方式 ([0fb7002](https://github.com/AlbertLin0923/mango-scripts/commit/0fb7002f5afb291016bf4463c9a35b90414d85cb))
+* i18n-utils增加对mjs和mts文件的支持 ([fae0762](https://github.com/AlbertLin0923/mango-scripts/commit/fae0762cccf7d6e840e1408fae85192e4114edf6))
+
 ## [2.0.10](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@2.0.9...@mango-scripts/i18n-utils@2.0.10) (2023-11-21)
 
 
