@@ -21,7 +21,9 @@
 - 内置 [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) 打包分析插件
 - 内置 [svg-sprite-loader](https://github.com/JetBrains/svg-sprite-loader) svg 精灵图优化 loader
 - 增加 [qiankun](https://github.com/umijs/qiankun) 配置支持
+- 内置 [esbuild](https://github.com/evanw/esbuild) 和 [swc](https://github.com/swc-project/swc) 配置支持
 - 增加 [eslint-webpack-plugin](https://github.com/webpack-contrib/eslint-webpack-plugin) 和 [stylelint-webpack-plugin](https://github.com/webpack-contrib/stylelint-webpack-plugin)，默认读取业务项目目录的配置
+
 - 可在开发环境下自动获取局域网 IP 并映射到地址栏，便于本地联调
 
 ## 安装
@@ -83,6 +85,7 @@ module.exports = {
   distDir: 'dist',
   loader: {
     babel: {
+      enable: true,
       options: {
         plugins: [
           [
@@ -95,6 +98,7 @@ module.exports = {
       },
     },
     less: {
+      enable: true,
       options: {
         lessOptions: {
           modifyVars: {
@@ -106,14 +110,25 @@ module.exports = {
       },
     },
     sass: {
+      enable: true,
       options: {
         additionalData: `@import "src/styles/mixins.scss";`,
       },
     },
     stylus: {
+      enable: true,
       options: {},
     },
     postcss: {
+      enable: true,
+      options: {},
+    },
+    swc: {
+      enable: false,
+      options: {},
+    },
+    esbuild: {
+      enable: false,
       options: {},
     },
   },

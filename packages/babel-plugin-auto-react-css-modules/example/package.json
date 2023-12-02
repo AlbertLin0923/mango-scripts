@@ -1,0 +1,7 @@
+{
+  "name": "example",
+  "private": true,
+  "scripts": {
+    "dev": "tsx index.ts"
+  }
+}

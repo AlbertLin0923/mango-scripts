@@ -274,10 +274,12 @@ export const astExtractor = (code: string, filePath: string) => {
   } else if (filePath.endsWith('.svelte')) {
     return extractInSvelte(code)
   } else if (
-    filePath.endsWith('.tsx') ||
-    filePath.endsWith('.ts') ||
+    filePath.endsWith('.js') ||
+    filePath.endsWith('.mjs') ||
     filePath.endsWith('.jsx') ||
-    filePath.endsWith('.js')
+    filePath.endsWith('.ts') ||
+    filePath.endsWith('.mts') ||
+    filePath.endsWith('.tsx')
   ) {
     return extractInJsAndTs(code)
   } else {

@@ -1,4 +1,6 @@
 import type { MinifyOptions } from 'terser'
+import type { Options as SwcOptions } from '@swc/core'
+import type { TransformOptions as EsbuildOptions } from 'esbuild'
 
 export type ConfigType = {
   /**
@@ -13,19 +15,60 @@ export type ConfigType = {
    */
   loader?: {
     babel?: {
-      options: Record<string, any>
+      /**
+       * enable
+       * @default true
+       */
+      enable: boolean
+      options?: Record<string, any>
     }
     less?: {
-      options: Record<string, any>
+      /**
+       * enable
+       * @default true
+       */
+      enable: boolean
+      options?: Record<string, any>
     }
     sass?: {
-      options: Record<string, any>
+      /**
+       * enable
+       * @default true
+       */
+      enable: boolean
+      options?: Record<string, any>
     }
     stylus?: {
-      options: Record<string, any>
+      /**
+       * enable
+       * @default true
+       */
+      enable: boolean
+      options?: Record<string, any>
     }
     postcss?: {
-      options: Record<string, any>
+      /**
+       * enable
+       * @default true
+       */
+      enable: boolean
+      options?: Record<string, any>
+    }
+    swc?: {
+      /**
+       * enable
+       * @default false
+       */
+      enable: boolean
+      options?: SwcOptions
+    }
+    esbuild?: {
+      /**
+       * enable
+       * @default false
+       */
+      enable: boolean
+      options?: EsbuildOptions
     }
   }
 
@@ -38,7 +81,7 @@ export type ConfigType = {
      */
     eslint?: {
       /**
-       * enable eslint
+       * enable
        * @default true
        */
       enable: boolean
@@ -49,10 +92,10 @@ export type ConfigType = {
      */
     stylelint?: {
       /**
-       * enable eslint
+       * enable
        * @default true
        */
-      enable: true
+      enable: boolean
       options?: Record<string, any>
     }
     /**
@@ -60,10 +103,10 @@ export type ConfigType = {
      */
     typescript?: {
       /**
-       * enable eslint
+       * enable
        * @default true
        */
-      enable: true
+      enable: boolean
       options?: Record<string, any>
     }
   }
@@ -114,6 +157,67 @@ export type ConfigType = {
       }
     }
   }
+}
+
+export const defaultUserConfig: ConfigType = {
+  distDir: 'dist',
+  loader: {
+    babel: {
+      enable: true,
+      options: {},
+    },
+    less: {
+      enable: true,
+      options: {},
+    },
+    sass: {
+      enable: true,
+      options: {},
+    },
+    stylus: {
+      enable: true,
+      options: {},
+    },
+    postcss: {
+      enable: true,
+      options: {},
+    },
+    swc: {
+      enable: false,
+      options: {},
+    },
+    esbuild: {
+      enable: false,
+      options: {},
+    },
+  },
+  plugin: {
+    eslint: {
+      enable: true,
+      options: {},
+    },
+    stylelint: {
+      enable: true,
+      options: {},
+    },
+    typescript: {
+      enable: true,
+      options: {},
+    },
+  },
+  optimization: {
+    splitChunks: {},
+    minimizer: {
+      jsMinimizer: {
+        minify: 'terserMinify',
+        terserOptions: {},
+      },
+      cssMinimizer: {
+        minify: 'cssnanoMinify',
+        minimizerOptions: {},
+      },
+    },
+  },
 }
 
 export function defineConfig(config: ConfigType): ConfigType {

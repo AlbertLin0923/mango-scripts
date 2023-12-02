@@ -2,55 +2,11 @@ import fs from 'fs-extra'
 import { mergeWith, get, isArray } from 'lodash'
 import { cosmiconfigSync } from 'cosmiconfig'
 
-const defaultUserConfig = {
-  distDir: 'dist',
-  loader: {
-    babel: {
-      options: {},
-    },
-    less: {
-      options: {},
-    },
-    sass: {
-      options: {},
-    },
-    stylus: {
-      options: {},
-    },
-    postcss: {
-      options: {},
-    },
-  },
-  plugin: {
-    eslint: {
-      enable: true,
-      options: {},
-    },
-    stylelint: {
-      enable: true,
-      options: {},
-    },
-    typescript: {
-      enable: true,
-      options: {},
-    },
-  },
-  optimization: {
-    splitChunks: {},
-    minimizer: {
-      jsMinimizer: {
-        minify: 'terserMinify', // terserMinify | uglifyJsMinify | esbuildMinify | swcMinify
-        terserOptions: {},
-      },
-      cssMinimizer: {
-        minify: 'cssnanoMinify', // cssnanoMinify | cssoMinify | cleanCssMinify | esbuildMinify  | lightningCssMinify | swcMinify
-        minimizerOptions: {},
-      },
-    },
-  },
-}
+import { defaultUserConfig } from '../defineConfig'
 
-export const deepMergeWithArray = (object: any, sources: any) => {
+import type { ConfigType } from '../defineConfig'
+
+export const deepMergeWithArray = <T>(object: T, sources: T): T => {
   return mergeWith(object, sources, (objValue, srcValue) => {
     if (isArray(objValue)) {
       return objValue.concat(srcValue)
@@ -59,11 +15,11 @@ export const deepMergeWithArray = (object: any, sources: any) => {
 }
 
 export const getUserConfig = (targetConfigObjPath: string) => {
-  const projectRoot = fs.realpathSync(process.cwd())
-
   const userConfigExplorer = cosmiconfigSync('mango')
 
-  const userConfigFilePath = userConfigExplorer.search(projectRoot)
+  const userConfigFilePath = userConfigExplorer.search(
+    fs.realpathSync(process.cwd()),
+  )
 
   if (userConfigFilePath !== null) {
     const userConfig = userConfigExplorer.load(userConfigFilePath.filepath)
@@ -73,7 +29,7 @@ export const getUserConfig = (targetConfigObjPath: string) => {
     }
 
     return get(
-      deepMergeWithArray(defaultUserConfig, userConfig?.config),
+      deepMergeWithArray(defaultUserConfig, userConfig?.config as ConfigType),
       targetConfigObjPath,
     )
   }

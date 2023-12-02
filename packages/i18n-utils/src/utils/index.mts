@@ -107,61 +107,6 @@ export const matchModuleMark = (code: string): string => {
   }
 }
 
-export const compareLocaleData = (oldFilePath: string, newFilePath: string) => {
-  const oldString = fs.readFileSync(oldFilePath, { encoding: 'utf-8' })
-  const newString = fs.readFileSync(newFilePath, { encoding: 'utf-8' })
-
-  let oldArr = []
-  let newArr = []
-  try {
-    oldArr = JSON.parse(oldString)
-    newArr = JSON.parse(newString)
-  } catch (error) {
-    console.log(error)
-    throw new Error('文件解析失败')
-  }
-
-  let sameNumber = 0
-  let addNumber = 0
-  let deleteNumber = 0
-  const addItemArr = []
-  const deleteItemArr = []
-
-  for (let index = 0; index < newArr.length; index++) {
-    const newItem = newArr[index]
-
-    const findSameItem = oldArr.find((oldItem: any) => {
-      return newItem['zh-CN'] === oldItem['zh-CN']
-    })
-
-    if (!findSameItem) {
-      addNumber++
-      addItemArr.push(newItem)
-    } else {
-      sameNumber++
-    }
-  }
-
-  for (let index = 0; index < oldArr.length; index++) {
-    const oldItem = oldArr[index]
-    const findSameItem = newArr.find((newItem: any) => {
-      return newItem['zh-CN'] === oldItem['zh-CN']
-    })
-    if (!findSameItem) {
-      deleteNumber++
-      deleteItemArr.push(oldItem)
-    }
-  }
-
-  return {
-    sameNumber,
-    addNumber,
-    deleteNumber,
-    addItemArr,
-    deleteItemArr,
-  }
-}
-
 export const collectDisableRuleCommentlocation = (comments: any) => {
   let entireFileDisabled = false
   const partialCommentList: any[] = []

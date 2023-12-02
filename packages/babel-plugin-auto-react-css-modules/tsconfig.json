@@ -2,11 +2,12 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "module": "commonjs",
-    "outDir": "dist",
+    "moduleResolution": "node",
     "resolveJsonModule": false,
     "skipLibCheck": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "outDir": "dist"
   },
   "include": ["./src"]
 }

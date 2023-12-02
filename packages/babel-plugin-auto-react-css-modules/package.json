@@ -1,0 +1,59 @@
+{
+  "name": "@mango-scripts/babel-plugin-auto-react-css-modules",
+  "version": "0.0.1",
+  "description": "自动编译普通 className 到 CSS 模块 className",
+  "keywords": [
+    "mango-scripts",
+    "babel-plugin",
+    "auto-react-css-modules"
+  ],
+  "homepage": "https://github.com/AlbertLin0923/mango-scripts/tree/main/packages/babel-plugin-auto-react-css-modules#readme",
+  "bugs": {
+    "url": "https://github.com/AlbertLin0923/mango-scripts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertLin0923/mango-scripts.git",
+    "directory": "packages/babel-plugin-auto-react-css-modules"
+  },
+  "license": "MIT",
+  "author": "AlbertLin0923",
+  "exports": {
+    ".": {
+      "types": "./dist/cjs/index.d.ts",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": {
+      "require": "./package.json"
+    }
+  },
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "@babel/core": "^7.23.5",
+    "@babel/runtime": "^7.23.5",
+    "@babel/helper-plugin-utils": "^7.22.5",
+    "@babel/plugin-transform-runtime": "^7.23.4",
+    "@babel/parser": "^7.23.5",
+    "@babel/traverse": "^7.23.5",
+    "@babel/types": "^7.23.5",
+    "fs-extra": "^11.1.1"
+  },
+  "devDependencies": {
+    "@types/babel__core": "^7.20.5",
+    "@types/babel__helper-plugin-utils": "^7.10.3",
+    "@types/babel__traverse": "^7.20.4",
+    "@types/fs-extra": "^11.0.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

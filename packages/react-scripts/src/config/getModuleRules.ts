@@ -1,11 +1,15 @@
 import path from 'path'
 
+import fs from 'fs-extra'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import loaderUtils from 'loader-utils'
+import browserslistToEsbuild from 'browserslist-to-esbuild'
 
 import { getPaths } from './getPaths'
 import { getUserConfig, deepMergeWithArray } from './getUserConfig'
 
+import type { Options as SwcOptions } from '@swc/core'
+import type { TransformOptions as EsbuildOptions } from 'esbuild'
 import type { RuleSetRule } from 'webpack'
 
 const cssRegex = /\.css$/
@@ -16,6 +20,11 @@ const lessRegex = /\.less$/
 const lessModuleRegex = /\.module\.less$/
 const stylusRegex = /\.(styl|stylus)$/
 const stylusModuleRegex = /\.module\.(styl|stylus)$/
+
+const extractJson = (key: string, pkgPath: string) => {
+  const packageJson = fs.readJSONSync(require.resolve(pkgPath))
+  return packageJson[key]
+}
 
 const getLocalIdent = (
   context: any,
@@ -48,7 +57,7 @@ const getLocalIdent = (
 }
 
 // common function to get style loaders
-const getStyleLoaders = (
+const transformStyleLoaders = (
   cssOptions: any,
   preProcessor?: any,
   preProcessorOptions?: any,
@@ -147,14 +156,376 @@ const getStyleLoaders = (
   ].filter(Boolean)
 }
 
-export const getModuleRules = () => {
+const getSvgLoaders = () => {
+  const paths = getPaths()
+  return [
+    {
+      test: /\.svg$/,
+      include: [paths.svgSpritePath],
+      use: [
+        {
+          loader: require.resolve('svg-sprite-loader'),
+          options: {
+            symbolId: 'icon-[name]',
+          },
+        },
+        { loader: require.resolve('svgo-loader') },
+      ],
+    },
+    {
+      test: /\.svg$/,
+      exclude: [paths.svgSpritePath],
+      use: [
+        {
+          loader: require.resolve('@svgr/webpack'),
+          options: {
+            prettier: false,
+            svgo: false,
+            svgoConfig: {
+              plugins: [{ removeViewBox: false }],
+            },
+            titleProp: true,
+            ref: true,
+          },
+        },
+        {
+          loader: require.resolve('file-loader'),
+          options: {
+            name: 'static/media/[name].[hash].[ext]',
+          },
+        },
+      ],
+      issuer: {
+        and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
+      },
+    },
+  ]
+}
+
+const getStyleLoaders = () => {
   const isEnvDevelopment = process.env.NODE_ENV === 'development'
   const isEnvProduction = process.env.NODE_ENV === 'production'
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
 
-  const { babel } = getUserConfig('loader')
+  const { less, sass, stylus } = getUserConfig('loader')
+
+  const cssRule = [
+    {
+      test: cssRegex,
+      exclude: cssModuleRegex,
+      use: transformStyleLoaders({
+        importLoaders: 1,
+        sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
+        modules: {
+          mode: 'icss',
+        },
+      }),
+      // Don't consider CSS imports dead code even if the
+      // containing package claims to have no side effects.
+      // Remove this when webpack adds a warning or an error for this.
+      // See https://github.com/webpack/webpack/issues/6571
+      sideEffects: true,
+    },
+    {
+      test: cssModuleRegex,
+      use: transformStyleLoaders({
+        importLoaders: 1,
+        sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
+        modules: {
+          mode: 'local',
+          getLocalIdent: getLocalIdent,
+        },
+      }),
+    },
+  ]
+
+  const sassRule = sass.enable
+    ? [
+        {
+          test: sassRegex,
+          exclude: sassModuleRegex,
+          use: transformStyleLoaders(
+            {
+              importLoaders: 3,
+              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
+              modules: {
+                mode: 'icss',
+              },
+            },
+            'sass-loader',
+          ),
+          // Don't consider CSS imports dead code even if the
+          // containing package claims to have no side effects.
+          // Remove this when webpack adds a warning or an error for this.
+          // See https://github.com/webpack/webpack/issues/6571
+          sideEffects: true,
+        },
+        {
+          test: sassModuleRegex,
+          use: transformStyleLoaders(
+            {
+              importLoaders: 3,
+              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
+              modules: {
+                mode: 'local',
+                getLocalIdent: getLocalIdent,
+              },
+            },
+            'sass-loader',
+          ),
+        },
+      ]
+    : []
+
+  const lessRule = less.enable
+    ? [
+        {
+          test: lessRegex,
+          exclude: lessModuleRegex,
+          use: transformStyleLoaders(
+            {
+              importLoaders: 4,
+              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
+              modules: {
+                mode: 'icss',
+              },
+            },
+            'less-loader',
+            {
+              lessOptions: {
+                modifyVars: {},
+                javascriptEnabled: true,
+              },
+            },
+          ),
+          sideEffects: true,
+        },
+        {
+          test: lessModuleRegex,
+          use: transformStyleLoaders(
+            {
+              importLoaders: 4,
+              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
+              modules: {
+                mode: 'local',
+                getLocalIdent: getLocalIdent,
+              },
+            },
+            'less-loader',
+            {
+              lessOptions: {
+                modifyVars: {},
+                javascriptEnabled: true,
+              },
+            },
+          ),
+        },
+      ]
+    : []
+
+  const stylusRule = stylus.enable
+    ? [
+        {
+          test: stylusRegex,
+          exclude: stylusModuleRegex,
+          use: transformStyleLoaders(
+            {
+              importLoaders: 5,
+              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
+              modules: {
+                mode: 'icss',
+              },
+            },
+            'stylus-loader',
+          ),
+          sideEffects: true,
+        },
+        {
+          test: stylusModuleRegex,
+          use: transformStyleLoaders(
+            {
+              importLoaders: 5,
+              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
+              modules: {
+                mode: 'local',
+                getLocalIdent: getLocalIdent,
+              },
+            },
+            'stylus-loader',
+          ),
+        },
+      ]
+    : []
+
+  return [
+    // "postcss" loader applies autoprefixer to our CSS.
+    // "css" loader resolves paths in CSS and adds assets as dependencies.
+    // "style" loader turns CSS into JS modules that inject <style> tags.
+    // In production, we use MiniCSSExtractPlugin to extract that CSS
+    // to a file, but in development "style" loader enables hot editing
+    // of CSS.
+    // By default we support CSS Modules with the extension .module.css
+    ...cssRule,
+    ...sassRule,
+    ...lessRule,
+    ...stylusRule,
+  ]
+}
+
+const getScriptLoaders = () => {
+  const isEnvDevelopment = process.env.NODE_ENV === 'development'
+  const isEnvProduction = process.env.NODE_ENV === 'production'
+  const useSourceMap = process.env.USE_SOURCEMAP === 'true'
+
+  const { swc, esbuild, babel } = getUserConfig('loader')
 
   const paths = getPaths()
+
+  if (swc.enable) {
+    return [
+      {
+        test: /\.(js|mjs|jsx|ts|mts|tsx)$/,
+        include: paths.appSrc,
+        loader: require.resolve('swc-loader'),
+        options: deepMergeWithArray(swc['options'], {
+          env: {
+            // path specifies the directory to load the browserslist module and any browserslist configuration files.
+            path: paths.appPath,
+            mode: 'entry',
+            coreJs: extractJson('version', 'core-js/package.json'),
+          },
+          jsc: {
+            externalHelpers: true,
+            parser: {
+              syntax: 'typescript',
+              tsx: true,
+              decorators: true,
+              dynamicImport: true,
+            },
+            transform: {
+              legacyDecorator: true,
+              react: {
+                runtime: 'automatic',
+                development: isEnvDevelopment,
+                refresh: isEnvDevelopment,
+              },
+            },
+          },
+        } as SwcOptions),
+      },
+      {
+        test: /\.(js|mjs)$/,
+        exclude: /@babel(?:\/|\\{1,2})runtime/,
+        loader: require.resolve('swc-loader'),
+        options: deepMergeWithArray(swc['options'], {
+          env: {
+            // path specifies the directory to load the browserslist module and any browserslist configuration files.
+            path: paths.appPath,
+            mode: 'entry',
+            coreJs: '3',
+          },
+          jsc: {
+            externalHelpers: true,
+            parser: {
+              syntax: 'ecmascript',
+              jsx: true,
+              dynamicImport: true,
+            },
+          },
+        } as SwcOptions),
+      },
+    ]
+  } else if (esbuild.enable) {
+    return [
+      {
+        test: /\.(js|mjs|jsx|ts|mts|tsx)$/,
+        include: paths.appSrc,
+        loader: require.resolve('esbuild-loader'),
+        options: deepMergeWithArray(esbuild['options'], {
+          target: browserslistToEsbuild(),
+          format: 'esm',
+          jsx: 'automatic',
+        } as EsbuildOptions),
+      },
+      {
+        test: /\.(js|mjs)$/,
+        exclude: /@babel(?:\/|\\{1,2})runtime/,
+        loader: require.resolve('esbuild-loader'),
+        options: deepMergeWithArray(esbuild['options'], {
+          target: browserslistToEsbuild(),
+          format: 'esm',
+          jsx: 'transform',
+        } as EsbuildOptions),
+      },
+    ]
+  } else if (babel.enable) {
+    return [
+      // Process application JS with Babel.
+      // The preset includes JSX, Flow, TypeScript, and some ESnext features.
+      {
+        test: /\.(js|mjs|jsx|ts|mts|tsx)$/,
+        include: paths.appSrc,
+        loader: require.resolve('babel-loader'),
+        options: deepMergeWithArray(babel['options'], {
+          customize: require.resolve(
+            '@mango-scripts/babel-preset-mango/customize',
+          ),
+          presets: [
+            [
+              require.resolve('@mango-scripts/babel-preset-mango/source'),
+              {
+                runtime: 'automatic',
+              },
+            ],
+          ],
+          babelrc: false,
+          configFile: false,
+          plugins: [
+            isEnvDevelopment && require.resolve('react-refresh/babel'),
+          ].filter(Boolean),
+          // This is a feature of `babel-loader` for webpack (not Babel itself).
+          // It enables caching results in ./node_modules/.cache/babel-loader/
+          // directory for faster rebuilds.
+          cacheDirectory: true,
+          // See #6846 for context on why cacheCompression is disabled
+          cacheCompression: false,
+          compact: isEnvProduction,
+        }),
+      },
+      // Process any JS outside of the app with Babel.
+      // Unlike the application JS, we only compile the standard ES features.
+      {
+        test: /\.(js|mjs)$/,
+        exclude: /@babel(?:\/|\\{1,2})runtime/,
+        loader: require.resolve('babel-loader'),
+        options: {
+          babelrc: false,
+          configFile: false,
+          compact: false,
+          presets: [
+            [
+              require.resolve('@mango-scripts/babel-preset-mango/dependencies'),
+              { helpers: true },
+            ],
+          ],
+          cacheDirectory: true,
+          // See #6846 for context on why cacheCompression is disabled
+          cacheCompression: false,
+          // Babel sourcemaps are needed for debugging into node_modules
+          // code.  Without the options below, debuggers like VSCode
+          // show incorrect code and set breakpoints on the wrong lines.
+          sourceMaps: useSourceMap,
+          inputSourceMap: useSourceMap,
+        },
+      },
+    ]
+  } else {
+    return []
+  }
+}
+
+export const getModuleRules = () => {
+  const useSourceMap = process.env.USE_SOURCEMAP === 'true'
 
   const loaders: RuleSetRule[] = [
     {
@@ -186,250 +557,9 @@ export const getModuleRules = () => {
             },
           },
         },
-        {
-          test: /\.svg$/,
-          include: [paths.svgSpritePath],
-          use: [
-            {
-              loader: require.resolve('svg-sprite-loader'),
-              options: {
-                symbolId: 'icon-[name]',
-              },
-            },
-            { loader: require.resolve('svgo-loader') },
-          ],
-        },
-        {
-          test: /\.svg$/,
-          exclude: [paths.svgSpritePath],
-          use: [
-            {
-              loader: require.resolve('@svgr/webpack'),
-              options: {
-                prettier: false,
-                svgo: false,
-                svgoConfig: {
-                  plugins: [{ removeViewBox: false }],
-                },
-                titleProp: true,
-                ref: true,
-              },
-            },
-            {
-              loader: require.resolve('file-loader'),
-              options: {
-                name: 'static/media/[name].[hash].[ext]',
-              },
-            },
-          ],
-          issuer: {
-            and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
-          },
-        },
-        // Process application JS with Babel.
-        // The preset includes JSX, Flow, TypeScript, and some ESnext features.
-        {
-          test: /\.(js|mjs|jsx|ts|tsx)$/,
-          include: paths.appSrc,
-          loader: require.resolve('babel-loader'),
-          options: deepMergeWithArray(babel['options'], {
-            customize: require.resolve(
-              '@mango-scripts/babel-preset-mango/customize',
-            ),
-            presets: [
-              [
-                require.resolve('@mango-scripts/babel-preset-mango/source'),
-                {
-                  runtime: 'automatic',
-                },
-              ],
-            ],
-            babelrc: false,
-            configFile: false,
-            plugins: [
-              isEnvDevelopment && require.resolve('react-refresh/babel'),
-            ].filter(Boolean),
-            // This is a feature of `babel-loader` for webpack (not Babel itself).
-            // It enables caching results in ./node_modules/.cache/babel-loader/
-            // directory for faster rebuilds.
-            cacheDirectory: true,
-            // See #6846 for context on why cacheCompression is disabled
-            cacheCompression: false,
-            compact: isEnvProduction,
-          }),
-        },
-        // Process any JS outside of the app with Babel.
-        // Unlike the application JS, we only compile the standard ES features.
-        {
-          test: /\.(js|mjs)$/,
-          exclude: /@babel(?:\/|\\{1,2})runtime/,
-          loader: require.resolve('babel-loader'),
-          options: {
-            babelrc: false,
-            configFile: false,
-            compact: false,
-            presets: [
-              [
-                require.resolve(
-                  '@mango-scripts/babel-preset-mango/dependencies',
-                ),
-                { helpers: true },
-              ],
-            ],
-            cacheDirectory: true,
-            // See #6846 for context on why cacheCompression is disabled
-            cacheCompression: false,
-            // Babel sourcemaps are needed for debugging into node_modules
-            // code.  Without the options below, debuggers like VSCode
-            // show incorrect code and set breakpoints on the wrong lines.
-            sourceMaps: useSourceMap,
-            inputSourceMap: useSourceMap,
-          },
-        },
-        // "postcss" loader applies autoprefixer to our CSS.
-        // "css" loader resolves paths in CSS and adds assets as dependencies.
-        // "style" loader turns CSS into JS modules that inject <style> tags.
-        // In production, we use MiniCSSExtractPlugin to extract that CSS
-        // to a file, but in development "style" loader enables hot editing
-        // of CSS.
-        // By default we support CSS Modules with the extension .module.css
-        {
-          test: cssRegex,
-          exclude: cssModuleRegex,
-          use: getStyleLoaders({
-            importLoaders: 1,
-            sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
-            modules: {
-              mode: 'icss',
-            },
-          }),
-          // Don't consider CSS imports dead code even if the
-          // containing package claims to have no side effects.
-          // Remove this when webpack adds a warning or an error for this.
-          // See https://github.com/webpack/webpack/issues/6571
-          sideEffects: true,
-        },
-        // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
-        // using the extension .module.css
-        {
-          test: cssModuleRegex,
-          use: getStyleLoaders({
-            importLoaders: 1,
-            sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
-            modules: {
-              mode: 'local',
-              getLocalIdent: getLocalIdent,
-            },
-          }),
-        },
-        // Opt-in support for SASS (using .scss or .sass extensions).
-        // By default we support SASS Modules with the
-        // extensions .module.scss or .module.sass
-        {
-          test: sassRegex,
-          exclude: sassModuleRegex,
-          use: getStyleLoaders(
-            {
-              importLoaders: 3,
-              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
-              modules: {
-                mode: 'icss',
-              },
-            },
-            'sass-loader',
-          ),
-          // Don't consider CSS imports dead code even if the
-          // containing package claims to have no side effects.
-          // Remove this when webpack adds a warning or an error for this.
-          // See https://github.com/webpack/webpack/issues/6571
-          sideEffects: true,
-        },
-        // Adds support for CSS Modules, but using SASS
-        // using the extension .module.scss or .module.sass
-        {
-          test: sassModuleRegex,
-          use: getStyleLoaders(
-            {
-              importLoaders: 3,
-              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
-              modules: {
-                mode: 'local',
-                getLocalIdent: getLocalIdent,
-              },
-            },
-            'sass-loader',
-          ),
-        },
-        {
-          test: lessRegex,
-          exclude: lessModuleRegex,
-          use: getStyleLoaders(
-            {
-              importLoaders: 4,
-              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
-              modules: {
-                mode: 'icss',
-              },
-            },
-            'less-loader',
-            {
-              lessOptions: {
-                modifyVars: {},
-                javascriptEnabled: true,
-              },
-            },
-          ),
-          sideEffects: true,
-        },
-        {
-          test: lessModuleRegex,
-          use: getStyleLoaders(
-            {
-              importLoaders: 4,
-              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
-              modules: {
-                mode: 'local',
-                getLocalIdent: getLocalIdent,
-              },
-            },
-            'less-loader',
-            {
-              lessOptions: {
-                modifyVars: {},
-                javascriptEnabled: true,
-              },
-            },
-          ),
-        },
-        {
-          test: stylusRegex,
-          exclude: stylusModuleRegex,
-          use: getStyleLoaders(
-            {
-              importLoaders: 5,
-              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
-              modules: {
-                mode: 'icss',
-              },
-            },
-            'stylus-loader',
-          ),
-          sideEffects: true,
-        },
-        {
-          test: stylusModuleRegex,
-          use: getStyleLoaders(
-            {
-              importLoaders: 5,
-              sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
-              modules: {
-                mode: 'local',
-                getLocalIdent: getLocalIdent,
-              },
-            },
-            'stylus-loader',
-          ),
-        },
+        ...getSvgLoaders(),
+        ...getScriptLoaders(),
+        ...getStyleLoaders(),
         // "file" loader makes sure those assets get served by WebpackDevServer.
         // When you `import` an asset, you get its (virtual) filename.
         // In production, they would get copied to the `build` folder.
@@ -440,7 +570,7 @@ export const getModuleRules = () => {
           // its runtime that would otherwise be processed through "file" loader.
           // Also exclude `html` and `json` extensions so they get processed
           // by webpacks internal loaders.
-          exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+          exclude: [/^$/, /\.(js|mjs|jsx|ts|mts|tsx)$/, /\.html$/, /\.json$/],
           type: 'asset/resource',
         },
         // ** STOP ** Are you adding a new loader?
@@ -454,7 +584,7 @@ export const getModuleRules = () => {
     loaders.unshift({
       enforce: 'pre',
       exclude: /@babel(?:\/|\\{1,2})runtime/,
-      test: /\.(js|mjs|jsx|ts|tsx|css)$/,
+      test: /\.(js|mjs|jsx|ts|mts|tsx|css)$/,
       loader: require.resolve('source-map-loader'),
     })
   }
