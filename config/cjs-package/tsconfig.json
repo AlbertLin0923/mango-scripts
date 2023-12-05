@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "resolveJsonModule": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "esnext"
+  }
+}

@@ -1,19 +1,3 @@
-import { defineConfig } from 'tsup'
+import config from '../../config/pure-esm-package/tsup.config'
 
-export default defineConfig([
-  {
-    format: 'esm',
-    entry: ['src'],
-    outDir: 'dist/esm',
-    bundle: false,
-    splitting: false,
-    clean: true,
-    dts: true,
-    shims: true,
-    outExtension() {
-      return {
-        js: `.mjs`,
-      }
-    },
-  },
-])
+export default config

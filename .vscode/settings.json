@@ -1,7 +1,7 @@
 {
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": false
+    "source.fixAll": true
   },
   "editor.linkedEditing": true,
   "explorer.compactFolders": false,

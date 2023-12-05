@@ -1,24 +1,3 @@
-import { defineConfig } from 'tsup'
+import config from '../../config/dual-package/tsup.config'
 
-export default defineConfig([
-  {
-    format: 'cjs',
-    entry: ['src'],
-    outDir: 'dist/cjs',
-    bundle: false,
-    splitting: false,
-    clean: true,
-    dts: true,
-    shims: true,
-  },
-  {
-    format: 'esm',
-    entry: ['src'],
-    outDir: 'dist/esm',
-    bundle: false,
-    splitting: false,
-    clean: true,
-    dts: true,
-    shims: true,
-  },
-])
+export default config

@@ -32,11 +32,7 @@
   "files": [
     "dist"
   ],
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "prepublishOnly": "pnpm run build"
-  },
+  "scripts": {},
   "dependencies": {
     "@babel/core": "^7.23.5",
     "@babel/runtime": "^7.23.5",

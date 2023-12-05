@@ -1,12 +1,4 @@
 {
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "module": "commonjs",
-    "resolveJsonModule": false,
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "esnext",
-    "outDir": "dist"
-  },
+  "extends": "../../config/dual-package/tsconfig.json",
   "include": ["./src"]
 }

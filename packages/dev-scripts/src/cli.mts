@@ -9,11 +9,11 @@ import { Command } from 'commander'
 import envinfo from 'envinfo'
 import { checkNodeVersion, checkUpdate, gs } from '@mango-scripts/utils'
 
-import changeExtname from './scripts/changeExtname.mts'
-import addPackage from './scripts/addPackage.mts'
-import copyDist from './scripts/copyDist.mts'
-import gitGkd from './scripts/gitGkd.mts'
-import releasePackage from './scripts/releasePackage.mts'
+import changeExtname from './scripts/changeExtname.mjs'
+import addPackage from './scripts/addPackage.mjs'
+import copyDist from './scripts/copyDist.mjs'
+import gitGkd from './scripts/gitGkd.mjs'
+import releasePackage from './scripts/releasePackage.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const packageJson = fs.readJSONSync(

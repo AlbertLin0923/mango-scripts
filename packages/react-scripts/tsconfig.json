@@ -1,12 +1,4 @@
 {
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "module": "commonjs",
-    "noEmit": true,
-    "resolveJsonModule": false,
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "esnext"
-  },
+  "extends": "../../config/cjs-package/tsconfig.json",
   "include": ["./src", "./types"]
 }

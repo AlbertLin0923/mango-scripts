@@ -1,14 +1,4 @@
 {
-  "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "esModuleInterop": true,
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "noEmit": true,
-    "resolveJsonModule": false,
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "esnext"
-  },
+  "extends": "../../config/pure-esm-package/tsconfig.json",
   "include": ["./src"]
 }

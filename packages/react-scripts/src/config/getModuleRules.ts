@@ -388,6 +388,8 @@ const getScriptLoaders = () => {
         include: paths.appSrc,
         loader: require.resolve('swc-loader'),
         options: deepMergeWithArray(swc['options'], {
+          swcrc: false,
+          configFile: false,
           env: {
             // path specifies the directory to load the browserslist module and any browserslist configuration files.
             path: paths.appPath,
@@ -413,27 +415,27 @@ const getScriptLoaders = () => {
           },
         } as SwcOptions),
       },
-      {
-        test: /\.(js|mjs)$/,
-        exclude: /@babel(?:\/|\\{1,2})runtime/,
-        loader: require.resolve('swc-loader'),
-        options: deepMergeWithArray(swc['options'], {
-          env: {
-            // path specifies the directory to load the browserslist module and any browserslist configuration files.
-            path: paths.appPath,
-            mode: 'entry',
-            coreJs: '3',
-          },
-          jsc: {
-            externalHelpers: true,
-            parser: {
-              syntax: 'ecmascript',
-              jsx: true,
-              dynamicImport: true,
-            },
-          },
-        } as SwcOptions),
-      },
+      // {
+      //   test: /\.(js|mjs)$/,
+      //   exclude: /@babel(?:\/|\\{1,2})runtime/,
+      //   loader: require.resolve('swc-loader'),
+      //   options: deepMergeWithArray(swc['options'], {
+      //     env: {
+      //       // path specifies the directory to load the browserslist module and any browserslist configuration files.
+      //       path: paths.appPath,
+      //       mode: 'entry',
+      //       coreJs: '3',
+      //     },
+      //     jsc: {
+      //       externalHelpers: true,
+      //       parser: {
+      //         syntax: 'ecmascript',
+      //         jsx: true,
+      //         dynamicImport: true,
+      //       },
+      //     },
+      //   } as SwcOptions),
+      // },
     ]
   } else if (esbuild.enable) {
     return [
@@ -447,16 +449,16 @@ const getScriptLoaders = () => {
           jsx: 'automatic',
         } as EsbuildOptions),
       },
-      {
-        test: /\.(js|mjs)$/,
-        exclude: /@babel(?:\/|\\{1,2})runtime/,
-        loader: require.resolve('esbuild-loader'),
-        options: deepMergeWithArray(esbuild['options'], {
-          target: browserslistToEsbuild(),
-          format: 'esm',
-          jsx: 'transform',
-        } as EsbuildOptions),
-      },
+      // {
+      //   test: /\.(js|mjs)$/,
+      //   exclude: /@babel(?:\/|\\{1,2})runtime/,
+      //   loader: require.resolve('esbuild-loader'),
+      //   options: deepMergeWithArray(esbuild['options'], {
+      //     target: browserslistToEsbuild(),
+      //     format: 'esm',
+      //     jsx: 'transform',
+      //   } as EsbuildOptions),
+      // },
     ]
   } else if (babel.enable) {
     return [

@@ -9,8 +9,8 @@ import { Command } from 'commander'
 import envinfo from 'envinfo'
 import { checkNodeVersion, checkUpdate, gs } from '@mango-scripts/utils'
 
-import updateLocale from './scripts/updateLocale.mts'
-import insertI18n from './scripts/insertI18n.mts'
+import updateLocale from './scripts/updateLocale.mjs'
+import insertI18n from './scripts/insertI18n.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const packageJson = fs.readJSONSync(
