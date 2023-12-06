@@ -1,3 +1,11 @@
+## [2.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.4...@mango-scripts/esp-config@2.0.5) (2023-12-06)
+
+
+### Features
+
+* ts配置和构建配置抽离出来 ([0c5bd54](https://github.com/AlbertLin0923/mango-scripts/commit/0c5bd542f44762becb8d425f15dff1788e664ca1))
+* ts配置和构建配置抽离出来 ([7197e68](https://github.com/AlbertLin0923/mango-scripts/commit/7197e6827f9673720e790fcdc31955547a50b9d7))
+
 ## [2.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.3...@mango-scripts/esp-config@2.0.4) (2023-11-27)
 
 

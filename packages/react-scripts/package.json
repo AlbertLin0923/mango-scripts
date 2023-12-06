@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.23.3",
-    "@mango-scripts/babel-preset-mango": "^0.0.1",
+    "@mango-scripts/babel-preset-mango": "^0.0.2",
     "@mango-scripts/utils": "^2.0.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@svgr/webpack": "^8.1.0",

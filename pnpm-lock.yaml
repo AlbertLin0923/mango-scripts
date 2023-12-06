@@ -346,7 +346,7 @@ importers:
     specifiers:
       '@babel/core': ^7.22.20
       '@babel/eslint-parser': ^7.22.15
-      '@mango-scripts/babel-preset-mango': ^0.0.1
+      '@mango-scripts/babel-preset-mango': ^0.0.2
       '@rushstack/eslint-patch': ^1.4.0
       '@typescript-eslint/eslint-plugin': ^6.7.2
       '@typescript-eslint/parser': ^6.7.2
@@ -371,7 +371,7 @@ importers:
     dependencies:
       '@babel/core': 7.23.2
       '@babel/eslint-parser': 7.22.15_@babel+core@7.23.2
-      '@mango-scripts/babel-preset-mango': 0.0.1
+      '@mango-scripts/babel-preset-mango': 0.0.2
       '@rushstack/eslint-patch': 1.5.1
       '@typescript-eslint/eslint-plugin': 6.10.0_unnvxw4fakqbvs7z3wtywkpysm
       '@typescript-eslint/parser': 6.10.0
@@ -473,7 +473,7 @@ importers:
   packages/react-scripts:
     specifiers:
       '@babel/core': ^7.23.3
-      '@mango-scripts/babel-preset-mango': ^0.0.1
+      '@mango-scripts/babel-preset-mango': ^0.0.2
       '@mango-scripts/utils': ^2.0.1
       '@pmmmwh/react-refresh-webpack-plugin': ^0.5.11
       '@svgr/webpack': ^8.1.0
@@ -552,7 +552,7 @@ importers:
       workbox-webpack-plugin: ^7.0.0
     dependencies:
       '@babel/core': 7.23.3
-      '@mango-scripts/babel-preset-mango': 0.0.1
+      '@mango-scripts/babel-preset-mango': 0.0.2
       '@mango-scripts/utils': 2.0.1
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.11_ca42wwonbhqklbcalgajr75sou
       '@svgr/webpack': 8.1.0
@@ -4717,6 +4717,33 @@ packages:
       fs-extra: 11.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@mango-scripts/babel-preset-mango/0.0.2:
+    resolution: {integrity: sha512-JWkTkG7cig9Gfd9XJr/Irfg5GIxV4il07ckSVzK/x6MVrJzFuFy2FrOG6EDi+zf9LudPMWivN6khGxrmc/wTMA==}
+    engines: {node: '>=16.0.0'}
+    dependencies:
+      '@babel/core': 7.23.5
+      '@babel/plugin-proposal-class-properties': 7.18.6_@babel+core@7.23.5
+      '@babel/plugin-proposal-decorators': 7.23.3_@babel+core@7.23.5
+      '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6_@babel+core@7.23.5
+      '@babel/plugin-proposal-numeric-separator': 7.18.6_@babel+core@7.23.5
+      '@babel/plugin-proposal-optional-chaining': 7.21.0_@babel+core@7.23.5
+      '@babel/plugin-proposal-private-methods': 7.18.6_@babel+core@7.23.5
+      '@babel/plugin-proposal-private-property-in-object': 7.21.11_@babel+core@7.23.5
+      '@babel/plugin-transform-react-display-name': 7.23.3_@babel+core@7.23.5
+      '@babel/plugin-transform-runtime': 7.23.4_@babel+core@7.23.5
+      '@babel/preset-env': 7.23.3_@babel+core@7.23.5
+      '@babel/preset-react': 7.23.3_@babel+core@7.23.5
+      '@babel/preset-typescript': 7.23.3_@babel+core@7.23.5
+      '@babel/runtime': 7.23.5
+      babel-plugin-jsx-css-modules: 0.1.1
+      babel-plugin-macros: 3.1.0
+      babel-plugin-transform-react-remove-prop-types: 0.4.24
+      fs-extra: 11.1.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /@mango-scripts/dev-scripts/2.0.6:
     resolution: {integrity: sha512-Od09r+M1gp6H9yqLeAMVC9LQyeyD/0f9rgy2J7F2KLA2oUOqh1zfUo2M5PXpvV4I6tNtVVFWvK/7+YRvNUJpcg==}
