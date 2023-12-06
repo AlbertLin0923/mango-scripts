@@ -20,18 +20,22 @@
   "exports": {
     "./source": {
       "types": "./dist/cjs/source.d.ts",
+      "import": "./dist/esm/source.mjs",
       "require": "./dist/cjs/source.js"
     },
     "./dependencies": {
       "types": "./dist/cjs/dependencies.d.ts",
+      "import": "./dist/esm/dependencies.mjs",
       "require": "./dist/cjs/dependencies.js"
     },
     "./customize": {
       "types": "./dist/cjs/customize.d.ts",
+      "import": "./dist/esm/customize.mjs",
       "require": "./dist/cjs/customize.js"
     }
   },
   "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
   "types": "./dist/cjs/index.d.ts",
   "files": [
     "dist"

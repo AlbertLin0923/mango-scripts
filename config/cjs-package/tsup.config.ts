@@ -6,9 +6,11 @@ export default defineConfig([
     entry: ['src'],
     outDir: 'dist/cjs',
     bundle: false,
-    splitting: false,
+    // https://github.com/egoist/tsup/issues/992
+    splitting: true,
     clean: true,
     dts: true,
     shims: true,
+    cjsInterop: true,
   },
 ])
