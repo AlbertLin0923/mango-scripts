@@ -1,3 +1,17 @@
+## [2.0.7](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.6...@mango-scripts/dev-scripts@2.0.7) (2023-12-06)
+
+
+### Features
+
+* 修改@mango-scripts/react-scripts一些模块导入方式 ([0fb7002](https://github.com/AlbertLin0923/mango-scripts/commit/0fb7002f5afb291016bf4463c9a35b90414d85cb))
+* release @mango-scripts/i18n-utils@2.0.12 ([1232395](https://github.com/AlbertLin0923/mango-scripts/commit/1232395175dff2813920ca56e0bb6eaa5a80c8ba))
+* ts配置和构建配置抽离出来 ([7197e68](https://github.com/AlbertLin0923/mango-scripts/commit/7197e6827f9673720e790fcdc31955547a50b9d7))
+
+
+### Bug Fixes
+
+* 修复conventional-changelog-cli依赖问题 ([a45aa7d](https://github.com/AlbertLin0923/mango-scripts/commit/a45aa7d4c36aace19369dac07a3ccacd143bcf08))
+
 ## [2.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.5...@mango-scripts/dev-scripts@2.0.6) (2023-11-24)
 
 
