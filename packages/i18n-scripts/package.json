@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/i18n-scripts",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "mango-i18n-system 自动国际化文案配置系统的辅助插件合集，用于下载语言包、转换vue文件等",
   "keywords": [
     "mango-scripts",

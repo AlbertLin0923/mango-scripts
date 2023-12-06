@@ -1,3 +1,13 @@
+## [2.0.1](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-scripts@2.0.0...@mango-scripts/i18n-scripts@2.0.1) (2023-12-06)
+
+
+### Features
+
+* 升级依赖包&&新增脚本 ([f3a00a3](https://github.com/AlbertLin0923/mango-scripts/commit/f3a00a3504b36d95aff0efeabbecad4c08e778c5))
+* 修改@mango-scripts/react-scripts一些模块导入方式 ([0fb7002](https://github.com/AlbertLin0923/mango-scripts/commit/0fb7002f5afb291016bf4463c9a35b90414d85cb))
+* release @mango-scripts/i18n-utils@2.0.12 ([1232395](https://github.com/AlbertLin0923/mango-scripts/commit/1232395175dff2813920ca56e0bb6eaa5a80c8ba))
+* ts配置和构建配置抽离出来 ([7197e68](https://github.com/AlbertLin0923/mango-scripts/commit/7197e6827f9673720e790fcdc31955547a50b9d7))
+
 ## [2.0.0](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-scripts@1.0.3...@mango-scripts/i18n-scripts@2.0.0) (2023-10-07)
 
 
