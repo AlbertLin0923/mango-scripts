@@ -31,7 +31,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@mango-scripts/utils": "^2.0.0",
+    "@mango-scripts/utils": "^2.0.1",
     "cli-table": "^0.3.11",
     "commander": "^11.1.0",
     "consola": "^3.2.3",

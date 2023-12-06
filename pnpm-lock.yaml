@@ -279,7 +279,7 @@ importers:
 
   packages/dev-scripts:
     specifiers:
-      '@mango-scripts/utils': ^2.0.0
+      '@mango-scripts/utils': ^2.0.1
       '@types/cli-table': ^0.3.3
       '@types/envinfo': ^7.8.2
       '@types/fs-extra': ^11.0.3
@@ -310,7 +310,7 @@ importers:
       semver: ^7.5.4
       undici: ^5.27.0
     dependencies:
-      '@mango-scripts/utils': 2.0.0
+      '@mango-scripts/utils': 2.0.1
       cli-table: 0.3.11
       commander: 11.1.0
       consola: 3.2.3
@@ -396,7 +396,7 @@ importers:
 
   packages/i18n-scripts:
     specifiers:
-      '@mango-scripts/utils': ^2.0.0
+      '@mango-scripts/utils': ^2.0.1
       '@types/cli-table': ^0.3.3
       '@types/envinfo': ^7.8.2
       '@types/fs-extra': ^11.0.3
@@ -416,7 +416,7 @@ importers:
       picocolors: ^1.0.0
       undici: ^5.27.0
     dependencies:
-      '@mango-scripts/utils': 2.0.0
+      '@mango-scripts/utils': 2.0.1
       cli-table: 0.3.11
       commander: 11.1.0
       consola: 3.2.3
@@ -474,7 +474,7 @@ importers:
     specifiers:
       '@babel/core': ^7.23.3
       '@mango-scripts/babel-preset-mango': ^0.0.1
-      '@mango-scripts/utils': ^2.0.0
+      '@mango-scripts/utils': ^2.0.1
       '@pmmmwh/react-refresh-webpack-plugin': ^0.5.11
       '@svgr/webpack': ^8.1.0
       '@swc/core': ^1.3.99
@@ -553,7 +553,7 @@ importers:
     dependencies:
       '@babel/core': 7.23.3
       '@mango-scripts/babel-preset-mango': 0.0.1
-      '@mango-scripts/utils': 2.0.0
+      '@mango-scripts/utils': 2.0.1
       '@pmmmwh/react-refresh-webpack-plugin': 0.5.11_ca42wwonbhqklbcalgajr75sou
       '@svgr/webpack': 8.1.0
       '@swc/core': 1.3.99_@swc+helpers@0.5.3
@@ -4723,7 +4723,7 @@ packages:
     engines: {node: '>=16.0.0'}
     hasBin: true
     dependencies:
-      '@mango-scripts/utils': 2.0.0
+      '@mango-scripts/utils': 2.0.1
       cli-table: 0.3.11
       commander: 11.1.0
       consola: 3.2.3
@@ -4790,8 +4790,8 @@ packages:
       - typescript
     dev: true
 
-  /@mango-scripts/utils/2.0.0:
-    resolution: {integrity: sha512-Oqsw8YdqhRbVyv+7jWo46G+LjfGTzety3tkzQ+3biG/gRKeGjWvcZ4bWxeZ4/y6KwgZxta+nZv435o1iEQoisQ==}
+  /@mango-scripts/utils/2.0.1:
+    resolution: {integrity: sha512-3r3bntj8Dh4x74l4Bx8fNlICPTEUnCwwY4T9WHwtMhJvDmJw113Zi/yov8Aqx7Lnx274N1QS8FbckN4TYccMQQ==}
     engines: {node: '>=16.0.0'}
     dependencies:
       gradient-string: 2.0.2

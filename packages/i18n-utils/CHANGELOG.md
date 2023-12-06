@@ -1,3 +1,10 @@
+## [2.0.12](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@2.0.11...@mango-scripts/i18n-utils@2.0.12) (2023-12-06)
+
+
+### Features
+
+* ts配置和构建配置抽离出来 ([7197e68](https://github.com/AlbertLin0923/mango-scripts/commit/7197e6827f9673720e790fcdc31955547a50b9d7))
+
 ## [2.0.11](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-utils@2.0.10...@mango-scripts/i18n-utils@2.0.11) (2023-12-02)
 
 
