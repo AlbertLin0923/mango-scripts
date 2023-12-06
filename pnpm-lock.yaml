@@ -6,8 +6,8 @@ importers:
     specifiers:
       '@commitlint/cli': ^18.4.3
       '@commitlint/config-conventional': ^18.4.3
-      '@mango-scripts/dev-scripts': ^2.0.6
-      '@mango-scripts/esp-config': ^2.0.4
+      '@mango-scripts/dev-scripts': ^2.0.7
+      '@mango-scripts/esp-config': ^2.0.5
       '@types/node': ^18.15.5
       '@types/react': ^18.2.38
       '@types/react-dom': ^18.2.17
@@ -29,8 +29,8 @@ importers:
     devDependencies:
       '@commitlint/cli': 18.4.3_typescript@5.3.2
       '@commitlint/config-conventional': 18.4.3
-      '@mango-scripts/dev-scripts': 2.0.6
-      '@mango-scripts/esp-config': 2.0.4_b7f76eo2ffficipafubkkxlsae
+      '@mango-scripts/dev-scripts': 2.0.7
+      '@mango-scripts/esp-config': 2.0.5_b7f76eo2ffficipafubkkxlsae
       '@types/node': 18.18.9
       '@types/react': 18.2.38
       '@types/react-dom': 18.2.17
@@ -4693,32 +4693,6 @@ packages:
       dayjs: 1.11.10
     dev: false
 
-  /@mango-scripts/babel-preset-mango/0.0.1:
-    resolution: {integrity: sha512-LRUj5matF6d+XSAwWdN0IaNYpSSpYfXtslrbufs7Ur0oe81hoHxvzdYE14cprduEEQlrL8OwayLZ72/lpVsrJQ==}
-    engines: {node: '>=16.0.0'}
-    dependencies:
-      '@babel/core': 7.23.5
-      '@babel/plugin-proposal-class-properties': 7.18.6_@babel+core@7.23.5
-      '@babel/plugin-proposal-decorators': 7.23.3_@babel+core@7.23.5
-      '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6_@babel+core@7.23.5
-      '@babel/plugin-proposal-numeric-separator': 7.18.6_@babel+core@7.23.5
-      '@babel/plugin-proposal-optional-chaining': 7.21.0_@babel+core@7.23.5
-      '@babel/plugin-proposal-private-methods': 7.18.6_@babel+core@7.23.5
-      '@babel/plugin-proposal-private-property-in-object': 7.21.11_@babel+core@7.23.5
-      '@babel/plugin-transform-react-display-name': 7.23.3_@babel+core@7.23.5
-      '@babel/plugin-transform-runtime': 7.23.4_@babel+core@7.23.5
-      '@babel/preset-env': 7.23.3_@babel+core@7.23.5
-      '@babel/preset-react': 7.23.3_@babel+core@7.23.5
-      '@babel/preset-typescript': 7.23.3_@babel+core@7.23.5
-      '@babel/runtime': 7.23.5
-      babel-plugin-jsx-css-modules: 0.1.1
-      babel-plugin-macros: 3.1.0
-      babel-plugin-transform-react-remove-prop-types: 0.4.24
-      fs-extra: 11.1.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /@mango-scripts/babel-preset-mango/0.0.2:
     resolution: {integrity: sha512-JWkTkG7cig9Gfd9XJr/Irfg5GIxV4il07ckSVzK/x6MVrJzFuFy2FrOG6EDi+zf9LudPMWivN6khGxrmc/wTMA==}
     engines: {node: '>=16.0.0'}
@@ -4743,10 +4717,9 @@ packages:
       fs-extra: 11.1.1
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
-  /@mango-scripts/dev-scripts/2.0.6:
-    resolution: {integrity: sha512-Od09r+M1gp6H9yqLeAMVC9LQyeyD/0f9rgy2J7F2KLA2oUOqh1zfUo2M5PXpvV4I6tNtVVFWvK/7+YRvNUJpcg==}
+  /@mango-scripts/dev-scripts/2.0.7:
+    resolution: {integrity: sha512-zzf208glqHP4AVmj3G9vyHZkHzYHA6ra2oh68dZ/8Hp408WCvg39PgqNEof9xLPOqfcnnYjy0bICwZ5Sl79RfQ==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     dependencies:
@@ -4754,7 +4727,6 @@ packages:
       cli-table: 0.3.11
       commander: 11.1.0
       consola: 3.2.3
-      conventional-changelog-cli: 4.1.0
       envinfo: 7.11.0
       execa: 8.0.1
       fs-extra: 11.1.1
@@ -4773,8 +4745,8 @@ packages:
       undici: 5.27.2
     dev: true
 
-  /@mango-scripts/esp-config/2.0.4_b7f76eo2ffficipafubkkxlsae:
-    resolution: {integrity: sha512-4kOZDXs/ldwkH/zvtW0sR0wA/cL5H7BcNJchuLsn0PIleBqvKYiA2cRIVR3m9bhW6M85BHawXhbnttqxSlj/1w==}
+  /@mango-scripts/esp-config/2.0.5_b7f76eo2ffficipafubkkxlsae:
+    resolution: {integrity: sha512-imqURhZeFka98z0r2vwHesX8sagkRJ4tCiDubgCXu/Pdtv97Nh5DGJYQ88KbWfJTsjrqGnkWh0xJtJ0kAGO79Q==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       eslint: '>= 8.50.0'
@@ -4783,7 +4755,7 @@ packages:
     dependencies:
       '@babel/core': 7.23.5
       '@babel/eslint-parser': 7.22.15_oqiedczmxzk7oajf4yu3k57bim
-      '@mango-scripts/babel-preset-mango': 0.0.1
+      '@mango-scripts/babel-preset-mango': 0.0.2
       '@rushstack/eslint-patch': 1.5.1
       '@typescript-eslint/eslint-plugin': 6.10.0_22bpg26eh4mckz44pcqzyewy2a
       '@typescript-eslint/parser': 6.10.0_t4y562kuozn2x6kqiutrjmhi5a
