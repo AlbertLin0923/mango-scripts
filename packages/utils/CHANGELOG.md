@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/utils@2.0.0...@mango-scripts/utils@2.0.1) (2023-12-06)
+
+
+### Features
+
+* release @mango-scripts/utils@2.0.0 ([7346251](https://github.com/AlbertLin0923/mango-scripts/commit/73462519d7c03b4aeee1f9ffae900fca24764299))
+* ts配置和构建配置抽离出来 ([7197e68](https://github.com/AlbertLin0923/mango-scripts/commit/7197e6827f9673720e790fcdc31955547a50b9d7))
+
 ## [2.0.0](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/utils@2.0.0...@mango-scripts/utils@2.0.0) (2023-10-06)
 
 ## [2.0.0](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/utils@1.0.1...@mango-scripts/utils@2.0.0) (2023-10-06)
