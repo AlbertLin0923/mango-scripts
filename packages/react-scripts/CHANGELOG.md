@@ -1,3 +1,14 @@
+## [2.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.2...@mango-scripts/react-scripts@2.0.3) (2023-12-06)
+
+
+### Features
+
+* 拆分react-scripts插件配置 ([c33edc9](https://github.com/AlbertLin0923/mango-scripts/commit/c33edc93b8fbe05636a343600edfab5c4208a736))
+* i18n-utils增加对mjs和mts文件的支持 ([fae0762](https://github.com/AlbertLin0923/mango-scripts/commit/fae0762cccf7d6e840e1408fae85192e4114edf6))
+* release @mango-scripts/esp-config@2.0.5 ([1780cc6](https://github.com/AlbertLin0923/mango-scripts/commit/1780cc651644480b1fbc7a8186bb3cecf6104bde))
+* release @mango-scripts/i18n-utils@2.0.12 ([1232395](https://github.com/AlbertLin0923/mango-scripts/commit/1232395175dff2813920ca56e0bb6eaa5a80c8ba))
+* ts配置和构建配置抽离出来 ([7197e68](https://github.com/AlbertLin0923/mango-scripts/commit/7197e6827f9673720e790fcdc31955547a50b9d7))
+
 ## [2.0.2](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.1...@mango-scripts/react-scripts@2.0.2) (2023-11-27)
 
 
