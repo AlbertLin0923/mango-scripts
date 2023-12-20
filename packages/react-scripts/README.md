@@ -76,13 +76,15 @@ pnpm add @mango-scripts/react-scripts -D
 
 ### 扩展配置
 
-项目根目录下新增 `mango.config.js`（或 `mango.config.cjs` / `mango.config.mjs` / `.mangorc`） 配置文件
+项目根目录下新增 `mango.config.ts`（或 `mango.config.js` / `mango.config.mjs` / `.mangorc`） 配置文件
 
-mango.config.js
+如：mango.config.ts
 
-```js
-module.exports = {
-  distDir: 'dist',
+```
+import { defineConfig } from '@mango-scripts/react-scripts'
+
+export default defineConfig({
+  distDir: 'build',
   loader: {
     babel: {
       enable: true,
@@ -164,7 +166,7 @@ module.exports = {
       },
     },
   },
-}
+})
 ```
 
 ## License

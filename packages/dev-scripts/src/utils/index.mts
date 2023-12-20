@@ -132,20 +132,6 @@ export const updateVersion = async (
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n')
 }
 
-export const publishPkg = async (
-  pkdDir: string,
-  tag?: string,
-): Promise<void> => {
-  const publicArgs = ['publish', '--access', 'public']
-  if (tag) {
-    publicArgs.push(`--tag`, tag)
-  }
-  publicArgs.push(`--no-git-checks`)
-  await run('pnpm', publicArgs, {
-    cwd: pkdDir,
-  })
-}
-
 export const getLatestTag = async (pkgName: string) => {
   const tags = (await run('git', ['tag'], { stdio: 'pipe' })).stdout
     .split(/\n/)
@@ -182,4 +168,18 @@ export const logRecentCommits = async (pkgName: string) => {
     { stdio: 'inherit' },
   )
   console.log()
+}
+
+export const publishPkg = async (
+  pkdDir: string,
+  tag?: string,
+): Promise<void> => {
+  const publicArgs = ['publish', '--access', 'public']
+  if (tag) {
+    publicArgs.push(`--tag`, tag)
+  }
+  publicArgs.push(`--no-git-checks`)
+  await run('pnpm', publicArgs, {
+    cwd: pkdDir,
+  })
 }

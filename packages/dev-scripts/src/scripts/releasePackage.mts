@@ -148,19 +148,14 @@ export const publishCI = async (tag: string) => {
     version.includes('beta')
       ? 'beta'
       : version.includes('alpha')
-      ? 'alpha'
-      : undefined,
+        ? 'alpha'
+        : undefined,
   )
 }
 
 const releasePackage = async () => {
-  const processArgs = minimist(process.argv.slice(2))
-  const { tag } = processArgs
-  if (tag) {
-    publishCI(tag)
-  } else {
-    boot()
-  }
+  const { tag } = minimist(process.argv.slice(2))
+  tag ? publishCI(tag) : boot()
 }
 
 export default releasePackage

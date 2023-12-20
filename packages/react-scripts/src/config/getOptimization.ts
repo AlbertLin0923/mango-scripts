@@ -169,5 +169,6 @@ export const getOptimization = () => {
       getJsMinimizer(),
       getCssMinimizer(),
     ],
+    runtimeChunk: true,
   }
 }

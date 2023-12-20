@@ -65,7 +65,7 @@ export const getPlugins = () => {
     // a network request.
     // https://github.com/facebook/create-react-app/issues/5358
     isEnvProduction &&
-      new InlineChunkHtmlPlugin(HtmlWebpackPlugin as any, [/runtime-.+[.]js/]),
+      new InlineChunkHtmlPlugin(HtmlWebpackPlugin as any, [/runtime~.+[.]js/]),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
