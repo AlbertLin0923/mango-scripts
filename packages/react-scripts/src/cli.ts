@@ -1,7 +1,9 @@
 #!/usr/bin/env node
+import path from 'path'
 
 import pico from 'picocolors'
 import envinfo from 'envinfo'
+import fs from 'fs-extra'
 import { Command } from 'commander'
 import { checkNodeVersion, checkUpdate, gs } from '@mango-scripts/utils'
 
@@ -9,7 +11,9 @@ import dev from './scripts/dev'
 import build from './scripts/build'
 import inspect from './scripts/inspect'
 
-const packageJson = require('../../package.json')
+const packageJson = fs.readJSONSync(
+  path.resolve(__dirname, '../../package.json'),
+)
 
 const { engines, name, version } = packageJson
 

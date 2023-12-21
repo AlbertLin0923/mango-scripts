@@ -3,6 +3,7 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 
 import { getUserConfig, deepMergeWithArray } from './getUserConfig'
 
+import type { Configuration } from 'webpack'
 import type { MinifyOptions } from 'terser'
 
 const getJsMinimizer = (): TerserPlugin<MinifyOptions> => {
@@ -154,8 +155,7 @@ const defaultSplitChunks = {
   },
 }
 
-export const getOptimization = () => {
-  const isEnvDevelopment = process.env.NODE_ENV === 'development'
+export const getOptimization = (): Configuration['optimization'] => {
   const isEnvProduction = process.env.NODE_ENV === 'production'
 
   const splitChunks = getUserConfig('optimization.splitChunks')

@@ -1,6 +1,8 @@
 import os from 'os'
 import { createHash } from 'crypto'
 
+import fs from 'fs-extra'
+
 const interfaces = os.networkInterfaces()
 
 // Get the local IP address in the LAN in the development environment
@@ -28,4 +30,9 @@ export const getHash = (env: any) => {
   const hash = createHash('md5')
   hash.update(JSON.stringify(env))
   return hash.digest('hex')
+}
+
+export const extractPkgJson = (key: string, pkgPath: string) => {
+  const packageJson = fs.readJSONSync(require.resolve(pkgPath))
+  return packageJson[key]
 }

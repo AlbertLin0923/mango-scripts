@@ -22,7 +22,9 @@ import { getPaths } from './getPaths'
 import { getEnv } from './getEnv'
 import { getUserConfig, deepMergeWithArray } from './getUserConfig'
 
-export const getPlugins = () => {
+import type { Configuration } from 'webpack'
+
+export const getPlugins = (): Configuration['plugins'] => {
   const isEnvDevelopment = process.env.NODE_ENV === 'development'
   const isEnvProduction = process.env.NODE_ENV === 'production'
   // Source maps are resource heavy and can cause out of memory issue for large source files.

@@ -1,12 +1,13 @@
 import path from 'path'
 
-import fs from 'fs-extra'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import loaderUtils from 'loader-utils'
 import browserslistToEsbuild from 'browserslist-to-esbuild'
 
 import { getPaths } from './getPaths'
 import { getUserConfig, deepMergeWithArray } from './getUserConfig'
+
+import { extractPkgJson } from '../utils'
 
 import type { Options as SwcOptions } from '@swc/core'
 import type { TransformOptions as EsbuildOptions } from 'esbuild'
@@ -20,11 +21,6 @@ const lessRegex = /\.less$/
 const lessModuleRegex = /\.module\.less$/
 const stylusRegex = /\.(styl|stylus)$/
 const stylusModuleRegex = /\.module\.(styl|stylus)$/
-
-const extractJson = (key: string, pkgPath: string) => {
-  const packageJson = fs.readJSONSync(require.resolve(pkgPath))
-  return packageJson[key]
-}
 
 const getLocalIdent = (
   context: any,
@@ -394,7 +390,7 @@ const getScriptLoaders = () => {
             // path specifies the directory to load the browserslist module and any browserslist configuration files.
             path: paths.appPath,
             mode: 'entry',
-            coreJs: extractJson('version', 'core-js/package.json'),
+            coreJs: extractPkgJson('version', 'core-js/package.json'),
           },
           jsc: {
             externalHelpers: true,
