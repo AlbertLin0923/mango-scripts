@@ -1,3 +1,16 @@
+## [2.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.3...@mango-scripts/react-scripts@2.0.4) (2023-12-23)
+
+
+### Features
+
+* 完善readme文件 ([247718e](https://github.com/AlbertLin0923/mango-scripts/commit/247718e40557c462f8ab8cb1a8f326d0a4603027))
+* 优化react-scripts ([bd00563](https://github.com/AlbertLin0923/mango-scripts/commit/bd0056340b28a0a3ad707652106e0312805444d6))
+
+
+### Bug Fixes
+
+* 解决webpack runtime内嵌失效问题 ([287dbe0](https://github.com/AlbertLin0923/mango-scripts/commit/287dbe024d86715a26758d1755ce08c85935b132))
+
 ## [2.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.2...@mango-scripts/react-scripts@2.0.3) (2023-12-06)
 
 
