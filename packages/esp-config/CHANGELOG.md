@@ -1,3 +1,10 @@
+## [2.0.7](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.6...@mango-scripts/esp-config@2.0.7) (2023-12-24)
+
+
+### Features
+
+* esp-config优化&&node版本升级 ([bc134db](https://github.com/AlbertLin0923/mango-scripts/commit/bc134db9114d50b9bb0da6659f13409f6a305848))
+
 ## [2.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.5...@mango-scripts/esp-config@2.0.6) (2023-12-24)
 
 
