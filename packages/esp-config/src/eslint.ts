@@ -19,11 +19,13 @@ const config = {
     },
     babelOptions: {
       presets: [
-        require.resolve('@mango-scripts/babel-preset-mango/source'),
-        {
-          helpers: false,
-          forceEnv: 'production',
-        },
+        [
+          require.resolve('@mango-scripts/babel-preset-mango/source'),
+          {
+            helpers: false,
+            forceEnv: 'production',
+          },
+        ],
       ],
     },
     requireConfigFile: false,
