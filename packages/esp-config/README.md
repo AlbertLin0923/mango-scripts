@@ -30,26 +30,34 @@ module.exports = {
 }
 ```
 
-### .stylelintrc.js
+### stylelint.config.mjs
 
-```js
-module.exports = {
-  extends: [require.resolve('@mango-scripts/esp-config/stylelint')],
+```mjs
+import stylelint from '@mango-scripts/esp-config/stylelint'
+
+/** @type {import("stylelint").Config} */
+const config = {
+  ...stylelint,
   rules: {
     // your rules
   },
 }
+
+export default config
 ```
 
-### .prettierrc.js
+### prettier.config.mjs
 
-```js
-const prettier = require('@mango-scripts/esp-config/prettier')
+```mjs
+import prettier from '@mango-scripts/esp-config/prettier'
 
-module.exports = {
+/** @type {import("prettier").Config} */
+const config = {
   ...prettier,
   // your rules
 }
+
+export default config
 ```
 
 ## License
