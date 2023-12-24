@@ -1,3 +1,11 @@
+## [2.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.5...@mango-scripts/esp-config@2.0.6) (2023-12-24)
+
+
+### Bug Fixes
+
+* 修复esp-config中eslint babel配置错误问题 ([aa19ccd](https://github.com/AlbertLin0923/mango-scripts/commit/aa19ccd70c6c2504eebfc99ce7fe8488f68ebb03))
+* 修复esp-config中eslint babel配置错误问题 ([1bb17fa](https://github.com/AlbertLin0923/mango-scripts/commit/1bb17fac23d0d255b9ab0fec96cebb3157a69784))
+
 ## [2.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.4...@mango-scripts/esp-config@2.0.5) (2023-12-06)
 
 
