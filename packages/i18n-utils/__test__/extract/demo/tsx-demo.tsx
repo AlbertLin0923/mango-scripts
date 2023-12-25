@@ -1,8 +1,9 @@
-/* eslint-disable node/no-missing-import */
+/* eslint-disable */
 // translateModules:["DEMO模块"]
 import React from 'react'
+// @ts-ignore
 import { Modal, Table, Progress } from 'antd'
-
+// @ts-ignore
 import { useTranslation } from 'react-i18next'
 
 export type AnalysisModalProps = React.PropsWithChildren<{

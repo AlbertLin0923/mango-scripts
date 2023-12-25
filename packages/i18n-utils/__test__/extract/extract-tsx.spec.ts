@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest'
 
 import { extractChineseFieldList } from '../../src/index'
+
 const path = require('path')
 const projectPath = path.resolve(__dirname, './demo')
 
