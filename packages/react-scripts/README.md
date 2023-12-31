@@ -2,7 +2,7 @@
 @mango-scripts/react-scripts
 </h1>
 <p align="center">
-基于 react-scripts@5.0.1 添加一些功能和优化
+React Web 项目构建工具，支持 webpack && rsbuild 双构建引擎切换
 <p>
 <p align="center">
 <a href="https://www.npmjs.com/package/@mango-scripts/react-scripts" target="__blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/@mango-scripts/react-scripts?label=" alt="NPM version"></a>
@@ -13,16 +13,17 @@
 
 ## 特性
 
-- 基于 [react-scripts@5.0.1](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts)，用 TypeScript + Pure ESM 改写
-- 支持 `type:modules` ESM 模式
+- 支持 [webpack](https://github.com/webpack/webpack) && [rsbuild](https://github.com/web-infra-dev/rsbuild) 双构建引擎切换
+- `webapck` 配置基于 [react-scripts@5.0.1](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts) ，使用 `TypeScript` + `Pure ESM` 进行改写，添加一些功能和优化
+- `rsbuild` 配置对标内部 `webpack` 配置，适用项目快速开发
+- 支持 `type:modules` ESM 模式开发项目
 - 类似 [craco](https://github.com/dilanx/craco)，可通过配置文件对该构建工具进行扩展配置
-- webpack 以及周边 loader、plugin 等相关依赖包保持及时的更新
-- 内置 [esbuild](https://github.com/evanw/esbuild) 和 [swc](https://github.com/swc-project/swc) 配置支持，可切换 对应的 js/css minify 压缩器
+- webpack、rsbuild 以及周边 loader、plugin 等相关依赖包保持及时的更新
+- `webpack`配置增加 [esbuild](https://github.com/evanw/esbuild) 和 [swc](https://github.com/swc-project/swc) 支持，可切换 对应的 js/css minify 压缩器，提高构建速度
 - 内置 `less`、`scss`、`sass`、`stylus` CSS 预处理器
 - 内置 [babel-plugin-jsx-css-modules](https://github.com/CJY0208/babel-plugin-jsx-css-modules) 插件，就像写普通 `css` 样式一样写 `css module` 模块化代码
 - 内置 [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) 打包分析插件
 - 内置 [svg-sprite-loader](https://github.com/JetBrains/svg-sprite-loader) svg 精灵图优化 loader
-- 增加 [qiankun](https://github.com/umijs/qiankun) 配置支持
 - 增加 [eslint-webpack-plugin](https://github.com/webpack-contrib/eslint-webpack-plugin) 和 [stylelint-webpack-plugin](https://github.com/webpack-contrib/stylelint-webpack-plugin)，默认读取业务项目目录的配置
 - 可在开发环境下自动获取局域网 IP 并映射到地址栏，便于本地联调
 
@@ -42,6 +43,8 @@ pnpm add @mango-scripts/react-scripts -D
 
 推荐 npm scripts 如下：
 
+#### 选择 webpack 构建
+
 ```json
 "scripts": {
   "dev": "react-scripts dev --mode development",
@@ -49,6 +52,18 @@ pnpm add @mango-scripts/react-scripts -D
   "build:test": "react-scripts build --mode test",
   "build:stage": "react-scripts build --mode stage",
   "build:prod": "react-scripts build --mode prod",
+},
+```
+
+#### 选择 rsbuild 构建
+
+```json
+"scripts": {
+  "dev": "react-scripts dev --mode development --bundler rsbuild",
+  "build:dev": "react-scripts build --mode dev --bundler rsbuild",
+  "build:test": "react-scripts build --mode test --bundler rsbuild",
+  "build:stage": "react-scripts build --mode stage --bundler rsbuild",
+  "build:prod": "react-scripts build --mode prod --bundler rsbuild",
 },
 ```
 
@@ -80,9 +95,10 @@ pnpm add @mango-scripts/react-scripts -D
 
 项目根目录下新增 `mango.config.mjs` 配置文件
 
-如：mango.config.mjs
+mango.config.mjs：
 
-```
+```mjs
+// 选择 webpack 构建的配置选项
 import { defineConfig } from '@mango-scripts/react-scripts'
 
 export default defineConfig({
@@ -171,6 +187,25 @@ export default defineConfig({
 })
 ```
 
+```mjs
+// 选择 rsbuild 构建的配置选项
+import { defineConfig } from '@mango-scripts/react-scripts'
+
+export default defineConfig({
+  // 具体配置参考rsbuild配置文档：https://rsbuild.dev/config/index
+  tools: {
+    sass: {
+      additionalData: `@import "src/styles/mixins.scss";`,
+    },
+  },
+  ...
+})
+```
+
 ## License
 
 [MIT](./LICENSE)
+
+```
+
+```
