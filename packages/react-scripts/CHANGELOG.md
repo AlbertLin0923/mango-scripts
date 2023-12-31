@@ -1,3 +1,11 @@
+## [2.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.4...@mango-scripts/react-scripts@2.0.5) (2023-12-31)
+
+
+### Features
+
+* 重构@mango-script/react-scripts，改成pure esm&&增加rsbuild配置 ([48c5ab0](https://github.com/AlbertLin0923/mango-scripts/commit/48c5ab049cff65629c657c57573689f0968ca831))
+* esp-config优化&&node版本升级 ([bc134db](https://github.com/AlbertLin0923/mango-scripts/commit/bc134db9114d50b9bb0da6659f13409f6a305848))
+
 ## [2.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.3...@mango-scripts/react-scripts@2.0.4) (2023-12-23)
 
 
