@@ -2,7 +2,7 @@
 @mango-scripts/react-scripts
 </h1>
 <p align="center">
-React Web 项目构建工具，支持 webpack && rsbuild 双构建引擎切换
+React Web App 项目构建工具，支持 webpack && rsbuild 双构建引擎切换
 <p>
 <p align="center">
 <a href="https://www.npmjs.com/package/@mango-scripts/react-scripts" target="__blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/@mango-scripts/react-scripts?label=" alt="NPM version"></a>

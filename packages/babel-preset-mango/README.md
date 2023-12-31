@@ -2,7 +2,7 @@
 @mango-scripts/babel-preset-mango
 </h1>
 <p align="center">
-通用 React App Babel 配置
+React Web App 项目通用 Babel 配置
 <p>
 <p align="center">
 <a href="https://www.npmjs.com/package/@mango-scripts/babel-preset-mango" target="__blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/@mango-scripts/babel-preset-mango?label=" alt="NPM version"></a>
