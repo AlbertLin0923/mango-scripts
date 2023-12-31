@@ -1,22 +1,27 @@
 import path from 'path'
 
 import fs from 'fs-extra'
-import ModuleScopePlugin from 'react-dev-utils/ModuleScopePlugin'
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 
-import { getEnv } from './getEnv'
-import { getPaths } from './getPaths'
-import { getModules } from './getModules'
-import { getPlugins } from './getPlugins'
-import { getModuleRules } from './getModuleRules'
-import { getOptimization } from './getOptimization'
+import { getModules } from './getModules.mjs'
+import { getPlugins } from './getPlugins.mjs'
+import { getModuleRules } from './getModuleRules.mjs'
+import { getOptimization } from './getOptimization.mjs'
 
-import { getHash } from '../utils'
+import ModuleScopePlugin from '../../common/utils/ModuleScopePlugin.mjs'
+import { getEnv } from '../../common/getEnv.mjs'
+import { getHash } from '../../common/utils/index.mjs'
 
+import type { PathsType } from '../../common/getPaths.mjs'
+import type { UserConfigType } from '../../defineConfig.mjs'
 import type { Configuration } from 'webpack'
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
-export const getWebpackConfig = (): Configuration => {
+export const getWebpackConfig = (
+  userConfig: UserConfigType,
+  paths: PathsType,
+): Configuration => {
   const isEnvDevelopment = process.env.NODE_ENV === 'development'
   const isEnvProduction = process.env.NODE_ENV === 'production'
   // Source maps are resource heavy and can cause out of memory issue for large source files.
@@ -25,8 +30,7 @@ export const getWebpackConfig = (): Configuration => {
   // passed into alias object. Uses a flag if passed into the build command
   const useProfile = process.env.USE_PROFILE === 'true'
 
-  const paths = getPaths()
-  const modules = getModules()
+  const modules = getModules(paths)
 
   // We will provide `paths.publicUrlOrPath` to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -96,14 +100,14 @@ export const getWebpackConfig = (): Configuration => {
         defaultWebpack: ['webpack/lib/'],
         config: [__filename],
         tsconfig: [paths.appTsConfig, paths.appJsConfig].filter((f) =>
-          fs.existsSync(f),
+          fs.pathExistsSync(f),
         ),
       },
     },
     infrastructureLogging: {
       level: 'none',
     },
-    optimization: getOptimization(),
+    optimization: getOptimization(userConfig),
     resolve: {
       // This allows you to set a fallback for where webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
@@ -151,14 +155,18 @@ export const getWebpackConfig = (): Configuration => {
               require.resolve('@mango-scripts/babel-preset-mango/source'),
             ],
           }),
-        ]) as any,
+        ]),
+        // Using this plugin means that you should no longer need to add alias entries in your webpack.config.js
+        // which correspond to the paths entries in your tsconfig.json.
+        // This plugin creates those alias entries for you, so you don't have to
+        new TsconfigPathsPlugin(),
       ],
     },
     module: {
       parser: { javascript: { strictExportPresence: true } },
-      rules: getModuleRules(),
+      rules: getModuleRules(userConfig, paths),
     },
-    plugins: getPlugins(),
+    plugins: getPlugins(userConfig, paths),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,

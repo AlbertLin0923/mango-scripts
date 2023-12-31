@@ -1,18 +1,17 @@
-import path from 'path'
+import path from 'node:path'
 
 import fs from 'fs-extra'
 import pico from 'picocolors'
 import resolve from 'resolve'
 
-import { getPaths } from './getPaths'
+import type { PathsType } from '../../common/getPaths.mjs'
 
 /**
  * Get additional module paths based on the baseUrl of a compilerOptions object.
  *
  * @param {Object} options
  */
-const getAdditionalModulePaths = (options: any = {}) => {
-  const paths = getPaths()
+const getAdditionalModulePaths = (paths: PathsType, options: any = {}) => {
   const baseUrl = options.baseUrl
 
   if (!baseUrl) {
@@ -58,9 +57,9 @@ const getAdditionalModulePaths = (options: any = {}) => {
  * @param {*} options
  */
 const getWebpackAliases = (
+  paths: PathsType,
   options: any = {},
 ): { src: string } | Record<string, never> => {
-  const paths = getPaths()
   const baseUrl = options.baseUrl
 
   if (!baseUrl) {
@@ -78,11 +77,10 @@ const getWebpackAliases = (
   }
 }
 
-export const getModules = () => {
-  const paths = getPaths()
+export const getModules = (paths: PathsType) => {
   // Check if TypeScript is setup
-  const hasTsConfig = fs.existsSync(paths.appTsConfig)
-  const hasJsConfig = fs.existsSync(paths.appJsConfig)
+  const hasTsConfig = fs.pathExistsSync(paths.appTsConfig)
+  const hasJsConfig = fs.pathExistsSync(paths.appJsConfig)
 
   if (hasTsConfig && hasJsConfig) {
     throw new Error(
@@ -111,11 +109,11 @@ export const getModules = () => {
   config = config || {}
   const options = config.compilerOptions || {}
 
-  const additionalModulePaths = getAdditionalModulePaths(options)
+  const additionalModulePaths = getAdditionalModulePaths(paths, options)
 
   return {
     additionalModulePaths: additionalModulePaths,
-    webpackAliases: getWebpackAliases(options),
+    webpackAliases: getWebpackAliases(paths, options),
     hasTsConfig,
   }
 }

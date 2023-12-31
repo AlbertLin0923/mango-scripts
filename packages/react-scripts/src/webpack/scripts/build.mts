@@ -1,17 +1,21 @@
 import fs from 'fs-extra'
 import pico from 'picocolors'
 import webpack from 'webpack'
-import checkRequiredFiles from 'react-dev-utils/checkRequiredFiles'
-import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages'
-import FileSizeReporter from 'react-dev-utils/FileSizeReporter'
-import printBuildError from 'react-dev-utils/printBuildError'
-import { checkBrowsers } from 'react-dev-utils/browsersHelper'
 
-import { applyEnv } from '../config/getEnv'
-import { getPaths } from '../config/getPaths'
-import { getWebpackConfig } from '../config/webpack.config'
+import {
+  printFileSizesAfterBuild,
+  measureFileSizesBeforeBuild,
+} from '../../common/utils/FileSizeReporter.mjs'
+import formatWebpackMessages from '../../common/utils/formatWebpackMessages.mjs'
+import printBuildError from '../../common/utils/printBuildError.mjs'
+import checkRequiredFiles from '../../common/utils/checkRequiredFiles.mjs'
+import { applyEnv } from '../../common/getEnv.mjs'
+import { getPaths } from '../../common/getPaths.mjs'
+import { getWebpackConfig } from '../config/webpack.config.mjs'
+import { getUserConfig } from '../config/getUserConfig.mjs'
 
 import type { Configuration } from 'webpack'
+import type { PathsType } from '../../common/getPaths.mjs'
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
@@ -29,8 +33,7 @@ interface webpackBuildResolveArgs {
 const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024
 const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024
 
-const copyPublicFolder = async () => {
-  const paths = getPaths()
+const copyPublicFolder = async (paths: PathsType) => {
   await fs.copy(paths.appPublic, paths.appDist, {
     dereference: true,
     filter: (file) => file !== paths.appHtml,
@@ -39,7 +42,7 @@ const copyPublicFolder = async () => {
 
 // Create the production build and print the deployment instructions.
 const webpackBuild = async (config: Configuration) => {
-  console.log(pico.cyan('\nCreating an optimized production build...'))
+  console.log(pico.cyan('Creating an optimized production build...'))
 
   const compiler = webpack(config)
 
@@ -91,36 +94,32 @@ const webpackBuild = async (config: Configuration) => {
 
 const build = async (mode: string) => {
   try {
+    const userConfig = await getUserConfig()
+    const paths = getPaths(userConfig)
+
     // apply env
-    applyEnv(mode, 'production')
-
-    const isInteractive = process.stdout.isTTY
-
-    const paths = getPaths()
+    applyEnv(mode, 'production', paths)
 
     // Warn and crash if required files are missing
     if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
       process.exit(1)
     }
 
-    // We require that you explicitly set browsers and do not fall back to
-    // browserslist defaults.
-    await checkBrowsers(paths.appPath, isInteractive)
-
     // First, read the current file sizes in build directory.
     // This lets us display how much they changed later.
-    const previousFileSizes =
-      await FileSizeReporter.measureFileSizesBeforeBuild(paths.appDist)
+    const previousFileSizes = await measureFileSizesBeforeBuild(paths.appDist)
 
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
     await fs.emptyDir(paths.appDist)
 
     // Merge with the public folder
-    await copyPublicFolder()
+    await copyPublicFolder(paths)
 
     try {
-      const { stats, warnings } = await webpackBuild(getWebpackConfig())
+      const { stats, warnings } = await webpackBuild(
+        getWebpackConfig(userConfig, paths),
+      )
 
       if (warnings.length) {
         console.log(pico.yellow('Compiled with warnings.\n'))
@@ -135,12 +134,10 @@ const build = async (mode: string) => {
             pico.cyan('// eslint-disable-next-line') +
             ' to the line before.\n',
         )
-      } else {
-        console.log(pico.green('Compiled successfully.\n'))
       }
 
       console.log('File sizes after gzip:\n')
-      FileSizeReporter.printFileSizesAfterBuild(
+      printFileSizesAfterBuild(
         stats as any,
         previousFileSizes,
         paths.appDist,

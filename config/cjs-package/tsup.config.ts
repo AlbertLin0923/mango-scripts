@@ -12,5 +12,8 @@ export default defineConfig([
     dts: true,
     shims: true,
     cjsInterop: true,
+    loader: {
+      '.applescript': 'copy',
+    },
   },
 ])

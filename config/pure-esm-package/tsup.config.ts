@@ -15,5 +15,8 @@ export default defineConfig([
         js: `.mjs`,
       }
     },
+    loader: {
+      '.applescript': 'copy',
+    },
   },
 ])

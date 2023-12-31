@@ -13,7 +13,8 @@
 
 ## 特性
 
-- 基于 [react-scripts@5.0.1](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts)，用 TypeScript 改写
+- 基于 [react-scripts@5.0.1](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts)，用 TypeScript + Pure ESM 改写
+- 支持 `type:modules` ESM 模式
 - 类似 [craco](https://github.com/dilanx/craco)，可通过配置文件对该构建工具进行扩展配置
 - webpack 以及周边 loader、plugin 等相关依赖包保持及时的更新
 - 内置 [esbuild](https://github.com/evanw/esbuild) 和 [swc](https://github.com/swc-project/swc) 配置支持，可切换 对应的 js/css minify 压缩器
@@ -31,11 +32,13 @@
 pnpm add @mango-scripts/react-scripts -D
 ```
 
+> 注意：这是一个 [纯ESM包](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c#pure-esm-package)
+
 ## 使用
 
 ### 脚本命令
 
-安装该库之后，你可以在 npm scripts 中以 react-scripts 或者从终端中以 ./node_modules/.bin/react-scripts 访问这个命令。
+安装该库之后，你可以在 npm scripts 中以 `react-scripts` 或者从终端中以 `./node_modules/.bin/react-scripts` 访问这个命令。
 
 推荐 npm scripts 如下：
 
@@ -75,9 +78,9 @@ pnpm add @mango-scripts/react-scripts -D
 
 ### 扩展配置
 
-项目根目录下新增 `mango.config.ts`（或 `mango.config.js` / `mango.config.mjs` / `.mangorc`） 配置文件
+项目根目录下新增 `mango.config.mjs` 配置文件
 
-如：mango.config.ts
+如：mango.config.mjs
 
 ```
 import { defineConfig } from '@mango-scripts/react-scripts'

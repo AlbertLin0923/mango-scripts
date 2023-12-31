@@ -2,14 +2,16 @@ import fs from 'fs-extra'
 import dotenv from 'dotenv'
 import dotenvExpand from 'dotenv-expand'
 
-import { getPaths } from './getPaths'
-import { cliEnv, recommendProductionEnv } from './getMode'
+import { cliEnv, recommendProductionEnv } from './getMode.mjs'
 
-import type { CliEnvType } from './getMode'
+import type { PathsType } from './getPaths.mjs'
+import type { CliEnvType } from './getMode.mjs'
 
-export const applyEnv = (mode: string, cliMode: keyof CliEnvType) => {
-  const paths = getPaths()
-
+export const applyEnv = (
+  mode: string,
+  cliMode: keyof CliEnvType,
+  paths: PathsType,
+) => {
   Object.entries(cliEnv[cliMode]).forEach(([key, value]) => {
     process.env[key] = value
   })
@@ -30,7 +32,7 @@ export const applyEnv = (mode: string, cliMode: keyof CliEnvType) => {
   ]
 
   dotenvFiles.forEach((dotenvFile) => {
-    if (fs.existsSync(dotenvFile)) {
+    if (fs.pathExistsSync(dotenvFile)) {
       dotenvExpand.expand(dotenv.config({ path: dotenvFile, override: true }))
     }
   })

@@ -1,11 +1,12 @@
 import path from 'path'
 
 import fs from 'fs-extra'
-import getPublicUrlOrPath from 'react-dev-utils/getPublicUrlOrPath'
 
-import { getUserConfig } from './getUserConfig'
+import getPublicUrlOrPath from '../common/utils/getPublicUrlOrPath.mjs'
 
-export const getPaths = () => {
+import type { UserConfigType } from '../defineConfig.mjs'
+
+export const getPaths = (userConfig: UserConfigType) => {
   // Make sure any symlinks in the project folder are resolved:
   // https://github.com/facebook/create-react-app/issues/637
   const appDirectory = fs.realpathSync(process.cwd())
@@ -24,7 +25,7 @@ export const getPaths = () => {
     process.env.PUBLIC_URL,
   )
 
-  const distDir = getUserConfig('distDir')
+  const { distDir } = userConfig
 
   const moduleFileExtensions = [
     'web.mjs',
@@ -42,8 +43,8 @@ export const getPaths = () => {
 
   // Resolve file paths in the same order as webpack
   const resolveModule = (resolveFn: typeof path.resolve, filePath: string) => {
-    const extension = moduleFileExtensions.find((extension) =>
-      fs.existsSync(resolveFn(`${filePath}.${extension}`)),
+    const extension = moduleFileExtensions.find((e) =>
+      fs.pathExistsSync(resolveFn(`${filePath}.${e}`)),
     )
 
     if (extension) {
@@ -76,3 +77,5 @@ export const getPaths = () => {
 
   return paths
 }
+
+export type PathsType = ReturnType<typeof getPaths>

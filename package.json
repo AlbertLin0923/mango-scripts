@@ -26,7 +26,8 @@
     "lint:stylelint": "stylelint \"**/*.{less,scss,sass,stylus,styl,css}\" --fix",
     "test-unit": "vitest run",
     "coverage": "vitest run --coverage",
-    "cz": "git add . && git cz"
+    "cz": "git add . && git cz",
+    "changeExt": "dev-scripts changeExtname --input ./packages/react-scripts/src --output ./packages/react-scripts/srco --originExt .ts --targetExt .mts"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",

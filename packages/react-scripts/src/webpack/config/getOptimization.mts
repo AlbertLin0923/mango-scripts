@@ -1,23 +1,25 @@
 import TerserPlugin from 'terser-webpack-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 
-import { getUserConfig, deepMergeWithArray } from './getUserConfig'
+import { deepMergeWithArray } from './getUserConfig.mjs'
 
+import type { UserConfigType } from '../../defineConfig.mjs'
 import type { Configuration } from 'webpack'
 import type { MinifyOptions } from 'terser'
 
-const getJsMinimizer = (): TerserPlugin<MinifyOptions> => {
+const getJsMinimizer = (
+  jsMinimizer: UserConfigType['optimization']['minimizer']['jsMinimizer'],
+): TerserPlugin<MinifyOptions> => {
   const useProfile = process.env.USE_PROFILE === 'true'
 
-  const { minify, terserOptions } = getUserConfig(
-    'optimization.minimizer.jsMinimizer',
-  )
+  const { minify, terserOptions } = jsMinimizer
 
   switch (minify) {
     case 'uglifyJsMinify':
       return new TerserPlugin({
         minify: TerserPlugin.uglifyJsMinify,
         terserOptions,
+        extractComments: false,
       })
     case 'esbuildMinify':
       return new TerserPlugin({
@@ -67,15 +69,19 @@ const getJsMinimizer = (): TerserPlugin<MinifyOptions> => {
             // https://github.com/facebook/create-react-app/issues/2488
             ascii_only: true,
           },
+          format: {
+            comments: false,
+          },
         }),
+        extractComments: false,
       })
   }
 }
 
-const getCssMinimizer = () => {
-  const { minify, minimizerOptions } = getUserConfig(
-    'optimization.minimizer.cssMinimizer',
-  )
+const getCssMinimizer = (
+  cssMinimizer: UserConfigType['optimization']['minimizer']['cssMinimizer'],
+) => {
+  const { minify, minimizerOptions } = cssMinimizer
 
   switch (minify) {
     case 'cssoMinify':
@@ -113,62 +119,68 @@ const getCssMinimizer = () => {
   }
 }
 
-const defaultSplitChunks = {
-  chunks: 'all',
-  cacheGroups: {
-    libs: {
-      name: 'chunk-libs',
-      test: /[\\/]node_modules[\\/]/,
-      priority: 10,
-      chunks: 'initial', // only package third parties that are initially dependent
-    },
-    antd: {
-      name: 'chunk-antd', // split elementUI into a single package
-      priority: 12, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-      test: /[\\/]node_modules[\\/]_?antd(.*)/, // in order to adapt to cnpm
-    },
-    elementUI: {
-      name: 'chunk-elementUI', // split elementUI into a single package
-      priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-      test: /[\\/]node_modules[\\/]_?element-ui(.*)/, // in order to adapt to cnpm
-    },
-    d3: {
-      name: 'chunk-d3', // split d3 into a single package
-      priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-      test: /[\\/]node_modules[\\/]d3/, // in order to adapt to cnpm
-    },
-    echarts: {
-      name: 'chunk-echarts', // split echarts into a single package
-      priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-      test: /[\\/]node_modules[\\/]echarts/, // in order to adapt to cnpm
-    },
-    exceljs: {
-      name: 'chunk-exceljs', // split exceljs into a single package
-      priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-      test: /[\\/]node_modules[\\/]exceljs/, // in order to adapt to cnpm
-    },
-    xlsx: {
-      name: 'chunk-xlsx', // split xlsx into a single package
-      priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-      test: /[\\/]node_modules[\\/]xlsx/, // in order to adapt to cnpm
-    },
-  },
-}
-
-export const getOptimization = (): Configuration['optimization'] => {
+export const getOptimization = (
+  userConfig: UserConfigType,
+): Configuration['optimization'] => {
   const isEnvProduction = process.env.NODE_ENV === 'production'
 
-  const splitChunks = getUserConfig('optimization.splitChunks')
+  const {
+    optimization: {
+      minimizer: { jsMinimizer, cssMinimizer },
+      splitChunks,
+    },
+  } = userConfig
 
   return {
     minimize: isEnvProduction,
     splitChunks:
-      isEnvProduction && deepMergeWithArray(splitChunks, defaultSplitChunks),
+      isEnvProduction &&
+      deepMergeWithArray(splitChunks, {
+        chunks: 'all',
+        cacheGroups: {
+          libs: {
+            name: 'chunk-libs',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: 'initial', // only package third parties that are initially dependent
+          },
+          antd: {
+            name: 'chunk-antd', // split elementUI into a single package
+            priority: 12, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]_?antd(.*)/, // in order to adapt to cnpm
+          },
+          elementUI: {
+            name: 'chunk-elementUI', // split elementUI into a single package
+            priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]_?element-ui(.*)/, // in order to adapt to cnpm
+          },
+          d3: {
+            name: 'chunk-d3', // split d3 into a single package
+            priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]d3/, // in order to adapt to cnpm
+          },
+          echarts: {
+            name: 'chunk-echarts', // split echarts into a single package
+            priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]echarts/, // in order to adapt to cnpm
+          },
+          exceljs: {
+            name: 'chunk-exceljs', // split exceljs into a single package
+            priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]exceljs/, // in order to adapt to cnpm
+          },
+          xlsx: {
+            name: 'chunk-xlsx', // split xlsx into a single package
+            priority: 22, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]xlsx/, // in order to adapt to cnpm
+          },
+        },
+      }),
     minimizer: [
       // This is only used in production mode
-      getJsMinimizer(),
-      getCssMinimizer(),
+      getJsMinimizer(jsMinimizer),
+      getCssMinimizer(cssMinimizer),
     ],
-    runtimeChunk: true,
+    runtimeChunk: isEnvProduction && true,
   }
 }

@@ -15,10 +15,6 @@ export const cliEnv: CliEnvType = {
     NODE_ENV: 'development',
     BABEL_ENV: 'development',
 
-    USE_TAILWIND: 'false',
-    USE_HTTPS: 'false',
-    SSL_CRT_FILE_PATH: '',
-    SSL_KEY_FILE_PATH: '',
     PORT: '',
     WDS_SOCKET_HOST: '',
     WDS_SOCKET_PATH: '',
@@ -31,7 +27,6 @@ export const cliEnv: CliEnvType = {
     NODE_ENV: 'production',
     BABEL_ENV: 'production',
 
-    USE_TAILWIND: 'false',
     USE_ANALYZE: 'false',
     USE_PROFILE: 'false',
     USE_SOURCEMAP: 'false',

@@ -13,27 +13,33 @@ import StylelintPlugin from 'stylelint-webpack-plugin'
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import WebpackBar from 'webpackbar'
-import InterpolateHtmlPlugin from 'react-dev-utils/InterpolateHtmlPlugin'
-import InlineChunkHtmlPlugin from 'react-dev-utils/InlineChunkHtmlPlugin'
-import ForkTsCheckerWebpackPlugin from 'react-dev-utils/ForkTsCheckerWebpackPlugin'
-import ModuleNotFoundPlugin from 'react-dev-utils/ModuleNotFoundPlugin'
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 
-import { getPaths } from './getPaths'
-import { getEnv } from './getEnv'
-import { getUserConfig, deepMergeWithArray } from './getUserConfig'
+import { deepMergeWithArray } from './getUserConfig.mjs'
 
+import eslintFormatter from '../../common/utils/eslintFormatter.mjs'
+import ModuleNotFoundPlugin from '../../common/utils/ModuleNotFoundPlugin.mjs'
+import InterpolateHtmlPlugin from '../../common/utils/InterpolateHtmlPlugin.mjs'
+import InlineChunkHtmlPlugin from '../../common/utils/InlineChunkHtmlPlugin.mjs'
+import { getEnv } from '../../common/getEnv.mjs'
+
+import type { UserConfigType } from '../../defineConfig.mjs'
+import type { PathsType } from '../../common/getPaths.mjs'
 import type { Configuration } from 'webpack'
 
-export const getPlugins = (): Configuration['plugins'] => {
+export const getPlugins = (
+  userConfig: UserConfigType,
+  paths: PathsType,
+): Configuration['plugins'] => {
   const isEnvDevelopment = process.env.NODE_ENV === 'development'
   const isEnvProduction = process.env.NODE_ENV === 'production'
   // Source maps are resource heavy and can cause out of memory issue for large source files.
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
   const useBundleAnalyzerPlugin = process.env.USE_ANALYZE === 'true'
 
-  const paths = getPaths()
-
-  const { eslint, stylelint, typescript } = getUserConfig('plugin')
+  const {
+    plugin: { eslint, stylelint, typescript },
+  } = userConfig
 
   // We will provide `paths.publicUrlOrPath` to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -67,13 +73,13 @@ export const getPlugins = (): Configuration['plugins'] => {
     // a network request.
     // https://github.com/facebook/create-react-app/issues/5358
     isEnvProduction &&
-      new InlineChunkHtmlPlugin(HtmlWebpackPlugin as any, [/runtime~.+[.]js/]),
+      new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime~.+[.]js/]),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
     // It will be an empty string unless you specify "homepage"
     // in `package.json`, in which case it will be the pathname of that URL.
-    new InterpolateHtmlPlugin(HtmlWebpackPlugin as any, env.raw),
+    new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
     // This gives some necessary context to module not found errors, such as
     // the requesting resource.
     new ModuleNotFoundPlugin(paths.appPath),
@@ -128,7 +134,7 @@ export const getPlugins = (): Configuration['plugins'] => {
     // Generate a service worker script that will precache, and keep up to date,
     // the HTML & assets that are part of the webpack build.
     isEnvProduction &&
-      fs.existsSync(paths.swSrc) &&
+      fs.pathExistsSync(paths.swSrc) &&
       new WorkboxWebpackPlugin.InjectManifest({
         swSrc: paths.swSrc,
         dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
@@ -163,7 +169,6 @@ export const getPlugins = (): Configuration['plugins'] => {
               syntactic: true,
             },
             mode: 'write-references',
-            // profile: true,
           },
           issue: {
             // This one is specifically to match during CI tests,
@@ -181,16 +186,14 @@ export const getPlugins = (): Configuration['plugins'] => {
               { file: '**/src/setupTests.*' },
             ],
           },
-          logger: {
-            infrastructure: 'silent',
-          },
+          logger: 'webpack-infrastructure',
         }),
       ),
     eslint?.enable &&
       new ESLintPlugin(
         deepMergeWithArray(eslint?.options, {
           extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-          formatter: require.resolve('react-dev-utils/eslintFormatter'),
+          formatter: eslintFormatter,
           eslintPath: require.resolve('eslint'),
           failOnError: true,
           context: paths.appSrc,
@@ -219,5 +222,5 @@ export const getPlugins = (): Configuration['plugins'] => {
       ),
     useBundleAnalyzerPlugin && new BundleAnalyzerPlugin(),
     new WebpackBar(),
-  ].filter(Boolean)
+  ].filter(Boolean) as Configuration['plugins']
 }

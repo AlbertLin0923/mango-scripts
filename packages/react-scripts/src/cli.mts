@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import path from 'path'
+import { fileURLToPath } from 'node:url'
 
 import pico from 'picocolors'
 import envinfo from 'envinfo'
@@ -7,20 +8,23 @@ import fs from 'fs-extra'
 import { Command } from 'commander'
 import { checkNodeVersion, checkUpdate, gs } from '@mango-scripts/utils'
 
-import dev from './scripts/dev'
-import build from './scripts/build'
-import inspect from './scripts/inspect'
+import webpackDev from './webpack/scripts/dev.mjs'
+import webpackBuild from './webpack/scripts/build.mjs'
+import webpackInspect from './webpack/scripts/inspect.mjs'
+import rsbuildDev from './rsbuild/scripts/dev.mjs'
+import rsbuildBuild from './rsbuild/scripts/build.mjs'
+import rsbuildInspect from './rsbuild/scripts/inspect.mjs'
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const packageJson = fs.readJSONSync(
   path.resolve(__dirname, '../../package.json'),
 )
-
 const { engines, name, version } = packageJson
 
 checkNodeVersion(engines.node, name)
 checkUpdate(packageJson)
 
-console.log(gs('@mango-scripts/react-scripts'))
+console.log(gs('@mango-scripts/react-scripts\n'))
 
 const program = new Command()
 program.version(`${name} ${version}`).usage('<command> [options]')
@@ -33,30 +37,57 @@ program
     '指定环境模式 (默认值：development)',
     'development',
   )
+  .option(
+    '-b --bundler <bundler>',
+    '指定底层构建工具 (默认值：webpack)',
+    'webpack',
+  )
   .allowUnknownOption()
   .action((options) => {
-    const { mode } = options
-    dev(mode)
+    const { mode, bundler } = options
+    if (bundler === 'rsbuild') {
+      rsbuildDev(mode)
+    } else {
+      webpackDev(mode)
+    }
   })
 
 program
   .command('build')
   .description('构建打包应用')
   .option('-m --mode <mode>', '指定环境模式 (默认值：production)', 'production')
+  .option(
+    '-b --bundler <bundler>',
+    '指定底层构建工具 (默认值：webpack)',
+    'webpack',
+  )
   .allowUnknownOption()
   .action((options) => {
-    const { mode } = options
-    build(mode)
+    const { mode, bundler } = options
+    if (bundler === 'rsbuild') {
+      rsbuildBuild(mode)
+    } else {
+      webpackBuild(mode)
+    }
   })
 
 program
   .command('inspect')
-  .description('打印 webpack 配置')
+  .description('打印配置')
   .option('-m --mode <mode>', '指定环境模式 (默认值：production)', 'production')
+  .option(
+    '-b --bundler <bundler>',
+    '指定底层构建工具 (默认值：webpack)',
+    'webpack',
+  )
   .allowUnknownOption()
   .action((options) => {
-    const { mode } = options
-    inspect(mode)
+    const { mode, bundler } = options
+    if (bundler === 'rsbuild') {
+      rsbuildInspect(mode)
+    } else {
+      webpackInspect(mode)
+    }
   })
 
 program

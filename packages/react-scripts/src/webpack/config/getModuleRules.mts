@@ -1,14 +1,15 @@
-import path from 'path'
+import path from 'node:path'
 
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import loaderUtils from 'loader-utils'
 import browserslistToEsbuild from 'browserslist-to-esbuild'
 
-import { getPaths } from './getPaths'
-import { getUserConfig, deepMergeWithArray } from './getUserConfig'
+import { deepMergeWithArray } from './getUserConfig.mjs'
 
-import { extractPkgJson } from '../utils'
+import { extractPkgJson } from '../../common/utils/index.mjs'
 
+import type { UserConfigType } from '../../defineConfig.mjs'
+import type { PathsType } from '../../common/getPaths.mjs'
 import type { Options as SwcOptions } from '@swc/core'
 import type { TransformOptions as EsbuildOptions } from 'esbuild'
 import type { RuleSetRule } from 'webpack'
@@ -54,6 +55,8 @@ const getLocalIdent = (
 
 // common function to get style loaders
 const transformStyleLoaders = (
+  userConfig: UserConfigType,
+  paths: PathsType,
   cssOptions: any,
   preProcessor?: any,
   preProcessorOptions?: any,
@@ -61,17 +64,16 @@ const transformStyleLoaders = (
   const isEnvDevelopment = process.env.NODE_ENV === 'development'
   const isEnvProduction = process.env.NODE_ENV === 'production'
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
-  const useTailwind = process.env.USE_TAILWIND === 'true'
 
-  const { less, sass, stylus, postcss } = getUserConfig('loader')
+  const {
+    loader: { less, sass, stylus, postcss },
+  } = userConfig
 
   const preProcessorLoaderMap: any = {
     'less-loader': less,
     'sass-loader': sass,
     'stylus-loader': stylus,
   }
-
-  const paths = getPaths()
 
   return [
     isEnvDevelopment && require.resolve('style-loader'),
@@ -98,36 +100,22 @@ const transformStyleLoaders = (
           // https://github.com/facebook/create-react-app/issues/2677
           ident: 'postcss',
           config: false,
-          plugins: !useTailwind
-            ? [
-                'postcss-flexbugs-fixes',
-                [
-                  'postcss-preset-env',
-                  {
-                    autoprefixer: {
-                      flexbox: 'no-2009',
-                    },
-                    stage: 3,
-                  },
-                ],
-                // Adds PostCSS Normalize as the reset css with default options,
-                // so that it honors browserslist config in package.json
-                // which in turn let's users customize the target behavior as per their needs.
-                'postcss-normalize',
-              ]
-            : [
-                'tailwindcss',
-                'postcss-flexbugs-fixes',
-                [
-                  'postcss-preset-env',
-                  {
-                    autoprefixer: {
-                      flexbox: 'no-2009',
-                    },
-                    stage: 3,
-                  },
-                ],
-              ],
+          plugins: [
+            'postcss-flexbugs-fixes',
+            [
+              'postcss-preset-env',
+              {
+                autoprefixer: {
+                  flexbox: 'no-2009',
+                },
+                stage: 3,
+              },
+            ],
+            // Adds PostCSS Normalize as the reset css with default options,
+            // so that it honors browserslist config in package.json
+            // which in turn let's users customize the target behavior as per their needs.
+            'postcss-normalize',
+          ],
         },
         sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
       }),
@@ -152,8 +140,7 @@ const transformStyleLoaders = (
   ].filter(Boolean)
 }
 
-const getSvgLoaders = () => {
-  const paths = getPaths()
+const getSvgLoaders = (userConfig: UserConfigType, paths: PathsType) => {
   return [
     {
       test: /\.svg$/,
@@ -198,18 +185,20 @@ const getSvgLoaders = () => {
   ]
 }
 
-const getStyleLoaders = () => {
+const getStyleLoaders = (userConfig: UserConfigType, paths: PathsType) => {
   const isEnvDevelopment = process.env.NODE_ENV === 'development'
   const isEnvProduction = process.env.NODE_ENV === 'production'
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
 
-  const { less, sass, stylus } = getUserConfig('loader')
+  const {
+    loader: { less, sass, stylus },
+  } = userConfig
 
   const cssRule = [
     {
       test: cssRegex,
       exclude: cssModuleRegex,
-      use: transformStyleLoaders({
+      use: transformStyleLoaders(userConfig, paths, {
         importLoaders: 1,
         sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
         modules: {
@@ -224,7 +213,7 @@ const getStyleLoaders = () => {
     },
     {
       test: cssModuleRegex,
-      use: transformStyleLoaders({
+      use: transformStyleLoaders(userConfig, paths, {
         importLoaders: 1,
         sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
         modules: {
@@ -241,6 +230,8 @@ const getStyleLoaders = () => {
           test: sassRegex,
           exclude: sassModuleRegex,
           use: transformStyleLoaders(
+            userConfig,
+            paths,
             {
               importLoaders: 3,
               sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
@@ -259,6 +250,8 @@ const getStyleLoaders = () => {
         {
           test: sassModuleRegex,
           use: transformStyleLoaders(
+            userConfig,
+            paths,
             {
               importLoaders: 3,
               sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
@@ -279,6 +272,8 @@ const getStyleLoaders = () => {
           test: lessRegex,
           exclude: lessModuleRegex,
           use: transformStyleLoaders(
+            userConfig,
+            paths,
             {
               importLoaders: 4,
               sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
@@ -299,6 +294,8 @@ const getStyleLoaders = () => {
         {
           test: lessModuleRegex,
           use: transformStyleLoaders(
+            userConfig,
+            paths,
             {
               importLoaders: 4,
               sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
@@ -325,6 +322,8 @@ const getStyleLoaders = () => {
           test: stylusRegex,
           exclude: stylusModuleRegex,
           use: transformStyleLoaders(
+            userConfig,
+            paths,
             {
               importLoaders: 5,
               sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
@@ -339,6 +338,8 @@ const getStyleLoaders = () => {
         {
           test: stylusModuleRegex,
           use: transformStyleLoaders(
+            userConfig,
+            paths,
             {
               importLoaders: 5,
               sourceMap: isEnvProduction ? useSourceMap : isEnvDevelopment,
@@ -368,14 +369,14 @@ const getStyleLoaders = () => {
   ]
 }
 
-const getScriptLoaders = () => {
+const getScriptLoaders = (userConfig: UserConfigType, paths: PathsType) => {
   const isEnvDevelopment = process.env.NODE_ENV === 'development'
   const isEnvProduction = process.env.NODE_ENV === 'production'
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
 
-  const { swc, esbuild, babel } = getUserConfig('loader')
-
-  const paths = getPaths()
+  const {
+    loader: { swc, esbuild, babel },
+  } = userConfig
 
   if (swc.enable) {
     return [
@@ -522,7 +523,10 @@ const getScriptLoaders = () => {
   }
 }
 
-export const getModuleRules = () => {
+export const getModuleRules = (
+  userConfig: UserConfigType,
+  paths: PathsType,
+) => {
   const useSourceMap = process.env.USE_SOURCEMAP === 'true'
 
   const loaders: RuleSetRule[] = [
@@ -555,9 +559,9 @@ export const getModuleRules = () => {
             },
           },
         },
-        ...getSvgLoaders(),
-        ...getScriptLoaders(),
-        ...getStyleLoaders(),
+        ...getSvgLoaders(userConfig, paths),
+        ...getScriptLoaders(userConfig, paths),
+        ...getStyleLoaders(userConfig, paths),
         // "file" loader makes sure those assets get served by WebpackDevServer.
         // When you `import` an asset, you get its (virtual) filename.
         // In production, they would get copied to the `build` folder.
