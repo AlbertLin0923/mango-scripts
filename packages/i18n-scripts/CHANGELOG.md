@@ -1,3 +1,12 @@
+## [2.0.2](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-scripts@2.0.1...@mango-scripts/i18n-scripts@2.0.2) (2024-01-01)
+
+
+### Features
+
+* 优化内部工具库utils，聚合常用node库 ([6cf4c2d](https://github.com/AlbertLin0923/mango-scripts/commit/6cf4c2d4472b4a862f02770c900d3131f7349d7f))
+* esp-config优化&&node版本升级 ([bc134db](https://github.com/AlbertLin0923/mango-scripts/commit/bc134db9114d50b9bb0da6659f13409f6a305848))
+* release @mango-scripts/i18n-utils@2.0.13 ([85a3ad9](https://github.com/AlbertLin0923/mango-scripts/commit/85a3ad9ca02dc67d419d424b6d13a53bc3771d68))
+
 ## [2.0.1](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/i18n-scripts@2.0.0...@mango-scripts/i18n-scripts@2.0.1) (2023-12-06)
 
 
