@@ -142,23 +142,29 @@ export const measureFileSizesBeforeBuild = async (
   root: string
   sizes: Record<string, number>
 }> => {
-  const fileNames = await recursiveReaddir(buildFolder)
+  try {
+    const fileNames = await recursiveReaddir(buildFolder)
 
-  let sizes: Record<string, number> = {}
+    let sizes: Record<string, number> = {}
 
-  if (fileNames) {
-    sizes = fileNames
-      .filter((i: any) => canReadAsset(i))
-      .reduce((memo: any, fileName) => {
-        const contents = fs.readFileSync(fileName)
-        const key = removeFileNameHash(buildFolder, fileName)
-        memo[key] = gzipSizeSync(contents)
-        return memo
-      }, {})
-  }
-
-  return {
-    root: buildFolder,
-    sizes: sizes || {},
+    if (fileNames) {
+      sizes = fileNames
+        .filter((i: any) => canReadAsset(i))
+        .reduce((memo: any, fileName) => {
+          const contents = fs.readFileSync(fileName)
+          const key = removeFileNameHash(buildFolder, fileName)
+          memo[key] = gzipSizeSync(contents)
+          return memo
+        }, {})
+    }
+    return {
+      root: buildFolder,
+      sizes: sizes,
+    }
+  } catch (error) {
+    return {
+      root: buildFolder,
+      sizes: {},
+    }
   }
 }
