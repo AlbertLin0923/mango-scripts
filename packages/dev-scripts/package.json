@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/dev-scripts",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "一些便捷的前端开发 Node.js 脚本",
   "keywords": [
     "mango-scripts",

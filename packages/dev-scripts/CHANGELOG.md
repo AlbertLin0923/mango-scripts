@@ -1,3 +1,18 @@
+## [2.0.8](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.7...@mango-scripts/dev-scripts@2.0.8) (2024-01-01)
+
+
+### Features
+
+* 优化内部工具库utils，聚合常用node库 ([6cf4c2d](https://github.com/AlbertLin0923/mango-scripts/commit/6cf4c2d4472b4a862f02770c900d3131f7349d7f))
+* esp-config优化&&node版本升级 ([bc134db](https://github.com/AlbertLin0923/mango-scripts/commit/bc134db9114d50b9bb0da6659f13409f6a305848))
+* release @mango-scripts/i18n-utils@2.0.13 ([85a3ad9](https://github.com/AlbertLin0923/mango-scripts/commit/85a3ad9ca02dc67d419d424b6d13a53bc3771d68))
+* release @mango-scripts/utils@2.0.2 ([1333a2a](https://github.com/AlbertLin0923/mango-scripts/commit/1333a2a91941d5e042eebc3b252ba81ba36a585c))
+
+
+### Bug Fixes
+
+* 解决webpack runtime内嵌失效问题 ([287dbe0](https://github.com/AlbertLin0923/mango-scripts/commit/287dbe024d86715a26758d1755ce08c85935b132))
+
 ## [2.0.7](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.6...@mango-scripts/dev-scripts@2.0.7) (2023-12-06)
 
 
