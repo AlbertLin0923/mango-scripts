@@ -31,7 +31,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@mango-scripts/utils": "workspace:^",
+    "@mango-scripts/utils": "^2.0.2",
     "gogocode": "^1.0.55"
   },
   "devDependencies": {},

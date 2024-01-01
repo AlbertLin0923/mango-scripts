@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/i18n-utils",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "mango-i18n-system 自动国际化文案配置系统的文案解析器，用于提取 中文文案key",
   "keywords": [
     "mango-scripts",
@@ -41,7 +41,7 @@
     "@babel/parser": "^7.23.0",
     "@babel/runtime": "^7.23.2",
     "@babel/types": "^7.23.0",
-    "@mango-scripts/utils": "workspace:^",
+    "@mango-scripts/utils": "^2.0.2",
     "hyntax": "^1.1.9",
     "pug": "^3.0.2",
     "svelte": "^3.59.0",
