@@ -606,9 +606,6 @@ importers:
       case-sensitive-paths-webpack-plugin:
         specifier: ^2.4.0
         version: 2.4.0
-      cosmiconfig:
-        specifier: ^9.0.0
-        version: 9.0.0(typescript@5.3.3)
       css-loader:
         specifier: ^6.8.1
         version: 6.8.1(webpack@5.89.0)
@@ -618,12 +615,6 @@ importers:
       detect-port:
         specifier: ^1.5.1
         version: 1.5.1
-      dotenv:
-        specifier: ^16.3.1
-        version: 16.3.1
-      dotenv-expand:
-        specifier: ^10.0.0
-        version: 10.0.0
       esbuild:
         specifier: ^0.19.11
         version: 0.19.11
@@ -639,9 +630,6 @@ importers:
       file-loader:
         specifier: ^6.2.0
         version: 6.2.0(webpack@5.89.0)
-      filesize:
-        specifier: ^10.1.0
-        version: 10.1.0
       fork-ts-checker-webpack-plugin:
         specifier: ^9.0.2
         version: 9.0.2(typescript@5.3.3)(webpack@5.89.0)
@@ -675,9 +663,6 @@ importers:
       mini-css-extract-plugin:
         specifier: ^2.7.6
         version: 2.7.6(webpack@5.89.0)
-      open:
-        specifier: ^10.0.2
-        version: 10.0.2
       postcss:
         specifier: ^8.4.31
         version: 8.4.32
@@ -693,12 +678,12 @@ importers:
       postcss-preset-env:
         specifier: ^9.3.0
         version: 9.3.0(postcss@8.4.32)
+      react:
+        specifier: '>= 16'
+        version: 18.2.0
       react-refresh:
         specifier: ^0.14.0
         version: 0.14.0
-      recursive-readdir:
-        specifier: ^2.2.3
-        version: 2.2.3
       resolve:
         specifier: ^1.22.8
         version: 1.22.8
@@ -790,15 +775,6 @@ importers:
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
-      '@types/react':
-        specifier: ^18.2.46
-        version: 18.2.46
-      '@types/react-dom':
-        specifier: ^18.2.17
-        version: 18.2.18
-      '@types/recursive-readdir':
-        specifier: ^2.2.4
-        version: 2.2.4
       '@types/resolve':
         specifier: ^1.20.6
         version: 1.20.6
@@ -811,12 +787,6 @@ importers:
       '@types/webpack-bundle-analyzer':
         specifier: ^4.6.3
         version: 4.6.3(@swc/core@1.3.102)(esbuild@0.19.11)(uglify-js@3.17.4)
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
 
   packages/utils:
     dependencies:
@@ -829,12 +799,24 @@ importers:
       consola:
         specifier: ^3.2.3
         version: 3.2.3
+      cosmiconfig:
+        specifier: ^9.0.0
+        version: 9.0.0(typescript@5.3.3)
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.3.1
+      dotenv-expand:
+        specifier: ^10.0.0
+        version: 10.0.0
       envinfo:
         specifier: ^7.11.0
         version: 7.11.0
       execa:
         specifier: ^8.0.1
         version: 8.0.1
+      filesize:
+        specifier: ^10.1.0
+        version: 10.1.0
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
@@ -865,12 +847,18 @@ importers:
       minimist:
         specifier: ^1.2.8
         version: 1.2.8
+      open:
+        specifier: ^10.0.2
+        version: 10.0.2
       picocolors:
         specifier: ^1.0.0
         version: 1.0.0
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
+      recursive-readdir:
+        specifier: ^2.2.3
+        version: 2.2.3
       semver:
         specifier: ^7.5.4
         version: 7.5.4
@@ -914,6 +902,9 @@ importers:
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
+      '@types/recursive-readdir':
+        specifier: ^2.2.4
+        version: 2.2.4
       '@types/semver':
         specifier: ^7.5.2
         version: 7.5.6
@@ -2471,7 +2462,7 @@ packages:
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
       resolve-from: 5.0.0
-      ts-node: 10.9.2(@types/node@20.5.1)(typescript@5.3.3)
+      ts-node: 10.9.2(@types/node@18.19.4)(typescript@5.3.3)
       typescript: 5.3.3
     transitivePeerDependencies:
       - '@swc/core'
@@ -7311,7 +7302,7 @@ packages:
     dependencies:
       '@types/node': 20.5.1
       cosmiconfig: 8.3.6(typescript@5.3.3)
-      ts-node: 10.9.2(@types/node@20.5.1)(typescript@5.3.3)
+      ts-node: 10.9.2(@types/node@18.19.4)(typescript@5.3.3)
       typescript: 5.3.3
     dev: true
 
@@ -17157,7 +17148,7 @@ packages:
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
-  /ts-node@10.9.2(@types/node@20.5.1)(typescript@5.3.3):
+  /ts-node@10.9.2(@types/node@18.19.4)(typescript@5.3.3):
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
     hasBin: true
     peerDependencies:
@@ -17176,7 +17167,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.5.1
+      '@types/node': 18.19.4
       acorn: 8.11.3
       acorn-walk: 8.3.1
       arg: 4.1.3

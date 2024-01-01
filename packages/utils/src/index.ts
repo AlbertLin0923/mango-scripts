@@ -19,6 +19,12 @@ import prompts from 'prompts'
 import getGitRepoInfo from 'git-repo-info'
 import fuzzypath from 'inquirer-fuzzy-path'
 import inquirerPrompt from 'inquirer-autocomplete-prompt'
+import open from 'open'
+import dotenv from 'dotenv'
+import { cosmiconfig } from 'cosmiconfig'
+import dotenvExpand from 'dotenv-expand'
+import { filesize } from 'filesize'
+import recursiveReaddir from 'recursive-readdir'
 inquirer.registerPrompt('fuzzypath', fuzzypath)
 inquirer.registerPrompt('autocomplete', inquirerPrompt)
 
@@ -37,6 +43,12 @@ export {
   semver,
   minimist,
   prompts,
+  open,
+  dotenv,
+  dotenvExpand,
+  cosmiconfig,
+  filesize,
+  recursiveReaddir,
 }
 
 export const checkNodeVersion = (wanted: string, name: string): void => {

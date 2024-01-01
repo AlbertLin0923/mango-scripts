@@ -1,6 +1,4 @@
-import { fs } from '@mango-scripts/utils'
-import dotenv from 'dotenv'
-import dotenvExpand from 'dotenv-expand'
+import { fs, dotenv, dotenvExpand } from '@mango-scripts/utils'
 
 import { cliEnv, recommendProductionEnv } from './getMode.mjs'
 

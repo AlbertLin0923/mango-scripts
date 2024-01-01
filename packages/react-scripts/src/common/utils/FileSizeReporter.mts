@@ -1,8 +1,6 @@
 import path from 'node:path'
 
-import { fs, pico } from '@mango-scripts/utils'
-import { filesize } from 'filesize'
-import recursive from 'recursive-readdir'
+import { fs, pico, recursiveReaddir, filesize } from '@mango-scripts/utils'
 import { gzipSizeSync } from 'gzip-size'
 
 import stripAnsi from './stripAnsi.mjs'
@@ -144,7 +142,7 @@ export const measureFileSizesBeforeBuild = async (
   root: string
   sizes: Record<string, number>
 }> => {
-  const fileNames = await recursive(buildFolder)
+  const fileNames = await recursiveReaddir(buildFolder)
 
   let sizes: Record<string, number> = {}
 

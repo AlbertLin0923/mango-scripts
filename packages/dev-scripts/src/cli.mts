@@ -10,7 +10,7 @@ import releasePackage from './scripts/releasePackage.mjs'
 
 const { name, version } = prepareCli()
 
-console.log(gs('@mango-scripts/dev-scripts'))
+console.log(gs('@mango-scripts/dev-scripts\n'))
 
 const program = new Command()
 program.version(`${name} ${version}`).usage('<command> [options]')

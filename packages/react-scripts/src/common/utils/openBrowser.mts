@@ -1,7 +1,6 @@
 import { execSync, spawn } from 'child_process'
 
-import { pico } from '@mango-scripts/utils'
-import open from 'open'
+import { pico, open } from '@mango-scripts/utils'
 
 // https://github.com/sindresorhus/open#app
 const OSX_CHROME = 'google chrome'
