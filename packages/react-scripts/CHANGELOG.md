@@ -1,3 +1,10 @@
+## [2.0.7](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.6...@mango-scripts/react-scripts@2.0.7) (2024-01-01)
+
+
+### Bug Fixes
+
+* 解决@mango-scripts/react-scripts扫描dist目录失败问题 ([034cfc8](https://github.com/AlbertLin0923/mango-scripts/commit/034cfc825db0535ac22e9b46965bf090ad9d1419))
+
 ## [2.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.5...@mango-scripts/react-scripts@2.0.6) (2024-01-01)
 
 
