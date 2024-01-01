@@ -26,13 +26,12 @@
     "lint:stylelint": "stylelint \"**/*.{less,scss,sass,stylus,styl,css}\" --fix",
     "test-unit": "vitest run",
     "coverage": "vitest run --coverage",
-    "cz": "git add . && git cz",
-    "changeExt": "dev-scripts changeExtname --input ./packages/react-scripts/src --output ./packages/react-scripts/srco --originExt .ts --targetExt .mts"
+    "cz": "git add . && git cz"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
-    "@mango-scripts/dev-scripts": "^2.0.7",
+    "@mango-scripts/dev-scripts": "^2.0.8",
     "@mango-scripts/esp-config": "^2.0.7",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.42",
