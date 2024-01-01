@@ -1,3 +1,12 @@
+## [2.0.6](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.5...@mango-scripts/react-scripts@2.0.6) (2024-01-01)
+
+
+### Features
+
+* 优化内部工具库utils，聚合常用node库 ([6cf4c2d](https://github.com/AlbertLin0923/mango-scripts/commit/6cf4c2d4472b4a862f02770c900d3131f7349d7f))
+* release @mango-scripts/i18n-utils@2.0.13 ([85a3ad9](https://github.com/AlbertLin0923/mango-scripts/commit/85a3ad9ca02dc67d419d424b6d13a53bc3771d68))
+* release @mango-scripts/utils@2.0.2 ([1333a2a](https://github.com/AlbertLin0923/mango-scripts/commit/1333a2a91941d5e042eebc3b252ba81ba36a585c))
+
 ## [2.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.4...@mango-scripts/react-scripts@2.0.5) (2023-12-31)
 
 
