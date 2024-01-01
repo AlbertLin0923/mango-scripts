@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import { fs } from '@mango-scripts/utils'
 import { createRsbuild } from '@rsbuild/core'
 
 import { applyEnv } from '../../common/getEnv.mjs'

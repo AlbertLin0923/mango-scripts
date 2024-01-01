@@ -27,21 +27,58 @@ pnpm add @mango-scripts/i18n-scripts -D
 
 从国际化文案配置系统下载语言包文件并进行对比和梳理
 
-```bash
-
-i18n-scripts updateLocale -f http://xxx:5003/api/locale/get_locale_map -o ./src/locales/common/ -l zh-CN en-US id-ID
+```json
+{
+  "scripts": {
+    "updateLocale": "i18n-scripts updateLocale --address <url> --output <dirPath> --localeList <locale...>"
+  }
+}
 ```
 
-其中
+```
+Options:
+  -a, --address <url>           国际化文案配置系统接口地址
+  -o, --output <dirPath>        语言包的存放目录路径
+  -l, --localeList [locale...]  需要下载的语言包列表
+```
 
--o 参数为 在业务项目里存储语言包的目录地址，例如：./src/locales/common/ -f 参数为 部署的服务器的地址和端口，例如：http://xxx:5003/api/locale/get_locale_map -l 参数为 需要下载的语言包列表，例如：zh-CN en-US id-ID
+例如：
+
+```
+{
+  "scripts": {
+    "updateLocale": "i18n-scripts updateLocale --address http://xxx:5003/api/locale/get_locale_map --output ./src/locales/common/ --localeList zh-CN en-US id-ID"
+  }
+}
+```
 
 ### insertI18n
 
 给 `vue` 文件添加 `$t('xxx')` 国际化 i18n 标识
 
-```bash
-i18n-scripts insertI18n
+```json
+{
+  "scripts": {
+    "insertI18n": "i18n-scripts insertI18n --input <dirPath> --output <dirPath> --localeModulesStr <string>"
+  }
+}
+```
+
+```
+Options:
+  -i, --input <dirPath>            输入目录路径
+  -o, --output <dirPath>           输出目录路径
+  -l, --localeModulesStr <string>  国际化文案模块字段
+```
+
+例如：
+
+```json
+{
+  "scripts": {
+    "insertI18n": "i18n-scripts insertI18n --input ./src/source -output ./src/target -localeModulesStr 需求1"
+  }
+}
 ```
 
 ## License

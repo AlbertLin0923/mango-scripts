@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import { fs } from '@mango-scripts/utils'
 
 import { regexExtractor } from './regexExtractor.mjs'
 import { astExtractor } from './astExtractor.mjs'

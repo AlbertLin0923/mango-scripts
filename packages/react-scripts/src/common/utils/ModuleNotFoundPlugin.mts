@@ -1,6 +1,6 @@
-import path from 'path'
+import path from 'node:path'
 
-import pico from 'picocolors'
+import { pico } from '@mango-scripts/utils'
 
 import type { Compiler, Compilation } from 'webpack'
 

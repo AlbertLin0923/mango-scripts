@@ -1,7 +1,6 @@
 import path from 'node:path'
 
-import fs from 'fs-extra'
-import pico from 'picocolors'
+import { fs, pico } from '@mango-scripts/utils'
 
 import { getPaths } from '../../common/getPaths.mjs'
 import { applyEnv } from '../../common/getEnv.mjs'

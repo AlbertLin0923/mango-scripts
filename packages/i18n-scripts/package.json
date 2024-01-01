@@ -31,28 +31,10 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@mango-scripts/utils": "^2.0.1",
-    "cli-table": "^0.3.11",
-    "commander": "^11.1.0",
-    "consola": "^3.2.3",
-    "envinfo": "^7.11.0",
-    "fs-extra": "^11.1.1",
-    "glob": "^10.3.10",
-    "gogocode": "^1.0.55",
-    "inquirer": "^9.2.11",
-    "inquirer-fuzzy-path": "^2.3.0",
-    "lodash": "^4.17.21",
-    "picocolors": "^1.0.0",
-    "undici": "^5.27.0"
+    "@mango-scripts/utils": "workspace:^",
+    "gogocode": "^1.0.55"
   },
-  "devDependencies": {
-    "@types/cli-table": "^0.3.3",
-    "@types/envinfo": "^7.8.2",
-    "@types/fs-extra": "^11.0.3",
-    "@types/inquirer": "^9.0.6",
-    "@types/inquirer-fuzzy-path": "^2.3.8",
-    "@types/lodash": "^4.14.200"
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=18.12.0"
   }

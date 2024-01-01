@@ -1,4 +1,4 @@
-import pico from 'picocolors'
+import { pico } from '@mango-scripts/utils'
 
 export default function printBuildError(
   err: Error & { message?: string; stack?: string },

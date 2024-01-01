@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 
 import { defineConfig, loadConfig, mergeRsbuildConfig } from '@rsbuild/core'
 import { pluginReact } from '@rsbuild/plugin-react'

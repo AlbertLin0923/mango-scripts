@@ -1,13 +1,6 @@
 #!/usr/bin/env node
 
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-
-import fs from 'fs-extra'
-import pico from 'picocolors'
-import { Command } from 'commander'
-import envinfo from 'envinfo'
-import { checkNodeVersion, checkUpdate, gs } from '@mango-scripts/utils'
+import { prepareCli, gs, pico, envinfo, Command } from '@mango-scripts/utils'
 
 import changeExtname from './scripts/changeExtname.mjs'
 import addPackage from './scripts/addPackage.mjs'
@@ -15,14 +8,7 @@ import copyDist from './scripts/copyDist.mjs'
 import gitGkd from './scripts/gitGkd.mjs'
 import releasePackage from './scripts/releasePackage.mjs'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const packageJson = fs.readJSONSync(
-  path.resolve(__dirname, '../../package.json'),
-)
-const { engines, name, version } = packageJson
-
-checkNodeVersion(engines.node, name)
-checkUpdate(packageJson)
+const { name, version } = prepareCli()
 
 console.log(gs('@mango-scripts/dev-scripts'))
 

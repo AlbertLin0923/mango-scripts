@@ -1,7 +1,43 @@
-import semver from 'semver'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import fs from 'fs-extra'
 import pico from 'picocolors'
 import updateNotifier from 'update-notifier'
 import gstring from 'gradient-string'
+import consola from 'consola'
+import inquirer from 'inquirer'
+import envinfo from 'envinfo'
+import CliTable from 'cli-table'
+import { Command } from 'commander'
+import { request } from 'undici'
+import { glob } from 'glob'
+import { execa } from 'execa'
+import semver from 'semver'
+import minimist from 'minimist'
+import prompts from 'prompts'
+import getGitRepoInfo from 'git-repo-info'
+import fuzzypath from 'inquirer-fuzzy-path'
+import inquirerPrompt from 'inquirer-autocomplete-prompt'
+inquirer.registerPrompt('fuzzypath', fuzzypath)
+inquirer.registerPrompt('autocomplete', inquirerPrompt)
+
+export {
+  fs,
+  pico,
+  consola,
+  inquirer,
+  envinfo,
+  CliTable,
+  Command,
+  request,
+  glob,
+  execa,
+  getGitRepoInfo,
+  semver,
+  minimist,
+  prompts,
+}
 
 export const checkNodeVersion = (wanted: string, name: string): void => {
   if (!semver.satisfies(process.version, wanted, { includePrerelease: true })) {
@@ -45,4 +81,17 @@ export const gs = (
   } else {
     return str
   }
+}
+
+export const prepareCli = (pathToPkg?: string): Record<string, any> => {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url))
+  const packageJson = fs.readJSONSync(
+    path.resolve(__dirname, pathToPkg || '../../package.json'),
+  )
+  const { engines, name } = packageJson
+
+  checkNodeVersion(engines.node, name)
+  checkUpdate(packageJson)
+
+  return packageJson
 }

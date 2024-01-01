@@ -1,17 +1,16 @@
 import path from 'node:path'
 
-import fs from 'fs-extra'
-import pico from 'picocolors'
-import consola from 'consola'
-import Table from 'cli-table'
-import inquirer from 'inquirer'
-import fuzzypath from 'inquirer-fuzzy-path'
-import { request } from 'undici'
+import {
+  fs,
+  pico,
+  consola,
+  inquirer,
+  request,
+  CliTable,
+} from '@mango-scripts/utils'
 
 import { compareLocaleData, cusJsonStringify } from '../utils/index.mjs'
 import defaultLocaleList from '../utils/defaultLocaleList.mjs'
-
-inquirer.registerPrompt('fuzzypath', fuzzypath)
 
 type StatType = Record<
   string,
@@ -24,7 +23,7 @@ type StatType = Record<
 >
 
 type UpdateLocaleOptions = {
-  fromAddress: string
+  address: string
   output: string
   localeList: string[]
 }
@@ -32,16 +31,16 @@ type UpdateLocaleOptions = {
 type FromAddressMapType = Record<string, Record<string, any>>
 
 const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
-  let { fromAddress, output, localeList } = options
+  let { address, output, localeList } = options
 
-  if (!fromAddress || !output || !localeList) {
+  if (!address || !output || !localeList) {
     const answer = await inquirer.prompt(
       [
-        !fromAddress && {
+        !address && {
           type: 'input',
-          name: 'fromAddress',
+          name: 'address',
           message: '请输入国际化文案配置系统接口地址',
-          validate: function (input: string) {
+          validate: (input: string) => {
             if (!input) {
               return '国际化文案配置系统接口地址不能为空!'
             }
@@ -68,7 +67,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
               name: i.fileName,
             }
           }),
-          validate(v: string[]) {
+          validate: (v: string[]) => {
             if (v.length < 1) {
               return '至少选择一个语言包列表'
             }
@@ -78,7 +77,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
       ].filter(Boolean),
     )
 
-    fromAddress = answer.fromAddress
+    address = answer.ddress
     output = answer.output
     localeList = answer.localeList
   }
@@ -87,7 +86,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
 
   console.log(
     `
-国际化文案配置系统接口地址: ${pico.green(fromAddress)}
+国际化文案配置系统接口地址: ${pico.green(address)}
 语言包的存放目录路径: ${pico.green(newLocaleDirPath)}
 需要下载的语言包列表: ${pico.green(localeList.join(' '))}
   `,
@@ -103,7 +102,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
 
   const newlocaleArr: { key: string; value: Record<string, any> }[] = []
 
-  const { body } = await request(fromAddress, {
+  const { body } = await request(address, {
     method: 'GET',
   })
 
@@ -164,7 +163,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
 
   consola.success('清空备份目录成功')
 
-  const iTable = new Table({
+  const iTable = new CliTable({
     head: [
       pico.bold(pico.cyan('locale')),
       pico.bold(pico.cyan('add')),

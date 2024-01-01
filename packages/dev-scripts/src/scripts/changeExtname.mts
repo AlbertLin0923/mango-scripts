@@ -1,13 +1,6 @@
 import path from 'node:path'
 
-import fs from 'fs-extra'
-import pico from 'picocolors'
-import consola from 'consola'
-import inquirer from 'inquirer'
-import fuzzypath from 'inquirer-fuzzy-path'
-import { glob } from 'glob'
-
-inquirer.registerPrompt('fuzzypath', fuzzypath)
+import { fs, pico, consola, inquirer, glob } from '@mango-scripts/utils'
 
 type ChangeExtnameOptionsType = {
   input: string

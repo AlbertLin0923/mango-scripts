@@ -1,4 +1,4 @@
-import pico from 'picocolors'
+import { pico } from '@mango-scripts/utils'
 import { createRsbuild } from '@rsbuild/core'
 
 import choosePort from '../../common/utils/choosePort.mjs'

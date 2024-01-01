@@ -1,6 +1,5 @@
 import detect from 'detect-port'
-import pico from 'picocolors'
-import prompts from 'prompts'
+import { prompts, pico } from '@mango-scripts/utils'
 
 import clearConsole from './clearConsole.mjs'
 import getProcessForPort from './getProcessForPort.mjs'

@@ -1,7 +1,7 @@
 import path from 'node:path'
 import os from 'node:os'
 
-import pico from 'picocolors'
+import { pico } from '@mango-scripts/utils'
 
 class ModuleScopePlugin {
   private appSrcs: string[]

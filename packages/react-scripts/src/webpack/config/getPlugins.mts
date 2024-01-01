@@ -1,6 +1,6 @@
 import path from 'path'
 
-import fs from 'fs-extra'
+import { fs } from '@mango-scripts/utils'
 import webpack from 'webpack'
 import resolve from 'resolve'
 import HtmlWebpackPlugin from 'html-webpack-plugin'

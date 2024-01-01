@@ -1,6 +1,6 @@
 import path from 'node:path'
 
-import pico from 'picocolors'
+import { pico } from '@mango-scripts/utils'
 import table from 'text-table'
 
 import stripAnsi from './stripAnsi.mjs'

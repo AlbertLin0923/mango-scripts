@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import { fs } from '@mango-scripts/utils'
 import dotenv from 'dotenv'
 import dotenvExpand from 'dotenv-expand'
 

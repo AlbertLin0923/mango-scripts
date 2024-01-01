@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process'
 import path from 'node:path'
 
-import pico from 'picocolors'
+import { pico } from '@mango-scripts/utils'
 
 const execOptions: any = {
   encoding: 'utf8',

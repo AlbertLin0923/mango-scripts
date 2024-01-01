@@ -1,3 +1,3 @@
-import config from '../../config/dual-package/tsup.config'
+import config from '../../config/pure-esm-package/tsup.config'
 
 export default config

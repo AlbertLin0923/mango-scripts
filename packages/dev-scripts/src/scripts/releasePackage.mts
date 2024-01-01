@@ -2,11 +2,13 @@
 
 import path from 'node:path'
 
-import minimist from 'minimist'
-import prompts from 'prompts'
-import semver from 'semver'
-import pico from 'picocolors'
-import getGitRepoInfo from 'git-repo-info'
+import {
+  pico,
+  minimist,
+  semver,
+  prompts,
+  getGitRepoInfo,
+} from '@mango-scripts/utils'
 
 import {
   getPkgInfoList,

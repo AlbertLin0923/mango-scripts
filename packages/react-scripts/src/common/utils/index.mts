@@ -1,7 +1,7 @@
-import os from 'os'
-import { createHash } from 'crypto'
+import os from 'node:os'
+import { createHash } from 'node:crypto'
 
-import fs from 'fs-extra'
+import { fs } from '@mango-scripts/utils'
 
 const interfaces = os.networkInterfaces()
 

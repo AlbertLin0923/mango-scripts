@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import { fs } from '@mango-scripts/utils'
 import { mergeWith, isArray } from 'lodash-es'
 import { cosmiconfig } from 'cosmiconfig'
 

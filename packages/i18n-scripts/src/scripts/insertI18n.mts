@@ -1,14 +1,7 @@
 import path from 'node:path'
 
-import fs from 'fs-extra'
-import pico from 'picocolors'
-import consola from 'consola'
-import inquirer from 'inquirer'
-import fuzzypath from 'inquirer-fuzzy-path'
+import { fs, pico, consola, inquirer, glob } from '@mango-scripts/utils'
 import gogocode from 'gogocode'
-import { glob } from 'glob'
-
-inquirer.registerPrompt('fuzzypath', fuzzypath)
 
 const INCLUDE_CHINESE_CHAR = /.*[\u4e00-\u9fff]+.*$/
 const INCLUDE_VARIABLE_CHAR = /[{{}}]+/

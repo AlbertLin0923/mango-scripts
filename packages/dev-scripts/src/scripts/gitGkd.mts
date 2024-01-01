@@ -1,6 +1,4 @@
-import pico from 'picocolors'
-import consola from 'consola'
-import getGitRepoInfo from 'git-repo-info'
+import { pico, consola, getGitRepoInfo } from '@mango-scripts/utils'
 
 import { run } from '../utils/index.mjs'
 

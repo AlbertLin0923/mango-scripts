@@ -1,9 +1,8 @@
 import path from 'node:path'
 import url from 'node:url'
 
-import fs from 'fs-extra'
+import { fs, pico } from '@mango-scripts/utils'
 import { ip } from 'address'
-import pico from 'picocolors'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 
 import formatWebpackMessages from './formatWebpackMessages.mjs'

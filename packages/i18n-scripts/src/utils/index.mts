@@ -1,5 +1,4 @@
-import fs from 'fs-extra'
-import pico from 'picocolors'
+import { fs, pico } from '@mango-scripts/utils'
 
 export const isObject = (d: any) => {
   return Object.prototype.toString.call(d) === '[object Object]'

@@ -1,13 +1,8 @@
-import pico from 'picocolors'
-import consola from 'consola'
 import npmKeyword from 'npm-keyword'
 import packageJson from 'package-json'
-import inquirer from 'inquirer'
-import inquirerPrompt from 'inquirer-autocomplete-prompt'
+import { pico, consola, inquirer } from '@mango-scripts/utils'
 
 import { run, getPkgInfoList } from '../utils/index.mjs'
-
-inquirer.registerPrompt('autocomplete', inquirerPrompt)
 
 const typeMap = [
   { name: 'dependencies', value: '--save-prod' },

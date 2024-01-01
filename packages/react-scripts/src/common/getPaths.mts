@@ -1,6 +1,6 @@
-import path from 'path'
+import path from 'node:path'
 
-import fs from 'fs-extra'
+import { fs } from '@mango-scripts/utils'
 
 import getPublicUrlOrPath from '../common/utils/getPublicUrlOrPath.mjs'
 

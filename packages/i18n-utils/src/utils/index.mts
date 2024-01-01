@@ -1,7 +1,7 @@
 import path from 'node:path'
-import crypto from 'crypto'
+import crypto from 'node:crypto'
 
-import fs from 'fs-extra'
+import { fs } from '@mango-scripts/utils'
 
 export type LocaleItem = {
   'zh-CN': string

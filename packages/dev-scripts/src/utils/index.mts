@@ -1,12 +1,6 @@
 import path from 'node:path'
 
-import fs from 'fs-extra'
-import { execa } from 'execa'
-import pico from 'picocolors'
-import semver from 'semver'
-
-import type { ReleaseType } from 'semver'
-import type { Options as ExecaOptions, ExecaReturnValue } from 'execa'
+import { fs, execa, pico, semver } from '@mango-scripts/utils'
 
 export interface IPkgInfo {
   pkgDir: string
@@ -50,8 +44,8 @@ export async function getPkgInfoList(
 export async function run(
   bin: string,
   args: string[],
-  opts: ExecaOptions<'utf8'> = {},
-): Promise<ExecaReturnValue<string>> {
+  opts: any = {},
+): Promise<any> {
   return execa(bin, args, { stdio: 'inherit', ...opts })
 }
 
@@ -64,7 +58,7 @@ export const getVersionChoices = (pkgCurrentVersion: string) => {
   const currentAlpha = pkgCurrentVersion.includes('alpha')
   const isStable = !currentBeta && !currentAlpha
 
-  function inc(i: ReleaseType, tag = currentAlpha ? 'alpha' : 'beta') {
+  function inc(i: semver.ReleaseType, tag = currentAlpha ? 'alpha' : 'beta') {
     return semver.inc(pkgCurrentVersion, i, tag) as string
   }
 
@@ -137,7 +131,7 @@ export const getLatestTag = async (pkgName: string) => {
     .split(/\n/)
     .filter(Boolean)
   return tags
-    .filter((tag) => tag.startsWith(`${pkgName}@`))
+    .filter((tag: any) => tag.startsWith(`${pkgName}@`))
     .sort()
     .reverse()[0]
 }

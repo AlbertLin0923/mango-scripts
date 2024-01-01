@@ -1,12 +1,5 @@
 #!/usr/bin/env node
-import path from 'path'
-import { fileURLToPath } from 'node:url'
-
-import pico from 'picocolors'
-import envinfo from 'envinfo'
-import fs from 'fs-extra'
-import { Command } from 'commander'
-import { checkNodeVersion, checkUpdate, gs } from '@mango-scripts/utils'
+import { prepareCli, Command, pico, envinfo, gs } from '@mango-scripts/utils'
 
 import webpackDev from './webpack/scripts/dev.mjs'
 import webpackBuild from './webpack/scripts/build.mjs'
@@ -15,14 +8,7 @@ import rsbuildDev from './rsbuild/scripts/dev.mjs'
 import rsbuildBuild from './rsbuild/scripts/build.mjs'
 import rsbuildInspect from './rsbuild/scripts/inspect.mjs'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const packageJson = fs.readJSONSync(
-  path.resolve(__dirname, '../../package.json'),
-)
-const { engines, name, version } = packageJson
-
-checkNodeVersion(engines.node, name)
-checkUpdate(packageJson)
+const { name, version } = prepareCli()
 
 console.log(gs('@mango-scripts/react-scripts\n'))
 

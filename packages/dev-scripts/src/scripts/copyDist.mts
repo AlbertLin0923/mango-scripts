@@ -1,9 +1,6 @@
 import path from 'node:path'
 
-import fs from 'fs-extra'
-import pico from 'picocolors'
-import consola from 'consola'
-import getGitRepoInfo from 'git-repo-info'
+import { fs, pico, consola, getGitRepoInfo } from '@mango-scripts/utils'
 
 import { getPkgInfoList } from '../utils/index.mjs'
 
