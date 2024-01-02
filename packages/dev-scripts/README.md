@@ -2,7 +2,7 @@
 @mango-scripts/dev-scripts
 </h1>
 <p align="center">
-一些便捷的前端开发 Node.js 脚本
+一些便捷的前端开发脚本，支持自动发布 npm 包、批量转换文件后缀名、git 快捷操作等
 <p>
 <p align="center">
 <a href="https://www.npmjs.com/package/@mango-scripts/dev-scripts" target="__blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/@mango-scripts/dev-scripts?label=" alt="NPM version"></a>

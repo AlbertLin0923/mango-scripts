@@ -2,7 +2,7 @@
 @mango-scripts/utils
 </h1>
 <p align="center">
-mango-scripts 工具库
+mango-scripts 内部工具库，导出命令行工具常用的第三方依赖库和工具函数
 <p>
 <p align="center">
 <a href="https://www.npmjs.com/package/@mango-scripts/utils" target="__blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/@mango-scripts/utils?label=" alt="NPM version"></a>

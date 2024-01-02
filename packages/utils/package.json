@@ -1,7 +1,7 @@
 {
   "name": "@mango-scripts/utils",
   "version": "2.0.2",
-  "description": "mango-scripts 工具库",
+  "description": "mango-scripts 内部工具库，导出命令行工具常用的第三方依赖库和工具函数",
   "keywords": [
     "mango-scripts",
     "utils"

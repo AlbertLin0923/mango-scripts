@@ -172,6 +172,70 @@ export type UserConfigType = {
   }
 }
 
+export const userDefaultWebpackConfig: UserConfigType = {
+  distDir: 'dist',
+  loader: {
+    babel: {
+      enable: true,
+      options: {},
+    },
+    less: {
+      enable: true,
+      options: {},
+    },
+    sass: {
+      enable: true,
+      options: {},
+    },
+    stylus: {
+      enable: true,
+      options: {},
+    },
+    postcss: {
+      enable: true,
+      options: {},
+    },
+    swc: {
+      enable: false,
+      options: {},
+    },
+    esbuild: {
+      enable: false,
+      options: {},
+    },
+  },
+  plugin: {
+    eslint: {
+      enable: true,
+      options: {},
+    },
+    stylelint: {
+      enable: true,
+      options: {},
+    },
+    typescript: {
+      enable: true,
+      options: {},
+    },
+  },
+  optimization: {
+    splitChunks: {},
+    minimizer: {
+      jsMinimizer: {
+        minify: 'terserMinify',
+        terserOptions: {},
+      },
+      cssMinimizer: {
+        minify: 'cssnanoMinify',
+        minimizerOptions: {},
+      },
+    },
+  },
+  server: {
+    https: undefined,
+  },
+}
+
 type WebpackConfig = {
   /**
    * output directory
@@ -338,70 +402,6 @@ type WebpackConfig = {
      */
     https: ServerOptions | undefined
   }
-}
-
-export const userDefaultWebpackConfig: WebpackConfig = {
-  distDir: 'dist',
-  loader: {
-    babel: {
-      enable: true,
-      options: {},
-    },
-    less: {
-      enable: true,
-      options: {},
-    },
-    sass: {
-      enable: true,
-      options: {},
-    },
-    stylus: {
-      enable: true,
-      options: {},
-    },
-    postcss: {
-      enable: true,
-      options: {},
-    },
-    swc: {
-      enable: false,
-      options: {},
-    },
-    esbuild: {
-      enable: false,
-      options: {},
-    },
-  },
-  plugin: {
-    eslint: {
-      enable: true,
-      options: {},
-    },
-    stylelint: {
-      enable: true,
-      options: {},
-    },
-    typescript: {
-      enable: true,
-      options: {},
-    },
-  },
-  optimization: {
-    splitChunks: {},
-    minimizer: {
-      jsMinimizer: {
-        minify: 'terserMinify',
-        terserOptions: {},
-      },
-      cssMinimizer: {
-        minify: 'cssnanoMinify',
-        minimizerOptions: {},
-      },
-    },
-  },
-  server: {
-    https: undefined,
-  },
 }
 
 export function defineConfig(
