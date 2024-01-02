@@ -1,7 +1,7 @@
 {
   "name": "@mango-scripts/i18n-utils",
   "version": "2.0.13",
-  "description": "mango-i18n-system 自动国际化文案配置系统的文案解析器，用于提取 中文文案key",
+  "description": "自动国际化文案配置系统的文案解析器，基于 AST / REGEX ，用于提取 中文文案key",
   "keywords": [
     "mango-scripts",
     "i18n-utils",

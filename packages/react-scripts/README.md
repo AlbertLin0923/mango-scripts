@@ -14,7 +14,7 @@ React Web App 项目构建工具，支持 webpack && rsbuild 双构建引擎切�
 ## 特性
 
 - 支持 [webpack](https://github.com/webpack/webpack) && [rsbuild](https://github.com/web-infra-dev/rsbuild) 双构建引擎切换
-- `webapck` 配置基于 [react-scripts@5.0.1](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts) ，使用 `TypeScript` + `Pure ESM` 进行改写，添加一些功能和优化
+- `webpack` 配置基于 [react-scripts@5.0.1](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts) ，使用 `TypeScript` + `Pure ESM` 进行改写，添加一些功能和优化
 - `rsbuild` 配置对标内部 `webpack` 配置，适用项目快速开发
 - 支持 `type:modules` ESM 模式开发项目
 - 类似 [craco](https://github.com/dilanx/craco)，可通过配置文件对该构建工具进行扩展配置
@@ -205,7 +205,3 @@ export default defineConfig({
 ## License
 
 [MIT](./LICENSE)
-
-```
-
-```

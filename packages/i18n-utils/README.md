@@ -1,7 +1,7 @@
 <h1 align="center">
 @mango-scripts/i18n-utils
 </h1>
-<p align="center"><a href="https://github.com/AlbertLin0923/mango-i18n-system" target="__blank" rel="noopener noreferrer">mango-i18n-system</a> 自动国际化文案配置系统的文案解析器，用于提取 中文文案key
+<p align="center"><a href="https://github.com/AlbertLin0923/mango-i18n-system" target="__blank" rel="noopener noreferrer">mango-i18n-system</a> 自动国际化文案配置系统的文案解析器，基于 AST / REGEX ，用于提取 中文文案key
 
 <p>
 <p align="center">
