@@ -41,6 +41,7 @@
     "@mango-scripts/utils": "^2.0.2",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@rsbuild/core": "^0.2.4",
+    "@rsbuild/plugin-babel": "^0.2.17",
     "@rsbuild/plugin-check-syntax": "^0.2.13",
     "@rsbuild/plugin-react": "^0.2.4",
     "@rsbuild/plugin-stylus": "^0.2.13",
@@ -113,6 +114,7 @@
     "@types/loader-utils": "^2.0.6",
     "@types/lodash-es": "^4.17.12",
     "@types/resolve": "^1.20.6",
+    "@types/svg-sprite-loader": "^3.9.9",
     "@types/text-table": "^0.2.5",
     "@types/uglify-js": "^3.17.4",
     "@types/webpack-bundle-analyzer": "^4.6.3"

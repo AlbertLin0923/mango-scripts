@@ -1,10 +1,11 @@
-import path from 'node:path'
+import { join } from 'node:path'
 
 import { defineConfig, loadConfig, mergeRsbuildConfig } from '@rsbuild/core'
 import { pluginReact } from '@rsbuild/plugin-react'
 import { pluginTypeCheck } from '@rsbuild/plugin-type-check'
 import { pluginSvgr } from '@rsbuild/plugin-svgr'
 import { pluginStylus } from '@rsbuild/plugin-stylus'
+import { pluginBabel } from '@rsbuild/plugin-babel'
 // import { pluginCheckSyntax } from '@rsbuild/plugin-check-syntax'
 
 import { getEnv } from '../../common/getEnv.mjs'
@@ -29,6 +30,11 @@ export const getRsbuildConfig = async (
       pluginSvgr(),
       pluginStylus(),
       // pluginCheckSyntax(),
+      pluginBabel({
+        babelLoaderOptions: (config, { addPlugins }) => {
+          addPlugins([require.resolve('babel-plugin-jsx-css-modules')])
+        },
+      }),
     ],
     output: {
       polyfill: 'entry',
@@ -56,6 +62,21 @@ export const getRsbuildConfig = async (
       postcss: (config, { addPlugins }) => {
         // addPlugins(tailwindcss)
       },
+      bundlerChain(chain, utils) {
+        chain.module
+          .rule('svg')
+          .oneOf('sprite')
+          .test(/./)
+          .include.add(paths.svgSpritePath)
+          .end()
+          .before('svg-asset-url')
+          .use('compat-svg-sprite-loader')
+          .loader(join(__dirname, '../loader/compat-svg-sprite-loader.mjs'))
+          .options({ symbolId: 'icon-[name]' })
+          .end()
+          .use('svgo')
+          .loader(require.resolve('svgo-loader'))
+      },
     },
     source: {
       define: env.stringified,
@@ -65,7 +86,7 @@ export const getRsbuildConfig = async (
 
   const userConfig = await loadConfig({
     cwd: process.cwd(),
-    path: path.join(process.cwd(), 'mango.config.mjs'),
+    path: join(process.cwd(), 'mango.config.mjs'),
   })
 
   return mergeRsbuildConfig(defaultConfig, devConfig, userConfig)
