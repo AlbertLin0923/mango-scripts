@@ -11,6 +11,8 @@ React Web App 项目构建工具，支持 webpack && rsbuild 双构建引擎切�
 <a href="./LICENSE" target="__blank" rel="noopener noreferrer"><img alt="License" src="https://img.shields.io/github/license/Albertlin0923/mango-scripts"></a>
 </p>
 
+[react-scripts](https://github.com/facebook/create-react-app/tree/main/packages/react-scripts) 已经很久不维护，相关依赖库没有及时更新，扩展配置也麻烦，官方推荐使用 Next.js 或 Remix，但对于 传统 CSR 渲染模式的 React Web App 项目，简单清晰的 `react-scripts` 仍是首选，该项目 fork 自 `react-scripts`，使用 `TypeScript` + `Pure ESM` 进行改写，添加一些功能和优化，同时引入 `rsbuild`，支持 webpack && rsbuild 双构建引擎切换
+
 ## 特性
 
 - 支持 [webpack](https://github.com/webpack/webpack) && [rsbuild](https://github.com/web-infra-dev/rsbuild) 双构建引擎切换
@@ -97,8 +99,9 @@ pnpm add @mango-scripts/react-scripts -D
 
 mango.config.mjs：
 
+#### 1. 选择基于 webpack 构建时，配置选项如下：
+
 ```mjs
-// 选择 webpack 构建的配置选项
 import { defineConfig } from '@mango-scripts/react-scripts'
 
 export default defineConfig({
@@ -187,8 +190,9 @@ export default defineConfig({
 })
 ```
 
+#### 2. 选择基于 rsbuild 构建时，配置选项如下：
+
 ```mjs
-// 选择 rsbuild 构建的配置选项
 import { defineConfig } from '@mango-scripts/react-scripts'
 
 export default defineConfig({
