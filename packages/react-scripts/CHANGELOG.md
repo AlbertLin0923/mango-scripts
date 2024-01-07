@@ -1,3 +1,10 @@
+## [2.0.8](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.7...@mango-scripts/react-scripts@2.0.8) (2024-01-07)
+
+
+### Features
+
+* @mango-scripts/react-scripts rsbuild模式增加对svg-sprite-loader和css-module的支持 ([7cd22dc](https://github.com/AlbertLin0923/mango-scripts/commit/7cd22dc7385a047d90f538978f786dc541e6832c))
+
 ## [2.0.7](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.6...@mango-scripts/react-scripts@2.0.7) (2024-01-01)
 
 
