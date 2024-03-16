@@ -124,6 +124,6 @@
     "typescript": ">= 5"
   },
   "engines": {
-    "node": ">=18.12.0"
+    "node": ">=18"
   }
 }
