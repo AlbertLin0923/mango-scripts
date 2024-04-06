@@ -6,7 +6,6 @@ import { pluginTypeCheck } from '@rsbuild/plugin-type-check'
 import { pluginSvgr } from '@rsbuild/plugin-svgr'
 import { pluginStylus } from '@rsbuild/plugin-stylus'
 import { pluginBabel } from '@rsbuild/plugin-babel'
-// import { pluginCheckSyntax } from '@rsbuild/plugin-check-syntax'
 
 import { getEnv } from '../../common/getEnv.mjs'
 
@@ -29,7 +28,6 @@ export const getRsbuildConfig = async (
       pluginTypeCheck(),
       pluginSvgr(),
       pluginStylus(),
-      // pluginCheckSyntax(),
       pluginBabel({
         babelLoaderOptions: (config, { addPlugins }) => {
           addPlugins([require.resolve('babel-plugin-jsx-css-modules')])
