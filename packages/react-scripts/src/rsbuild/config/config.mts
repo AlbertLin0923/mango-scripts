@@ -6,9 +6,9 @@ import { pluginTypeCheck } from '@rsbuild/plugin-type-check'
 import { pluginSvgr } from '@rsbuild/plugin-svgr'
 import { pluginStylus } from '@rsbuild/plugin-stylus'
 import { pluginBabel } from '@rsbuild/plugin-babel'
-// import { pluginCheckSyntax } from '@rsbuild/plugin-check-syntax'
 
 import { getEnv } from '../../common/getEnv.mjs'
+import { require } from '../../common/utils/index.mjs'
 
 import type { PathsType } from '../../common/getPaths.mjs'
 import type { RsbuildConfig } from '@rsbuild/core'
@@ -29,7 +29,6 @@ export const getRsbuildConfig = async (
       pluginTypeCheck(),
       pluginSvgr(),
       pluginStylus(),
-      // pluginCheckSyntax(),
       pluginBabel({
         babelLoaderOptions: (config, { addPlugins }) => {
           addPlugins([require.resolve('babel-plugin-jsx-css-modules')])
@@ -59,9 +58,6 @@ export const getRsbuildConfig = async (
             },
     },
     tools: {
-      postcss: (config, { addPlugins }) => {
-        // addPlugins(tailwindcss)
-      },
       bundlerChain(chain, utils) {
         chain.module
           .rule('svg')
@@ -84,7 +80,7 @@ export const getRsbuildConfig = async (
     performance: { prefetch: true },
   })
 
-  const userConfig = await loadConfig({
+  const { content: userConfig } = await loadConfig({
     cwd: process.cwd(),
     path: join(process.cwd(), 'mango.config.mjs'),
   })

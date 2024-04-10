@@ -1,7 +1,10 @@
 import os from 'node:os'
 import { createHash } from 'node:crypto'
+import { createRequire } from 'node:module'
 
 import { fs } from '@mango-scripts/utils'
+
+export const require = createRequire(import.meta.url)
 
 const interfaces = os.networkInterfaces()
 

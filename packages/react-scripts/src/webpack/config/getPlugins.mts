@@ -17,6 +17,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 
 import { deepMergeWithArray } from './getUserConfig.mjs'
 
+import { require } from '../../common/utils/index.mjs'
 import eslintFormatter from '../../common/utils/eslintFormatter.mjs'
 import ModuleNotFoundPlugin from '../../common/utils/ModuleNotFoundPlugin.mjs'
 import InterpolateHtmlPlugin from '../../common/utils/InterpolateHtmlPlugin.mjs'

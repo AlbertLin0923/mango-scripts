@@ -21,7 +21,7 @@ export const getPaths = (userConfig: UserConfigType) => {
   // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
   const publicUrlOrPath = getPublicUrlOrPath(
     process.env.NODE_ENV === 'development',
-    require(resolveApp('package.json')).homepage,
+    fs.readJSONSync(resolveApp('package.json'))?.homepage,
     process.env.PUBLIC_URL,
   )
 

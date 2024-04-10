@@ -8,6 +8,7 @@ import { getPlugins } from './getPlugins.mjs'
 import { getModuleRules } from './getModuleRules.mjs'
 import { getOptimization } from './getOptimization.mjs'
 
+import { require } from '../../common/utils/index.mjs'
 import ModuleScopePlugin from '../../common/utils/ModuleScopePlugin.mjs'
 import { getEnv } from '../../common/getEnv.mjs'
 import { getHash } from '../../common/utils/index.mjs'

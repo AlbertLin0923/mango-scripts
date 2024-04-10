@@ -2,6 +2,7 @@ import { fs, pico } from '@mango-scripts/utils'
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 
+import { require } from '../../common/utils/index.mjs'
 import {
   createCompiler,
   prepareProxy,

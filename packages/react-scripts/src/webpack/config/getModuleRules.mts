@@ -7,6 +7,7 @@ import browserslistToEsbuild from 'browserslist-to-esbuild'
 import { deepMergeWithArray } from './getUserConfig.mjs'
 
 import { extractPkgJson } from '../../common/utils/index.mjs'
+import { require } from '../../common/utils/index.mjs'
 
 import type { UserConfigType } from '../../defineConfig.mjs'
 import type { PathsType } from '../../common/getPaths.mjs'

@@ -3,6 +3,8 @@ import path from 'node:path'
 
 import { pico } from '@mango-scripts/utils'
 
+import { require } from './index.mjs'
+
 const execOptions: any = {
   encoding: 'utf8',
   stdio: ['pipe', 'pipe', 'ignore'],

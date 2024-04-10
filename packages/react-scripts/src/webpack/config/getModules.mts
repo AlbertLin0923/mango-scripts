@@ -3,6 +3,8 @@ import path from 'node:path'
 import { fs, pico } from '@mango-scripts/utils'
 import resolve from 'resolve'
 
+import { require } from '../../common/utils/index.mjs'
+
 import type { PathsType } from '../../common/getPaths.mjs'
 
 /**
