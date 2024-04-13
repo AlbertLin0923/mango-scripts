@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/react-scripts",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "React Web 项目构建工具，支持 webpack && rsbuild 双构建引擎切换",
   "keywords": [
     "mango-scripts",

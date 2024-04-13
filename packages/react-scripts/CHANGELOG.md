@@ -1,3 +1,12 @@
+## [2.0.9](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.8...@mango-scripts/react-scripts@2.0.9) (2024-04-13)
+
+
+### Features
+
+* 更新@mango-scripts/react-scripts依赖 ([c5363d4](https://github.com/AlbertLin0923/mango-scripts/commit/c5363d4ff5c95bb37162db481fce6008ce68de77))
+* 升级@mango-scripts/react-scripts rsbuild版本 ([7a9bf6e](https://github.com/AlbertLin0923/mango-scripts/commit/7a9bf6e0961c7a0dae2a21458d02e61e9ff22230))
+* 升级适配@mango-scripts/react-scripts依赖 ([815933f](https://github.com/AlbertLin0923/mango-scripts/commit/815933f25ebedbdf6fdb8893142dbc114f75bf8a))
+
 ## [2.0.8](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/react-scripts@2.0.7...@mango-scripts/react-scripts@2.0.8) (2024-01-07)
 
 
