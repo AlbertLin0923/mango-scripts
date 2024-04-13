@@ -57,6 +57,9 @@ export const getRsbuildConfig = async (
               media: '[name].[contenthash:16][ext]',
             },
     },
+    html: {
+      template: paths.appHtml,
+    },
     tools: {
       bundlerChain(chain, utils) {
         chain.module
