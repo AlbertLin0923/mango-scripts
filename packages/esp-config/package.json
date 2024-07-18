@@ -44,8 +44,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsup --watch",
     "build": "tsup",
+    "dev": "tsup --watch",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
@@ -55,14 +55,15 @@
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-prettier": "^5.1.2",
-    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss-html": "^1.5.0",
     "postcss-less": "^6.0.0",
     "postcss-styl": "^0.12.3",
+    "prettier-plugin-tailwindcss": "^0.6.5",
     "stylelint-config-css-modules": "^4.4.0",
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-rational-order": "^0.1.2",
