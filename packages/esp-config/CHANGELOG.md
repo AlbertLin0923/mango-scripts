@@ -1,3 +1,10 @@
+## [2.0.8](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.7...@mango-scripts/esp-config@2.0.8) (2024-07-18)
+
+
+### Features
+
+* @mango-scripts/esp-config 增加对tailwindcss插件支持 ([3653beb](https://github.com/AlbertLin0923/mango-scripts/commit/3653bebb9ce904b74e49d9ec6f6345af4e978eab))
+
 ## [2.0.7](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/esp-config@2.0.6...@mango-scripts/esp-config@2.0.7) (2023-12-24)
 
 
