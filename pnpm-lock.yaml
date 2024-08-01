@@ -18,8 +18,8 @@ importers:
         specifier: ^2.0.8
         version: 2.0.8(typescript@5.5.3)
       '@mango-scripts/esp-config':
-        specifier: ^2.0.7
-        version: 2.0.7(@types/eslint@8.56.10)(eslint@8.57.0)(postcss@8.4.39)(prettier@3.3.3)(stylelint@16.7.0(typescript@5.5.3))(typescript@5.5.3)
+        specifier: ^2.0.8
+        version: 2.0.8(@types/eslint@8.56.10)(eslint@8.57.0)(postcss@8.4.39)(prettier@3.3.3)(stylelint@16.7.0(typescript@5.5.3))(typescript@5.5.3)
       '@types/node':
         specifier: ^20.10.5
         version: 20.14.11
@@ -2756,9 +2756,9 @@ packages:
     engines: {node: '>=18.12.0'}
     hasBin: true
 
-  '@mango-scripts/esp-config@2.0.7':
-    resolution: {integrity: sha512-Y28pT27x7IvUuexTdZJRNWc8nalq0Rz+uGTc/KvJgd6TBQU0KKHvdaffKwwRv1Zi/h6Ttgr/oHXdZJiaYF7mDw==}
-    engines: {node: '>=18.12.0'}
+  '@mango-scripts/esp-config@2.0.8':
+    resolution: {integrity: sha512-sZ37IS13+jfdYeM9UfBT/My5Qv526omxXUwM0nD5/jZeyKIhEbPVNmjAJA0nTkeOGRrbxNlF+bmTVVQs7hr6xw==}
+    engines: {node: '>=18'}
     peerDependencies:
       eslint: '>= 8.56.0'
       prettier: '>= 3.1.1'
@@ -13087,7 +13087,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@mango-scripts/esp-config@2.0.7(@types/eslint@8.56.10)(eslint@8.57.0)(postcss@8.4.39)(prettier@3.3.3)(stylelint@16.7.0(typescript@5.5.3))(typescript@5.5.3)':
+  '@mango-scripts/esp-config@2.0.8(@types/eslint@8.56.10)(eslint@8.57.0)(postcss@8.4.39)(prettier@3.3.3)(stylelint@16.7.0(typescript@5.5.3))(typescript@5.5.3)':
     dependencies:
       '@babel/core': 7.24.9
       '@babel/eslint-parser': 7.24.8(@babel/core@7.24.9)(eslint@8.57.0)
@@ -13105,6 +13105,7 @@ snapshots:
       postcss-less: 6.0.0(postcss@8.4.39)
       postcss-styl: 0.12.3
       prettier: 3.3.3
+      prettier-plugin-tailwindcss: 0.6.5(prettier@3.3.3)
       stylelint: 16.7.0(typescript@5.5.3)
       stylelint-config-css-modules: 4.4.0(stylelint@16.7.0(typescript@5.5.3))
       stylelint-config-html: 1.1.0(postcss-html@1.7.0)(stylelint@16.7.0(typescript@5.5.3))
@@ -13115,10 +13116,25 @@ snapshots:
       stylelint-order: 6.0.4(stylelint@16.7.0(typescript@5.5.3))
       stylelint-prettier: 5.0.2(prettier@3.3.3)(stylelint@16.7.0(typescript@5.5.3))
     transitivePeerDependencies:
+      - '@ianvs/prettier-plugin-sort-imports'
+      - '@prettier/plugin-pug'
+      - '@shopify/prettier-plugin-liquid'
+      - '@trivago/prettier-plugin-sort-imports'
       - '@types/eslint'
+      - '@zackad/prettier-plugin-twig-melody'
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
       - postcss
+      - prettier-plugin-astro
+      - prettier-plugin-css-order
+      - prettier-plugin-import-sort
+      - prettier-plugin-jsdoc
+      - prettier-plugin-marko
+      - prettier-plugin-organize-attributes
+      - prettier-plugin-organize-imports
+      - prettier-plugin-sort-imports
+      - prettier-plugin-style-order
+      - prettier-plugin-svelte
       - supports-color
       - typescript
 
