@@ -101,6 +101,12 @@ export const gs = (
 export const prepareCli = <T extends Record<string, any>>(
   packageJson: T,
 ): T => {
+  if (!packageJson) {
+    return {
+      name: '',
+      version: '',
+    } as any
+  }
   const {
     engines: { node },
     name,

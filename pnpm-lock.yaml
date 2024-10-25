@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@mango-scripts/utils': 2.0.2
+
 importers:
 
   .:
@@ -217,8 +220,8 @@ importers:
         specifier: ^17.6.3
         version: 17.8.1
       '@mango-scripts/dev-scripts':
-        specifier: workspace:*
-        version: link:../../packages/dev-scripts
+        specifier: 2.0.8
+        version: 2.0.8(typescript@5.6.3)
       '@mango-scripts/esp-config':
         specifier: workspace:*
         version: link:../../packages/esp-config
@@ -408,7 +411,7 @@ importers:
   packages/dev-scripts:
     dependencies:
       '@mango-scripts/utils':
-        specifier: ^2.0.2
+        specifier: 2.0.2
         version: 2.0.2(typescript@5.6.3)
       npm-keyword:
         specifier: ^7.0.0
@@ -501,7 +504,7 @@ importers:
   packages/i18n-scripts:
     dependencies:
       '@mango-scripts/utils':
-        specifier: ^2.0.2
+        specifier: 2.0.2
         version: 2.0.2(typescript@5.6.3)
       gogocode:
         specifier: ^1.0.55
@@ -522,7 +525,7 @@ importers:
         specifier: ^7.23.0
         version: 7.26.0
       '@mango-scripts/utils':
-        specifier: ^2.0.2
+        specifier: 2.0.2
         version: 2.0.2(typescript@5.6.3)
       hyntax:
         specifier: ^1.1.9
@@ -556,7 +559,7 @@ importers:
         specifier: ^0.0.2
         version: 0.0.2
       '@mango-scripts/utils':
-        specifier: ^2.0.2
+        specifier: 2.0.2
         version: 2.0.2(typescript@5.6.3)
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.11
