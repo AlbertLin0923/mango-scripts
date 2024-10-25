@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@mango-scripts/utils': 2.0.2
-
 importers:
 
   .:
@@ -411,8 +408,8 @@ importers:
   packages/dev-scripts:
     dependencies:
       '@mango-scripts/utils':
-        specifier: 2.0.2
-        version: 2.0.2(typescript@5.6.3)
+        specifier: ^2.0.4
+        version: 2.0.4(typescript@5.6.3)
       npm-keyword:
         specifier: ^7.0.0
         version: 7.0.0
@@ -504,8 +501,8 @@ importers:
   packages/i18n-scripts:
     dependencies:
       '@mango-scripts/utils':
-        specifier: 2.0.2
-        version: 2.0.2(typescript@5.6.3)
+        specifier: ^2.0.4
+        version: 2.0.4(typescript@5.6.3)
       gogocode:
         specifier: ^1.0.55
         version: 1.0.55(vue@3.5.12(typescript@5.6.3))
@@ -525,8 +522,8 @@ importers:
         specifier: ^7.23.0
         version: 7.26.0
       '@mango-scripts/utils':
-        specifier: 2.0.2
-        version: 2.0.2(typescript@5.6.3)
+        specifier: ^2.0.2
+        version: 2.0.4(typescript@5.6.3)
       hyntax:
         specifier: ^1.1.9
         version: 1.1.9
@@ -559,8 +556,8 @@ importers:
         specifier: ^0.0.2
         version: 0.0.2
       '@mango-scripts/utils':
-        specifier: 2.0.2
-        version: 2.0.2(typescript@5.6.3)
+        specifier: ^2.0.4
+        version: 2.0.4(typescript@5.6.3)
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.11
         version: 0.5.15(@types/webpack@5.28.5(@swc/core@1.7.39(@swc/helpers@0.5.13))(esbuild@0.20.2)(uglify-js@3.19.3))(react-refresh@0.14.2)(type-fest@4.26.1)(webpack-dev-server@4.15.2(webpack@5.95.0(@swc/core@1.7.39(@swc/helpers@0.5.13))(esbuild@0.20.2)(uglify-js@3.19.3)))(webpack@5.95.0(@swc/core@1.7.39(@swc/helpers@0.5.13))(esbuild@0.20.2)(uglify-js@3.19.3))
@@ -2985,6 +2982,10 @@ packages:
   '@mango-scripts/utils@2.0.2':
     resolution: {integrity: sha512-aiw9PaCRVQepNuoV0PpGPgvfic8dUn4BftrfrfeUA34OGusz/1h+7nR7yWGUYh8cWVe4v2V29pwS4D3GtxFylQ==}
     engines: {node: '>=18.12.0'}
+
+  '@mango-scripts/utils@2.0.4':
+    resolution: {integrity: sha512-jt77CRPOat1gPvk3PcfU9dI8ykkt7D+ck8hhb+WxuHwnbciigkilFUU/yOEuOKh0rRiky4LRL6qZIVhgQBp1gw==}
+    engines: {node: '>=18'}
 
   '@module-federation/runtime-tools@0.1.6':
     resolution: {integrity: sha512-7ILVnzMIa0Dlc0Blck5tVZG1tnk1MmLnuZpLOMpbdW+zl+N6wdMjjHMjEZFCUAJh2E5XJ3BREwfX8Ets0nIkLg==}
@@ -13986,6 +13987,39 @@ snapshots:
       prompts: 2.4.2
       recursive-readdir: 2.2.3
       semver: 7.6.3
+      undici: 6.20.1
+      update-notifier: 7.3.1
+    transitivePeerDependencies:
+      - typescript
+
+  '@mango-scripts/utils@2.0.4(typescript@5.6.3)':
+    dependencies:
+      commander: 12.1.0
+      configstore: 7.0.0
+      consola: 3.2.3
+      cosmiconfig: 9.0.0(typescript@5.6.3)
+      dotenv: 16.4.5
+      dotenv-expand: 11.0.6
+      envinfo: 7.14.0
+      execa: 8.0.1
+      file-type: 19.6.0
+      filesize: 10.1.6
+      fs-extra: 11.2.0
+      git-repo-info: 2.1.1
+      glob: 11.0.0
+      gradient-string: 3.0.0
+      inquirer: 9.3.7
+      inquirer-autocomplete-prompt: 3.0.1(inquirer@9.3.7)
+      inquirer-fuzzy-path: 2.3.0
+      lodash-es: 4.17.21
+      mime: 4.0.4
+      minimist: 1.2.8
+      open: 10.1.0
+      picocolors: 1.1.1
+      prompts: 2.4.2
+      recursive-readdir: 2.2.3
+      semver: 7.6.3
+      tty-table: 4.2.3
       undici: 6.20.1
       update-notifier: 7.3.1
     transitivePeerDependencies:
