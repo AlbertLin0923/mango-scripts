@@ -1,6 +1,6 @@
 import path from 'node:path'
 
-import { fs, execa, pico, semver } from '@mango-scripts/utils'
+import { fs, execa, pico, semver, consola } from '@mango-scripts/utils'
 
 export interface IPkgInfo {
   pkgDir: string
@@ -50,7 +50,7 @@ export async function run(
 }
 
 export const step = (msg: string) => {
-  return console.log(pico.cyan(msg))
+  return consola.info(pico.cyan(msg))
 }
 
 export const getVersionChoices = (pkgCurrentVersion: string) => {
@@ -142,7 +142,7 @@ export const logRecentCommits = async (pkgName: string) => {
   const sha = await run('git', ['rev-list', '-n', '1', tag], {
     stdio: 'pipe',
   }).then((res) => res.stdout.trim())
-  console.log(
+  consola.info(
     pico.bold(
       `\n${pico.blue(`i`)} Commits of ${pico.green(pkgName)} since ${pico.green(
         tag,
@@ -161,7 +161,6 @@ export const logRecentCommits = async (pkgName: string) => {
     ],
     { stdio: 'inherit' },
   )
-  console.log()
 }
 
 export const publishPkg = async (
@@ -176,4 +175,14 @@ export const publishPkg = async (
   await run('pnpm', publicArgs, {
     cwd: pkdDir,
   })
+}
+
+export const getFileName = (filePath: string) => {
+  const baseName = path.basename(filePath)
+  const reg = /(.*)(?=\.[^.]*)/g
+  const matches = baseName.match(reg)
+  if (matches) {
+    return matches[0]
+  }
+  return ''
 }

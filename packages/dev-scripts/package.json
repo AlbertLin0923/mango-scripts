@@ -38,7 +38,6 @@
     "npm-keyword": "^7.0.0",
     "package-json": "^8.1.1"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=18"
   }

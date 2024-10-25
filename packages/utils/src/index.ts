@@ -1,6 +1,3 @@
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-
 import fs from 'fs-extra'
 import pico from 'picocolors'
 import updateNotifier from 'update-notifier'
@@ -8,7 +5,7 @@ import gstring from 'gradient-string'
 import consola from 'consola'
 import inquirer from 'inquirer'
 import envinfo from 'envinfo'
-import CliTable from 'cli-table'
+import CliTable from 'tty-table'
 import { Command } from 'commander'
 import { request } from 'undici'
 import { glob } from 'glob'
@@ -25,9 +22,13 @@ import { cosmiconfig } from 'cosmiconfig'
 import dotenvExpand from 'dotenv-expand'
 import { filesize } from 'filesize'
 import recursiveReaddir from 'recursive-readdir'
+import Configstore from 'configstore'
+import mime from 'mime'
 inquirer.registerPrompt('fuzzypath', fuzzypath)
 inquirer.registerPrompt('autocomplete', inquirerPrompt)
 
+export * as filetype from 'file-type'
+export * as lodash from 'lodash-es'
 export {
   fs,
   pico,
@@ -42,6 +43,7 @@ export {
   getGitRepoInfo,
   semver,
   minimist,
+  mime,
   prompts,
   open,
   dotenv,
@@ -49,6 +51,7 @@ export {
   cosmiconfig,
   filesize,
   recursiveReaddir,
+  Configstore,
 }
 
 export const checkNodeVersion = (wanted: string, name: string): void => {
@@ -95,14 +98,15 @@ export const gs = (
   }
 }
 
-export const prepareCli = (pathToPkg?: string): Record<string, any> => {
-  const __dirname = path.dirname(fileURLToPath(import.meta.url))
-  const packageJson = fs.readJSONSync(
-    path.resolve(__dirname, pathToPkg || '../../package.json'),
-  )
-  const { engines, name } = packageJson
+export const prepareCli = <T extends Record<string, any>>(
+  packageJson: T,
+): T => {
+  const {
+    engines: { node },
+    name,
+  } = packageJson
 
-  checkNodeVersion(engines.node, name)
+  checkNodeVersion(node, name)
   checkUpdate(packageJson)
 
   return packageJson

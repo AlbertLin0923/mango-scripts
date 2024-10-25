@@ -1,5 +1,15 @@
 #!/usr/bin/env node
-import { prepareCli, Command, pico, envinfo, gs } from '@mango-scripts/utils'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import {
+  fs,
+  prepareCli,
+  Command,
+  pico,
+  envinfo,
+  gs,
+} from '@mango-scripts/utils'
 
 import webpackDev from './webpack/scripts/dev.mjs'
 import webpackBuild from './webpack/scripts/build.mjs'
@@ -8,7 +18,13 @@ import rsbuildDev from './rsbuild/scripts/dev.mjs'
 import rsbuildBuild from './rsbuild/scripts/build.mjs'
 import rsbuildInspect from './rsbuild/scripts/inspect.mjs'
 
-const { name, version } = prepareCli()
+const packageJson = fs.readJSONSync(
+  path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '../../package.json',
+  ),
+)
+const { name, version } = prepareCli(packageJson)
 
 console.log(gs('@mango-scripts/react-scripts\n'))
 

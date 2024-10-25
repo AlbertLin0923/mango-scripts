@@ -68,8 +68,6 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
 
   const response = await packageJson(`@types/${installPkgName.trim()}`)
 
-  console.log(response)
-
   if (response) {
     consola.info(response)
   }
@@ -87,7 +85,7 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
   const typeValue = typeMap.find((i) => i.name === type)?.value
 
   if (yes) {
-    console.log(
+    consola.info(
       `执行 ${pico.cyan(
         `pnpm add ${installPkgName} ${typeValue} --filter ${appName}`,
       )}`,
@@ -100,10 +98,8 @@ const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
       `${appName}`,
     ])
   } else {
-    console.log(pico.red('取消安装'))
+    consola.warn(pico.red('取消安装'))
   }
-
-  console.log()
 }
 
 export default addPackage

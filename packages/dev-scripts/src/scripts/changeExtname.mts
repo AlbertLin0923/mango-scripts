@@ -72,7 +72,7 @@ const changeExtname = async (
   const inputDirPath = path.resolve(process.cwd(), input)
   const outputDirPath = path.resolve(process.cwd(), output)
 
-  console.log(
+  consola.info(
     `
 输入目录路径: ${pico.green(inputDirPath)}
 输出目录路径: ${pico.green(outputDirPath)}

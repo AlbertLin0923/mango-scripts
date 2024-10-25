@@ -84,7 +84,7 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
 
   const newLocaleDirPath = path.resolve(process.cwd(), output)
 
-  console.log(
+  consola.info(
     `
 国际化文案配置系统接口地址: ${pico.green(address)}
 语言包的存放目录路径: ${pico.green(newLocaleDirPath)}
@@ -163,27 +163,30 @@ const updateLocale = async (options: UpdateLocaleOptions): Promise<void> => {
 
   consola.success('清空备份目录成功')
 
-  const iTable = new CliTable({
-    head: [
-      pico.bold(pico.cyan('locale')),
-      pico.bold(pico.cyan('add')),
-      pico.bold(pico.cyan('modify')),
-      pico.bold(pico.cyan('delete')),
-      pico.bold(pico.cyan('same')),
-    ],
-  })
-
-  Object.entries(stat).forEach(([key, value]) => {
-    iTable.push([
-      pico.yellow(key),
-      pico.yellow(value.addNumber),
-      pico.yellow(value.modifyNumber),
-      pico.yellow(value.deleteNumber),
-      pico.yellow(value.sameNumber),
-    ])
-  })
-
-  console.log(iTable.toString())
+  console.log(
+    CliTable(
+      [
+        pico.bold(pico.cyan('locale')),
+        pico.bold(pico.cyan('add')),
+        pico.bold(pico.cyan('modify')),
+        pico.bold(pico.cyan('delete')),
+        pico.bold(pico.cyan('same')),
+      ],
+      Object.entries(stat).reduce(
+        (acc: any[], [key, value]) => [
+          ...acc,
+          [
+            pico.yellow(key),
+            pico.yellow(value.addNumber),
+            pico.yellow(value.modifyNumber),
+            pico.yellow(value.deleteNumber),
+            pico.yellow(value.sameNumber),
+          ],
+        ],
+        [],
+      ),
+    ).render(),
+  )
 
   process.exit(0)
 }

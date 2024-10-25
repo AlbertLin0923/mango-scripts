@@ -5,6 +5,7 @@ import path from 'node:path'
 import {
   pico,
   minimist,
+  consola,
   semver,
   prompts,
   getGitRepoInfo,
@@ -24,7 +25,7 @@ import type { IPkgInfo } from '../utils/index.mjs'
 
 export const boot = async (): Promise<void> => {
   const { branch } = getGitRepoInfo()
-  console.log(pico.cyan(`now in branch: ${branch}\n`))
+  consola.info(pico.cyan(`now in branch: ${branch}\n`))
 
   let targetVersion: string | undefined
 
@@ -107,7 +108,7 @@ export const boot = async (): Promise<void> => {
     await run('git', ['commit', '-m', `feat: release ${tag}`])
     await run('git', ['tag', tag])
   } else {
-    console.log('No changes to commit.')
+    consola.info('No changes to commit.')
     return
   }
 
@@ -115,15 +116,13 @@ export const boot = async (): Promise<void> => {
   await run('git', ['push', 'origin', `refs/tags/${tag}`])
   await run('git', ['push'])
 
-  console.log(
+  consola.success(
     pico.green(
       `
 Pushed, publishing should starts shortly on CI.
 `,
     ),
   )
-
-  console.log()
 }
 
 export const publishCI = async (tag: string) => {

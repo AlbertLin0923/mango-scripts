@@ -1,11 +1,26 @@
 #!/usr/bin/env node
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-import { gs, prepareCli, pico, envinfo, Command } from '@mango-scripts/utils'
+import {
+  fs,
+  gs,
+  prepareCli,
+  pico,
+  envinfo,
+  Command,
+} from '@mango-scripts/utils'
 
 import updateLocale from './scripts/updateLocale.mjs'
 import insertI18n from './scripts/insertI18n.mjs'
 
-const { name, version } = prepareCli()
+const packageJson = fs.readJSONSync(
+  path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '../../package.json',
+  ),
+)
+const { name, version } = prepareCli(packageJson)
 
 console.log(gs('@mango-scripts/i18n-scripts'))
 

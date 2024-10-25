@@ -1,6 +1,16 @@
 #!/usr/bin/env node
 
-import { prepareCli, gs, pico, envinfo, Command } from '@mango-scripts/utils'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import {
+  fs,
+  gs,
+  pico,
+  envinfo,
+  Command,
+  prepareCli,
+} from '@mango-scripts/utils'
 
 import changeExtname from './scripts/changeExtname.mjs'
 import addPackage from './scripts/addPackage.mjs'
@@ -8,7 +18,14 @@ import copyDist from './scripts/copyDist.mjs'
 import gitGkd from './scripts/gitGkd.mjs'
 import releasePackage from './scripts/releasePackage.mjs'
 
-const { name, version } = prepareCli()
+const packageJson = fs.readJSONSync(
+  path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '../../package.json',
+  ),
+)
+
+const { name, version } = prepareCli(packageJson)
 
 console.log(gs('@mango-scripts/dev-scripts\n'))
 
@@ -98,8 +115,7 @@ program
 // output help information on unknown commands
 program.on('command:*', ([cmd]) => {
   program.outputHelp()
-  console.log(`  ` + pico.red(`Unknown command ${pico.yellow(cmd)}.`))
-  console.log()
+  console.log(`  ` + pico.red(`Unknown command ${pico.yellow(cmd)}.\n`))
   process.exitCode = 1
 })
 
@@ -109,9 +125,8 @@ program.on('--help', () => {
   console.log(
     `  Run ${pico.cyan(
       `${name} <command> --help`,
-    )} for detailed usage of given command.`,
+    )} for detailed usage of given command.\n`,
   )
-  console.log()
 })
 
 program.commands.forEach((c) => c.on('--help', () => console.log()))
