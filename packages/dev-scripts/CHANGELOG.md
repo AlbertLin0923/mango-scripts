@@ -1,3 +1,10 @@
+## [2.0.9](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.8...@mango-scripts/dev-scripts@2.0.9) (2024-10-25)
+
+
+### Features
+
+* release @mango-scripts/utils@2.0.3 ([b2f94bc](https://github.com/AlbertLin0923/mango-scripts/commit/b2f94bc0344083d3b070dbb1f09dc81cd761e659))
+
 ## [2.0.8](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.7...@mango-scripts/dev-scripts@2.0.8) (2024-01-01)
 
 
