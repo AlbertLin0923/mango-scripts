@@ -14,7 +14,6 @@ import {
 
 import changeExtname from './scripts/changeExtname.mjs'
 import addPackage from './scripts/addPackage.mjs'
-import copyDist from './scripts/copyDist.mjs'
 import gitGkd from './scripts/gitGkd.mjs'
 import releasePackage from './scripts/releasePackage.mjs'
 
@@ -53,8 +52,8 @@ program
     ['./apps', './packages'],
   )
   .allowUnknownOption()
-  .action((options) => {
-    addPackage(options)
+  .action(() => {
+    addPackage()
   })
 
 program
@@ -63,19 +62,6 @@ program
   .allowUnknownOption()
   .action(() => {
     releasePackage()
-  })
-
-program
-  .command('copyDist')
-  .description('复制多包仓库的打包dist产物到根目录')
-  .option(
-    '-t, --targetDirList [targetDirList...]',
-    '需要复制dist产物的子目录列表',
-    ['./apps'],
-  )
-  .allowUnknownOption()
-  .action((options) => {
-    copyDist(options)
   })
 
 program

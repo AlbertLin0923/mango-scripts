@@ -2,20 +2,15 @@ import npmKeyword from 'npm-keyword'
 import packageJson from 'package-json'
 import { pico, consola, inquirer } from '@mango-scripts/utils'
 
-import { run, getPkgInfoList } from '../utils/index.mjs'
+import { run, getPkgInfoList } from '../utils/releaseUtils.mjs'
 
 const typeMap = [
   { name: 'dependencies', value: '--save-prod' },
   { name: 'devDependencies', value: '--save-dev' },
 ]
 
-type AddPackageOptionsType = {
-  targetDirList: string[]
-}
-
-const addPackage = async (options: AddPackageOptionsType): Promise<void> => {
-  const { targetDirList } = options
-  const appList = await getPkgInfoList(targetDirList)
+const addPackage = async (): Promise<void> => {
+  const appList = await getPkgInfoList()
 
   const { appName, installPkgName, type } = await inquirer.prompt([
     {

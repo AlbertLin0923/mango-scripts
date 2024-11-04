@@ -24,6 +24,8 @@ import { filesize } from 'filesize'
 import recursiveReaddir from 'recursive-readdir'
 import Configstore from 'configstore'
 import mime from 'mime'
+import ora from 'ora'
+import cliProgress from 'cli-progress'
 inquirer.registerPrompt('fuzzypath', fuzzypath)
 inquirer.registerPrompt('autocomplete', inquirerPrompt)
 
@@ -52,6 +54,8 @@ export {
   filesize,
   recursiveReaddir,
   Configstore,
+  ora,
+  cliProgress,
 }
 
 export const checkNodeVersion = (wanted: string, name: string): void => {
