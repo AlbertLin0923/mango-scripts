@@ -1,3 +1,11 @@
+## [2.0.5](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/utils@2.0.4...@mango-scripts/utils@2.0.5) (2024-11-16)
+
+
+### Features
+
+* 尝试提交一段代码 ([90d7c14](https://github.com/AlbertLin0923/mango-scripts/commit/90d7c14d90a69fc8ac46c72bb35b00b576d1bd69))
+* 优化 @mango-scripts/dev-scripts 发包脚本逻辑 ([70d2dd2](https://github.com/AlbertLin0923/mango-scripts/commit/70d2dd2a62d0886ac8d5907a4e668a7a0b78c8e3))
+
 ## [2.0.4](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/utils@2.0.3...@mango-scripts/utils@2.0.4) (2024-10-25)
 
 ## [2.0.3](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/utils@2.0.2...@mango-scripts/utils@2.0.3) (2024-10-25)
