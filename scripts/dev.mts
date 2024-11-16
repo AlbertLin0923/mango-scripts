@@ -1,19 +1,4 @@
-import path from 'node:path'
-
-import { execa, fs } from '@mango-scripts/utils'
-
-export const getMonorepoPkgListInfo = async (): Promise<string[]> => {
-  const pkgDirPathList: string[] = []
-  const dirList = await fs.readdir(path.join(process.cwd(), './packages'))
-  for (const dir of dirList) {
-    const pkgDirPath = path.resolve(process.cwd(), './packages', dir)
-    if ((await fs.stat(pkgDirPath)).isDirectory()) {
-      pkgDirPathList.push(pkgDirPath)
-    }
-  }
-
-  return pkgDirPathList
-}
+import { execa, getMonorepoPkgListInfo } from '@mango-scripts/utils'
 
 const openInTerminalTab = async (command: string): Promise<void> => {
   const script = `
@@ -44,8 +29,8 @@ const openInTerminalTab = async (command: string): Promise<void> => {
 
 const boot = async () => {
   const pkgDirPathList = await getMonorepoPkgListInfo()
-  for (const dir of pkgDirPathList) {
-    await openInTerminalTab(`cd ${dir} && pnpm run dev`)
+  for (const { pkgDirPath } of pkgDirPathList) {
+    await openInTerminalTab(`cd ${pkgDirPath} && pnpm run dev`)
   }
 }
 

@@ -15,14 +15,14 @@ importers:
         specifier: ^18.4.3
         version: 18.6.3
       '@mango-scripts/dev-scripts':
-        specifier: ^2.0.10
-        version: 2.0.10(typescript@5.6.3)
+        specifier: ^2.1.0
+        version: 2.1.0(typescript@5.6.3)
       '@mango-scripts/esp-config':
         specifier: ^2.0.8
         version: 2.0.8(@types/eslint@9.6.1)(eslint@8.57.1)(postcss@8.4.47)(prettier@3.3.3)(stylelint@16.10.0(typescript@5.6.3))(typescript@5.6.3)
       '@mango-scripts/utils':
-        specifier: ^2.0.4
-        version: 2.0.4(typescript@5.6.3)
+        specifier: ^2.0.5
+        version: 2.0.5(typescript@5.6.3)
       '@types/node':
         specifier: ^20.10.5
         version: 20.14.11
@@ -411,8 +411,8 @@ importers:
   packages/dev-scripts:
     dependencies:
       '@mango-scripts/utils':
-        specifier: ^2.0.5
-        version: 2.0.5(typescript@5.6.3)
+        specifier: workspace:*
+        version: link:../utils
       npm-keyword:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2978,8 +2978,8 @@ packages:
     resolution: {integrity: sha512-JWkTkG7cig9Gfd9XJr/Irfg5GIxV4il07ckSVzK/x6MVrJzFuFy2FrOG6EDi+zf9LudPMWivN6khGxrmc/wTMA==}
     engines: {node: '>=16.0.0'}
 
-  '@mango-scripts/dev-scripts@2.0.10':
-    resolution: {integrity: sha512-RteF/jDlaSYMpSRZLsnSLeNvApmSMtYem3FQEicD+14MGacXILNLfxHWWthcxfMul3lY8CNILEiJZjaebrUCww==}
+  '@mango-scripts/dev-scripts@2.1.0':
+    resolution: {integrity: sha512-XfbiLssSUqemwkA8WPJVnTXBufJ+WKSg0OUDQe0223TEso5mqOfjHp+ZKOEgJ4QWSeY1zCt1tUJaAZo7zeW5Eg==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2990,10 +2990,6 @@ packages:
       eslint: '>= 8.56.0'
       prettier: '>= 3.1.1'
       stylelint: '>= 16.0.2'
-
-  '@mango-scripts/utils@2.0.4':
-    resolution: {integrity: sha512-jt77CRPOat1gPvk3PcfU9dI8ykkt7D+ck8hhb+WxuHwnbciigkilFUU/yOEuOKh0rRiky4LRL6qZIVhgQBp1gw==}
-    engines: {node: '>=18'}
 
   '@mango-scripts/utils@2.0.5':
     resolution: {integrity: sha512-UcQNmITxbAsTeB3k4g+f7JaE4snquROFOscPNIXLM7jtUjsRC3DzoczjiDWa93mRjVvTLaxO8QKL1mcO3dG0HQ==}
@@ -13916,7 +13912,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mango-scripts/dev-scripts@2.0.10(typescript@5.6.3)':
+  '@mango-scripts/dev-scripts@2.1.0(typescript@5.6.3)':
     dependencies:
       '@mango-scripts/utils': 2.0.5(typescript@5.6.3)
       npm-keyword: 7.0.0
@@ -13974,39 +13970,6 @@ snapshots:
       - prettier-plugin-style-order
       - prettier-plugin-svelte
       - supports-color
-      - typescript
-
-  '@mango-scripts/utils@2.0.4(typescript@5.6.3)':
-    dependencies:
-      commander: 12.1.0
-      configstore: 7.0.0
-      consola: 3.2.3
-      cosmiconfig: 9.0.0(typescript@5.6.3)
-      dotenv: 16.4.5
-      dotenv-expand: 11.0.6
-      envinfo: 7.14.0
-      execa: 8.0.1
-      file-type: 19.6.0
-      filesize: 10.1.6
-      fs-extra: 11.2.0
-      git-repo-info: 2.1.1
-      glob: 11.0.0
-      gradient-string: 3.0.0
-      inquirer: 9.3.7
-      inquirer-autocomplete-prompt: 3.0.1(inquirer@9.3.7)
-      inquirer-fuzzy-path: 2.3.0
-      lodash-es: 4.17.21
-      mime: 4.0.4
-      minimist: 1.2.8
-      open: 10.1.0
-      picocolors: 1.1.1
-      prompts: 2.4.2
-      recursive-readdir: 2.2.3
-      semver: 7.6.3
-      tty-table: 4.2.3
-      undici: 6.20.1
-      update-notifier: 7.3.1
-    transitivePeerDependencies:
       - typescript
 
   '@mango-scripts/utils@2.0.5(typescript@5.6.3)':

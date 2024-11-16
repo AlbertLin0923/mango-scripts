@@ -2,7 +2,7 @@
 @mango-scripts/dev-scripts
 </h1>
 <p align="center">
-一些便捷的前端开发脚本，支持自动发布 npm 包、批量转换文件后缀名、git 快捷操作等
+一些便捷的前端开发脚本，支持快捷发布 npm 包、批量转换文件后缀名、git 快捷操作等
 <p>
 <p align="center">
 <a href="https://www.npmjs.com/package/@mango-scripts/dev-scripts" target="__blank" rel="noopener noreferrer"><img src="https://img.shields.io/npm/v/@mango-scripts/dev-scripts?label=" alt="NPM version"></a>
@@ -23,36 +23,28 @@ pnpm add @mango-scripts/dev-scripts -D
 
 在项目 `package.json` 的 `scripts` 增加脚本命令
 
+### releasePackage
+
+在 Monorepo 仓库模式下，快捷发布 npm 包
+
+```bash
+dev-scripts releasePackage
+```
+
+### addPackage
+
+在 Monorepo 仓库模式下，快捷添加子目录依赖包
+
+```bash
+dev-scripts addPackage --targetDirList [targetDirList...]
+```
+
 ### changeExtname
 
 批量转换文件后缀名
 
 ```bash
 dev-scripts changeExtname --input <dirPath> --output <dirPath> --originExt <string> --targetExt <string>
-```
-
-### addPackage
-
-在Monorepo仓库模式下，快捷添加子目录依赖包
-
-```bash
-dev-scripts addPackage --targetDirList [targetDirList...]
-```
-
-### releasePackage
-
-在Monorepo仓库模式下，发布npm包
-
-```bash
-dev-scripts releasePackage
-```
-
-### copyDist
-
-复制多包仓库的打包 dist 产物到根目录
-
-```bash
-dev-scripts copyDist --targetDirList [targetDirList...]
 ```
 
 ### gitGkd

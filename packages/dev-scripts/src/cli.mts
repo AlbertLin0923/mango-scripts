@@ -32,15 +32,11 @@ const program = new Command()
 program.version(`${name} ${version}`).usage('<command> [options]')
 
 program
-  .command('changeExtname')
-  .description('批量转换文件后缀名')
-  .option('-i, --input <dirPath>', '输入目录路径')
-  .option('-o, --output <dirPath>', '输出目录路径')
-  .option('-r, --originExt <string>', '原始后缀名')
-  .option('-t, --targetExt <string>', '目标后缀名')
+  .command('releasePackage')
+  .description('在Monorepo仓库模式下，快捷发布npm包')
   .allowUnknownOption()
-  .action((options) => {
-    changeExtname(options)
+  .action(() => {
+    releasePackage()
   })
 
 program
@@ -57,11 +53,15 @@ program
   })
 
 program
-  .command('releasePackage')
-  .description('在Monorepo仓库模式下，发布npm包')
+  .command('changeExtname')
+  .description('批量转换文件后缀名')
+  .option('-i, --input <dirPath>', '输入目录路径')
+  .option('-o, --output <dirPath>', '输出目录路径')
+  .option('-r, --originExt <string>', '原始后缀名')
+  .option('-t, --targetExt <string>', '目标后缀名')
   .allowUnknownOption()
-  .action(() => {
-    releasePackage()
+  .action((options) => {
+    changeExtname(options)
   })
 
 program
