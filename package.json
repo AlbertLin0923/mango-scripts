@@ -32,7 +32,7 @@
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
-    "@mango-scripts/dev-scripts": "workspace:*",
+    "@mango-scripts/dev-scripts": "^2.0.10",
     "@mango-scripts/esp-config": "^2.0.8",
     "@mango-scripts/utils": "^2.0.4",
     "@types/node": "^20.10.5",
