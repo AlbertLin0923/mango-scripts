@@ -46,7 +46,7 @@ export const publish = async (tag: string) => {
 }
 
 export const release = async (): Promise<void> => {
-  // if (!(await confirmGitBranch()) || !(await confirmWorktreeEmpty())) return
+  if (!(await confirmGitBranch()) || !(await confirmWorktreeEmpty())) return
 
   const { publishType } = await inquirer.prompt([
     {
@@ -158,7 +158,7 @@ export const release = async (): Promise<void> => {
     consola.success(
       pico.green(
         `
-    推送到远程仓库成功，远程安装和打包部署即将启动，请在远程仓库查看状态
+    推送到远程仓库成功，远程打包部署即将启动，请在远程仓库查看状态
     `,
       ),
     )
