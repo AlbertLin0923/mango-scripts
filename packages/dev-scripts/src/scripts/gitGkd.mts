@@ -1,6 +1,6 @@
 import { pico, consola, getGitRepoInfo } from '@mango-scripts/utils'
 
-import { run } from '../utils/releaseUtils.mjs'
+import { run } from '../utils/index.mjs'
 
 type GitGkdOptionsType = {
   targetBranch: string[]

@@ -1,3 +1,5 @@
+import path from 'node:path'
+
 import fs from 'fs-extra'
 import pico from 'picocolors'
 import updateNotifier from 'update-notifier'
@@ -120,4 +122,42 @@ export const prepareCli = <T extends Record<string, any>>(
   checkUpdate(packageJson)
 
   return packageJson
+}
+
+export const getMonorepoPkgListInfo = async (): Promise<
+  {
+    pkgDir: string
+    pkgDirPath: string
+    pkgJsonFilePath: string
+    pkgName: string
+    pkgCurrentVersion: string
+  }[]
+> => {
+  const pkgInfoList: {
+    pkgDir: string
+    pkgDirPath: string
+    pkgJsonFilePath: string
+    pkgName: string
+    pkgCurrentVersion: string
+  }[] = []
+  const targetDirPath = path.resolve(process.cwd(), './packages')
+  const pkgDirList = await fs.readdir(targetDirPath)
+
+  for (const pkgDir of pkgDirList) {
+    const pkgDirPath = path.join(targetDirPath, pkgDir)
+    const pkgJsonFilePath = path.join(pkgDirPath, 'package.json')
+    if (await fs.pathExists(pkgJsonFilePath)) {
+      const { name: pkgName, version: pkgCurrentVersion } =
+        await fs.readJSON(pkgJsonFilePath)
+      pkgInfoList.push({
+        pkgDir,
+        pkgDirPath,
+        pkgJsonFilePath,
+        pkgName,
+        pkgCurrentVersion,
+      })
+    }
+  }
+
+  return pkgInfoList
 }

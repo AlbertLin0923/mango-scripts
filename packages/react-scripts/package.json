@@ -37,8 +37,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.24.4",
-    "@mango-scripts/babel-preset-mango": "^0.0.2",
-    "@mango-scripts/utils": "^2.0.4",
+    "@mango-scripts/babel-preset-mango": "workspace:*",
+    "@mango-scripts/utils": "workspace:*",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@rsbuild/core": "^0.6.1",
     "@rsbuild/plugin-babel": "^0.6.1",

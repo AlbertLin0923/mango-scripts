@@ -15,7 +15,7 @@
   "author": "AlbertLin0923",
   "scripts": {
     "release": "dev-scripts releasePackage",
-    "dev": "pnpm -r --filter './packages/**' run dev",
+    "dev": "tsx scripts/dev.mts",
     "build": "pnpm -r --filter './packages/**' run build",
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
@@ -34,6 +34,7 @@
     "@commitlint/config-conventional": "^18.4.3",
     "@mango-scripts/dev-scripts": "workspace:*",
     "@mango-scripts/esp-config": "^2.0.8",
+    "@mango-scripts/utils": "^2.0.4",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",

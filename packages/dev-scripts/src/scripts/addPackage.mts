@@ -1,8 +1,13 @@
 import npmKeyword from 'npm-keyword'
 import packageJson from 'package-json'
-import { pico, consola, inquirer } from '@mango-scripts/utils'
+import {
+  pico,
+  consola,
+  inquirer,
+  getMonorepoPkgListInfo,
+} from '@mango-scripts/utils'
 
-import { run, getPkgInfoList } from '../utils/releaseUtils.mjs'
+import { run } from '../utils/index.mjs'
 
 const typeMap = [
   { name: 'dependencies', value: '--save-prod' },
@@ -10,7 +15,7 @@ const typeMap = [
 ]
 
 const addPackage = async (): Promise<void> => {
-  const appList = await getPkgInfoList()
+  const appList = await getMonorepoPkgListInfo()
 
   const { appName, installPkgName, type } = await inquirer.prompt([
     {

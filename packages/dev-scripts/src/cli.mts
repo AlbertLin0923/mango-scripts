@@ -15,7 +15,7 @@ import {
 import changeExtname from './scripts/changeExtname.mjs'
 import addPackage from './scripts/addPackage.mjs'
 import gitGkd from './scripts/gitGkd.mjs'
-import releasePackage from './scripts/releasePackage.mjs'
+import releasePackage from './scripts/releasePackage/index.mjs'
 
 const packageJson = fs.readJSONSync(
   path.resolve(

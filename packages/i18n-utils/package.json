@@ -41,7 +41,7 @@
     "@babel/parser": "^7.23.0",
     "@babel/runtime": "^7.23.2",
     "@babel/types": "^7.23.0",
-    "@mango-scripts/utils": "^2.0.2",
+    "@mango-scripts/utils": "workspace:*",
     "hyntax": "^1.1.9",
     "pug": "^3.0.2",
     "svelte": "^3.59.0",

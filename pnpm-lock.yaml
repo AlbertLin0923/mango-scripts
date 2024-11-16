@@ -20,6 +20,9 @@ importers:
       '@mango-scripts/esp-config':
         specifier: ^2.0.8
         version: 2.0.8(@types/eslint@9.6.1)(eslint@8.57.1)(postcss@8.4.47)(prettier@3.3.3)(stylelint@16.10.0(typescript@5.6.3))(typescript@5.6.3)
+      '@mango-scripts/utils':
+        specifier: ^2.0.4
+        version: 2.0.4(typescript@5.6.3)
       '@types/node':
         specifier: ^20.10.5
         version: 20.14.11
@@ -408,8 +411,8 @@ importers:
   packages/dev-scripts:
     dependencies:
       '@mango-scripts/utils':
-        specifier: ^2.0.4
-        version: 2.0.4(typescript@5.6.3)
+        specifier: workspace:*
+        version: link:../utils
       npm-keyword:
         specifier: ^7.0.0
         version: 7.0.0
@@ -501,8 +504,8 @@ importers:
   packages/i18n-scripts:
     dependencies:
       '@mango-scripts/utils':
-        specifier: ^2.0.4
-        version: 2.0.4(typescript@5.6.3)
+        specifier: workspace:*
+        version: link:../utils
       gogocode:
         specifier: ^1.0.55
         version: 1.0.55(vue@3.5.12(typescript@5.6.3))
@@ -522,8 +525,8 @@ importers:
         specifier: ^7.23.0
         version: 7.26.0
       '@mango-scripts/utils':
-        specifier: ^2.0.2
-        version: 2.0.4(typescript@5.6.3)
+        specifier: workspace:*
+        version: link:../utils
       hyntax:
         specifier: ^1.1.9
         version: 1.1.9
@@ -553,11 +556,11 @@ importers:
         specifier: ^7.24.4
         version: 7.26.0
       '@mango-scripts/babel-preset-mango':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: workspace:*
+        version: link:../babel-preset-mango
       '@mango-scripts/utils':
-        specifier: ^2.0.4
-        version: 2.0.4(typescript@5.6.3)
+        specifier: workspace:*
+        version: link:../utils
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.11
         version: 0.5.15(@types/webpack@5.28.5(@swc/core@1.7.39(@swc/helpers@0.5.13))(esbuild@0.20.2)(uglify-js@3.19.3))(react-refresh@0.14.2)(type-fest@4.26.1)(webpack-dev-server@4.15.2(webpack@5.95.0(@swc/core@1.7.39(@swc/helpers@0.5.13))(esbuild@0.20.2)(uglify-js@3.19.3)))(webpack@5.95.0(@swc/core@1.7.39(@swc/helpers@0.5.13))(esbuild@0.20.2)(uglify-js@3.19.3))
