@@ -15,8 +15,8 @@ importers:
         specifier: ^18.4.3
         version: 18.6.3
       '@mango-scripts/dev-scripts':
-        specifier: ^2.1.0
-        version: 2.1.0(typescript@5.6.3)
+        specifier: 2.0.10
+        version: 2.0.10(typescript@5.6.3)
       '@mango-scripts/esp-config':
         specifier: ^2.0.8
         version: 2.0.8(@types/eslint@9.6.1)(eslint@8.57.1)(postcss@8.4.47)(prettier@3.3.3)(stylelint@16.10.0(typescript@5.6.3))(typescript@5.6.3)
@@ -2981,8 +2981,8 @@ packages:
     resolution: {integrity: sha512-JWkTkG7cig9Gfd9XJr/Irfg5GIxV4il07ckSVzK/x6MVrJzFuFy2FrOG6EDi+zf9LudPMWivN6khGxrmc/wTMA==}
     engines: {node: '>=16.0.0'}
 
-  '@mango-scripts/dev-scripts@2.1.0':
-    resolution: {integrity: sha512-XfbiLssSUqemwkA8WPJVnTXBufJ+WKSg0OUDQe0223TEso5mqOfjHp+ZKOEgJ4QWSeY1zCt1tUJaAZo7zeW5Eg==}
+  '@mango-scripts/dev-scripts@2.0.10':
+    resolution: {integrity: sha512-RteF/jDlaSYMpSRZLsnSLeNvApmSMtYem3FQEicD+14MGacXILNLfxHWWthcxfMul3lY8CNILEiJZjaebrUCww==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -13923,7 +13923,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mango-scripts/dev-scripts@2.1.0(typescript@5.6.3)':
+  '@mango-scripts/dev-scripts@2.0.10(typescript@5.6.3)':
     dependencies:
       '@mango-scripts/utils': 2.0.5(typescript@5.6.3)
       npm-keyword: 7.0.0

@@ -27,9 +27,13 @@ import type { Pkg } from './type.mjs'
 export const publish = async (tag: string) => {
   if (!tag || !tag.includes('@')) throw new Error('无效的发布TAG')
 
-  const [pkgName, version] = tag.split(/@(.+)/)
+  const [pkgName, version] = tag.split('@')
   const rawPkgName = pkgName.split('/')[1]
-  const releaseType = version.match(/beta|alpha/)?.[0]
+  const releaseType = version.includes('beta')
+    ? 'beta'
+    : version.includes('alpha')
+      ? 'alpha'
+      : undefined
 
   step(`发布 ${pkgName} 中...`)
 
@@ -46,7 +50,7 @@ export const publish = async (tag: string) => {
 }
 
 export const release = async (): Promise<void> => {
-  // if (!(await confirmGitBranch()) || !(await confirmWorktreeEmpty())) return
+  if (!(await confirmGitBranch()) || !(await confirmWorktreeEmpty())) return
 
   const { publishType } = await inquirer.prompt([
     {

@@ -33,7 +33,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@mango-scripts/utils": "workspace:*",
+    "@mango-scripts/utils": "^2.0.5",
     "npm-keyword": "^7.0.0",
     "package-json": "^8.1.1"
   },
