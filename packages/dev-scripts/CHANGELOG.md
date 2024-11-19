@@ -1,3 +1,11 @@
+## [2.1.1](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.1.0...@mango-scripts/dev-scripts@2.1.1) (2024-11-19)
+
+
+### Features
+
+* 优化 @mango-scripts/dev-scripts 逻辑 ([2807f4d](https://github.com/AlbertLin0923/mango-scripts/commit/2807f4d15a3f7638732d5335191433992d281d14))
+* release @mango-scripts/utils@2.0.6 ([d062723](https://github.com/AlbertLin0923/mango-scripts/commit/d06272383311c0c6cd75f63b62f999592db90ca5))
+
 ## [2.1.0](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.0.10...@mango-scripts/dev-scripts@2.1.0) (2024-11-16)
 
 

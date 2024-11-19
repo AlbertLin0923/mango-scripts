@@ -411,8 +411,8 @@ importers:
   packages/dev-scripts:
     dependencies:
       '@mango-scripts/utils':
-        specifier: ^2.0.5
-        version: 2.0.5(typescript@5.6.3)
+        specifier: ^2.0.6
+        version: 2.0.6(typescript@5.6.3)
       npm-keyword:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2996,6 +2996,10 @@ packages:
 
   '@mango-scripts/utils@2.0.5':
     resolution: {integrity: sha512-UcQNmITxbAsTeB3k4g+f7JaE4snquROFOscPNIXLM7jtUjsRC3DzoczjiDWa93mRjVvTLaxO8QKL1mcO3dG0HQ==}
+    engines: {node: '>=18'}
+
+  '@mango-scripts/utils@2.0.6':
+    resolution: {integrity: sha512-0TgX3lYSrPVVKHqcnhx/tpsCdMF0awgPz8LK7YAub8xPJsYeWXOTUu4DAxsR2UNSj77PGiFZvUUsu57Ov+6iEw==}
     engines: {node: '>=18'}
 
   '@module-federation/runtime-tools@0.1.6':
@@ -13925,7 +13929,7 @@ snapshots:
 
   '@mango-scripts/dev-scripts@2.0.10(typescript@5.6.3)':
     dependencies:
-      '@mango-scripts/utils': 2.0.5(typescript@5.6.3)
+      '@mango-scripts/utils': 2.0.6(typescript@5.6.3)
       npm-keyword: 7.0.0
       package-json: 8.1.1
     transitivePeerDependencies:
@@ -14000,6 +14004,42 @@ snapshots:
       git-repo-info: 2.1.1
       glob: 11.0.0
       gradient-string: 3.0.0
+      inquirer: 9.3.7
+      inquirer-autocomplete-prompt: 3.0.1(inquirer@9.3.7)
+      inquirer-fuzzy-path: 2.3.0
+      lodash-es: 4.17.21
+      mime: 4.0.4
+      minimist: 1.2.8
+      open: 10.1.0
+      ora: 8.1.1
+      picocolors: 1.1.1
+      prompts: 2.4.2
+      recursive-readdir: 2.2.3
+      semver: 7.6.3
+      tty-table: 4.2.3
+      undici: 6.20.1
+      update-notifier: 7.3.1
+    transitivePeerDependencies:
+      - typescript
+
+  '@mango-scripts/utils@2.0.6(typescript@5.6.3)':
+    dependencies:
+      cli-progress: 3.12.0
+      commander: 12.1.0
+      configstore: 7.0.0
+      consola: 3.2.3
+      cosmiconfig: 9.0.0(typescript@5.6.3)
+      dotenv: 16.4.5
+      dotenv-expand: 11.0.6
+      envinfo: 7.14.0
+      execa: 8.0.1
+      file-type: 19.6.0
+      filesize: 10.1.6
+      fs-extra: 11.2.0
+      git-repo-info: 2.1.1
+      glob: 11.0.0
+      gradient-string: 3.0.0
+      image-size: 1.1.1
       inquirer: 9.3.7
       inquirer-autocomplete-prompt: 3.0.1(inquirer@9.3.7)
       inquirer-fuzzy-path: 2.3.0

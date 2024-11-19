@@ -1,6 +1,6 @@
 {
   "name": "@mango-scripts/dev-scripts",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "一些便捷的前端开发脚本，支持快捷发布 npm 包、批量转换文件后缀名、git 快捷操作等",
   "keywords": [
     "mango-scripts",
@@ -33,7 +33,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@mango-scripts/utils": "^2.0.5",
+    "@mango-scripts/utils": "^2.0.6",
     "npm-keyword": "^7.0.0",
     "package-json": "^8.1.1"
   },
