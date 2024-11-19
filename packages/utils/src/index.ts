@@ -28,11 +28,14 @@ import Configstore from 'configstore'
 import mime from 'mime'
 import ora from 'ora'
 import cliProgress from 'cli-progress'
+import imageSize from 'image-size'
+
 inquirer.registerPrompt('fuzzypath', fuzzypath)
 inquirer.registerPrompt('autocomplete', inquirerPrompt)
 
 export * as filetype from 'file-type'
 export * as lodash from 'lodash-es'
+
 export {
   fs,
   pico,
@@ -58,6 +61,7 @@ export {
   Configstore,
   ora,
   cliProgress,
+  imageSize,
 }
 
 export const checkNodeVersion = (wanted: string, name: string): void => {

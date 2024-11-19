@@ -17,7 +17,7 @@ export const confirmRegistry = async () => {
     {
       type: 'confirm',
       name: 'yes',
-      message: `当前 npm registry 为: ${pico.yellow(registry)}，确定? `,
+      message: `当前 npm registry 为: ${pico.cyan(registry)}，确定? `,
     },
   ])
 
@@ -30,7 +30,7 @@ export const confirmGitBranch = async () => {
     {
       type: 'confirm',
       name: 'yes',
-      message: `当前发布的分支为: ${pico.yellow(branch)}，确定？`,
+      message: `当前发布的分支为: ${pico.cyan(branch)}，确定？`,
     },
   ])
 

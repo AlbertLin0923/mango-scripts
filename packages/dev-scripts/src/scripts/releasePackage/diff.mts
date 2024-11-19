@@ -2,12 +2,12 @@ import { fs, semver, lodash } from '@mango-scripts/utils'
 
 import { run } from '../../utils/index.mjs'
 
-import type { Pkg } from '../../utils/index.mjs'
+import type { Pkg } from './type.mjs'
 
 const { uniq } = lodash
 
 // 获取与指定包名相关的最新 Git 标签
-const getLatestTagForPkg = async (pkg: Pkg) => {
+const getLatestTag = async (pkg: Pkg) => {
   const tags = (await run('git', ['tag'], { stdio: 'pipe' })).stdout
     .split('\n')
     .filter((tag: string) => tag.startsWith(`${pkg.pkgName}@`))
@@ -19,27 +19,31 @@ const getLatestTagForPkg = async (pkg: Pkg) => {
 }
 
 // 记录指定包的最近提交列表
-export const logRecentCommitListForPkg = async (
+const getRecentCommitList = async (
   pkg: Pkg,
+  latestTag?: string,
 ): Promise<string[]> => {
-  const latestTag = await getLatestTagForPkg(pkg)
   const logRange = latestTag ? `${latestTag}..HEAD` : 'HEAD'
 
-  const commitFormat = [
-    '--no-pager',
-    'log',
-    logRange,
-    '--color',
-    '--graph',
-    '--pretty=format:%C(Magenta)[%cd]%Cgreen(%cr)%C(bold blue)<%an>%Creset %Cred%h%Creset -%C(yellow)%d%Creset %s',
-    '--date=format:%Y-%m-%d %H:%M:%S',
-    '--abbrev-commit',
-    '--',
-    `packages/${pkg.pkgDir}`,
-  ]
-
   return (
-    (await run('git', commitFormat, { stdio: 'pipe' }))?.stdout
+    (
+      await run(
+        'git',
+        [
+          '--no-pager',
+          'log',
+          logRange,
+          '--color',
+          '--graph',
+          '--pretty=format:%C(Magenta)[%cd]%Cgreen(%cr)%C(bold blue)<%an>%Creset %Cred%h%Creset -%C(yellow)%d%Creset %s',
+          '--date=format:%Y-%m-%d %H:%M:%S',
+          '--abbrev-commit',
+          '--',
+          `packages/${pkg.pkgDir}`,
+        ],
+        { stdio: 'pipe' },
+      )
+    )?.stdout
       ?.split('\n')
       ?.filter(Boolean) || []
   )
@@ -52,6 +56,7 @@ const getDepNameList = async ({ pkgJsonFilePath }: Pkg) => {
     await fs.readJson(pkgJsonFilePath)
   return uniq([...Object.keys(dependencies), ...Object.keys(devDependencies)])
 }
+
 /**
 对于packages目录下的内部包：A B C D E F G，
 A依赖B，A依赖C，B依赖C，B依赖D，F，G无内部包依赖
@@ -148,24 +153,28 @@ const addChangedDepInfoForPkgList = async (
   pkgListWithCommitList: Pkg[],
   pkgList: Pkg[],
 ) => {
-  const dependency = await generateDependencyMap(pkgList)
+  const dependencyMap = await generateDependencyMap(pkgList)
   return pkgList.map((pkg) => {
-    const pkgDependency = dependency.find(
+    const pkgDependency = dependencyMap.find(
       ({ pkg: { pkgName } }) => pkgName === pkg.pkgName,
+    )
+
+    const pkgInPkgListWithCommitList = pkgListWithCommitList.find(
+      (dep: Pkg) => dep.pkgName === pkg.pkgName,
     )
 
     return {
       ...pkg,
       changedDep:
         pkgDependency &&
-        pkgDependency?.deps.filter((dep: { pkg: Pkg; level: number[] }) =>
-          pkgListWithCommitList.findIndex(
-            (d: Pkg) => dep.pkg.pkgName === d.pkgName,
-          ),
+        pkgDependency?.deps.filter(
+          (dep: { pkg: Pkg; level: number[] }) =>
+            pkgListWithCommitList.findIndex(
+              (d: Pkg) => dep.pkg.pkgName === d.pkgName,
+            ) > -1,
         ),
-      commitList:
-        pkgListWithCommitList.find((dep: Pkg) => dep.pkgName === pkg.pkgName)
-          ?.commitList ?? [],
+      commitList: pkgInPkgListWithCommitList?.commitList ?? [],
+      latestTag: pkgInPkgListWithCommitList?.latestTag ?? '',
     }
   })
 }
@@ -174,12 +183,12 @@ export const getDiffPkgList = async (pkgList: Pkg[]) => {
   const pkgListWithCommitList = (
     await Promise.all(
       pkgList.map(async (pkg) => {
-        return { ...pkg, commitList: await logRecentCommitListForPkg(pkg) }
+        const latestTag = await getLatestTag(pkg)
+        const commitList = await getRecentCommitList(pkg, latestTag)
+        return { ...pkg, latestTag, commitList }
       }),
     )
-  ).filter((pkg) => {
-    return pkg.commitList.length > 0
-  })
+  ).filter((pkg) => pkg?.commitList?.length > 0)
 
   return await addChangedDepInfoForPkgList(pkgListWithCommitList, pkgList)
 }

@@ -17,12 +17,12 @@ import {
   confirmNpmLoggedIn,
 } from './confirmEnv.mjs'
 import { updateVersion, updateDepVersion, updateChangelog } from './update.mjs'
-import { getDiffPkgList } from './diffPkgList.mjs'
+import { getDiffPkgList } from './diff.mjs'
 import { setPkgTargetVersion } from './version.mjs'
 
 import { run, step } from '../../utils/index.mjs'
 
-import type { Pkg } from '../../utils/index.mjs'
+import type { Pkg } from './type.mjs'
 
 export const publish = async (tag: string) => {
   if (!tag || !tag.includes('@')) throw new Error('无效的发布TAG')
@@ -46,7 +46,7 @@ export const publish = async (tag: string) => {
 }
 
 export const release = async (): Promise<void> => {
-  if (!(await confirmGitBranch()) || !(await confirmWorktreeEmpty())) return
+  // if (!(await confirmGitBranch()) || !(await confirmWorktreeEmpty())) return
 
   const { publishType } = await inquirer.prompt([
     {
@@ -54,8 +54,8 @@ export const release = async (): Promise<void> => {
       name: 'publishType',
       message: '选择发布方式',
       choices: [
-        { name: '本地打包发布', value: 'local' },
         { name: '远程CI发布', value: 'remote' },
+        { name: '本地打包发布', value: 'local' },
       ],
     },
   ])
@@ -66,7 +66,7 @@ export const release = async (): Promise<void> => {
     if (!(await confirmRegistry()) || !(await confirmNpmLoggedIn())) return
   } else {
     consola.info(
-      pico.red(`使用[远程CI发布]前，你需要确认远程CI上已配置 publish 命令\n`),
+      pico.red(`使用[远程CI发布]前，你需要确认远程CI上已配置 publish 命令`),
     )
   }
 
@@ -86,7 +86,7 @@ export const release = async (): Promise<void> => {
         const depChangedInfo =
           pkg.changedDep && pkg.changedDep?.length > 0
             ? pico.magenta(
-                ` [依赖已更新][${pkg.changedDep.map((it: { pkg: Pkg; level: number[] }) => `${it.pkg.pkgName}<${it.level.join(',')}级依赖>`).join(', ')}]`,
+                ` [依赖更新][${pkg.changedDep.map((it: { pkg: Pkg; level: number[] }) => `${it.pkg.pkgName}<${it.level.join(',')}级依赖>`).join(', ')}]`,
               )
             : ''
         return {
@@ -103,9 +103,10 @@ export const release = async (): Promise<void> => {
 
   const { pkgName, pkgJsonFilePath, pkgDirPath, commitList } = selectedPkg
 
+  console.log()
   commitList?.length &&
     consola.info(`最近 commit：
-    ${commitList.join('\n')}  
+${commitList.join('\n')}  
       `)
 
   const pkgTargetVersion = await setPkgTargetVersion(selectedPkg)
@@ -114,15 +115,30 @@ export const release = async (): Promise<void> => {
 
   const tag = `${pkgName}@${pkgTargetVersion}`
 
-  const { yes }: { yes: boolean } = await inquirer.prompt([
+  const { isTagRight }: { isTagRight: boolean } = await inquirer.prompt([
     {
       type: 'confirm',
-      name: 'yes',
+      name: 'isTagRight',
       message: `当前的发布TAG： ${pico.yellow(tag)}，确定？`,
     },
   ])
 
-  if (!yes) return
+  if (!isTagRight) return
+
+  const { isPublishAlready }: { isPublishAlready: boolean } =
+    await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'isPublishAlready',
+        message: `确定开始发布？`,
+        default: false,
+      },
+    ])
+
+  if (!isPublishAlready) {
+    console.error('已取消发布')
+    return
+  }
 
   step('升级 package.json 版本号...')
   await updateVersion(pkgJsonFilePath, pkgTargetVersion)

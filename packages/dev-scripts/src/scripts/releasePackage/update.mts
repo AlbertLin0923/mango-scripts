@@ -2,7 +2,7 @@ import { fs, pico } from '@mango-scripts/utils'
 
 import { run, step } from '../../utils/index.mjs'
 
-import type { Pkg } from '../../utils/index.mjs'
+import type { Pkg } from './type.mjs'
 
 export const updateVersion = async (
   pkgPath: string,

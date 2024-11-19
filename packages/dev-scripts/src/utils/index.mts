@@ -1,15 +1,5 @@
 import { execa, pico, consola } from '@mango-scripts/utils'
 
-export type Pkg = {
-  pkgDir: string
-  pkgDirPath: string
-  pkgJsonFilePath: string
-  pkgName: string
-  pkgCurrentVersion: string
-  commitList?: string[]
-  changedDep?: Pkg[]
-}
-
 export const run = async (
   bin: string,
   args: string[],

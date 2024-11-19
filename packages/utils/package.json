@@ -44,6 +44,7 @@
     "dotenv-expand": "^11.0.6",
     "envinfo": "^7.14.0",
     "execa": "^8.0.1",
+    "image-size": "^1.1.1",
     "file-type": "^19.6.0",
     "filesize": "^10.1.6",
     "fs-extra": "^11.2.0",

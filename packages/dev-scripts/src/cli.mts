@@ -43,7 +43,7 @@ program
   .command('addPackage')
   .description('在Monorepo仓库模式下，快捷添加子目录依赖包')
   .option(
-    '-t, --targetDirList [targetDirList...]',
+    '-t, --targetDirList [dirPathList...]',
     '需要添加依赖包的子目录列表',
     ['./apps', './packages'],
   )
@@ -57,8 +57,8 @@ program
   .description('批量转换文件后缀名')
   .option('-i, --input <dirPath>', '输入目录路径')
   .option('-o, --output <dirPath>', '输出目录路径')
-  .option('-r, --originExt <string>', '原始后缀名')
-  .option('-t, --targetExt <string>', '目标后缀名')
+  .option('-r, --originExt <extName>', '原始后缀名，例如 .js')
+  .option('-t, --targetExt <extName>', '目标后缀名，例如 .ts')
   .allowUnknownOption()
   .action((options) => {
     changeExtname(options)
@@ -67,11 +67,10 @@ program
 program
   .command('gitGkd')
   .description('一键切换、合并、推送目标分支')
-  .option(
-    '-t, --targetBranch [targetBranch...]',
-    '切换、合并、推送的目标分支',
-    ['dev', 'test'],
-  )
+  .option('-t, --targetBranch [branchName...]', '切换、合并、推送的目标分支', [
+    'dev',
+    'test',
+  ])
   .allowUnknownOption()
   .action((options) => {
     gitGkd(options)

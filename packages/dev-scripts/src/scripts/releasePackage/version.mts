@@ -1,7 +1,7 @@
-import { semver, inquirer, consola } from '@mango-scripts/utils'
+import { semver, inquirer, consola, ora } from '@mango-scripts/utils'
 import packageJson from 'package-json'
 
-import type { Pkg } from '../../utils/index.mjs'
+import type { Pkg } from './type.mjs'
 
 const getVersionChoices = (pkgCurrentVersion: string) => {
   const currentBeta = pkgCurrentVersion.includes('beta')
@@ -70,14 +70,20 @@ const getVersionChoices = (pkgCurrentVersion: string) => {
 export const setPkgTargetVersion = async (pkg: Pkg) => {
   const { pkgName, pkgCurrentVersion } = pkg
   let pkgTargetVersion: string
+  let remotePkgJson: any | undefined = undefined
 
-  const remotePkgJson = await packageJson(pkgName)
+  // 获取远程 npm registry 上的 pkg 信息，并检查是否存在
+  const spinner = ora().start(`获取远程npm registry 版本号...`)
+  try {
+    remotePkgJson = await packageJson(pkgName)
+  } catch (error) {}
+  spinner.stop()
 
   const { releaseType } = await inquirer.prompt([
     {
       type: 'list',
       name: 'releaseType',
-      message: `选择发包版本 ${remotePkgJson ? `[远程npm registry版本号: ${remotePkgJson.version}]` : null}`,
+      message: `选择发包版本 ${remotePkgJson ? `[远程npm registry版本号: ${remotePkgJson.version}]` : `[远程npm registry 暂无该包]`}`,
       choices: getVersionChoices(pkgCurrentVersion),
       loop: false,
     },
