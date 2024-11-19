@@ -411,8 +411,8 @@ importers:
   packages/dev-scripts:
     dependencies:
       '@mango-scripts/utils':
-        specifier: workspace:*
-        version: link:../utils
+        specifier: ^2.0.5
+        version: 2.0.5(typescript@5.6.3)
       npm-keyword:
         specifier: ^7.0.0
         version: 7.0.0
