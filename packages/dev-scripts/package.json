@@ -35,7 +35,12 @@
   "dependencies": {
     "@mango-scripts/utils": "^2.0.6",
     "npm-keyword": "^7.0.0",
-    "package-json": "^8.1.1"
+    "package-json": "^8.1.1",
+    "conventional-changelog-cli": "^5.0.0",
+    "which": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/which": "^3.0.4"
   },
   "engines": {
     "node": ">=18"

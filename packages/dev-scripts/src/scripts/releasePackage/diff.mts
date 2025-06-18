@@ -6,76 +6,102 @@ import type { Pkg } from './type.mjs'
 
 const { uniq } = lodash
 
-// 获取与指定包名相关的最新 Git 标签
-const getLatestTag = async (pkg: Pkg) => {
-  const tags = (await run('git', ['tag'], { stdio: 'pipe' })).stdout
-    .split('\n')
-    .filter((tag: string) => tag.startsWith(`${pkg.pkgName}@`))
-    .map((tag: string) => tag.replace(`${pkg.pkgName}@`, ''))
-    .filter(semver.valid)
-    .sort(semver.rcompare)
+const isValidVersion = (tag: string): boolean => Boolean(semver.valid(tag))
 
-  return tags[0] ? `${pkg.pkgName}@${tags[0]}` : undefined
-}
-
-// 记录指定包的最近提交列表
-const getRecentCommitList = async (
+/**
+ * 获取指定包的最新 Git tag。
+ *
+ * @param pkg - 包信息对象，包含包名等。
+ * @param isMonorepo - 是否处于 monorepo 模式。
+ * @returns 最新的 tag 字符串，例如 "pkg@1.2.3" 或 "v1.2.3"，若无则返回 undefined。
+ */
+export const getLatestTag = async (
   pkg: Pkg,
-  latestTag?: string,
-): Promise<string[]> => {
-  const logRange = latestTag ? `${latestTag}..HEAD` : 'HEAD'
+  isMonorepo: boolean = true,
+): Promise<string | undefined> => {
+  const tags: string[] = (await run('git', ['tag'], { stdio: 'pipe' })).stdout
+    .split('\n')
+    .map((tag: string) => tag.trim())
+    .filter(Boolean)
 
-  return (
-    (
-      await run(
-        'git',
-        [
-          '--no-pager',
-          'log',
-          logRange,
-          '--color',
-          '--graph',
-          '--pretty=format:%C(Magenta)[%cd]%Cgreen(%cr)%C(bold blue)<%an>%Creset %Cred%h%Creset -%C(yellow)%d%Creset %s',
-          '--date=format:%Y-%m-%d %H:%M:%S',
-          '--abbrev-commit',
-          '--',
-          `packages/${pkg.pkgDir}`,
-        ],
-        { stdio: 'pipe' },
-      )
-    )?.stdout
-      ?.split('\n')
-      ?.filter(Boolean) || []
-  )
-}
+  const filteredTags: string[] = isMonorepo
+    ? tags
+        .filter((tag) => tag.startsWith(`${pkg.pkgName}@`))
+        .map((tag) => tag.replace(`${pkg.pkgName}@`, ''))
+        .filter(isValidVersion)
+    : tags
+        .map((tag) => tag.replace(/^v/, '')) // 支持 v1.0.0 格式
+        .filter(isValidVersion)
 
-// 获取包的依赖列表
-const getDepNameList = async ({ pkgJsonFilePath }: Pkg) => {
-  if (!(await fs.pathExists(pkgJsonFilePath))) return []
-  const { dependencies = {}, devDependencies = {} } =
-    await fs.readJson(pkgJsonFilePath)
-  return uniq([...Object.keys(dependencies), ...Object.keys(devDependencies)])
+  const sortedTags = filteredTags.sort(semver.rcompare)
+
+  const latestVersion = sortedTags?.[0]
+
+  return latestVersion
+    ? isMonorepo
+      ? `${pkg.pkgName}@${latestVersion}`
+      : `v${latestVersion}`
+    : undefined
 }
 
 /**
-对于packages目录下的内部包：A B C D E F G，
-A依赖B，A依赖C，B依赖C，B依赖D，F，G无内部包依赖
+ * 获取指定包的 Git 最近提交记录。
+ *
+ * @param pkg - 包信息
+ * @param latestTag - 最近的 Git tag（可选）
+ * @param isMonorepo - 是否是 monorepo 仓库结构
+ * @returns 提交记录数组（每条为格式化字符串）
+ */
+export const getRecentCommitList = async (
+  pkg: Pkg,
+  latestTag?: string,
+  isMonorepo: boolean = true,
+): Promise<string[]> => {
+  const logRange = latestTag ? `${latestTag}..HEAD` : 'HEAD'
 
-输出：
+  const targetPath = isMonorepo ? `packages/${pkg.pkgDir}` : '.'
+
+  const arg = [
+    '--no-pager',
+    'log',
+    logRange,
+    '--color',
+    '--graph',
+    '--pretty=format:%C(Magenta)[%cd]%Cgreen(%cr)%C(bold blue)<%an>%Creset %Cred%h%Creset -%C(yellow)%d%Creset %s',
+    '--date=format:%Y-%m-%d %H:%M:%S',
+    '--abbrev-commit',
+    '--',
+    targetPath,
+  ]
+
+  const result = await run('git', arg, { stdio: 'pipe' })
+
+  return result?.stdout?.split('\n').filter(Boolean) || []
+}
+
+/**
+对于packages目录下的内部包：A B C D E，
+A依赖B，A依赖C，B依赖C，B依赖D，E无内部包依赖
+
 const map = [
   {
     pkg: 'A',
     deps: [
-      { pkg: 'B', level: [1] },
-      { pkg: 'C', level: [1, 2] },
-      { pkg: 'D', level: [2] },
+      {
+        pkg: 'B',
+        deps: [
+          { pkg: 'C', deps: [] },
+          { pkg: 'D', deps: [] },
+        ],
+      },
+      { pkg: 'C', deps: [] },
     ],
   },
   {
     pkg: 'B',
     deps: [
-      { pkg: 'C', level: [1] },
-      { pkg: 'D', level: [1] },
+      { pkg: 'C', deps: [] },
+      { pkg: 'D', deps: [] },
     ],
   },
   {
@@ -90,105 +116,69 @@ const map = [
     pkg: 'E',
     deps: [],
   },
-  {
-    pkg: 'F',
-    deps: [],
-  },
-  {
-    pkg: 'G',
-    deps: [],
-  },
-]
+] 
 */
-const generateDependencyMap = async (allPkgList: Pkg[]) => {
-  const pkgLevelCache: Map<string, number[]> = new Map()
 
-  const getPkgLevels = async (pkg: Pkg, level = 1): Promise<number[]> => {
-    // 如果缓存中已有层级数据，直接返回
-    if (pkgLevelCache.has(pkg.pkgName)) {
-      return pkgLevelCache.get(pkg.pkgName) || []
-    }
-
-    const depNameList = await getDepNameList(pkg)
-    const depsWithLevel: number[] = [level]
-
-    // 遍历当前包的依赖，递归计算依赖层级
-    for (const depName of depNameList) {
-      const depPkg = allPkgList.find((p) => p.pkgName === depName)
-      if (depPkg) {
-        const depLevels = await getPkgLevels(depPkg, level + 1)
-        depsWithLevel.push(...depLevels)
-      }
-    }
-
-    // 缓存当前包的层级数据
-    pkgLevelCache.set(pkg.pkgName, uniq(depsWithLevel))
-    return pkgLevelCache.get(pkg.pkgName) || []
-  }
-
-  const dependencyMap: { pkg: Pkg; deps: { pkg: Pkg; level: number[] }[] }[] =
-    []
-
-  // 遍历所有包，生成每个包的依赖树
-  for (const pkg of allPkgList) {
-    const deps = []
-    const depNameList = await getDepNameList(pkg)
-
-    // 对每个依赖包，计算它的层级并生成依赖关系
-    for (const depName of depNameList) {
-      const depPkg = allPkgList.find((p) => p.pkgName === depName)
-      if (depPkg) {
-        const depLevels = await getPkgLevels(depPkg)
-        deps.push({ pkg: depPkg, level: depLevels })
-      }
-    }
-
-    dependencyMap.push({ pkg, deps })
-  }
-
-  return dependencyMap
+// 获取包的依赖名称列表
+const getDepNameList = async ({ pkgJsonFilePath }: Pkg): Promise<string[]> => {
+  if (!(await fs.pathExists(pkgJsonFilePath))) return []
+  const { dependencies = {}, devDependencies = {} } =
+    await fs.readJson(pkgJsonFilePath)
+  return uniq([...Object.keys(dependencies), ...Object.keys(devDependencies)])
 }
 
-const addChangedDepInfoForPkgList = async (
-  pkgListWithCommitList: Pkg[],
-  pkgList: Pkg[],
-) => {
-  const dependencyMap = await generateDependencyMap(pkgList)
-  return pkgList.map((pkg) => {
-    const pkgDependency = dependencyMap.find(
-      ({ pkg: { pkgName } }) => pkgName === pkg.pkgName,
-    )
+// 构建依赖关系图
+const generateDependencyMap = async (pkgList: Pkg[]): Promise<Pkg[]> => {
+  // 递归解析依赖
+  const resolveDeps = async (
+    pkg: Pkg,
+    seen = new Set<string>(),
+  ): Promise<Pkg> => {
+    seen.add(pkg.pkgName)
 
-    const pkgInPkgListWithCommitList = pkgListWithCommitList.find(
-      (dep: Pkg) => dep.pkgName === pkg.pkgName,
-    )
+    const depNameList = await getDepNameList(pkg)
+
+    const deps: Pkg[] = []
+
+    for (const depName of depNameList) {
+      const depPkg = pkgList.find((p) => p.pkgName === depName)
+      if (!depPkg || seen.has(depPkg.pkgName)) continue
+
+      const childDepTree = await resolveDeps(depPkg, new Set(seen))
+      deps.push(childDepTree)
+    }
 
     return {
       ...pkg,
-      changedDep:
-        pkgDependency &&
-        pkgDependency?.deps.filter(
-          (dep: { pkg: Pkg; level: number[] }) =>
-            pkgListWithCommitList.findIndex(
-              (d: Pkg) => dep.pkg.pkgName === d.pkgName,
-            ) > -1,
-        ),
-      commitList: pkgInPkgListWithCommitList?.commitList ?? [],
-      latestTag: pkgInPkgListWithCommitList?.latestTag ?? '',
+      deps,
     }
-  })
+  }
+
+  const map: Pkg[] = []
+
+  for (const pkg of pkgList) {
+    const tree = await resolveDeps(pkg)
+    map.push(tree)
+  }
+
+  return map
 }
 
-export const getDiffPkgList = async (pkgList: Pkg[]) => {
-  const pkgListWithCommitList = (
-    await Promise.all(
-      pkgList.map(async (pkg) => {
-        const latestTag = await getLatestTag(pkg)
-        const commitList = await getRecentCommitList(pkg, latestTag)
-        return { ...pkg, latestTag, commitList }
-      }),
-    )
-  ).filter((pkg) => pkg?.commitList?.length > 0)
+export const addDiffInfoForPkgListInMonorepo = async (pkgList: Pkg[]) => {
+  const pkgWithGitInfo = await Promise.all(
+    pkgList.map(async (pkg) => {
+      const latestTag = await getLatestTag(pkg)
+      const commitList = await getRecentCommitList(pkg, latestTag)
+      return { ...pkg, latestTag, commitList }
+    }),
+  )
 
-  return await addChangedDepInfoForPkgList(pkgListWithCommitList, pkgList)
+  const result = await generateDependencyMap(pkgWithGitInfo)
+  return result
+}
+
+export const addDiffInfoForPkgInPolyrepo = async (pkg: Pkg) => {
+  const latestTag = await getLatestTag(pkg, false)
+  const commitList = await getRecentCommitList(pkg, latestTag, false)
+  return { ...pkg, latestTag, commitList }
 }

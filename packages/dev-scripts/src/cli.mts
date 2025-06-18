@@ -26,14 +26,14 @@ const packageJson = fs.readJSONSync(
 
 const { name, version } = prepareCli(packageJson)
 
-console.log(gs('@mango-scripts/dev-scripts\n'))
+console.log(pico.bold(gs('@mango-scripts/dev-scripts\n')))
 
 const program = new Command()
 program.version(`${name} ${version}`).usage('<command> [options]')
 
 program
   .command('releasePackage')
-  .description('在Monorepo仓库模式下，快捷发布npm包')
+  .description('快捷发布 npm 包')
   .allowUnknownOption()
   .action(() => {
     releasePackage()

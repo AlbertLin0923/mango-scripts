@@ -13,28 +13,30 @@ export const confirmRegistry = async () => {
     await run('npm', ['config', 'get', 'registry'], { stdio: 'pipe' })
   ).stdout
 
-  const { yes }: { yes: boolean } = await inquirer.prompt([
+  const { isNpmRegistryOk } = await inquirer.prompt<{
+    isNpmRegistryOk: boolean
+  }>([
     {
       type: 'confirm',
-      name: 'yes',
+      name: 'isNpmRegistryOk',
       message: `当前 npm registry 为: ${pico.cyan(registry)}，确定? `,
     },
   ])
 
-  return yes
+  return isNpmRegistryOk
 }
 
 export const confirmGitBranch = async () => {
   const { branch } = getGitRepoInfo()
-  const { yes }: { yes: boolean } = await inquirer.prompt([
+  const { isGitBranchOk } = await inquirer.prompt<{ isGitBranchOk: boolean }>([
     {
       type: 'confirm',
-      name: 'yes',
+      name: 'isGitBranchOk',
       message: `当前发布的分支为: ${pico.cyan(branch)}，确定？`,
     },
   ])
 
-  return yes
+  return isGitBranchOk
 }
 
 export const confirmWorktreeEmpty = async () => {
@@ -59,15 +61,15 @@ export const confirmNpmLoggedIn = async () => {
       return false
     }
 
-    const { yes }: { yes: boolean } = await inquirer.prompt([
+    const { isNpmUserOk } = await inquirer.prompt<{ isNpmUserOk: boolean }>([
       {
         type: 'confirm',
-        name: 'yes',
+        name: 'isNpmUserOk',
         message: `当前登录的 npm 用户为: ${pico.cyan(user)}，确定？`,
       },
     ])
 
-    return yes
+    return isNpmUserOk
   } catch (error) {
     consola.error('检测到您尚未登录 npm，请使用 `npm login` 登录后再继续。')
     return false

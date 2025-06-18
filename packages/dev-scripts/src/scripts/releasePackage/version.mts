@@ -67,7 +67,7 @@ const getVersionChoices = (pkgCurrentVersion: string) => {
   return versionChoices
 }
 
-export const setPkgTargetVersion = async (pkg: Pkg) => {
+export const getPkgTargetVersion = async (pkg: Pkg) => {
   const { pkgName, pkgCurrentVersion } = pkg
   let pkgTargetVersion: string
   let remotePkgJson: any | undefined = undefined

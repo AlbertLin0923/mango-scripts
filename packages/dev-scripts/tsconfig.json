@@ -1,4 +1,7 @@
 {
   "extends": "../../config/pure-esm-package/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react"
+  },
   "include": ["./src"]
 }

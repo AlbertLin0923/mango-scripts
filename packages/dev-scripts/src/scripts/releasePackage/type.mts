@@ -6,5 +6,9 @@ export type Pkg = {
   pkgCurrentVersion: string
   latestTag?: string
   commitList?: string[]
-  changedDep?: Pkg[]
+  deps?: Pkg[]
 }
+
+export type RepoType = 'monorepo' | 'polyrepo'
+
+export type PublishType = 'remote' | 'local'
