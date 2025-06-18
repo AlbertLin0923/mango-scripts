@@ -1,3 +1,9 @@
+## <small>2.1.2 (2025-06-18)</small>
+
+* feat: 优化@mango-scripts/dev-scripts release发包流程 ([fa0fef8](https://github.com/AlbertLin0923/mango-scripts/commit/fa0fef8))
+
+
+
 ## [2.1.1](https://github.com/AlbertLin0923/mango-scripts/compare/@mango-scripts/dev-scripts@2.1.0...@mango-scripts/dev-scripts@2.1.1) (2024-11-19)
 
 
